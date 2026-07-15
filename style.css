@@ -1,433 +1,233 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+/* =========================================
+   GOOGLE FONT
+========================================= */
 
-:root {
-  --primary: #4f8dff;
-  --primary2: #70a8ff;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-  --background: #06101f;
-  --background2: #0a1930;
+/* =========================================
+   RESET
+========================================= */
 
-  --text: #ffffff;
-  --muted: #b9c9e9;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+html{
+    scroll-behavior:smooth;
 }
 
-html {
-  scroll-behavior: smooth;
+body{
+    background:#071321;
+    color:#ffffff;
 }
 
-body {
-  background: radial-gradient(
-    circle at top,
-    #194b97 0%,
-    #0d2448 30%,
-    #071321 100%
-  );
+/* =========================================
+   NAVBAR
+========================================= */
 
-  color: white;
+header{
+    width:100%;
+    height:80px;
 
-  overflow-x: hidden;
+    background:#0D1828;
 
-  min-height: 100vh;
+    display:grid;
+    grid-template-columns:220px 1fr;
+    align-items:center;
+
+    padding:0 60px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-/* Blue Glow */
-
-body::before {
-  content: "";
-
-  position: fixed;
-
-  top: -400px;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  width: 900px;
-  height: 900px;
-
-  background: radial-gradient(
-    circle,
-    rgba(79, 141, 255, 0.45),
-    transparent 70%
-  );
-
-  filter: blur(60px);
-
-  z-index: -1;
-
-  pointer-events: none;
+.logo{
+    font-size:34px;
+    font-weight:900;
+    color:#ffffff;
 }
 
-/* ========================= */
-/* NAVBAR */
-/* ========================= */
-
-.navbar {
-  position: fixed;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 82px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 0 70px;
-
-  background: rgba(7, 18, 34, 0.7);
-
-  backdrop-filter: blur(18px);
-
-  border-top: 3px solid var(--primary);
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-
-  z-index: 999;
+.logo span{
+    color:#4F8DFF;
 }
 
-.logo {
-  font-size: 30px;
-
-  font-weight: 800;
-
-  letter-spacing: 0.3px;
+nav{
+    display:flex;
+    justify-content:center;
+    gap:45px;
 }
 
-.logo span {
-  color: var(--primary);
+nav a{
+    text-decoration:none;
+    color:#ffffff;
+    font-size:16px;
+    font-weight:600;
+    transition:.25s;
 }
 
-nav {
-  display: flex;
-
-  gap: 40px;
+nav a:hover{
+    color:#4F8DFF;
 }
 
-nav a {
-  text-decoration: none;
+/* =========================================
+   BACK BUTTON
+========================================= */
 
-  color: white;
-
-  font-weight: 600;
-
-  transition: 0.3s;
+.page-header{
+    padding:25px 40px 10px;
 }
 
-nav a:hover {
-  color: var(--primary);
+.back-btn{
+    width:48px;
+    height:48px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#171C24;
+
+    color:#ffffff;
+    text-decoration:none;
+
+    font-size:28px;
+    font-weight:700;
+
+    border-radius:12px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.25s;
 }
 
-/* Buttons */
-
-.button,
-.primary,
-.secondary {
-  display: inline-flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  padding: 15px 34px;
-
-  border-radius: 14px;
-
-  font-weight: 700;
-
-  text-decoration: none;
-
-  transition: 0.35s;
+.back-btn:hover{
+    background:#4F8DFF;
+    transform:translateX(-3px);
+    box-shadow:0 0 20px rgba(79,141,255,.45);
 }
 
-.button,
-.primary {
-  background: linear-gradient(180deg, #6ca8ff, #4f8dff);
+/* =========================================
+   CARD GRID
+========================================= */
 
-  box-shadow: 0 0 30px rgba(79, 141, 255, 0.45);
+.cards{
+    max-width:1450px;
 
-  color: white;
+    margin:auto;
+
+    padding:20px 40px 60px;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:24px;
 }
 
-.button:hover,
-.primary:hover {
-  transform: translateY(-3px);
+/* =========================================
+   CARD
+========================================= */
 
-  box-shadow: 0 0 45px rgba(79, 141, 255, 0.75);
+.card{
+    background:#171C24;
+
+    border-radius:14px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    min-height:420px;
+
+    transition:.3s;
 }
 
-.secondary {
-  margin-left: 18px;
+.card:hover{
+    transform:translateY(-6px);
 
-  background: rgba(255, 255, 255, 0.05);
+    border-color:#4F8DFF;
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  color: white;
-
-  backdrop-filter: blur(10px);
+    box-shadow:0 15px 35px rgba(0,0,0,.4);
 }
 
-.secondary:hover {
-  background: rgba(79, 141, 255, 0.2);
+/* Top placeholder */
+
+.card::before{
+    content:"";
+
+    display:block;
+
+    width:100%;
+    height:180px;
+
+    background:#222935;
+
+    border-radius:14px 14px 0 0;
 }
 
-/* ========================= */
-/* HERO */
-/* ========================= */
+/* Title */
 
-.hero {
-  position: relative;
+.card::after{
+    content:"Vehicle Name";
 
-  display: flex;
+    display:block;
 
-  justify-content: center;
+    margin:25px;
 
-  align-items: center;
+    color:#ffffff;
 
-  min-height: 100vh;
+    font-size:24px;
 
-  padding-top: 90px;
-
-  overflow: hidden;
+    font-weight:700;
 }
 
-.content {
-  position: relative;
+/* =========================================
+   SCROLLBAR
+========================================= */
 
-  z-index: 20;
-
-  max-width: 900px;
-
-  text-align: center;
-
-  padding: 20px;
+::-webkit-scrollbar{
+    width:10px;
 }
 
-.content h1 {
-  font-size: 84px;
-
-  font-weight: 900;
-
-  line-height: 1;
-
-  margin-bottom: 30px;
-
-  text-shadow: 0 0 40px rgba(79, 141, 255, 0.45);
+::-webkit-scrollbar-track{
+    background:#071321;
 }
 
-.content span {
-  color: var(--primary);
+::-webkit-scrollbar-thumb{
+    background:#4F8DFF;
+    border-radius:20px;
 }
 
-.content p {
-  max-width: 760px;
+/* =========================================
+   RESPONSIVE
+========================================= */
 
-  margin: auto;
+@media(max-width:900px){
 
-  font-size: 22px;
-
-  line-height: 1.8;
-
-  color: var(--muted);
-
-  margin-bottom: 45px;
+header{
+    grid-template-columns:1fr;
+    height:auto;
+    gap:20px;
+    padding:20px;
 }
 
-.buttons {
-  display: flex;
-
-  justify-content: center;
-
-  gap: 18px;
-
-  flex-wrap: wrap;
-}
-/* ========================= */
-/* HERO BACKGROUND SLIDER */
-/* ========================= */
-
-.background {
-  position: absolute;
-
-  inset: 0;
-
-  overflow: hidden;
-
-  z-index: 1;
+nav{
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
 }
 
-.background img {
-  position: absolute;
-
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-
-  opacity: 0;
-
-  animation: heroSlider 18s infinite;
-
-  transform: scale(1.12);
-
-  filter: brightness(0.65);
+.cards{
+    padding:20px;
+    grid-template-columns:1fr;
 }
 
-/* Image Timing */
-
-.background img:nth-child(1) {
-  animation-delay: 0s;
+.logo{
+    text-align:center;
 }
 
-.background img:nth-child(2) {
-  animation-delay: 6s;
+.page-header{
+    padding:20px;
 }
 
-.background img:nth-child(3) {
-  animation-delay: 12s;
-}
-
-/* Fade Animation */
-
-@keyframes heroSlider {
-  0% {
-    opacity: 0;
-
-    transform: scale(1.12);
-  }
-
-  6% {
-    opacity: 1;
-  }
-
-  30% {
-    opacity: 1;
-
-    transform: scale(1);
-  }
-
-  36% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 0;
-
-    transform: scale(1);
-  }
-}
-
-/* ========================= */
-/* DARK OVERLAY */
-/* ========================= */
-
-.overlay {
-  position: absolute;
-
-  inset: 0;
-
-  background:
-    linear-gradient(rgba(5, 15, 30, 0.55), rgba(5, 15, 30, 0.9)),
-    radial-gradient(circle at top, rgba(79, 141, 255, 0.2), transparent 65%);
-
-  z-index: 2;
-}
-
-/* ========================= */
-/* HERO GLOW */
-/* ========================= */
-
-.hero-glow {
-  position: absolute;
-
-  top: 50%;
-
-  left: 50%;
-
-  transform: translate(-50%, -50%);
-
-  width: 900px;
-
-  height: 900px;
-
-  background: radial-gradient(
-    circle,
-    rgba(79, 141, 255, 0.18),
-    transparent 70%
-  );
-
-  filter: blur(90px);
-
-  pointer-events: none;
-
-  z-index: 3;
-}
-
-/* ========================= */
-/* FEATURE CARDS */
-/* ========================= */
-
-.features {
-  display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
-
-  gap: 30px;
-
-  max-width: 1200px;
-
-  margin: 120px auto;
-
-  padding: 0 40px;
-}
-
-.card {
-  background: rgba(15, 32, 60, 0.55);
-
-  backdrop-filter: blur(18px);
-
-  border: 1px solid rgba(79, 141, 255, 0.18);
-
-  border-radius: 22px;
-
-  padding: 35px;
-
-  transition: 0.35s;
-
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-}
-
-.card:hover {
-  transform: translateY(-10px);
-
-  border-color: #4f8dff;
-
-  box-shadow: 0 25px 60px rgba(79, 141, 255, 0.2);
-}
-
-.card h2 {
-  margin-bottom: 18px;
-
-  font-size: 28px;
-
-  color: #6ea8ff;
-}
-
-.card p {
-  color: #b9c9e9;
-
-  line-height: 1.7;
 }
