@@ -19,7 +19,7 @@
     <meta name="robots" content="index, follow">
 
     <!-- ==========================================
-         OPEN GRAPH (Discord, Facebook, etc.)
+         OPEN GRAPH
     =========================================== -->
 
     <meta property="og:title" content="Car Values">
@@ -66,62 +66,127 @@
 
 <body>
 
-    <!-- ==========================================
-         HEADER
-    =========================================== -->
+<header>
 
-    <header>
+    <div class="logo">
+        Car <span>Values</span>
+    </div>
 
-        <div class="logo">
-            Car <span>Values</span>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#">Vehicles</a>
+        <a href="#">Updates</a>
+        <a href="#">About</a>
+    </nav>
+
+</header>
+
+<section class="page-header">
+
+    <a href="index.html" class="back-btn">
+        &#8592;
+    </a>
+
+</section>
+
+<main class="cards">
+
+    <div class="card" data-id="1"></div>
+    <div class="card" data-id="2"></div>
+    <div class="card" data-id="3"></div>
+    <div class="card" data-id="4"></div>
+
+    <div class="card" data-id="5"></div>
+    <div class="card" data-id="6"></div>
+    <div class="card" data-id="7"></div>
+    <div class="card" data-id="8"></div>
+
+    <div class="card" data-id="9"></div>
+    <div class="card" data-id="10"></div>
+    <div class="card" data-id="11"></div>
+    <div class="card" data-id="12"></div>
+
+</main>
+
+<!-- ==========================================
+     ADMIN PANEL
+========================================== -->
+
+<div class="admin-overlay" id="adminPanel">
+
+    <div class="admin-panel">
+
+        <h2 class="admin-title">
+            Edit <span>Vehicle</span>
+        </h2>
+
+        <div class="admin-group">
+
+            <label>Vehicle Name</label>
+
+            <input
+                type="text"
+                id="vehicleName"
+            >
+
         </div>
 
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="#">Vehicles</a>
-            <a href="#">Updates</a>
-            <a href="#">About</a>
-        </nav>
+        <div class="admin-group">
 
-    </header>
+            <label>Value</label>
 
-    <!-- ==========================================
-         BACK BUTTON
-    =========================================== -->
+            <input
+                type="number"
+                id="vehicleValue"
+            >
 
-    <section class="page-header">
+        </div>
 
-        <a href="index.html" class="back-btn" aria-label="Go Back">
-            &#8592;
-        </a>
+        <div class="admin-group">
 
-    </section>
+            <label>Demand</label>
 
-    <!-- ==========================================
-         CARD GRID
-    =========================================== -->
+            <select id="vehicleDemand">
 
-    <main class="cards">
+                <option>Very High</option>
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+                <option>Very Low</option>
 
-        <!-- Row 1 -->
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
+            </select>
 
-        <!-- Row 2 -->
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
+        </div>
 
-        <!-- Row 3 -->
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
+        <div class="button-row">
 
-    </main>
+            <button
+                class="save-btn"
+                id="saveBtn">
+
+                Save
+
+            </button>
+
+            <button
+                class="cancel-btn"
+                id="cancelBtn">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     FIREBASE
+========================================== -->
+
+<script type="module" src="app.js"></script>
 
 </body>
 </html>
