@@ -1,4 +1,9 @@
-// your code goes // ==========================================
+// ==========================================
+// CAR VALUES
+// SCRIPT.JS
+// ==========================================
+
+// ==========================================
 // FIREBASE IMPORTS
 // ==========================================
 
@@ -8,8 +13,8 @@ import {
     getFirestore,
     collection,
     doc,
-    getDocs,
     getDoc,
+    getDocs,
     setDoc,
     updateDoc,
     onSnapshot
@@ -19,7 +24,6 @@ import {
     getAuth,
     GoogleAuthProvider,
     signInWithPopup,
-    signOut,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
@@ -56,18 +60,14 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 // ==========================================
-// CHANGE THIS TO YOUR EMAIL
+// ADMIN EMAIL
 // ==========================================
 
 const ADMIN_EMAIL = "theg95705@gmail.com";
 
 // ==========================================
-// VARIABLES
+// PAGE ELEMENTS
 // ==========================================
-
-let currentVehicle = null;
-
-let isAdmin = false;
 
 const cards = document.querySelectorAll(".card");
 
@@ -84,30 +84,68 @@ const saveBtn = document.getElementById("saveBtn");
 const cancelBtn = document.getElementById("cancelBtn");
 
 // ==========================================
-// AUTH STATE
+// VARIABLES
 // ==========================================
 
-onAuthStateChanged(auth, (user)=>{
+let currentVehicle = null;
 
-    if(!user){
+let isAdmin = false;
 
-        isAdmin = false;
+// ==========================================
+// FIRESTORE
+// ==========================================
+
+const vehiclesRef = collection(db, "vehicles");
+
+// ==========================================
+// GOOGLE SIGN IN
+// ==========================================
+
+async function login() {
+
+    try {
+
+        await signInWithPopup(auth, provider);
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+// ==========================================
+// CHECK LOGIN
+// ==========================================
+
+onAuthStateChanged(auth, (user) => {
+
+    if (!user) {
+
+        login();
 
         return;
 
     }
 
-    isAdmin = user.email === ADMIN_EMAIL;
-
     console.log("Signed in:", user.email);
 
-});here
-// ==========================================
-// FIRESTORE COLLECTION
-// ==========================================
+    isAdmin = user.email === ADMIN_EMAIL;
 
-const vehiclesRef = collection(db, "vehicles");
+    if (isAdmin) {
 
+        console.log("Admin Mode Enabled");
+
+    } else {
+
+        console.log("Viewer Mode");
+
+    }
+
+});
 // ==========================================
 // CREATE DEFAULT VEHICLES
 // ==========================================
@@ -117,6 +155,8 @@ async function createDefaults() {
     const snapshot = await getDocs(vehiclesRef);
 
     if (!snapshot.empty) return;
+
+    console.log("Creating default vehicles...");
 
     for (let i = 1; i <= 12; i++) {
 
@@ -139,7 +179,7 @@ async function createDefaults() {
 createDefaults();
 
 // ==========================================
-// LOAD VEHICLES LIVE
+// LIVE VEHICLE UPDATES
 // ==========================================
 
 onSnapshot(vehiclesRef, (snapshot) => {
@@ -148,10 +188,8 @@ onSnapshot(vehiclesRef, (snapshot) => {
 
         const data = vehicleDoc.data();
 
-        const id = vehicleDoc.id;
-
         const card = document.querySelector(
-            `.card[data-id="${id}"]`
+            `.card[data-id="${vehicleDoc.id}"]`
         );
 
         if (!card) return;
@@ -163,15 +201,11 @@ onSnapshot(vehiclesRef, (snapshot) => {
                 <h2>${data.name}</h2>
 
                 <div class="vehicle-value">
-
                     $${Number(data.value).toLocaleString()}
-
                 </div>
 
                 <div class="vehicle-demand">
-
                     ${data.demand}
-
                 </div>
 
             </div>
@@ -182,35 +216,59 @@ onSnapshot(vehiclesRef, (snapshot) => {
 
 });
 
+console.log("Vehicle listener started.");
 // ==========================================
-// CARD CLICK
+// OPEN ADMIN PANEL
 // ==========================================
 
 cards.forEach((card) => {
 
     card.addEventListener("click", async () => {
 
-        if (!isAdmin) return;
+        if (!isAdmin) {
+
+            console.log("Viewer Mode - Editing Disabled");
+            return;
+
+        }
 
         currentVehicle = card.dataset.id;
 
-        const snap = await getDoc(
-            doc(db, "vehicles", currentVehicle)
-        );
+        try {
 
-        const data = snap.data();
+            const vehicleRef = doc(db, "vehicles", currentVehicle);
 
-        vehicleName.value = data.name;
+            const snapshot = await getDoc(vehicleRef);
 
-        vehicleValue.value = data.value;
+            if (!snapshot.exists()) {
 
-        vehicleDemand.value = data.demand;
+                alert("Vehicle not found.");
 
-        adminPanel.classList.add("show");
+                return;
+
+            }
+
+            const data = snapshot.data();
+
+            vehicleName.value = data.name;
+            vehicleValue.value = data.value;
+            vehicleDemand.value = data.demand;
+
+            adminPanel.style.display = "flex";
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+            alert("Failed to load vehicle.");
+
+        }
 
     });
 
 });
+
 // ==========================================
 // SAVE VEHICLE
 // ==========================================
@@ -233,39 +291,58 @@ saveBtn.addEventListener("click", async () => {
 
     }
 
-    await updateDoc(doc(db, "vehicles", currentVehicle), {
+    try {
 
-        name: name,
+        await updateDoc(
 
-        value: value,
+            doc(db, "vehicles", currentVehicle),
 
-        demand: demand
+            {
 
-    });
+                name: name,
 
-    adminPanel.classList.remove("show");
+                value: value,
+
+                demand: demand
+
+            }
+
+        );
+
+        adminPanel.style.display = "none";
+
+        console.log("Vehicle Updated");
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert("Unable to save changes.");
+
+    }
 
 });
-
 // ==========================================
 // CANCEL BUTTON
 // ==========================================
 
 cancelBtn.addEventListener("click", () => {
 
-    adminPanel.classList.remove("show");
+    adminPanel.style.display = "none";
 
 });
 
 // ==========================================
-// CLOSE PANEL WHEN CLICKING BACKGROUND
+// CLOSE WHEN CLICKING OUTSIDE PANEL
 // ==========================================
 
 adminPanel.addEventListener("click", (event) => {
 
     if (event.target === adminPanel) {
 
-        adminPanel.classList.remove("show");
+        adminPanel.style.display = "none";
 
     }
 
@@ -279,7 +356,7 @@ document.addEventListener("keydown", (event) => {
 
     if (event.key === "Escape") {
 
-        adminPanel.classList.remove("show");
+        adminPanel.style.display = "none";
 
     }
 
@@ -291,10 +368,27 @@ document.addEventListener("keydown", (event) => {
 
 document.addEventListener("keydown", (event) => {
 
-    if (event.key === "Enter" && adminPanel.classList.contains("show")) {
+    if (
+        event.key === "Enter" &&
+        adminPanel.style.display === "flex"
+    ) {
 
         saveBtn.click();
 
     }
+
+});
+
+// ==========================================
+// STARTUP MESSAGE
+// ==========================================
+
+window.addEventListener("load", () => {
+
+    console.log("==================================");
+    console.log(" Car Values Loaded Successfully ");
+    console.log(" Firebase Connected");
+    console.log(" Waiting for Live Updates...");
+    console.log("==================================");
 
 });
