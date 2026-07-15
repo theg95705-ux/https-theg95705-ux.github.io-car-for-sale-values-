@@ -253,3 +253,461 @@ nav{
 }
 
 }
+/* ==========================================
+   ADMIN OVERLAY
+========================================== */
+
+.admin-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    background:rgba(0,0,0,.65);
+
+    backdrop-filter:blur(8px);
+
+    z-index:9999;
+
+}
+
+.admin-overlay.show{
+
+    display:flex;
+
+}
+
+/* ==========================================
+   ADMIN PANEL
+========================================== */
+
+.admin-panel{
+
+    width:500px;
+
+    background:#171C24;
+
+    border:1px solid rgba(79,141,255,.18);
+
+    border-radius:18px;
+
+    padding:35px;
+
+    box-shadow:
+        0 0 35px rgba(79,141,255,.18),
+        0 25px 60px rgba(0,0,0,.45);
+
+    animation:popup .25s ease;
+
+}
+
+/* ==========================================
+   POPUP ANIMATION
+========================================== */
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px) scale(.96);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0) scale(1);
+
+    }
+
+}
+
+/* ==========================================
+   TITLE
+========================================== */
+
+.admin-title{
+
+    text-align:center;
+
+    font-size:34px;
+
+    font-weight:900;
+
+    color:#ffffff;
+
+    margin-bottom:30px;
+
+}
+
+.admin-title span{
+
+    color:#4F8DFF;
+
+}
+/* ==========================================
+   INPUT GROUPS
+========================================== */
+
+.admin-group{
+
+    margin-bottom:22px;
+
+}
+
+.admin-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#ffffff;
+
+    font-size:15px;
+
+    font-weight:700;
+
+}
+
+/* ==========================================
+   INPUTS & SELECT
+========================================== */
+
+.admin-group input,
+.admin-group select{
+
+    width:100%;
+
+    height:54px;
+
+    padding:0 16px;
+
+    background:#0F203C;
+
+    color:#ffffff;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:12px;
+
+    outline:none;
+
+    transition:.25s;
+
+}
+
+.admin-group input::placeholder{
+
+    color:#8CA5CF;
+
+}
+
+.admin-group input:focus,
+.admin-group select:focus{
+
+    border-color:#4F8DFF;
+
+    box-shadow:0 0 18px rgba(79,141,255,.25);
+
+}
+
+/* Remove default select arrow styling */
+
+.admin-group select{
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    -moz-appearance:none;
+
+    cursor:pointer;
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 20 20'%3E%3Cpath d='M5.25 7.5L10 12.25 14.75 7.5'/%3E%3C/svg%3E");
+
+    background-repeat:no-repeat;
+
+    background-position:right 16px center;
+
+    background-size:18px;
+
+    padding-right:45px;
+
+}
+/* ==========================================
+   BUTTON ROW
+========================================== */
+
+.button-row{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:30px;
+
+}
+
+/* ==========================================
+   SAVE BUTTON
+========================================== */
+
+.save-btn{
+
+    flex:1;
+
+    height:54px;
+
+    background:#4F8DFF;
+
+    color:#ffffff;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.save-btn:hover{
+
+    transform:translateY(-2px);
+
+    background:#5A98FF;
+
+    box-shadow:0 0 25px rgba(79,141,255,.40);
+
+}
+
+.save-btn:active{
+
+    transform:translateY(0);
+
+}
+
+/* ==========================================
+   CANCEL BUTTON
+========================================== */
+
+.cancel-btn{
+
+    flex:1;
+
+    height:54px;
+
+    background:#222935;
+
+    color:#ffffff;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.cancel-btn:hover{
+
+    background:#2F3746;
+
+    transform:translateY(-2px);
+
+}
+
+.cancel-btn:active{
+
+    transform:translateY(0);
+
+}
+
+/* ==========================================
+   DISABLED BUTTON
+========================================== */
+
+.save-btn:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+    box-shadow:none;
+
+    transform:none;
+
+}
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:600px){
+
+    .admin-panel{
+
+        width:90%;
+
+        max-width:500px;
+
+        padding:25px;
+
+    }
+
+    .admin-title{
+
+        font-size:28px;
+
+    }
+
+    .button-row{
+
+        flex-direction:column;
+
+        gap:12px;
+
+    }
+
+    .save-btn,
+    .cancel-btn{
+
+        width:100%;
+
+    }
+
+}
+
+/* ==========================================
+   SCROLLING
+========================================== */
+
+.admin-panel{
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+}
+
+.admin-panel::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.admin-panel::-webkit-scrollbar-track{
+
+    background:#171C24;
+
+}
+
+.admin-panel::-webkit-scrollbar-thumb{
+
+    background:#4F8DFF;
+
+    border-radius:20px;
+
+}
+
+/* ==========================================
+   FADE IN / OUT
+========================================== */
+
+.admin-overlay{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+        opacity .25s ease,
+        visibility .25s ease;
+
+}
+
+.admin-overlay.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+/* ==========================================
+   INPUT HOVER
+========================================== */
+
+.admin-group input:hover,
+.admin-group select:hover{
+
+    border-color:rgba(79,141,255,.35);
+
+}
+
+/* ==========================================
+   BUTTON TRANSITIONS
+========================================== */
+
+.save-btn,
+.cancel-btn{
+
+    transition:
+        background .25s,
+        transform .25s,
+        box-shadow .25s;
+
+}
+
+/* ==========================================
+   PANEL GLOW
+========================================== */
+
+.admin-panel{
+
+    position:relative;
+
+}
+
+.admin-panel::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-1px;
+
+    border-radius:18px;
+
+    pointer-events:none;
+
+    box-shadow:
+        0 0 25px rgba(79,141,255,.10);
+
+}
+
+/* ==========================================
+   END ADMIN PANEL
+========================================== */
