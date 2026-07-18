@@ -1,124 +1,167 @@
+<!-- ==========================================
+     VEHICLE VALUES
+     VALUES.HTML
+     COMPLETE UPDATED VERSION
+     PART 1 - HEAD + HEADER + SEARCH
+========================================== -->
+
+
 <!DOCTYPE html>
+
 <html lang="en">
+
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Vehicle Values</title>
-
-    <!-- SEO -->
-    <meta name="description" content="Track vehicle prices, demand, rarity and trading values in one place.">
-    <meta name="robots" content="index, follow">
+<meta charset="UTF-8">
 
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Vehicle Values">
-    <meta property="og:description" content="Track vehicle prices, demand, rarity and trading values in one place.">
-    <meta property="og:image" content="https://i.postimg.cc/ZRS6Lx4Q/carforsalenz.webp">
-    <meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Vehicle Values">
-    <meta name="twitter:description" content="Track vehicle prices, demand, rarity and trading values in one place.">
-    <meta name="twitter:image" content="https://i.postimg.cc/ZRS6Lx4Q/carforsalenz.webp">
+
+<title>
+Vehicle Values
+</title>
 
 
-    <!-- Favicon -->
-    <link rel="icon"
-          type="image/webp"
-          href="https://i.postimg.cc/ZRS6Lx4Q/carforsalenz.webp">
+
+<!-- SEO -->
+
+<meta 
+name="description"
+content="Track vehicle prices, demand, rarity and trading values in one place."
+>
 
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+<meta 
+name="robots"
+content="index, follow"
+>
 
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet">
+
+<!-- Open Graph -->
+
+<meta 
+property="og:title"
+content="Vehicle Values"
+>
 
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="values.css">
+<meta 
+property="og:description"
+content="Track vehicle prices, demand, rarity and trading values."
+>
+
+
+
+<meta 
+property="og:type"
+content="website"
+>
+
+
+
+<!-- FONT -->
+
+<link 
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet"
+>
+
+
+
+<!-- CSS -->
+
+<link 
+rel="stylesheet"
+href="values.css"
+>
+
 
 
 </head>
 
 
+
+
+
+
 <body>
 
 
-<!-- ========================================= -->
-<!-- HEADER -->
-<!-- ========================================= -->
+
+
+<!-- ==========================================
+     HEADER
+========================================== -->
 
 
 <header class="header">
 
 
-    <div class="logo">
 
-        Vehicle <span>Values</span>
-
-    </div>
+<div class="header-left">
 
 
+<a 
+href="index.html"
+class="back-btn"
+>
 
-    <nav>
+← Back
 
-
-        <a href="index.html">
-
-            Home
-
-        </a>
-
+</a>
 
 
-        <a href="values.html" class="active">
-
-            Vehicles
-
-        </a>
+</div>
 
 
 
-        <a href="#">
-
-            Updates
-
-        </a>
 
 
-
-        <a href="#">
-
-            About
-
-        </a>
+<div class="logo">
 
 
-    </nav>
+<h1>
+
+Vehicle 
+<span>
+Values
+</span>
+
+</h1>
+
+
+<p>
+Vehicle Price Database
+</p>
+
+
+</div>
 
 
 
-    <button
-        id="logoutBtn"
-        class="logout-btn"
-        style="display:none;">
 
 
-        Log Out
+<div class="header-right">
 
 
-    </button>
+<button 
+id="logoutBtn"
+class="logout-btn"
+style="display:none;"
+>
+
+Logout
+
+</button>
+
+
+</div>
+
 
 
 </header>
@@ -127,27 +170,271 @@
 
 
 
-<!-- ========================================= -->
-<!-- PAGE TITLE -->
-<!-- ========================================= -->
-
-
-<section class="page-title">
-
-
-    <h1>
-
-        Vehicle Collection
-
-    </h1>
 
 
 
-    <p>
+<!-- ==========================================
+     MAIN CONTENT
+========================================== -->
 
-        Browse every vehicle, compare values, demand and rarity.
 
-    </p>
+<main class="main-container">
+
+
+
+
+
+
+<h2 class="page-title">
+
+Vehicle Values
+
+</h2>
+
+
+
+<p class="page-description">
+
+Search vehicles and view current trading values, demand and rarity.
+
+</p>
+
+
+
+
+
+
+
+
+<!-- ==========================================
+     SEARCH + FILTER BAR
+========================================== -->
+
+
+<section class="filter-panel">
+
+
+
+
+
+<div class="search-box">
+
+
+<input
+
+type="text"
+
+id="searchInput"
+
+placeholder="Search vehicle..."
+
+>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="filter-box">
+
+
+<select id="demandFilter">
+
+
+<option value="all">
+
+All Demand
+
+</option>
+
+
+
+<option value="10">
+
+10/10
+
+</option>
+
+
+<option value="9">
+
+9/10
+
+</option>
+
+
+<option value="8">
+
+8/10
+
+</option>
+
+
+<option value="7">
+
+7/10
+
+</option>
+
+
+<option value="6">
+
+6/10
+
+</option>
+
+
+<option value="5">
+
+5/10
+
+</option>
+
+
+<option value="4">
+
+4/10
+
+</option>
+
+
+<option value="3">
+
+3/10
+
+</option>
+
+
+<option value="2">
+
+2/10
+
+</option>
+
+
+<option value="1">
+
+1/10
+
+</option>
+
+
+<option value="0">
+
+0/10
+
+</option>
+
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="filter-box">
+
+
+<select id="sortFilter">
+
+
+<option value="default">
+
+Sort By
+
+</option>
+
+
+<option value="valueHigh">
+
+Highest Value
+
+</option>
+
+
+<option value="valueLow">
+
+Lowest Value
+
+</option>
+
+
+<option value="nameAZ">
+
+Name A-Z
+
+</option>
+
+
+<option value="nameZA">
+
+Name Z-A
+
+</option>
+
+
+<option value="demandHigh">
+
+Highest Demand
+
+</option>
+
+
+<option value="demandLow">
+
+Lowest Demand
+
+</option>
+
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="limited-filter">
+
+
+<label>
+
+
+<input
+
+type="checkbox"
+
+id="limitedOnly"
+
+>
+
+
+Limited Only
+
+
+</label>
+
+
+</div>
+
+
+
 
 
 </section>
@@ -156,202 +443,641 @@
 
 
 
-<!-- ========================================= -->
-<!-- BACK BUTTON -->
-<!-- ========================================= -->
 
 
-<section class="page-header">
+
+<!-- ==========================================
+     VEHICLE GRID START
+========================================== -->
 
 
-    <a href="index.html" class="back-btn">
+<section
 
-        &#8592;
+id="cardsContainer"
 
-    </a>
+class="vehicle-grid"
+
+
+>
+
+
+    <!-- ==========================================
+     VEHICLE CARD TEMPLATE
+========================================== -->
+
+
+<template id="vehicleCardTemplate">
+
+
+<div class="card">
+
+
+
+<div class="limited-badge">
+
+LIMITED
+
+</div>
+
+
+
+
+
+
+<div class="vehicle-image">
+
+
+<img 
+
+src=""
+
+alt="Vehicle Image"
+
+>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="vehicle-info">
+
+
+
+<div class="name-box">
+
+
+<h3 class="name-value">
+
+Unnamed Vehicle
+
+</h3>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="stats">
+
+
+
+<div class="stat-box">
+
+
+<span class="stat-title">
+
+Demand
+
+</span>
+
+
+<span class="demand-value">
+
+0/10
+
+</span>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="stat-box">
+
+
+<span class="stat-title">
+
+Value
+
+</span>
+
+
+<span class="value-text">
+
+$0
+
+</span>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</template>
+
+
+
+
+
+
+
+
+
+<!-- ==========================================
+     ADMIN LOGIN OVERLAY
+========================================== -->
+
+
+<div
+
+id="loginOverlay"
+
+class="overlay"
+
+
+>
+
+
+
+
+
+<div class="admin-box">
+
+
+
+<h2>
+
+Admin Login
+
+</h2>
+
+
+
+
+
+
+<input
+
+id="loginEmail"
+
+type="email"
+
+placeholder="Email"
+
+>
+
+
+
+
+
+<input
+
+id="loginPassword"
+
+type="password"
+
+placeholder="Password"
+
+>
+
+
+
+
+
+
+
+<div class="admin-buttons">
+
+
+
+<button
+
+id="loginBtn"
+
+class="primary-btn"
+
+>
+
+Sign In
+
+</button>
+
+
+
+
+
+<button
+
+id="loginCancelBtn"
+
+class="secondary-btn"
+
+>
+
+Cancel
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ==========================================
+     ADMIN VEHICLE EDITOR
+========================================== -->
+
+
+<div
+
+id="adminOverlay"
+
+class="overlay"
+
+
+>
+
+
+
+
+
+<div class="admin-box editor">
+
+
+
+
+
+
+<h2>
+
+Edit Vehicle
+
+</h2>
+
+
+
+
+
+
+
+
+<label>
+
+Vehicle Name
+
+</label>
+
+
+<input
+
+id="vehicleName"
+
+type="text"
+
+placeholder="Vehicle Name"
+
+>
+
+
+
+
+
+
+
+
+<label>
+
+Vehicle Value
+
+</label>
+
+
+<input
+
+id="vehicleValue"
+
+type="number"
+
+placeholder="Value"
+
+>
+
+
+
+
+
+
+
+
+
+<label>
+
+Demand
+
+</label>
+
+
+
+<select
+
+id="vehicleDemand"
+
+>
+
+
+<option value="10">
+
+10/10
+
+</option>
+
+
+<option value="9">
+
+9/10
+
+</option>
+
+
+<option value="8">
+
+8/10
+
+</option>
+
+
+<option value="7">
+
+7/10
+
+</option>
+
+
+<option value="6">
+
+6/10
+
+</option>
+
+
+<option value="5">
+
+5/10
+
+</option>
+
+
+<option value="4">
+
+4/10
+
+</option>
+
+
+<option value="3">
+
+3/10
+
+</option>
+
+
+<option value="2">
+
+2/10
+
+</option>
+
+
+<option value="1">
+
+1/10
+
+</option>
+
+
+<option value="0">
+
+0/10
+
+</option>
+
+
+</select>
+
+
+
+
+
+
+
+
+<label>
+
+Image URL
+
+</label>
+
+
+<input
+
+id="vehicleImage"
+
+type="text"
+
+placeholder="Image URL"
+
+>
+
+
+
+
+
+
+
+
+<label class="checkbox-row">
+
+
+<input
+
+id="vehicleLimited"
+
+type="checkbox"
+
+>
+
+
+Limited Vehicle
+
+
+</label>
+
+
+
+
+
+
+
+
+<div class="admin-buttons">
+
+
+
+<button
+
+id="saveBtn"
+
+class="primary-btn"
+
+>
+
+Save
+
+</button>
+
+
+
+
+
+
+
+<button
+
+id="cancelBtn"
+
+class="secondary-btn"
+
+>
+
+Cancel
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+    <!-- ==========================================
+     CLOSE VEHICLE GRID
+========================================== -->
 
 
 </section>
-<!-- ========================================= -->
-<!-- SEARCH + FILTER BAR -->
-<!-- ========================================= -->
 
 
-<section class="toolbar">
 
 
-    <div class="search-box">
 
 
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search vehicles...">
 
+<!-- ==========================================
+     PAGINATION
+========================================== -->
 
-    </div>
 
+<section class="pagination-container">
 
 
 
-    <div class="filter-group">
+<button
 
+id="previousPage"
 
+class="page-btn"
 
-        <select id="demandFilter">
+>
 
+← Previous
 
-            <option value="all">
-                All Demand
-            </option>
+</button>
 
 
-            <option value="10">
-                10/10
-            </option>
 
 
-            <option value="9">
-                9/10
-            </option>
 
 
-            <option value="8">
-                8/10
-            </option>
+<div
 
+id="pageNumbers"
 
-            <option value="7">
-                7/10
-            </option>
+class="page-numbers"
 
+>
 
-            <option value="6">
-                6/10
-            </option>
+</div>
 
 
-            <option value="5">
-                5/10
-            </option>
 
 
-            <option value="4">
-                4/10
-            </option>
 
 
-            <option value="3">
-                3/10
-            </option>
 
+<button
 
-            <option value="2">
-                2/10
-            </option>
+id="nextPage"
 
+class="page-btn"
 
-            <option value="1">
-                1/10
-            </option>
+>
 
+Next →
 
-            <option value="0">
-                0/10
-            </option>
+</button>
 
-
-        </select>
-
-
-
-
-
-        <select id="sortFilter">
-
-
-            <option value="default">
-
-                Default
-
-            </option>
-
-
-
-            <option value="valueHigh">
-
-                Value: High → Low
-
-            </option>
-
-
-
-            <option value="valueLow">
-
-                Value: Low → High
-
-            </option>
-
-
-
-            <option value="nameAZ">
-
-                Name: A → Z
-
-            </option>
-
-
-
-            <option value="nameZA">
-
-                Name: Z → A
-
-            </option>
-
-
-
-            <option value="demandHigh">
-
-                Demand: High → Low
-
-            </option>
-
-
-
-            <option value="demandLow">
-
-                Demand: Low → High
-
-            </option>
-
-
-        </select>
-
-
-
-
-
-        <label class="limited-filter">
-
-
-            <input
-                type="checkbox"
-                id="limitedOnly">
-
-
-
-            <span>
-
-                Limited Only
-
-            </span>
-
-
-        </label>
-
-
-
-    </div>
 
 
 </section>
@@ -361,26 +1087,6 @@
 
 
 
-
-<!-- =====================================
-VEHICLE GRID
-===================================== -->
-
-
-<main 
-class="cards"
-id="cardsContainer">
-
-
-    <!--
-
-    Vehicle cards are generated automatically
-    by script.js.
-
-    Change TOTAL_VEHICLES in script.js to add
-    more cards without editing HTML.
-
-    -->
 
 
 </main>
@@ -392,634 +1098,53 @@ id="cardsContainer">
 
 
 
-<!-- =====================================
-CARD TEMPLATE
-===================================== -->
 
+<!-- ==========================================
+     FOOTER
+========================================== -->
 
-<template id="vehicleCardTemplate">
 
+<footer class="footer">
 
 
-    <div class="card">
+<p>
 
+© 2026 Vehicle Values
 
+</p>
 
-        <div class="limited-badge">
 
-            ★ LIMITED
+<p>
 
-        </div>
+Track prices • Demand • Rarity • Trading Values
 
+</p>
 
 
+</footer>
 
 
-        <div class="vehicle-image">
 
 
-            <img 
-            src=""
-            alt="Vehicle">
 
 
-        </div>
 
 
 
-
-
-        <div class="vehicle-name-box">
-
-
-
-            <span class="name-title">
-
-                NAME
-
-            </span>
-
-
-
-
-            <span class="name-value">
-
-                Loading...
-
-            </span>
-
-
-
-        </div>
-
-
-
-
-
-
-
-        <div class="stat-box">
-
-
-
-            <span class="stat-title">
-
-                Demand
-
-            </span>
-
-
-
-
-            <span class="demand-value">
-
-                0/10
-
-            </span>
-
-
-
-        </div>
-
-
-
-
-
-
-
-        <div class="stat-box">
-
-
-
-            <span class="stat-title">
-
-                Value
-
-            </span>
-
-
-
-
-            <span class="value-text">
-
-                $0
-
-            </span>
-
-
-
-        </div>
-
-
-
-
-
-    </div>
-
-
-
-</template>
-<!-- =====================================
-ADMIN LOGIN OVERLAY
-===================================== -->
-
-
-<div 
-class="admin-overlay"
-id="loginOverlay">
-
-
-
-    <div class="admin-panel">
-
-
-
-        <h2 class="admin-title">
-
-            Admin <span>Login</span>
-
-        </h2>
-
-
-
-
-
-        <div class="admin-group">
-
-
-            <label>
-
-                Email
-
-            </label>
-
-
-
-            <input
-            type="email"
-            id="loginEmail"
-            placeholder="Email">
-
-
-
-        </div>
-
-
-
-
-
-
-
-        <div class="admin-group">
-
-
-            <label>
-
-                Password
-
-            </label>
-
-
-
-            <input
-            type="password"
-            id="loginPassword"
-            placeholder="Password">
-
-
-
-        </div>
-
-
-
-
-
-
-
-        <p
-        id="loginError"
-        class="login-error"
-        style="display:none;">
-
-
-        </p>
-
-
-
-
-
-
-
-
-        <div class="button-row">
-
-
-
-            <button
-            id="loginBtn"
-            class="save-btn">
-
-
-                Sign In
-
-
-            </button>
-
-
-
-
-
-
-            <button
-            id="loginCancelBtn"
-            class="cancel-btn">
-
-
-                Cancel
-
-
-            </button>
-
-
-
-        </div>
-
-
-
-
-    </div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- =====================================
-ADMIN VEHICLE EDITOR
-===================================== -->
-
-
-<div
-class="admin-overlay"
-id="adminOverlay">
-
-
-
-
-
-    <div class="admin-panel">
-
-
-
-
-
-
-        <h2 class="admin-title">
-
-
-            Edit <span>Vehicle</span>
-
-
-        </h2>
-
-
-
-
-
-
-
-
-
-        <div class="admin-group">
-
-
-
-            <label>
-
-                Vehicle Name
-
-            </label>
-
-
-
-            <input
-            type="text"
-            id="vehicleName"
-            placeholder="Vehicle Name">
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-        <div class="admin-group">
-
-
-
-            <label>
-
-                Vehicle Value
-
-            </label>
-
-
-
-
-            <input
-            type="number"
-            id="vehicleValue"
-            placeholder="125000">
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-        <div class="admin-group">
-
-
-
-            <label>
-
-                Vehicle Demand
-
-            </label>
-
-
-
-
-
-
-            <select id="vehicleDemand">
-
-
-
-                <option value="10">
-
-                    10/10
-
-                </option>
-
-
-
-                <option value="9">
-
-                    9/10
-
-                </option>
-
-
-
-                <option value="8">
-
-                    8/10
-
-                </option>
-
-
-
-                <option value="7">
-
-                    7/10
-
-                </option>
-
-
-
-                <option value="6">
-
-                    6/10
-
-                </option>
-
-
-
-                <option value="5">
-
-                    5/10
-
-                </option>
-
-
-
-                <option value="4">
-
-                    4/10
-
-                </option>
-
-
-
-                <option value="3">
-
-                    3/10
-
-                </option>
-
-
-
-                <option value="2">
-
-                    2/10
-
-                </option>
-
-
-
-                <option value="1">
-
-                    1/10
-
-                </option>
-
-
-
-                <option value="0">
-
-                    0/10
-
-                </option>
-
-
-
-            </select>
-
-
-
-        </div>
-
-
-
-
-
-
-
-        <!-- IMAGE URL -->
-
-
-        <div class="admin-group">
-
-
-
-            <label>
-
-                Vehicle Image URL
-
-            </label>
-
-
-
-
-            <input
-            type="text"
-            id="vehicleImage"
-            placeholder="https://example.com/car.png">
-
-
-
-        </div>
-        <!-- =====================================
-LIMITED VEHICLE TOGGLE
-===================================== -->
-
-
-<div class="admin-group">
-
-
-
-    <div class="limited-setting">
-
-
-
-        <span>
-
-            Limited Vehicle
-
-        </span>
-
-
-
-
-
-        <label class="switch">
-
-
-
-            <input
-            type="checkbox"
-            id="vehicleLimited">
-
-
-
-            <span class="slider"></span>
-
-
-
-        </label>
-
-
-
-    </div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- =====================================
-ADMIN BUTTONS
-===================================== -->
-
-
-<div class="button-row">
-
-
-
-    <button
-    id="saveBtn"
-    class="save-btn">
-
-
-        Save
-
-
-    </button>
-
-
-
-
-
-
-
-    <button
-    id="cancelBtn"
-    class="cancel-btn">
-
-
-        Cancel
-
-
-    </button>
-
-
-
-</div>
-
-
-
-
-
-
-    </div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- =====================================
-JAVASCRIPT
-===================================== -->
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
 
 
 <script
-type="module"
-src="script.js">
 
-</script>
+type="module"
+
+src="script.js"
+
+></script>
+
+
 
 
 
