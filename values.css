@@ -1,7 +1,7 @@
 /* ==========================================
    VEHICLE VALUES
    VALUES.CSS
-   UPDATED VERSION
+   UPDATED FIXED VERSION
    PART 1 - GLOBAL + HEADER
 ========================================== */
 
@@ -49,6 +49,7 @@
 
 
 
+
 /* ==========================================
    GLOBAL RESET
 ========================================== */
@@ -57,7 +58,6 @@
 *{
 
     margin:0;
-
     padding:0;
 
     box-sizing:border-box;
@@ -82,21 +82,19 @@ body{
 
     min-height:100vh;
 
-
     background:
-
     linear-gradient(
         180deg,
         #0b1220,
         #08111f
     );
 
-
     color:var(--text);
 
     overflow-x:hidden;
 
 }
+
 
 
 
@@ -109,50 +107,33 @@ body::before{
 
     content:"";
 
-
     position:fixed;
-
 
     top:-400px;
 
-
     left:50%;
 
-
-    transform:
-    translateX(-50%);
-
+    transform:translateX(-50%);
 
 
     width:900px;
 
-
     height:900px;
-
 
 
     background:
 
-
     radial-gradient(
-
         circle,
-
         rgba(79,141,255,.20),
-
         transparent 65%
-
     );
 
 
-
-    filter:
-    blur(90px);
-
+    filter:blur(90px);
 
 
     z-index:-1;
-
 
     pointer-events:none;
 
@@ -178,12 +159,9 @@ button,
 input,
 select{
 
-    font-family:
-    "Inter",
-    sans-serif;
+    font-family:"Inter",sans-serif;
 
 }
-
 
 
 
@@ -209,32 +187,23 @@ img{
 
     width:100%;
 
-
     height:78px;
-
 
 
     display:flex;
 
-
     align-items:center;
-
 
     justify-content:space-between;
 
 
-
     padding:
-
     0 60px;
-
 
 
     background:
 
-
     rgba(7,18,34,.85);
-
 
 
     backdrop-filter:
@@ -242,17 +211,14 @@ img{
     blur(18px);
 
 
-
     border-top:
 
     3px solid var(--primary);
 
 
-
     border-bottom:
 
     1px solid rgba(255,255,255,.08);
-
 
 
     position:sticky;
@@ -270,6 +236,7 @@ img{
 
 
 
+
 /* ==========================================
    LOGO
 ========================================== */
@@ -277,34 +244,24 @@ img{
 
 .logo{
 
-
     font-size:28px;
-
 
     font-weight:900;
 
-
     letter-spacing:.5px;
-
 
     cursor:pointer;
 
-
 }
-
 
 
 
 .logo span{
 
-
     color:
-
     var(--primary);
 
-
 }
-
 
 
 
@@ -317,107 +274,73 @@ img{
 
 nav{
 
-
     display:flex;
-
 
     align-items:center;
 
-
     gap:35px;
 
-
 }
-
-
 
 
 
 nav a{
 
-
     position:relative;
-
 
     text-decoration:none;
 
-
     color:white;
-
 
     font-size:16px;
 
-
     font-weight:700;
-
 
     transition:.3s;
 
-
 }
-
-
 
 
 
 nav a::after{
 
-
     content:"";
-
 
     position:absolute;
 
-
     left:0;
-
 
     bottom:-8px;
 
-
     width:0;
 
-
     height:2px;
-
 
     background:
 
     var(--primary);
 
-
     transition:.3s;
 
-
 }
-
-
 
 
 
 nav a:hover::after,
 nav a.active::after{
 
-
     width:100%;
 
-
 }
-
 
 
 
 nav a:hover,
 nav a.active{
 
-
-    color:
-
-    var(--primary);
-
+    color:var(--primary);
 
 }
-
 
 
 
@@ -435,13 +358,10 @@ nav a.active{
     var(--danger);
 
 
-
     color:white;
 
 
-
     border:none;
-
 
 
     padding:
@@ -449,30 +369,22 @@ nav a.active{
     11px 24px;
 
 
-
     border-radius:14px;
-
 
 
     font-size:15px;
 
 
-
     font-weight:900;
-
 
 
     cursor:pointer;
 
 
-
     transition:.3s;
 
 
-
 }
-
-
 
 
 
@@ -482,7 +394,6 @@ nav a.active{
     transform:
 
     translateY(-3px);
-
 
 
     box-shadow:
@@ -513,10 +424,7 @@ nav a.active{
     65px 20px 35px;
 
 
-
 }
-
-
 
 
 
@@ -532,7 +440,6 @@ nav a.active{
     letter-spacing:-1px;
 
 
-
     text-shadow:
 
 
@@ -540,8 +447,6 @@ nav a.active{
 
 
 }
-
-
 
 
 
@@ -560,9 +465,7 @@ nav a.active{
     margin-right:auto;
 
 
-    color:
-
-    var(--muted);
+    color:var(--muted);
 
 
     font-size:18px;
@@ -592,15 +495,11 @@ nav a.active{
 
 .page-header{
 
-
     width:95%;
-
 
     max-width:1400px;
 
-
     margin:25px auto;
-
 
 }
 
@@ -612,23 +511,17 @@ nav a.active{
 
     display:inline-flex;
 
-
     align-items:center;
-
 
     justify-content:center;
 
 
-
     width:45px;
-
 
     height:45px;
 
 
-
     border-radius:14px;
-
 
 
     background:
@@ -636,36 +529,27 @@ nav a.active{
     var(--panel);
 
 
-
     border:
 
     1px solid var(--border);
 
 
-
     color:white;
-
 
 
     text-decoration:none;
 
 
-
     font-size:28px;
-
 
 
     font-weight:900;
 
 
-
     transition:.3s;
 
 
-
 }
-
-
 
 
 
@@ -677,11 +561,9 @@ nav a.active{
     var(--primary);
 
 
-
     border-color:
 
     var(--primary);
-
 
 
     transform:
@@ -710,7 +592,6 @@ nav a.active{
     max-width:1400px;
 
 
-
     margin:
 
     30px auto;
@@ -720,13 +601,10 @@ nav a.active{
     display:flex;
 
 
-
     align-items:center;
 
 
-
     justify-content:space-between;
-
 
 
     gap:20px;
@@ -739,13 +617,11 @@ nav a.active{
 
     background:
 
-
     rgba(18,27,43,.85);
 
 
 
     border:
-
 
     1px solid var(--border);
 
@@ -766,15 +642,15 @@ nav a.active{
     var(--shadow);
 
 
-
 }
 
 
 
 
 
+
 /* ==========================================
-   SEARCH
+   SEARCH BOX
 ========================================== */
 
 
@@ -783,10 +659,7 @@ nav a.active{
 
     flex:1;
 
-
 }
-
-
 
 
 
@@ -796,11 +669,9 @@ nav a.active{
     width:100%;
 
 
-
     padding:
 
     15px 20px;
-
 
 
     background:
@@ -808,40 +679,30 @@ nav a.active{
     var(--panel-light);
 
 
-
     border:
 
     2px solid var(--border);
 
 
-
     border-radius:15px;
-
 
 
     color:white;
 
 
-
     font-size:16px;
-
 
 
     font-weight:600;
 
 
-
     outline:none;
-
 
 
     transition:.3s;
 
 
-
 }
-
-
 
 
 
@@ -857,15 +718,12 @@ nav a.active{
 
 
 
-
-
 .search-box input:focus{
 
 
     border-color:
 
     var(--primary);
-
 
 
     box-shadow:
@@ -906,7 +764,6 @@ nav a.active{
 
 
 
-
 .filter-group select{
 
 
@@ -915,9 +772,7 @@ nav a.active{
     14px 18px;
 
 
-
     min-width:150px;
-
 
 
     background:
@@ -925,40 +780,27 @@ nav a.active{
     var(--panel-light);
 
 
-
     border:
 
     2px solid var(--border);
 
 
-
     border-radius:15px;
-
 
 
     color:white;
 
 
-
     font-weight:800;
-
 
 
     outline:none;
 
 
-
     cursor:pointer;
 
 
-
-    transition:.3s;
-
-
-
 }
-
-
 
 
 
@@ -975,50 +817,6 @@ nav a.active{
 
 
 
-
-.filter-group select:focus{
-
-
-    border-color:
-
-    var(--primary);
-
-
-
-    box-shadow:
-
-    0 0 20px rgba(79,141,255,.3);
-
-
-}
-
-
-
-
-
-.filter-group option{
-
-
-    background:
-
-    #121b2b;
-
-
-    color:white;
-
-
-}
-
-
-
-
-
-
-/* ==========================================
-   LIMITED FILTER
-========================================== */
-
-
 .limited-filter{
 
 
@@ -1031,19 +829,16 @@ nav a.active{
     gap:10px;
 
 
-
     color:white;
 
 
     font-weight:800;
 
 
-
     cursor:pointer;
 
 
 }
-
 
 
 
@@ -1057,19 +852,14 @@ nav a.active{
     height:18px;
 
 
-
-    cursor:pointer;
-
-
 }
 
 
 
 
-
-
 /* ==========================================
-   VEHICLE GRID (UPDATED SMALLER CARDS)
+   VEHICLE GRID
+   FIXED CARD SIZE
 ========================================== */
 
 
@@ -1098,9 +888,9 @@ nav a.active{
 
     repeat(
 
-        auto-fit,
+        auto-fill,
 
-        minmax(240px,280px)
+        minmax(240px,260px)
 
     );
 
@@ -1110,8 +900,9 @@ nav a.active{
 
 
 
-    gap:25px;
+    gap:
 
+    25px;
 
 
 }
@@ -1133,16 +924,17 @@ nav a.active{
     position:relative;
 
 
+    width:260px;
+
+
 
     background:
 
-
-    rgba(18,27,43,.9);
+    rgba(18,27,43,.92);
 
 
 
     border:
-
 
     2px solid var(--border);
 
@@ -1152,7 +944,7 @@ nav a.active{
 
 
 
-    padding:16px;
+    padding:14px;
 
 
 
@@ -1173,10 +965,7 @@ nav a.active{
     transition:.35s;
 
 
-
 }
-
-
 
 
 
@@ -1186,7 +975,7 @@ nav a.active{
 
     transform:
 
-    translateY(-10px);
+    translateY(-8px);
 
 
 
@@ -1198,7 +987,6 @@ nav a.active{
 
     box-shadow:
 
-
     0 30px 70px rgba(79,141,255,.25);
 
 
@@ -1208,10 +996,6 @@ nav a.active{
 
 
 
-
-/* ==========================================
-   LIMITED VEHICLE CARD
-========================================== */
 
 
 .card.limited{
@@ -1247,12 +1031,10 @@ nav a.active{
     position:absolute;
 
 
-
     top:14px;
 
 
     left:14px;
-
 
 
     display:none;
@@ -1295,7 +1077,6 @@ nav a.active{
 
 
 
-
 .card.limited .limited-badge{
 
 
@@ -1311,7 +1092,8 @@ nav a.active{
 
 
 /* ==========================================
-   VEHICLE IMAGE FIXED
+   VEHICLE IMAGE
+   NO STRETCH FIX
 ========================================== */
 
 
@@ -1321,7 +1103,8 @@ nav a.active{
     width:100%;
 
 
-    height:180px;
+
+    height:150px;
 
 
 
@@ -1343,16 +1126,15 @@ nav a.active{
 
 
 
-    justify-content:center;
-
-
-
     align-items:center;
 
 
 
-    padding:10px;
+    justify-content:center;
 
+
+
+    padding:12px;
 
 
 }
@@ -1367,11 +1149,14 @@ nav a.active{
     width:100%;
 
 
+
     height:100%;
 
 
 
-    object-fit:contain;
+    object-fit:
+
+    contain;
 
 
 
@@ -1379,15 +1164,11 @@ nav a.active{
 
 
 
-    max-height:160px;
-
-
-
     transition:.35s;
 
 
-
 }
+
 
 
 
@@ -1399,7 +1180,7 @@ nav a.active{
 
     transform:
 
-    scale(1.03);
+    scale(1.04);
 
 
 }
@@ -1408,9 +1189,8 @@ nav a.active{
 
 
 
-
 /* ==========================================
-   VEHICLE NAME BOX
+   VEHICLE NAME
 ========================================== */
 
 
@@ -1423,7 +1203,9 @@ nav a.active{
 
 
 
-    padding:14px;
+    padding:
+
+    13px;
 
 
 
@@ -1431,7 +1213,23 @@ nav a.active{
 
 
 
-    margin-bottom:12px;
+    margin-top:12px;
+
+
+
+    min-height:75px;
+
+
+
+    display:flex;
+
+
+
+    flex-direction:column;
+
+
+
+    justify-content:center;
 
 
 }
@@ -1439,13 +1237,7 @@ nav a.active{
 
 
 
-
-
 .name-title{
-
-
-    display:block;
-
 
 
     color:
@@ -1469,9 +1261,7 @@ nav a.active{
     letter-spacing:1px;
 
 
-
 }
-
 
 
 
@@ -1479,11 +1269,7 @@ nav a.active{
 .name-value{
 
 
-    display:block;
-
-
-
-    margin-top:7px;
+    margin-top:6px;
 
 
 
@@ -1491,7 +1277,7 @@ nav a.active{
 
 
 
-    font-size:20px;
+    font-size:18px;
 
 
 
@@ -1499,7 +1285,19 @@ nav a.active{
 
 
 
+    overflow:hidden;
+
+
+
+    text-overflow:ellipsis;
+
+
+
+    white-space:nowrap;
+
+
 }
+
 
 
 
@@ -1513,8 +1311,6 @@ nav a.active{
 
 
 
-
-
 /* ==========================================
    STAT BOXES
 ========================================== */
@@ -1524,7 +1320,6 @@ nav a.active{
 
 
     background:
-
 
     var(--panel-light);
 
@@ -1544,12 +1339,10 @@ nav a.active{
 
     border:
 
-
     1px solid rgba(255,255,255,.05);
 
 
 }
-
 
 
 
@@ -1564,7 +1357,6 @@ nav a.active{
 
 
     color:
-
 
     var(--muted);
 
@@ -1602,12 +1394,11 @@ nav a.active{
 
     color:
 
-
     var(--primary-light);
 
 
 
-    font-size:23px;
+    font-size:22px;
 
 
 
@@ -1627,12 +1418,11 @@ nav a.active{
 
     color:
 
-
     var(--success);
 
 
 
-    font-size:23px;
+    font-size:22px;
 
 
 
@@ -1679,13 +1469,11 @@ nav a.active{
 
     background:
 
-
     rgba(0,0,0,.75);
 
 
 
     backdrop-filter:
-
 
     blur(12px);
 
@@ -1695,8 +1483,6 @@ nav a.active{
 
 
 }
-
-
 
 
 
@@ -1722,13 +1508,11 @@ nav a.active{
 
     background:
 
-
     rgba(18,27,43,.98);
 
 
 
     border:
-
 
     2px solid var(--border);
 
@@ -1744,19 +1528,16 @@ nav a.active{
 
     box-shadow:
 
-
     0 40px 90px rgba(0,0,0,.7);
 
 
 
     animation:
 
-
     fadeIn .3s ease;
 
 
 }
-
 
 
 
@@ -1795,12 +1576,10 @@ nav a.active{
 
 
 
-
 .admin-title span{
 
 
     color:
-
 
     var(--primary);
 
@@ -1816,7 +1595,7 @@ nav a.active{
 
 
 /* ==========================================
-   FORM GROUP
+   ADMIN FORM GROUP
 ========================================== */
 
 
@@ -1860,8 +1639,6 @@ nav a.active{
 
 
 
-
-
 /* ==========================================
    INPUTS
 ========================================== */
@@ -1878,20 +1655,17 @@ nav a.active{
 
     padding:
 
-
     14px;
 
 
 
     background:
 
-
     var(--panel-light);
 
 
 
     border:
-
 
     2px solid var(--border);
 
@@ -1920,11 +1694,7 @@ nav a.active{
     transition:.3s;
 
 
-
 }
-
-
-
 
 
 
@@ -1935,14 +1705,10 @@ nav a.active{
 
     color:
 
-
     var(--muted);
 
 
 }
-
-
-
 
 
 
@@ -1955,13 +1721,11 @@ nav a.active{
 
     border-color:
 
-
     var(--primary);
 
 
 
     box-shadow:
-
 
     0 0 25px rgba(79,141,255,.35);
 
@@ -1977,7 +1741,7 @@ nav a.active{
 
 
 /* ==========================================
-   DROPDOWN FIX
+   SELECT FIX
 ========================================== */
 
 
@@ -1987,9 +1751,7 @@ select{
     appearance:auto;
 
 
-
     background:
-
 
     var(--panel-light);
 
@@ -2008,7 +1770,6 @@ select option{
 
 
     background:
-
 
     #121b2b;
 
@@ -2070,7 +1831,6 @@ select option{
 
     padding:
 
-
     15px;
 
 
@@ -2130,19 +1890,16 @@ select option{
 
     transform:
 
-
     translateY(-4px);
 
 
 
     box-shadow:
 
-
     0 15px 35px rgba(79,141,255,.45);
 
 
 }
-
 
 
 
@@ -2165,7 +1922,6 @@ select option{
 
     padding:
 
-
     15px;
 
 
@@ -2179,7 +1935,6 @@ select option{
 
 
     background:
-
 
     #334155;
 
@@ -2210,13 +1965,10 @@ select option{
 
 
 
-
-
 .cancel-btn:hover{
 
 
     background:
-
 
     #475569;
 
@@ -2224,12 +1976,10 @@ select option{
 
     transform:
 
-
     translateY(-3px);
 
 
 }
-
 
 
 
@@ -2247,7 +1997,6 @@ select option{
 
 
     color:
-
 
     var(--danger);
 
@@ -2309,7 +2058,6 @@ select option{
 
 
 
-
 .switch{
 
 
@@ -2332,7 +2080,6 @@ select option{
 
 
 
-
 .switch input{
 
 
@@ -2348,7 +2095,6 @@ select option{
 
 
 }
-
 
 
 
@@ -2383,7 +2129,6 @@ select option{
 
 
 }
-
 
 
 
@@ -2437,12 +2182,10 @@ select option{
 
 
 
-
 .switch input:checked + .slider{
 
 
     background:
-
 
     var(--gold);
 
@@ -2455,19 +2198,15 @@ select option{
 
 
 
-
 .switch input:checked + .slider:before{
 
 
     transform:
 
-
     translateX(28px);
 
 
 }
-
-
 
 
 
@@ -2529,12 +2268,10 @@ select option{
 
 
 
-
 .card{
 
 
     animation:
-
 
     fadeIn .35s ease;
 
@@ -2562,8 +2299,6 @@ select option{
 
 
 
-
-
 ::-webkit-scrollbar-track{
 
 
@@ -2574,13 +2309,10 @@ select option{
 
 
 
-
-
 ::-webkit-scrollbar-thumb{
 
 
     background:
-
 
     var(--border);
 
@@ -2593,13 +2325,10 @@ select option{
 
 
 
-
-
 ::-webkit-scrollbar-thumb:hover{
 
 
     background:
-
 
     var(--primary);
 
@@ -2613,9 +2342,8 @@ select option{
 
 
 
-
 /* ==========================================
-   FINAL ELEMENT FIXES
+   GLOBAL FIXES
 ========================================== */
 
 
@@ -2628,13 +2356,10 @@ select,
 
     -webkit-tap-highlight-color:
 
-
     transparent;
 
 
 }
-
-
 
 
 
@@ -2652,8 +2377,6 @@ button{
 
 
 
-
-
 input,
 select{
 
@@ -2662,8 +2385,6 @@ select{
 
 
 }
-
-
 
 
 
@@ -2699,7 +2420,6 @@ img{
 
         padding:
 
-
         0 35px;
 
 
@@ -2715,7 +2435,6 @@ img{
 
 
         gap:
-
 
         22px;
 
@@ -2733,13 +2452,11 @@ img{
 
         flex-direction:
 
-
         column;
 
 
 
         align-items:
-
 
         stretch;
 
@@ -2788,9 +2505,9 @@ img{
 
         repeat(
 
-            auto-fit,
+            auto-fill,
 
-            minmax(240px,280px)
+            minmax(240px,260px)
 
         );
 
@@ -2808,7 +2525,6 @@ img{
 
         font-size:
 
-
         44px;
 
 
@@ -2817,9 +2533,6 @@ img{
 
 
 }
-
-
-
 
 
 
@@ -2843,13 +2556,11 @@ img{
 
         height:
 
-
         75px;
 
 
 
         padding:
-
 
         0 20px;
 
@@ -2866,7 +2577,6 @@ img{
 
 
         font-size:
-
 
         24px;
 
@@ -2898,13 +2608,11 @@ img{
 
         padding:
 
-
         10px 16px;
 
 
 
         font-size:
-
 
         14px;
 
@@ -2922,7 +2630,6 @@ img{
 
         padding:
 
-
         50px 15px 30px;
 
 
@@ -2938,7 +2645,6 @@ img{
 
 
         font-size:
-
 
         34px;
 
@@ -2956,7 +2662,6 @@ img{
 
         font-size:
 
-
         15px;
 
 
@@ -2972,7 +2677,6 @@ img{
 
 
         width:
-
 
         92%;
 
@@ -2990,13 +2694,11 @@ img{
 
         width:
 
-
         92%;
 
 
 
         padding:
-
 
         16px;
 
@@ -3013,7 +2715,6 @@ img{
 
 
         flex-direction:
-
 
         column;
 
@@ -3049,7 +2750,6 @@ img{
 
         width:
 
-
         92%;
 
 
@@ -3062,7 +2762,6 @@ img{
 
 
         gap:
-
 
         22px;
 
@@ -3078,7 +2777,7 @@ img{
     .card{
 
 
-        max-width:100%;
+        width:100%;
 
 
     }
@@ -3093,7 +2792,6 @@ img{
 
 
         height:
-
 
         160px;
 
@@ -3111,13 +2809,11 @@ img{
 
         width:
 
-
         95%;
 
 
 
         padding:
-
 
         25px;
 
@@ -3135,7 +2831,6 @@ img{
 
         font-size:
 
-
         28px;
 
 
@@ -3152,7 +2847,6 @@ img{
 
         flex-direction:
 
-
         column;
 
 
@@ -3161,7 +2855,6 @@ img{
 
 
 }
-
 
 
 
@@ -3184,7 +2877,6 @@ img{
 
         font-size:
 
-
         20px;
 
 
@@ -3200,7 +2892,6 @@ img{
 
 
         padding:
-
 
         8px 12px;
 
@@ -3218,7 +2909,6 @@ img{
 
         height:
 
-
         150px;
 
 
@@ -3234,7 +2924,6 @@ img{
 
 
         font-size:
-
 
         24px;
 
@@ -3254,28 +2943,36 @@ img{
 
 
 /* ==========================================
-   EXTRA CARD FIXES
+   FINAL IMAGE SAFETY FIX
 ========================================== */
 
 
-.card img{
+.vehicle-image{
 
 
-    pointer-events:none;
+    display:flex;
+
+
+    overflow:hidden;
 
 
 }
 
 
 
+.vehicle-image img{
 
 
+    width:100%;
 
 
-.card:hover{
+    height:100%;
 
 
-    z-index:5;
+    object-fit:contain !important;
+
+
+    object-position:center;
 
 
 }
@@ -3289,7 +2986,7 @@ img{
 
 
 /* ==========================================
-   EMPTY IMAGE FIX
+   EMPTY IMAGE PLACEHOLDER
 ========================================== */
 
 
@@ -3298,20 +2995,17 @@ img{
 
     content:
 
-
     "No Image";
 
 
 
     color:
 
-
     var(--muted);
 
 
 
     font-weight:
-
 
     800;
 
@@ -3327,22 +3021,27 @@ img{
 
 
 /* ==========================================
-   IMAGE SIZE SAFETY FIX
+   CARD FINAL POLISH
 ========================================== */
 
 
-.vehicle-image img{
+.card img{
 
 
-    object-fit:
-
-
-    contain !important;
+    pointer-events:none;
 
 
 }
 
 
+
+.card:hover{
+
+
+    z-index:5;
+
+
+}
 
 
 
@@ -3353,7 +3052,6 @@ img{
 
     aspect-ratio:
 
-
     16 / 10;
 
 
@@ -3361,6 +3059,16 @@ img{
 
 
 
+
+
+
+.card .vehicle-name-box{
+
+
+    overflow:hidden;
+
+
+}
 
 
 
