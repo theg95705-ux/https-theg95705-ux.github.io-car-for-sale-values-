@@ -1,13 +1,13 @@
-/* ==========================================
-   VEHICLE VALUES
-   VALUES.CSS
-   UPDATED FIXED VERSION
-   PART 1 - GLOBAL + HEADER
-========================================== */
+// ==========================================
+// VEHICLE VALUES
+// VALUES.CSS
+// UPDATED VERSION
+// PART 1 - VARIABLES + GLOBAL + HEADER
+// ==========================================
 
 
 /* ==========================================
-   FONT
+   GOOGLE FONT
 ========================================== */
 
 @import url(
@@ -16,36 +16,54 @@
 
 
 
+
+
 /* ==========================================
    VARIABLES
 ========================================== */
 
-
 :root{
 
+
     --primary:#4f8dff;
+
     --primary-light:#70a8ff;
 
+
     --background:#0b1220;
-    --background-two:#0f1b30;
+
+    --background-two:#0a1930;
+
 
     --panel:#121b2b;
+
     --panel-light:#182438;
+
 
     --border:#2b3d5d;
 
+
     --text:#ffffff;
+
     --muted:#b9c9e9;
 
+
     --success:#34d399;
+
     --gold:#caa64a;
+
+
     --danger:#ef4444;
 
 
     --shadow:
-    0 20px 55px rgba(0,0,0,.45);
+    0 20px 60px rgba(0,0,0,.35);
+
 
 }
+
+
+
 
 
 
@@ -57,2227 +75,114 @@
 
 *{
 
+
     margin:0;
+
     padding:0;
 
     box-sizing:border-box;
 
-    font-family:
-    "Inter",
-    sans-serif;
+    font-family:"Inter",sans-serif;
+
 
 }
+
+
 
 
 
 html{
 
+
     scroll-behavior:smooth;
 
+
 }
+
+
 
 
 
 body{
 
+
     min-height:100vh;
 
-    background:
-    linear-gradient(
-        180deg,
-        #0b1220,
-        #08111f
-    );
 
-    color:var(--text);
+    background:
+    var(--background);
+
+
+    color:
+    var(--text);
+
 
     overflow-x:hidden;
+
 
 }
 
 
 
 
+
 /* ==========================================
-   BACKGROUND EFFECT
+   BACKGROUND GLOW
 ========================================== */
 
 
 body::before{
 
+
     content:"";
+
 
     position:fixed;
 
-    top:-400px;
+
+    top:-350px;
+
 
     left:50%;
 
-    transform:translateX(-50%);
+
+    transform:
+    translateX(-50%);
 
 
     width:900px;
+
 
     height:900px;
 
 
     background:
 
+
     radial-gradient(
+
         circle,
-        rgba(79,141,255,.20),
-        transparent 65%
+
+        rgba(79,141,255,.25),
+
+        transparent 70%
+
     );
 
 
-    filter:blur(90px);
+
+    filter:
+    blur(70px);
+
 
 
     z-index:-1;
 
+
     pointer-events:none;
 
-}
-
-
-
-
-/* ==========================================
-   GLOBAL ELEMENTS
-========================================== */
-
-
-a{
-
-    color:inherit;
-
-}
-
-
-
-button,
-input,
-select{
-
-    font-family:"Inter",sans-serif;
-
-}
-
-
-
-img{
-
-    display:block;
-
-    max-width:100%;
-
-}
-
-
-
-
-
-/* ==========================================
-   HEADER
-========================================== */
-
-
-.header{
-
-
-    width:100%;
-
-    height:78px;
-
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-
-    padding:
-    0 60px;
-
-
-    background:
-
-    rgba(7,18,34,.85);
-
-
-    backdrop-filter:
-
-    blur(18px);
-
-
-    border-top:
-
-    3px solid var(--primary);
-
-
-    border-bottom:
-
-    1px solid rgba(255,255,255,.08);
-
-
-    position:sticky;
-
-
-    top:0;
-
-
-    z-index:999;
-
-
-}
-
-
-
-
-
-
-/* ==========================================
-   LOGO
-========================================== */
-
-
-.logo{
-
-    font-size:28px;
-
-    font-weight:900;
-
-    letter-spacing:.5px;
-
-    cursor:pointer;
-
-}
-
-
-
-.logo span{
-
-    color:
-    var(--primary);
-
-}
-
-
-
-
-
-/* ==========================================
-   NAVIGATION
-========================================== */
-
-
-nav{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:35px;
-
-}
-
-
-
-nav a{
-
-    position:relative;
-
-    text-decoration:none;
-
-    color:white;
-
-    font-size:16px;
-
-    font-weight:700;
-
-    transition:.3s;
-
-}
-
-
-
-nav a::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-
-    bottom:-8px;
-
-    width:0;
-
-    height:2px;
-
-    background:
-
-    var(--primary);
-
-    transition:.3s;
-
-}
-
-
-
-nav a:hover::after,
-nav a.active::after{
-
-    width:100%;
-
-}
-
-
-
-nav a:hover,
-nav a.active{
-
-    color:var(--primary);
-
-}
-
-
-
-
-/* ==========================================
-   LOGOUT BUTTON
-========================================== */
-
-
-.logout-btn{
-
-
-    background:
-
-    var(--danger);
-
-
-    color:white;
-
-
-    border:none;
-
-
-    padding:
-
-    11px 24px;
-
-
-    border-radius:14px;
-
-
-    font-size:15px;
-
-
-    font-weight:900;
-
-
-    cursor:pointer;
-
-
-    transition:.3s;
-
-
-}
-
-
-
-.logout-btn:hover{
-
-
-    transform:
-
-    translateY(-3px);
-
-
-    box-shadow:
-
-    0 10px 25px rgba(239,68,68,.35);
-
-
-}
-
-
-
-
-
-/* ==========================================
-   PAGE TITLE
-========================================== */
-
-
-.page-title{
-
-
-    text-align:center;
-
-
-    padding:
-
-
-    65px 20px 35px;
-
-
-}
-
-
-
-.page-title h1{
-
-
-    font-size:50px;
-
-
-    font-weight:900;
-
-
-    letter-spacing:-1px;
-
-
-    text-shadow:
-
-
-    0 0 45px rgba(79,141,255,.45);
-
-
-}
-
-
-
-.page-title p{
-
-
-    margin-top:15px;
-
-
-    max-width:700px;
-
-
-    margin-left:auto;
-
-
-    margin-right:auto;
-
-
-    color:var(--muted);
-
-
-    font-size:18px;
-
-
-    line-height:1.6;
-
-
-}
-
-
-
-/* ==========================================
-   END PART 1
-========================================== */
-/* ==========================================
-   VEHICLE VALUES
-   PART 2 - TOOLBAR + VEHICLE CARDS
-========================================== */
-
-
-
-/* ==========================================
-   PAGE HEADER / BACK BUTTON
-========================================== */
-
-
-.page-header{
-
-    width:95%;
-
-    max-width:1400px;
-
-    margin:25px auto;
-
-}
-
-
-
-
-.back-btn{
-
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-
-    width:45px;
-
-    height:45px;
-
-
-    border-radius:14px;
-
-
-    background:
-
-    var(--panel);
-
-
-    border:
-
-    1px solid var(--border);
-
-
-    color:white;
-
-
-    text-decoration:none;
-
-
-    font-size:28px;
-
-
-    font-weight:900;
-
-
-    transition:.3s;
-
-
-}
-
-
-
-.back-btn:hover{
-
-
-    background:
-
-    var(--primary);
-
-
-    border-color:
-
-    var(--primary);
-
-
-    transform:
-
-    translateX(-5px);
-
-
-}
-
-
-
-
-
-
-/* ==========================================
-   TOOLBAR
-========================================== */
-
-
-.toolbar{
-
-
-    width:95%;
-
-
-    max-width:1400px;
-
-
-    margin:
-
-    30px auto;
-
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    justify-content:space-between;
-
-
-    gap:20px;
-
-
-
-    padding:20px;
-
-
-
-    background:
-
-    rgba(18,27,43,.85);
-
-
-
-    border:
-
-    1px solid var(--border);
-
-
-
-    border-radius:22px;
-
-
-
-    backdrop-filter:
-
-    blur(18px);
-
-
-
-    box-shadow:
-
-    var(--shadow);
-
-
-}
-
-
-
-
-
-
-/* ==========================================
-   SEARCH BOX
-========================================== */
-
-
-.search-box{
-
-
-    flex:1;
-
-}
-
-
-
-.search-box input{
-
-
-    width:100%;
-
-
-    padding:
-
-    15px 20px;
-
-
-    background:
-
-    var(--panel-light);
-
-
-    border:
-
-    2px solid var(--border);
-
-
-    border-radius:15px;
-
-
-    color:white;
-
-
-    font-size:16px;
-
-
-    font-weight:600;
-
-
-    outline:none;
-
-
-    transition:.3s;
-
-
-}
-
-
-
-.search-box input::placeholder{
-
-
-    color:
-
-    var(--muted);
-
-
-}
-
-
-
-.search-box input:focus{
-
-
-    border-color:
-
-    var(--primary);
-
-
-    box-shadow:
-
-    0 0 25px rgba(79,141,255,.35);
-
-
-}
-
-
-
-
-
-
-/* ==========================================
-   FILTER AREA
-========================================== */
-
-
-.filter-group{
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    gap:15px;
-
-
-    flex-wrap:wrap;
-
-
-}
-
-
-
-
-
-.filter-group select{
-
-
-    padding:
-
-    14px 18px;
-
-
-    min-width:150px;
-
-
-    background:
-
-    var(--panel-light);
-
-
-    border:
-
-    2px solid var(--border);
-
-
-    border-radius:15px;
-
-
-    color:white;
-
-
-    font-weight:800;
-
-
-    outline:none;
-
-
-    cursor:pointer;
-
-
-}
-
-
-
-.filter-group select:hover{
-
-
-    border-color:
-
-    var(--primary);
-
-
-}
-
-
-
-
-.limited-filter{
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    gap:10px;
-
-
-    color:white;
-
-
-    font-weight:800;
-
-
-    cursor:pointer;
-
-
-}
-
-
-
-
-.limited-filter input{
-
-
-    width:18px;
-
-
-    height:18px;
-
-
-}
-
-
-
-
-/* ==========================================
-   VEHICLE GRID
-   FIXED CARD SIZE
-========================================== */
-
-
-.cards{
-
-
-    width:95%;
-
-
-    max-width:1400px;
-
-
-
-    margin:
-
-    40px auto 80px;
-
-
-
-    display:grid;
-
-
-
-    grid-template-columns:
-
-
-    repeat(
-
-        auto-fill,
-
-        minmax(240px,260px)
-
-    );
-
-
-
-    justify-content:center;
-
-
-
-    gap:
-
-    25px;
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================
-   VEHICLE CARD
-========================================== */
-
-
-.card{
-
-
-    position:relative;
-
-
-    width:260px;
-
-
-
-    background:
-
-    rgba(18,27,43,.92);
-
-
-
-    border:
-
-    2px solid var(--border);
-
-
-
-    border-radius:22px;
-
-
-
-    padding:14px;
-
-
-
-    overflow:hidden;
-
-
-
-    cursor:pointer;
-
-
-
-    box-shadow:
-
-    var(--shadow);
-
-
-
-    transition:.35s;
-
-
-}
-
-
-
-
-.card:hover{
-
-
-    transform:
-
-    translateY(-8px);
-
-
-
-    border-color:
-
-    var(--primary);
-
-
-
-    box-shadow:
-
-    0 30px 70px rgba(79,141,255,.25);
-
-
-}
-
-
-
-
-
-
-
-.card.limited{
-
-
-    border-color:
-
-    var(--gold);
-
-
-
-    box-shadow:
-
-    0 0 35px rgba(202,166,74,.25);
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================
-   LIMITED BADGE
-========================================== */
-
-
-.limited-badge{
-
-
-    position:absolute;
-
-
-    top:14px;
-
-
-    left:14px;
-
-
-    display:none;
-
-
-
-    padding:
-
-    7px 14px;
-
-
-
-    border-radius:999px;
-
-
-
-    background:
-
-    var(--gold);
-
-
-
-    color:white;
-
-
-
-    font-size:12px;
-
-
-
-    font-weight:900;
-
-
-
-    z-index:5;
-
-
-}
-
-
-
-
-.card.limited .limited-badge{
-
-
-    display:flex;
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================
-   VEHICLE IMAGE
-   NO STRETCH FIX
-========================================== */
-
-
-.vehicle-image{
-
-
-    width:100%;
-
-
-
-    height:150px;
-
-
-
-    background:
-
-    var(--panel-light);
-
-
-
-    border-radius:18px;
-
-
-
-    overflow:hidden;
-
-
-
-    display:flex;
-
-
-
-    align-items:center;
-
-
-
-    justify-content:center;
-
-
-
-    padding:12px;
-
-
-}
-
-
-
-
-
-.vehicle-image img{
-
-
-    width:100%;
-
-
-
-    height:100%;
-
-
-
-    object-fit:
-
-    contain;
-
-
-
-    object-position:center;
-
-
-
-    transition:.35s;
-
-
-}
-
-
-
-
-
-
-
-.card:hover .vehicle-image img{
-
-
-    transform:
-
-    scale(1.04);
-
-
-}
-
-
-
-
-
-/* ==========================================
-   VEHICLE NAME
-========================================== */
-
-
-.vehicle-name-box{
-
-
-    background:
-
-    var(--panel-light);
-
-
-
-    padding:
-
-    13px;
-
-
-
-    border-radius:15px;
-
-
-
-    margin-top:12px;
-
-
-
-    min-height:75px;
-
-
-
-    display:flex;
-
-
-
-    flex-direction:column;
-
-
-
-    justify-content:center;
-
-
-}
-
-
-
-
-.name-title{
-
-
-    color:
-
-    var(--muted);
-
-
-
-    font-size:12px;
-
-
-
-    font-weight:900;
-
-
-
-    text-transform:uppercase;
-
-
-
-    letter-spacing:1px;
-
-
-}
-
-
-
-
-.name-value{
-
-
-    margin-top:6px;
-
-
-
-    color:white;
-
-
-
-    font-size:18px;
-
-
-
-    font-weight:900;
-
-
-
-    overflow:hidden;
-
-
-
-    text-overflow:ellipsis;
-
-
-
-    white-space:nowrap;
-
-
-}
-
-
-
-
-/* ==========================================
-   END PART 2
-========================================== */
-/* ==========================================
-   VEHICLE VALUES
-   PART 3 - STATS + ADMIN SYSTEM
-========================================== */
-
-
-
-/* ==========================================
-   STAT BOXES
-========================================== */
-
-
-.stat-box{
-
-
-    background:
-
-    var(--panel-light);
-
-
-
-    border-radius:15px;
-
-
-
-    padding:14px;
-
-
-
-    margin-top:10px;
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,.05);
-
-
-}
-
-
-
-
-
-
-.stat-title{
-
-
-    display:block;
-
-
-
-    color:
-
-    var(--muted);
-
-
-
-    font-size:12px;
-
-
-
-    font-weight:900;
-
-
-
-    letter-spacing:1px;
-
-
-
-    text-transform:uppercase;
-
-
-
-    margin-bottom:7px;
-
-
-}
-
-
-
-
-
-
-
-.value-text{
-
-
-    color:
-
-    var(--primary-light);
-
-
-
-    font-size:22px;
-
-
-
-    font-weight:900;
-
-
-}
-
-
-
-
-
-
-
-.demand-value{
-
-
-    color:
-
-    var(--success);
-
-
-
-    font-size:22px;
-
-
-
-    font-weight:900;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================
-   ADMIN OVERLAY
-========================================== */
-
-
-.admin-overlay{
-
-
-    position:fixed;
-
-
-
-    inset:0;
-
-
-
-    display:none;
-
-
-
-    align-items:center;
-
-
-
-    justify-content:center;
-
-
-
-    background:
-
-    rgba(0,0,0,.75);
-
-
-
-    backdrop-filter:
-
-    blur(12px);
-
-
-
-    z-index:5000;
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================
-   ADMIN PANEL
-========================================== */
-
-
-.admin-panel{
-
-
-    width:500px;
-
-
-
-    max-width:95%;
-
-
-
-    background:
-
-    rgba(18,27,43,.98);
-
-
-
-    border:
-
-    2px solid var(--border);
-
-
-
-    border-radius:24px;
-
-
-
-    padding:35px;
-
-
-
-    box-shadow:
-
-    0 40px 90px rgba(0,0,0,.7);
-
-
-
-    animation:
-
-    fadeIn .3s ease;
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================
-   ADMIN TITLE
-========================================== */
-
-
-.admin-title{
-
-
-    text-align:center;
-
-
-
-    font-size:36px;
-
-
-
-    font-weight:900;
-
-
-
-    margin-bottom:25px;
-
-
-}
-
-
-
-
-
-
-.admin-title span{
-
-
-    color:
-
-    var(--primary);
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================
-   ADMIN FORM GROUP
-========================================== */
-
-
-.admin-group{
-
-
-    margin-bottom:20px;
-
-
-}
-
-
-
-
-
-
-
-.admin-group label{
-
-
-    display:block;
-
-
-
-    color:white;
-
-
-
-    font-weight:800;
-
-
-
-    margin-bottom:8px;
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================
-   INPUTS
-========================================== */
-
-
-.admin-group input,
-
-.admin-group select{
-
-
-    width:100%;
-
-
-
-    padding:
-
-    14px;
-
-
-
-    background:
-
-    var(--panel-light);
-
-
-
-    border:
-
-    2px solid var(--border);
-
-
-
-    border-radius:14px;
-
-
-
-    color:white;
-
-
-
-    outline:none;
-
-
-
-    font-size:16px;
-
-
-
-    font-weight:600;
-
-
-
-    transition:.3s;
-
-
-}
-
-
-
-
-
-.admin-group input::placeholder{
-
-
-    color:
-
-    var(--muted);
-
-
-}
-
-
-
-
-
-.admin-group input:focus,
-
-.admin-group select:focus{
-
-
-    border-color:
-
-    var(--primary);
-
-
-
-    box-shadow:
-
-    0 0 25px rgba(79,141,255,.35);
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================
-   SELECT FIX
-========================================== */
-
-
-select{
-
-
-    appearance:auto;
-
-
-    background:
-
-    var(--panel-light);
-
-
-
-    color:white;
-
-
-}
-
-
-
-
-
-select option{
-
-
-    background:
-
-    #121b2b;
-
-
-
-    color:white;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================
-   BUTTON ROW
-========================================== */
-
-
-.button-row{
-
-
-    display:flex;
-
-
-
-    gap:15px;
-
-
-
-    margin-top:25px;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================
-   SAVE BUTTON
-========================================== */
-
-
-.save-btn{
-
-
-    flex:1;
-
-
-
-    padding:
-
-    15px;
-
-
-
-    border:none;
-
-
-
-    border-radius:15px;
-
-
-
-    background:
-
-
-    linear-gradient(
-
-        180deg,
-
-        #70a8ff,
-
-        #4f8dff
-
-    );
-
-
-
-    color:white;
-
-
-
-    font-size:16px;
-
-
-
-    font-weight:900;
-
-
-
-    cursor:pointer;
-
-
-
-    transition:.3s;
-
-
-}
-
-
-
-
-
-
-
-.save-btn:hover{
-
-
-    transform:
-
-    translateY(-4px);
-
-
-
-    box-shadow:
-
-    0 15px 35px rgba(79,141,255,.45);
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================
-   CANCEL BUTTON
-========================================== */
-
-
-.cancel-btn{
-
-
-    flex:1;
-
-
-
-    padding:
-
-    15px;
-
-
-
-    border:none;
-
-
-
-    border-radius:15px;
-
-
-
-    background:
 
-    #334155;
-
-
-
-    color:white;
-
-
-
-    font-size:16px;
-
-
-
-    font-weight:900;
-
-
-
-    cursor:pointer;
-
-
-
-    transition:.3s;
-
-
-}
-
-
-
-
-
-.cancel-btn:hover{
-
-
-    background:
-
-    #475569;
-
-
-
-    transform:
-
-    translateY(-3px);
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================
-   LOGIN ERROR
-========================================== */
-
-
-.login-error{
-
-
-    color:
-
-    var(--danger);
-
-
-
-    font-weight:900;
-
-
-
-    text-align:center;
-
-
-
-    margin-top:15px;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================
-   LIMITED SWITCH
-========================================== */
-
-
-.limited-setting{
-
-
-    display:flex;
-
-
-
-    align-items:center;
-
-
-
-    justify-content:space-between;
-
-
-
-    color:white;
-
-
-
-    font-weight:900;
-
-
-}
-
-
-
-
-
-
-
-.switch{
-
-
-    position:relative;
-
-
-
-    width:62px;
-
-
-
-    height:34px;
-
-
-}
-
-
-
-
-
-
-
-.switch input{
-
-
-    opacity:0;
-
-
-
-    width:0;
-
-
-
-    height:0;
-
-
-}
-
-
-
-
-
-
-
-.slider{
-
-
-    position:absolute;
-
-
-
-    inset:0;
-
-
-
-    background:#475569;
-
-
-
-    border-radius:50px;
-
-
-
-    cursor:pointer;
-
-
-
-    transition:.3s;
-
-
-}
-
-
-
-
-
-
-
-.slider:before{
-
-
-    content:"";
-
-
-
-    position:absolute;
-
-
-
-    width:26px;
-
-
-
-    height:26px;
-
-
-
-    left:4px;
-
-
-
-    bottom:4px;
-
-
-
-    background:white;
-
-
-
-    border-radius:50%;
-
-
-
-    transition:.3s;
-
-
-}
-
-
-
-
-
-
-
-.switch input:checked + .slider{
-
-
-    background:
-
-    var(--gold);
-
-
-}
-
-
-
-
-
-
-
-.switch input:checked + .slider:before{
-
-
-    transform:
-
-    translateX(28px);
-
-
-}
-
-
-
-
-
-/* ==========================================
-   END PART 3
-========================================== */
-/* ==========================================
-   VEHICLE VALUES
-   PART 4 - RESPONSIVE + FINAL FIXES
-========================================== */
-
-
-
-
-
-/* ==========================================
-   ANIMATIONS
-========================================== */
-
-
-@keyframes fadeIn{
-
-
-    from{
-
-
-        opacity:0;
-
-
-        transform:
-
-        translateY(20px);
-
-
-    }
-
-
-
-    to{
-
-
-        opacity:1;
-
-
-        transform:
-
-        translateY(0);
-
-
-    }
-
-
-}
-
-
-
-
-
-
-.card{
-
-
-    animation:
-
-    fadeIn .35s ease;
-
-
 }
-
 
 
 
@@ -2313,9 +218,7 @@ select option{
 
 
     background:
-
-    var(--border);
-
+    var(--primary);
 
 
     border-radius:20px;
@@ -2325,12 +228,2366 @@ select option{
 
 
 
-::-webkit-scrollbar-thumb:hover{
+
+
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+
+.header{
+
+
+    width:100%;
+
+
+    height:82px;
+
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:space-between;
+
+
+
+    padding:
+    0 70px;
+
 
 
     background:
 
+
+    rgba(7,18,34,.75);
+
+
+
+    backdrop-filter:
+    blur(18px);
+
+
+
+    border-top:
+    3px solid var(--primary);
+
+
+
+    border-bottom:
+    1px solid rgba(255,255,255,.08);
+
+
+
+    position:sticky;
+
+
+    top:0;
+
+
+    z-index:999;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   LOGO
+========================================== */
+
+
+.logo{
+
+
+    font-size:30px;
+
+
+    font-weight:900;
+
+
+    letter-spacing:.5px;
+
+
+    color:white;
+
+
+}
+
+
+
+.logo span{
+
+
+    color:
     var(--primary);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+
+nav{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:40px;
+
+
+}
+
+
+
+
+
+nav a{
+
+
+    text-decoration:none;
+
+
+    color:white;
+
+
+    font-weight:600;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+nav a:hover{
+
+
+    color:
+    var(--primary);
+
+
+    transform:
+    translateY(-2px);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   LOGOUT BUTTON
+========================================== */
+
+
+.logout-btn{
+
+
+    background:
+    var(--danger);
+
+
+    color:white;
+
+
+    border:none;
+
+
+    padding:
+    12px 24px;
+
+
+
+    border-radius:12px;
+
+
+
+    font-weight:800;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+.logout-btn:hover{
+
+
+    background:#dc2626;
+
+
+    transform:
+    translateY(-3px);
+
+
+    box-shadow:
+    0 10px 25px rgba(239,68,68,.35);
+
+
+}
+
+
+
+
+
+
+/* ==========================================
+   PAGE TITLE
+========================================== */
+
+
+.page-title{
+
+
+    text-align:center;
+
+
+    padding:
+    70px 20px 35px;
+
+
+}
+
+
+
+
+
+.page-title h1{
+
+
+    font-size:52px;
+
+
+    font-weight:900;
+
+
+    margin-bottom:15px;
+
+
+    text-shadow:
+
+
+    0 0 40px rgba(79,141,255,.45);
+
+
+}
+
+
+
+
+
+.page-title p{
+
+
+    color:
+    var(--muted);
+
+
+    font-size:18px;
+
+
+}
+// ==========================================
+// PART 2 - VEHICLE GRID + CARDS
+// ==========================================
+
+
+
+
+
+/* ==========================================
+   VEHICLE GRID
+========================================== */
+
+
+.cards{
+
+
+    width:95%;
+
+
+    max-width:1600px;
+
+
+    margin:40px auto 80px;
+
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+
+    repeat(
+        auto-fit,
+        minmax(320px,1fr)
+    );
+
+
+
+    gap:30px;
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   VEHICLE CARD
+========================================== */
+
+
+.card{
+
+
+    position:relative;
+
+
+
+    background:
+
+
+    rgba(15,32,60,.70);
+
+
+
+    backdrop-filter:
+    blur(18px);
+
+
+
+    border:
+    2px solid var(--border);
+
+
+
+    border-radius:22px;
+
+
+
+    padding:20px;
+
+
+
+    overflow:hidden;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:
+    .35s ease;
+
+
+
+    box-shadow:
+    var(--shadow);
+
+
+
+}
+
+
+
+
+
+.card::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    top:0;
+
+
+    left:-100%;
+
+
+    width:100%;
+
+
+    height:100%;
+
+
+    background:
+
+
+    linear-gradient(
+
+        120deg,
+
+        transparent,
+
+        rgba(255,255,255,.08),
+
+        transparent
+
+    );
+
+
+
+    transition:.6s;
+
+
+}
+
+
+
+
+.card:hover::before{
+
+
+    left:100%;
+
+
+}
+
+
+
+
+
+
+.card:hover{
+
+
+    transform:
+
+
+    translateY(-10px);
+
+
+
+    border-color:
+    var(--primary);
+
+
+
+    box-shadow:
+
+
+    0 25px 70px rgba(79,141,255,.25);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   LIMITED VEHICLE CARD
+========================================== */
+
+
+.card.limited{
+
+
+    border-color:
+    var(--gold);
+
+
+
+    box-shadow:
+
+
+    0 0 25px rgba(202,166,74,.25);
+
+
+
+}
+
+
+
+
+.card.limited:hover{
+
+
+    border-color:#e4c56a;
+
+
+
+    box-shadow:
+
+
+    0 0 45px rgba(202,166,74,.45);
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   LIMITED BADGE
+========================================== */
+
+
+.limited-badge{
+
+
+    position:absolute;
+
+
+
+    top:15px;
+
+
+    left:15px;
+
+
+
+    z-index:5;
+
+
+
+    display:none;
+
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+
+    padding:
+
+
+    7px 14px;
+
+
+
+    border-radius:999px;
+
+
+
+    background:
+    var(--gold);
+
+
+
+    color:white;
+
+
+
+    font-size:11px;
+
+
+
+    font-weight:900;
+
+
+
+    letter-spacing:1px;
+
+
+
+    box-shadow:
+
+
+    0 0 20px rgba(202,166,74,.5);
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   VEHICLE IMAGE
+========================================== */
+
+
+.vehicle-image{
+
+
+    width:100%;
+
+
+
+    height:220px;
+
+
+
+    background:
+
+
+    rgba(24,36,56,.95);
+
+
+
+    border-radius:18px;
+
+
+
+    overflow:hidden;
+
+
+
+    display:flex;
+
+
+
+    justify-content:center;
+
+
+
+    align-items:center;
+
+
+
+    margin-bottom:20px;
+
+
+
+}
+
+
+
+
+
+
+.vehicle-image img{
+
+
+    width:100%;
+
+
+
+    height:100%;
+
+
+
+    object-fit:cover;
+
+
+
+    transition:
+    .35s ease;
+
+
+
+}
+
+
+
+
+
+.card:hover .vehicle-image img{
+
+
+    transform:
+    scale(1.06);
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   IMAGE PLACEHOLDER
+========================================== */
+
+
+.vehicle-image img:not([src]),
+
+.vehicle-image img[src=""]{
+
+
+    opacity:0;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   VEHICLE NAME BOX
+========================================== */
+
+
+.vehicle-name-box{
+
+
+    background:
+
+
+    rgba(24,36,56,.9);
+
+
+
+    border-radius:15px;
+
+
+
+    padding:15px;
+
+
+
+    margin-bottom:15px;
+
+
+
+}
+
+
+
+
+
+
+
+.name-title{
+
+
+    display:block;
+
+
+
+    color:#8ea3bf;
+
+
+
+    font-size:12px;
+
+
+
+    font-weight:800;
+
+
+
+    letter-spacing:1px;
+
+
+
+    text-transform:uppercase;
+
+
+
+    margin-bottom:7px;
+
+
+
+}
+
+
+
+
+
+
+
+.name-value{
+
+
+    color:white;
+
+
+
+    font-size:23px;
+
+
+
+    font-weight:900;
+
+
+
+    word-break:break-word;
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   STAT BOXES
+========================================== */
+
+
+.stat-box{
+
+
+    background:
+
+
+    rgba(24,36,56,.9);
+
+
+
+    border-radius:15px;
+
+
+
+    padding:15px;
+
+
+
+    margin-bottom:12px;
+
+
+
+}
+
+
+
+
+
+
+
+.stat-title{
+
+
+    display:block;
+
+
+
+    color:#8ea3bf;
+
+
+
+    font-size:12px;
+
+
+
+    font-weight:800;
+
+
+
+    text-transform:uppercase;
+
+
+
+    letter-spacing:1px;
+
+
+
+    margin-bottom:7px;
+
+
+
+}
+
+
+
+
+
+
+
+.value-text{
+
+
+    color:
+    var(--primary-light);
+
+
+
+    font-size:24px;
+
+
+
+    font-weight:900;
+
+
+
+}
+
+
+
+
+
+
+
+.demand-value{
+
+
+    color:
+    var(--success);
+
+
+
+    font-size:24px;
+
+
+
+    font-weight:900;
+
+
+
+}
+// ==========================================
+// PART 3 - ADMIN PANEL + LOGIN + FORMS
+// ==========================================
+
+
+
+
+
+/* ==========================================
+   OVERLAY SYSTEM
+========================================== */
+
+
+.admin-overlay,
+.login-overlay{
+
+
+    position:fixed;
+
+
+    inset:0;
+
+
+
+    background:
+
+
+    rgba(0,0,0,.75);
+
+
+
+    display:none;
+
+
+
+    align-items:center;
+
+
+
+    justify-content:center;
+
+
+
+    z-index:5000;
+
+
+
+    backdrop-filter:
+    blur(8px);
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   ADMIN PANEL
+========================================== */
+
+
+.admin-panel,
+
+
+.login-panel{
+
+
+    width:500px;
+
+
+
+    max-width:95%;
+
+
+
+    background:
+
+
+    rgba(18,27,43,.96);
+
+
+
+    backdrop-filter:
+
+
+    blur(20px);
+
+
+
+    border:
+
+
+    2px solid var(--border);
+
+
+
+    border-radius:24px;
+
+
+
+    padding:32px;
+
+
+
+    box-shadow:
+
+
+    0 30px 80px rgba(0,0,0,.55);
+
+
+
+    animation:
+
+
+    popup .25s ease;
+
+
+
+}
+
+
+
+
+
+
+
+@keyframes popup{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:
+        scale(.9);
+
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:
+        scale(1);
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   PANEL TITLES
+========================================== */
+
+
+.admin-title,
+
+
+.login-title{
+
+
+    text-align:center;
+
+
+
+    font-size:36px;
+
+
+
+    font-weight:900;
+
+
+
+    margin-bottom:30px;
+
+
+
+}
+
+
+
+
+
+.admin-title span{
+
+
+    color:
+    var(--primary);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   FORM GROUPS
+========================================== */
+
+
+.admin-group{
+
+
+    margin-bottom:22px;
+
+
+
+}
+
+
+
+
+
+.admin-group label{
+
+
+    display:block;
+
+
+
+    color:#cbd5e1;
+
+
+
+    font-weight:700;
+
+
+
+    margin-bottom:8px;
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   INPUTS + DROPDOWNS
+========================================== */
+
+
+.admin-group input,
+
+.admin-group select,
+
+
+.login-panel input{
+
+
+    width:100%;
+
+
+
+    padding:14px;
+
+
+
+    background:
+
+
+    rgba(24,36,56,.95);
+
+
+
+    border:
+
+
+    2px solid var(--border);
+
+
+
+    border-radius:12px;
+
+
+
+    color:white;
+
+
+
+    font-size:16px;
+
+
+
+    outline:none;
+
+
+
+    transition:.25s;
+
+
+
+}
+
+
+
+
+
+
+
+/* FIX DROPDOWN VISIBILITY */
+
+
+.admin-group select{
+
+
+    appearance:none;
+
+
+
+    cursor:pointer;
+
+
+
+}
+
+
+
+
+
+
+
+.admin-group select option{
+
+
+    background:#182438;
+
+
+
+    color:white;
+
+
+
+}
+
+
+
+
+
+
+
+.admin-group input:focus,
+
+.admin-group select:focus,
+
+
+.login-panel input:focus{
+
+
+    border-color:
+
+
+    var(--primary);
+
+
+
+    box-shadow:
+
+
+    0 0 20px rgba(79,141,255,.3);
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   BUTTON ROW
+========================================== */
+
+
+.button-row{
+
+
+    display:flex;
+
+
+
+    gap:15px;
+
+
+
+    margin-top:25px;
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   SAVE BUTTON
+========================================== */
+
+
+.save-btn{
+
+
+    flex:1;
+
+
+
+    padding:15px;
+
+
+
+    border:none;
+
+
+
+    border-radius:14px;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        180deg,
+
+        #6ca8ff,
+
+        #4f8dff
+
+    );
+
+
+
+    color:white;
+
+
+
+    font-size:17px;
+
+
+
+    font-weight:800;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:.3s;
+
+
+
+}
+
+
+
+
+
+.save-btn:hover{
+
+
+    transform:
+
+
+    translateY(-3px);
+
+
+
+    box-shadow:
+
+
+    0 0 35px rgba(79,141,255,.55);
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   CANCEL BUTTON
+========================================== */
+
+
+.cancel-btn{
+
+
+    flex:1;
+
+
+
+    padding:15px;
+
+
+
+    border:none;
+
+
+
+    border-radius:14px;
+
+
+
+    background:
+
+
+    #334155;
+
+
+
+    color:white;
+
+
+
+    font-size:17px;
+
+
+
+    font-weight:800;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:.3s;
+
+
+
+}
+
+
+
+
+
+.cancel-btn:hover{
+
+
+    background:
+
+
+    #475569;
+
+
+
+    transform:
+
+
+    translateY(-3px);
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   LOGIN BUTTON
+========================================== */
+
+
+.login-btn{
+
+
+    width:100%;
+
+
+
+    padding:15px;
+
+
+
+    border:none;
+
+
+
+    border-radius:14px;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        180deg,
+
+        #6ca8ff,
+
+        #4f8dff
+
+    );
+
+
+
+    color:white;
+
+
+
+    font-size:17px;
+
+
+
+    font-weight:800;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:.3s;
+
+
+
+}
+
+
+
+
+
+.login-btn:hover{
+
+
+    transform:
+
+
+    translateY(-3px);
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   ERROR MESSAGE
+========================================== */
+
+
+.login-error{
+
+
+    display:none;
+
+
+
+    color:#ef4444;
+
+
+
+    font-weight:800;
+
+
+
+    text-align:center;
+
+
+
+    margin-top:12px;
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   LIMITED SWITCH
+========================================== */
+
+
+.limited-setting{
+
+
+    display:flex;
+
+
+
+    justify-content:space-between;
+
+
+
+    align-items:center;
+
+
+
+    padding:10px 0;
+
+
+
+}
+
+
+
+
+
+
+
+.switch{
+
+
+    position:relative;
+
+
+
+    width:60px;
+
+
+
+    height:34px;
+
+
+
+}
+
+
+
+
+
+
+
+.switch input{
+
+
+    opacity:0;
+
+
+
+    width:0;
+
+
+
+    height:0;
+
+
+
+}
+
+
+
+
+
+
+
+.slider{
+
+
+    position:absolute;
+
+
+
+    inset:0;
+
+
+
+    background:#475569;
+
+
+
+    border-radius:999px;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:.25s;
+
+
+
+}
+
+
+
+
+
+
+
+.slider::before{
+
+
+    content:"";
+
+
+
+    position:absolute;
+
+
+
+    width:26px;
+
+
+
+    height:26px;
+
+
+
+    left:4px;
+
+
+
+    bottom:4px;
+
+
+
+    background:white;
+
+
+
+    border-radius:50%;
+
+
+
+    transition:.25s;
+
+
+
+}
+
+
+
+
+
+
+
+.switch input:checked + .slider{
+
+
+    background:
+    var(--gold);
+
+
+
+}
+
+
+
+
+
+.switch input:checked + .slider::before{
+
+
+    transform:
+
+
+    translateX(26px);
+
+
+
+}
+/* ==========================================
+   VEHICLE VALUES
+   VALUES.CSS
+   PART 4 - RESPONSIVE + FINAL FIXES
+========================================== */
+
+
+/* ==========================================
+   EXTRA ANIMATIONS
+========================================== */
+
+
+@keyframes glowPulse{
+
+    0%{
+
+        box-shadow:
+        0 0 10px rgba(79,141,255,.25);
+
+    }
+
+
+    50%{
+
+        box-shadow:
+        0 0 35px rgba(79,141,255,.55);
+
+    }
+
+
+    100%{
+
+        box-shadow:
+        0 0 10px rgba(79,141,255,.25);
+
+    }
+
+}
+
+
+
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(15px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
+
+}
+
+
+
+
+/* ==========================================
+   VEHICLE CARD LOAD ANIMATION
+========================================== */
+
+
+.card{
+
+    animation:
+    fadeIn .35s ease forwards;
+
+}
+
+
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+
+@media(max-width:1000px){
+
+
+    .header{
+
+
+        padding:
+        0 35px;
+
+
+    }
+
+
+
+
+
+    nav{
+
+
+        gap:20px;
+
+
+    }
+
+
+
+
+
+    .cards{
+
+
+        grid-template-columns:
+
+        repeat(
+            auto-fit,
+            minmax(280px,1fr)
+        );
+
+
+    }
+
+
+
+
+
+    .page-title h1{
+
+
+        font-size:42px;
+
+
+    }
+
+
+
+
+
+    .admin-panel{
+
+
+        width:90%;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+
+@media(max-width:700px){
+
+
+
+    .header{
+
+
+        height:75px;
+
+
+        padding:
+
+        0 20px;
+
+
+    }
+
+
+
+
+
+
+    .logo{
+
+
+        font-size:24px;
+
+
+    }
+
+
+
+
+
+
+    nav{
+
+
+        display:none;
+
+
+    }
+
+
+
+
+
+
+    .logout-btn{
+
+
+        padding:
+
+        10px 15px;
+
+
+        font-size:14px;
+
+
+    }
+
+
+
+
+
+
+
+    .page-title{
+
+
+        padding:
+
+        45px 15px 25px;
+
+
+    }
+
+
+
+
+
+
+
+    .page-title h1{
+
+
+        font-size:34px;
+
+
+    }
+
+
+
+
+
+
+
+    .page-title p{
+
+
+        font-size:15px;
+
+
+    }
+
+
+
+
+
+
+
+    .page-header{
+
+
+        width:90%;
+
+
+    }
+
+
+
+
+
+
+
+    .cards{
+
+
+        width:92%;
+
+
+        grid-template-columns:
+
+        1fr;
+
+
+        gap:20px;
+
+
+    }
+
+
+
+
+
+
+
+    .card{
+
+
+        padding:16px;
+
+
+    }
+
+
+
+
+
+
+
+    .vehicle-image{
+
+
+        height:190px;
+
+
+    }
+
+
+
+
+
+
+
+    .name-value{
+
+
+        font-size:20px;
+
+
+    }
+
+
+
+
+
+
+
+    .value-text,
+    .demand-value{
+
+
+        font-size:20px;
+
+
+    }
+
+
+
+
+
+
+
+    .admin-panel{
+
+
+        width:95%;
+
+
+        padding:22px;
+
+
+        border-radius:18px;
+
+
+    }
+
+
+
+
+
+
+
+    .admin-title{
+
+
+        font-size:28px;
+
+
+    }
+
+
+
+
+
+
+
+    .button-row{
+
+
+        flex-direction:
+
+        column;
+
+
+    }
+
+
+
+
+
+
+
+    .save-btn,
+    .cancel-btn{
+
+
+        width:100%;
+
+
+    }
+
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   SMALL PHONES
+========================================== */
+
+
+@media(max-width:400px){
+
+
+
+    .logo{
+
+
+        font-size:21px;
+
+
+    }
+
+
+
+
+
+
+
+    .vehicle-image{
+
+
+        height:160px;
+
+
+    }
+
+
+
+
+
+
+
+    .admin-title{
+
+
+        font-size:24px;
+
+
+    }
+
+
+
+
+
+
+
+    .admin-group input,
+    .admin-group select{
+
+
+        font-size:14px;
+
+
+    }
+
+
 
 
 }
@@ -2343,20 +2600,188 @@ select option{
 
 
 /* ==========================================
-   GLOBAL FIXES
+   IMAGE FALLBACK FIX
+========================================== */
+
+
+.vehicle-image img[src=""],
+.vehicle-image img:not([src]){
+
+
+    display:none;
+
+
+}
+
+
+
+
+
+.vehicle-image::before{
+
+
+    content:"No Image";
+
+
+    color:#8ea3bf;
+
+
+    font-weight:700;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+
+
+.vehicle-image img[src]:not([src=""]) + *{
+
+
+    display:none;
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================
+   DROPDOWN FIX
+========================================== */
+
+
+select{
+
+
+    appearance:auto;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+select option{
+
+
+    background:#121b2b;
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+
+/* ==========================================
+   REMOVE MOBILE TAP FLASH
 ========================================== */
 
 
 button,
 a,
+.card,
 input,
-select,
-.card{
+select{
 
 
     -webkit-tap-highlight-color:
 
     transparent;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   SMOOTH SCROLLBAR
+========================================== */
+
+
+::-webkit-scrollbar{
+
+
+    width:10px;
+
+
+}
+
+
+
+
+
+::-webkit-scrollbar-track{
+
+
+    background:#0b1220;
+
+
+}
+
+
+
+
+
+::-webkit-scrollbar-thumb{
+
+
+    background:#2b3d5d;
+
+
+    border-radius:20px;
+
+
+}
+
+
+
+
+
+::-webkit-scrollbar-thumb:hover{
+
+
+    background:#4f8dff;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   FINAL SAFETY FIXES
+========================================== */
+
+
+img{
+
+
+    max-width:100%;
+
+
+    user-select:none;
 
 
 }
@@ -2390,691 +2815,7 @@ select{
 
 
 
-img{
-
-
-    user-select:none;
-
-
-}
-
-
-
-
-
-
-
-
 
 /* ==========================================
-   TABLET
-========================================== */
-
-
-@media(max-width:1000px){
-
-
-
-    .header{
-
-
-        padding:
-
-        0 35px;
-
-
-    }
-
-
-
-
-
-
-
-    nav{
-
-
-        gap:
-
-        22px;
-
-
-    }
-
-
-
-
-
-
-
-    .toolbar{
-
-
-        flex-direction:
-
-        column;
-
-
-
-        align-items:
-
-        stretch;
-
-
-    }
-
-
-
-
-
-
-
-    .search-box{
-
-
-        width:100%;
-
-
-    }
-
-
-
-
-
-
-
-    .filter-group{
-
-
-        justify-content:center;
-
-
-    }
-
-
-
-
-
-
-
-    .cards{
-
-
-        grid-template-columns:
-
-
-        repeat(
-
-            auto-fill,
-
-            minmax(240px,260px)
-
-        );
-
-
-    }
-
-
-
-
-
-
-
-    .page-title h1{
-
-
-        font-size:
-
-        44px;
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================
-   MOBILE
-========================================== */
-
-
-@media(max-width:700px){
-
-
-
-    .header{
-
-
-        height:
-
-        75px;
-
-
-
-        padding:
-
-        0 20px;
-
-
-    }
-
-
-
-
-
-
-
-    .logo{
-
-
-        font-size:
-
-        24px;
-
-
-    }
-
-
-
-
-
-
-
-    nav{
-
-
-        display:none;
-
-
-    }
-
-
-
-
-
-
-
-    .logout-btn{
-
-
-        padding:
-
-        10px 16px;
-
-
-
-        font-size:
-
-        14px;
-
-
-    }
-
-
-
-
-
-
-
-    .page-title{
-
-
-        padding:
-
-        50px 15px 30px;
-
-
-    }
-
-
-
-
-
-
-
-    .page-title h1{
-
-
-        font-size:
-
-        34px;
-
-
-    }
-
-
-
-
-
-
-
-    .page-title p{
-
-
-        font-size:
-
-        15px;
-
-
-    }
-
-
-
-
-
-
-
-    .page-header{
-
-
-        width:
-
-        92%;
-
-
-    }
-
-
-
-
-
-
-
-    .toolbar{
-
-
-        width:
-
-        92%;
-
-
-
-        padding:
-
-        16px;
-
-
-    }
-
-
-
-
-
-
-
-    .filter-group{
-
-
-        flex-direction:
-
-        column;
-
-
-
-        width:100%;
-
-
-    }
-
-
-
-
-
-
-
-    .filter-group select{
-
-
-        width:100%;
-
-
-    }
-
-
-
-
-
-
-
-    .cards{
-
-
-        width:
-
-        92%;
-
-
-
-        grid-template-columns:
-
-
-        1fr;
-
-
-
-        gap:
-
-        22px;
-
-
-    }
-
-
-
-
-
-
-
-    .card{
-
-
-        width:100%;
-
-
-    }
-
-
-
-
-
-
-
-    .vehicle-image{
-
-
-        height:
-
-        160px;
-
-
-    }
-
-
-
-
-
-
-
-    .admin-panel{
-
-
-        width:
-
-        95%;
-
-
-
-        padding:
-
-        25px;
-
-
-    }
-
-
-
-
-
-
-
-    .admin-title{
-
-
-        font-size:
-
-        28px;
-
-
-    }
-
-
-
-
-
-
-
-    .button-row{
-
-
-        flex-direction:
-
-        column;
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================
-   SMALL PHONES
-========================================== */
-
-
-@media(max-width:400px){
-
-
-
-    .logo{
-
-
-        font-size:
-
-        20px;
-
-
-    }
-
-
-
-
-
-
-
-    .logout-btn{
-
-
-        padding:
-
-        8px 12px;
-
-
-    }
-
-
-
-
-
-
-
-    .vehicle-image{
-
-
-        height:
-
-        150px;
-
-
-    }
-
-
-
-
-
-
-
-    .admin-title{
-
-
-        font-size:
-
-        24px;
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================
-   FINAL IMAGE SAFETY FIX
-========================================== */
-
-
-.vehicle-image{
-
-
-    display:flex;
-
-
-    overflow:hidden;
-
-
-}
-
-
-
-.vehicle-image img{
-
-
-    width:100%;
-
-
-    height:100%;
-
-
-    object-fit:contain !important;
-
-
-    object-position:center;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================
-   EMPTY IMAGE PLACEHOLDER
-========================================== */
-
-
-.vehicle-image:empty::before{
-
-
-    content:
-
-    "No Image";
-
-
-
-    color:
-
-    var(--muted);
-
-
-
-    font-weight:
-
-    800;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================
-   CARD FINAL POLISH
-========================================== */
-
-
-.card img{
-
-
-    pointer-events:none;
-
-
-}
-
-
-
-.card:hover{
-
-
-    z-index:5;
-
-
-}
-
-
-
-
-
-.card .vehicle-image{
-
-
-    aspect-ratio:
-
-    16 / 10;
-
-
-}
-
-
-
-
-
-
-.card .vehicle-name-box{
-
-
-    overflow:hidden;
-
-
-}
-
-
-
-
-
-
-/* ==========================================
-   END VALUES.CSS
+   END OF VALUES.CSS
 ========================================== */
