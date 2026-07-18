@@ -3,1302 +3,276 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Vehicle Values</title>
 
-<title>Vehicle Values</title>
+    <!-- SEO -->
+    <meta name="description" content="Track vehicle prices, demand, rarity and trading values in one place.">
+    <meta name="robots" content="index, follow">
 
+    <!-- Open Graph -->
+    <meta property="og:title" content="Vehicle Values">
+    <meta property="og:description" content="Track vehicle prices, demand, rarity and trading values in one place.">
+    <meta property="og:image" content="https://i.postimg.cc/ZRS6Lx4Q/carforsalenz.webp">
+    <meta property="og:type" content="website">
 
-<!-- SEO -->
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vehicle Values">
+    <meta name="twitter:description" content="Track vehicle prices, demand, rarity and trading values in one place.">
+    <meta name="twitter:image" content="https://i.postimg.cc/ZRS6Lx4Q/carforsalenz.webp">
 
-<meta name="description" content="Track vehicle prices, demand, rarity and trading values in one place.">
+    <!-- Favicon -->
+    <link rel="icon"
+          type="image/webp"
+          href="https://i.postimg.cc/ZRS6Lx4Q/carforsalenz.webp">
 
-<meta name="robots" content="index, follow">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
 
-<!-- OPEN GRAPH -->
-
-<meta property="og:title" content="Vehicle Values">
-
-<meta property="og:description" content="Track vehicle prices, demand, rarity and trading values in one place.">
-
-<meta property="og:image" content="https://i.postimg.cc/ZRS6Lx4Q/carforsalenz.webp">
-
-<meta property="og:image:width" content="1200">
-
-<meta property="og:image:height" content="630">
-
-<meta property="og:type" content="website">
-
-<meta property="og:site_name" content="Vehicle Values">
-
-
-<!-- TWITTER -->
-
-<meta name="twitter:card" content="summary_large_image">
-
-<meta name="twitter:title" content="Vehicle Values">
-
-<meta name="twitter:description" content="Track vehicle prices, demand, rarity and trading values in one place.">
-
-<meta name="twitter:image" content="https://i.postimg.cc/ZRS6Lx4Q/carforsalenz.webp">
-
-
-<!-- FAVICON -->
-
-<link 
-rel="icon"
-type="image/webp"
-href="https://i.postimg.cc/ZRS6Lx4Q/carforsalenz.webp">
-
-
-<!-- GOOGLE FONT -->
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-<link 
-href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-rel="stylesheet">
-
-
-<!-- CSS -->
-
-<link rel="stylesheet" href="values.css">
-
+    <!-- CSS -->
+    <link rel="stylesheet" href="values.css">
 
 </head>
 
-
 <body>
 
-
-<!-- =====================================
-HEADER
-===================================== -->
-
+<!-- ========================================= -->
+<!-- HEADER -->
+<!-- ========================================= -->
 
 <header class="header">
 
+    <div class="logo">
+        Vehicle <span>Values</span>
+    </div>
 
-<div class="logo">
+    <nav>
 
-Vehicle <span>Values</span>
+        <a href="index.html">
+            Home
+        </a>
 
-</div>
+        <a href="values.html" class="active">
+            Vehicles
+        </a>
 
+        <a href="#">
+            Updates
+        </a>
 
+        <a href="#">
+            About
+        </a>
 
-<nav>
+    </nav>
 
-<a href="index.html">
-Home
-</a>
+    <button
+        id="logoutBtn"
+        class="logout-btn"
+        style="display:none;">
 
+        Log Out
 
-<a href="#">
-Vehicles
-</a>
-
-
-<a href="#">
-Updates
-</a>
-
-
-<a href="#">
-About
-</a>
-
-
-</nav>
-
-
-
-<button
-id="logoutBtn"
-class="logout-btn"
-style="display:none;">
-
-Log Out
-
-</button>
-
+    </button>
 
 </header>
 
-
-
-
-
-<!-- =====================================
-PAGE TITLE
-===================================== -->
-
+<!-- ========================================= -->
+<!-- PAGE TITLE -->
+<!-- ========================================= -->
 
 <section class="page-title">
 
+    <h1>
+        Vehicle Collection
+    </h1>
 
-<h1>
-Vehicle Collection
-</h1>
-
-
-<p>
-Track every vehicle's value, demand and rarity.
-</p>
-
+    <p>
+        Browse every vehicle, compare values, demand and rarity.
+    </p>
 
 </section>
 
-
-
-
-
-<!-- =====================================
-BACK BUTTON
-===================================== -->
-
+<!-- ========================================= -->
+<!-- BACK BUTTON -->
+<!-- ========================================= -->
 
 <section class="page-header">
 
-
-<a 
-href="index.html"
-class="back-btn">
-
-&#8592;
-
-</a>
-
+    <a href="index.html" class="back-btn">
+        &#8592;
+    </a>
 
 </section>
 
+<!-- ========================================= -->
+<!-- SEARCH + FILTER BAR -->
+<!-- ========================================= -->
 
+<section class="toolbar">
 
+    <div class="search-box">
 
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search vehicles...">
 
+    </div>
 
+    <div class="filter-group">
 
+        <select id="demandFilter">
+
+            <option value="all">
+                All Demand
+            </option>
+
+            <option value="10">
+                10/10
+            </option>
+
+            <option value="9">
+                9/10
+            </option>
+
+            <option value="8">
+                8/10
+            </option>
+
+            <option value="7">
+                7/10
+            </option>
+
+            <option value="6">
+                6/10
+            </option>
+
+            <option value="5">
+                5/10
+            </option>
+
+            <option value="4">
+                4/10
+            </option>
+
+            <option value="3">
+                3/10
+            </option>
+
+            <option value="2">
+                2/10
+            </option>
+
+            <option value="1">
+                1/10
+            </option>
+
+            <option value="0">
+                0/10
+            </option>
+
+        </select>
+
+        <select id="sortFilter">
+
+            <option value="default">
+                Default
+            </option>
+
+            <option value="valueHigh">
+                Value: High → Low
+            </option>
+
+            <option value="valueLow">
+                Value: Low → High
+            </option>
+
+            <option value="nameAZ">
+                Name: A → Z
+            </option>
+
+            <option value="nameZA">
+                Name: Z → A
+            </option>
+
+            <option value="demandHigh">
+                Demand: High → Low
+            </option>
+
+            <option value="demandLow">
+                Demand: Low → High
+            </option>
+
+        </select>
+
+        <label class="limited-filter">
+
+            <input
+                type="checkbox"
+                id="limitedOnly">
+
+            <span>
+                Limited Only
+            </span>
+
+        </label>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- VEHICLE GRID -->
+<!-- ========================================= -->
+
+<main
+    class="cards"
+    id="cardsContainer">
+
+    <!--
+        Vehicle cards are now generated
+        automatically by script.js.
+
+        To add more vehicles later,
+        simply change:
+
+        const TOTAL_CARDS = 82;
+
+        inside script.js
+
+        No HTML editing required.
+    -->
+
+</main>
 <!-- =====================================
 VEHICLE GRID
 ===================================== -->
 
 
 <main class="cards">
-
-
-
-
-
-<!-- VEHICLE CARD TEMPLATE -->
-
-
-
-<div class="card" data-id="1">
-
-
-<div 
-class="limited-badge"
-id="limitedBadge1"
-style="display:none;">
-
-★ LIMITED
-
-</div>
-
-
-
-<div class="vehicle-image">
-
-
-<img 
-id="image1"
-src=""
-alt="Vehicle">
-
-
-</div>
-
-
-
-
-<div class="vehicle-name-box">
-
-
-<span class="name-title">
-
-NAME
-
-</span>
-
-
-
-<span 
-class="name-value"
-id="name1">
-
-Loading...
-
-</span>
-
-
-</div>
-
-
-
-
-<div class="stat-box">
-
-
-<span class="stat-title">
-
-Demand
-
-</span>
-
-
-
-<span
-class="demand-value"
-id="demand1">
-
-0/10
-
-</span>
-
-
-</div>
-
-
-
-
-
-<div class="stat-box">
-
-
-<span class="stat-title">
-
-Value
-
-</span>
-
-
-
-<span
-class="value-text"
-id="value1">
-
-$0
-
-</span>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card" data-id="2">
-
-
-<div 
-class="limited-badge"
-id="limitedBadge2"
-style="display:none;">
-
-★ LIMITED
-
-</div>
-
-
-<div class="vehicle-image">
-
-<img 
-id="image2"
-src=""
-alt="Vehicle">
-
-</div>
-
-
-<div class="vehicle-name-box">
-
-<span class="name-title">
-NAME
-</span>
-
-
-<span 
-class="name-value"
-id="name2">
-
-Loading...
-
-</span>
-
-
-</div>
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Demand
-</span>
-
-
-<span
-class="demand-value"
-id="demand2">
-
-0/10
-
-</span>
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Value
-</span>
-
-
-<span
-class="value-text"
-id="value2">
-
-$0
-
-</span>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="card" data-id="3">
-
-
-<div 
-class="limited-badge"
-id="limitedBadge3"
-style="display:none;">
-
-★ LIMITED
-
-</div>
-
-
-<div class="vehicle-image">
-
-<img 
-id="image3"
-src=""
-alt="Vehicle">
-
-</div>
-
-
-<div class="vehicle-name-box">
-
-
-<span class="name-title">
-NAME
-</span>
-
-
-<span
-class="name-value"
-id="name3">
-
-Loading...
-
-</span>
-
-
-</div>
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Demand
-</span>
-
-
-<span
-class="demand-value"
-id="demand3">
-
-0/10
-
-</span>
-
-
-</div>
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Value
-</span>
-
-
-<span
-class="value-text"
-id="value3">
-
-$0
-
-</span>
-
-
-</div>
-
-
-</div>
 <!-- =====================================
-VEHICLE CARD 4
+VEHICLE GRID
 ===================================== -->
 
-
-<div class="card" data-id="4">
-
-
-<div class="limited-badge"
-id="limitedBadge4"
-style="display:none;">
-
-★ LIMITED
-
-</div>
-
-
-<div class="vehicle-image">
-
-<img 
-id="image4"
-src=""
-alt="Vehicle">
-
-</div>
-
-
-<div class="vehicle-name-box">
-
-<span class="name-title">
-NAME
-</span>
-
-
-<span 
-class="name-value"
-id="name4">
-
-Loading...
-
-</span>
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Demand
-</span>
-
-
-<span
-class="demand-value"
-id="demand4">
-
-0/10
-
-</span>
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Value
-</span>
-
-
-<span
-class="value-text"
-id="value4">
-
-$0
-
-</span>
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<!-- =====================================
-VEHICLE CARD 5
-===================================== -->
-
-
-<div class="card" data-id="5">
-
-
-<div class="limited-badge"
-id="limitedBadge5"
-style="display:none;">
-
-★ LIMITED
-
-</div>
-
-
-<div class="vehicle-image">
-
-<img 
-id="image5"
-src=""
-alt="Vehicle">
-
-</div>
-
-
-<div class="vehicle-name-box">
-
-<span class="name-title">
-NAME
-</span>
-
-
-<span 
-class="name-value"
-id="name5">
-
-Loading...
-
-</span>
-
-</div>
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Demand
-</span>
-
-
-<span
-class="demand-value"
-id="demand5">
-
-0/10
-
-</span>
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Value
-</span>
-
-
-<span
-class="value-text"
-id="value5">
-
-$0
-
-</span>
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- =====================================
-VEHICLE CARD 6
-===================================== -->
-
-
-<div class="card" data-id="6">
-
-
-<div class="limited-badge"
-id="limitedBadge6"
-style="display:none;">
-
-★ LIMITED
-
-</div>
-
-
-<div class="vehicle-image">
-
-<img 
-id="image6"
-src=""
-alt="Vehicle">
-
-</div>
-
-
-<div class="vehicle-name-box">
-
-<span class="name-title">
-NAME
-</span>
-
-
-<span 
-class="name-value"
-id="name6">
-
-Loading...
-
-</span>
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Demand
-</span>
-
-
-<span
-class="demand-value"
-id="demand6">
-
-0/10
-
-</span>
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Value
-</span>
-
-
-<span
-class="value-text"
-id="value6">
-
-$0
-
-</span>
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-<!-- =====================================
-VEHICLE CARD 7
-===================================== -->
-
-
-<div class="card" data-id="7">
-
-
-<div class="limited-badge"
-id="limitedBadge7"
-style="display:none;">
-
-★ LIMITED
-
-</div>
-
-
-<div class="vehicle-image">
-
-<img 
-id="image7"
-src=""
-alt="Vehicle">
-
-</div>
-
-
-<div class="vehicle-name-box">
-
-
-<span class="name-title">
-NAME
-</span>
-
-
-<span
-class="name-value"
-id="name7">
-
-Loading...
-
-</span>
-
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Demand
-</span>
-
-
-<span
-class="demand-value"
-id="demand7">
-
-0/10
-
-</span>
-
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Value
-</span>
-
-
-<span
-class="value-text"
-id="value7">
-
-$0
-
-</span>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-<!-- =====================================
-VEHICLE CARD 8
-===================================== -->
-
-
-<div class="card" data-id="8">
-
-
-<div class="limited-badge"
-id="limitedBadge8"
-style="display:none;">
-
-★ LIMITED
-
-</div>
-
-
-<div class="vehicle-image">
-
-<img 
-id="image8"
-src=""
-alt="Vehicle">
-
-</div>
-
-
-<div class="vehicle-name-box">
-
-<span class="name-title">
-NAME
-</span>
-
-
-<span
-class="name-value"
-id="name8">
-
-Loading...
-
-</span>
-
-</div>
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Demand
-</span>
-
-
-<span
-class="demand-value"
-id="demand8">
-
-0/10
-
-</span>
-
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Value
-</span>
-
-
-<span
-class="value-text"
-id="value8">
-
-$0
-
-</span>
-
-
-</div>
-
-
-</div>
-<!-- =====================================
-VEHICLE CARD 9
-===================================== -->
-
-
-<div class="card" data-id="9">
-
-
-<div class="limited-badge"
-id="limitedBadge9"
-style="display:none;">
-
-★ LIMITED
-
-</div>
-
-
-<div class="vehicle-image">
-
-<img 
-id="image9"
-src=""
-alt="Vehicle">
-
-</div>
-
-
-<div class="vehicle-name-box">
-
-<span class="name-title">
-NAME
-</span>
-
-
-<span 
-class="name-value"
-id="name9">
-
-Loading...
-
-</span>
-
-</div>
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Demand
-</span>
-
-
-<span
-class="demand-value"
-id="demand9">
-
-0/10
-
-</span>
-
-
-</div>
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Value
-</span>
-
-
-<span
-class="value-text"
-id="value9">
-
-$0
-
-</span>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<!-- =====================================
-VEHICLE CARD 10
-===================================== -->
-
-
-<div class="card" data-id="10">
-
-
-<div class="limited-badge"
-id="limitedBadge10"
-style="display:none;">
-
-★ LIMITED
-
-</div>
-
-
-<div class="vehicle-image">
-
-<img 
-id="image10"
-src=""
-alt="Vehicle">
-
-</div>
-
-
-<div class="vehicle-name-box">
-
-<span class="name-title">
-NAME
-</span>
-
-
-<span
-class="name-value"
-id="name10">
-
-Loading...
-
-</span>
-
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Demand
-</span>
-
-
-<span
-class="demand-value"
-id="demand10">
-
-0/10
-
-</span>
-
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Value
-</span>
-
-
-<span
-class="value-text"
-id="value10">
-
-$0
-
-</span>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- =====================================
-VEHICLE CARD 11
-===================================== -->
-
-
-<div class="card" data-id="11">
-
-
-<div class="limited-badge"
-id="limitedBadge11"
-style="display:none;">
-
-★ LIMITED
-
-</div>
-
-
-<div class="vehicle-image">
-
-<img 
-id="image11"
-src=""
-alt="Vehicle">
-
-</div>
-
-
-<div class="vehicle-name-box">
-
-<span class="name-title">
-NAME
-</span>
-
-
-<span
-class="name-value"
-id="name11">
-
-Loading...
-
-</span>
-
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Demand
-</span>
-
-
-<span
-class="demand-value"
-id="demand11">
-
-0/10
-
-</span>
-
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Value
-</span>
-
-
-<span
-class="value-text"
-id="value11">
-
-$0
-
-</span>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- =====================================
-VEHICLE CARD 12
-===================================== -->
-
-
-<div class="card" data-id="12">
-
-
-<div class="limited-badge"
-id="limitedBadge12"
-style="display:none;">
-
-★ LIMITED
-
-</div>
-
-
-<div class="vehicle-image">
-
-<img 
-id="image12"
-src=""
-alt="Vehicle">
-
-</div>
-
-
-<div class="vehicle-name-box">
-
-<span class="name-title">
-NAME
-</span>
-
-
-<span
-class="name-value"
-id="name12">
-
-Loading...
-
-</span>
-
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Demand
-</span>
-
-
-<span
-class="demand-value"
-id="demand12">
-
-0/10
-
-</span>
-
-
-</div>
-
-
-
-<div class="stat-box">
-
-<span class="stat-title">
-Value
-</span>
-
-
-<span
-class="value-text"
-id="value12">
-
-$0
-
-</span>
-
-
-</div>
-
-
-</div>
-
+<main class="cards" id="vehicleGrid">
+
+    <!--
+    Vehicle cards are generated automatically
+    by script.js.
+
+    Change TOTAL_VEHICLES in script.js to add
+    more cards without editing HTML.
+    -->
 
 </main>
-
 
 
 
