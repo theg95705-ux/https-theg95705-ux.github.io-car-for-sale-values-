@@ -103,11 +103,10 @@ console.log(
 // ==========================================
 
 
-const ADMIN_EMAIL =
-"theg95705@gmail.com";
-
-const ADMIN_EMAIL =
-"ellocosigma@gmail.com";
+const ADMIN_EMAILS = [
+    "theg95705@gmail.com",
+    "ellocosigma@gmail.com"
+];
 
 
 
