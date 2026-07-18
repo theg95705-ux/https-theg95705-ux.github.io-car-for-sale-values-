@@ -12,13 +12,11 @@
     <meta name="description" content="Track vehicle prices, demand, rarity and trading values in one place.">
     <meta name="robots" content="index, follow">
 
-
     <!-- Open Graph -->
     <meta property="og:title" content="Vehicle Values">
     <meta property="og:description" content="Track vehicle prices, demand, rarity and trading values in one place.">
     <meta property="og:image" content="https://i.postimg.cc/ZRS6Lx4Q/carforsalenz.webp">
     <meta property="og:type" content="website">
-
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
@@ -26,499 +24,282 @@
     <meta name="twitter:description" content="Track vehicle prices, demand, rarity and trading values in one place.">
     <meta name="twitter:image" content="https://i.postimg.cc/ZRS6Lx4Q/carforsalenz.webp">
 
-
     <!-- Favicon -->
     <link rel="icon"
           type="image/webp"
           href="https://i.postimg.cc/ZRS6Lx4Q/carforsalenz.webp">
 
-
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet">
 
-
     <!-- CSS -->
     <link rel="stylesheet" href="values.css">
 
-
 </head>
 
-
 <body>
-
 
 <!-- ========================================= -->
 <!-- HEADER -->
 <!-- ========================================= -->
 
-
 <header class="header">
 
-
     <div class="logo">
-
         Vehicle <span>Values</span>
-
     </div>
-
-
 
     <nav>
 
-
         <a href="index.html">
-
             Home
-
         </a>
-
-
 
         <a href="values.html" class="active">
-
             Vehicles
-
         </a>
 
-
-
         <a href="#">
-
             Updates
-
         </a>
-
-
 
         <a href="#">
-
             About
-
         </a>
-
 
     </nav>
-
-
 
     <button
         id="logoutBtn"
         class="logout-btn"
         style="display:none;">
 
-
         Log Out
-
 
     </button>
 
-
 </header>
-
-
-
-
 
 <!-- ========================================= -->
 <!-- PAGE TITLE -->
 <!-- ========================================= -->
 
-
 <section class="page-title">
 
-
     <h1>
-
         Vehicle Collection
-
     </h1>
 
-
-
     <p>
-
         Browse every vehicle, compare values, demand and rarity.
-
     </p>
 
-
 </section>
-
-
-
-
 
 <!-- ========================================= -->
 <!-- BACK BUTTON -->
 <!-- ========================================= -->
 
-
 <section class="page-header">
 
-
     <a href="index.html" class="back-btn">
-
         &#8592;
-
     </a>
 
-
 </section>
+
 <!-- ========================================= -->
 <!-- SEARCH + FILTER BAR -->
 <!-- ========================================= -->
 
-
 <section class="toolbar">
 
-
     <div class="search-box">
-
 
         <input
             type="text"
             id="searchInput"
             placeholder="Search vehicles...">
 
-
     </div>
-
-
-
 
     <div class="filter-group">
 
-
-
         <select id="demandFilter">
-
 
             <option value="all">
                 All Demand
             </option>
 
-
             <option value="10">
                 10/10
             </option>
-
 
             <option value="9">
                 9/10
             </option>
 
-
             <option value="8">
                 8/10
             </option>
-
 
             <option value="7">
                 7/10
             </option>
 
-
             <option value="6">
                 6/10
             </option>
-
 
             <option value="5">
                 5/10
             </option>
 
-
             <option value="4">
                 4/10
             </option>
-
 
             <option value="3">
                 3/10
             </option>
 
-
             <option value="2">
                 2/10
             </option>
-
 
             <option value="1">
                 1/10
             </option>
 
-
             <option value="0">
                 0/10
             </option>
 
-
         </select>
-
-
-
-
 
         <select id="sortFilter">
 
-
             <option value="default">
-
                 Default
-
             </option>
-
-
 
             <option value="valueHigh">
-
                 Value: High → Low
-
             </option>
-
-
 
             <option value="valueLow">
-
                 Value: Low → High
-
             </option>
-
-
 
             <option value="nameAZ">
-
                 Name: A → Z
-
             </option>
-
-
 
             <option value="nameZA">
-
                 Name: Z → A
-
             </option>
-
-
 
             <option value="demandHigh">
-
                 Demand: High → Low
-
             </option>
-
-
 
             <option value="demandLow">
-
                 Demand: Low → High
-
             </option>
-
 
         </select>
 
-
-
-
-
         <label class="limited-filter">
-
 
             <input
                 type="checkbox"
                 id="limitedOnly">
 
-
-
             <span>
-
                 Limited Only
-
             </span>
-
 
         </label>
 
-
-
     </div>
 
-
 </section>
-
-
-
-
-
-
 
 <!-- =====================================
 VEHICLE GRID
 ===================================== -->
 
-
-<main 
-class="cards"
-id="cardsContainer">
-
+<main class="cards" id="cardsContainer">
 
     <!--
-
     Vehicle cards are generated automatically
     by script.js.
 
     Change TOTAL_VEHICLES in script.js to add
     more cards without editing HTML.
-
     -->
 
-
 </main>
-
-
-
-
-
-
-
 
 <!-- =====================================
 CARD TEMPLATE
 ===================================== -->
 
-
 <template id="vehicleCardTemplate">
-
-
 
     <div class="card">
 
-
-
         <div class="limited-badge">
-
             ★ LIMITED
-
         </div>
-
-
-
-
 
         <div class="vehicle-image">
-
-
-            <img 
-            src=""
-            alt="Vehicle">
-
-
+            <img src="" alt="Vehicle">
         </div>
-
-
-
-
 
         <div class="vehicle-name-box">
 
-
-
-            <span class="name-title">
-
-                NAME
-
-            </span>
-
-
-
+            <span class="name-title">NAME</span>
 
             <span class="name-value">
-
                 Loading...
-
             </span>
-
-
 
         </div>
 
-
-
-
-
-
-
         <div class="stat-box">
 
-
-
-            <span class="stat-title">
-
-                Demand
-
-            </span>
-
-
-
+            <span class="stat-title">Demand</span>
 
             <span class="demand-value">
-
                 0/10
-
             </span>
 
-
-
         </div>
-
-
-
-
-
-
 
         <div class="stat-box">
 
-
-
-            <span class="stat-title">
-
-                Value
-
-            </span>
-
-
-
+            <span class="stat-title">Value</span>
 
             <span class="value-text">
-
                 $0
-
             </span>
 
-
-
         </div>
-
-
-
-
 
     </div>
 
-
-
 </template>
+
+
+
+
+
+
 <!-- =====================================
 ADMIN LOGIN OVERLAY
 ===================================== -->
@@ -529,130 +310,95 @@ class="admin-overlay"
 id="loginOverlay">
 
 
+<div class="admin-panel">
 
-    <div class="admin-panel">
 
+<h2 class="admin-title">
 
+Admin <span>Login</span>
 
-        <h2 class="admin-title">
+</h2>
 
-            Admin <span>Login</span>
 
-        </h2>
 
+<div class="admin-group">
 
 
+<label>
+Email
+</label>
 
 
-        <div class="admin-group">
-
-
-            <label>
-
-                Email
-
-            </label>
-
-
-
-            <input
-            type="email"
-            id="loginEmail"
-            placeholder="Email">
-
-
-
-        </div>
-
-
-
-
-
-
-
-        <div class="admin-group">
-
-
-            <label>
-
-                Password
-
-            </label>
-
-
-
-            <input
-            type="password"
-            id="loginPassword"
-            placeholder="Password">
-
-
-
-        </div>
-
-
-
-
-
-
-
-        <p
-        id="loginError"
-        class="login-error"
-        style="display:none;">
-
-
-        </p>
-
-
-
-
-
-
-
-
-        <div class="button-row">
-
-
-
-            <button
-            id="loginBtn"
-            class="save-btn">
-
-
-                Sign In
-
-
-            </button>
-
-
-
-
-
-
-            <button
-            id="loginCancelBtn"
-            class="cancel-btn">
-
-
-                Cancel
-
-
-            </button>
-
-
-
-        </div>
-
-
-
-
-    </div>
+<input
+type="email"
+id="loginEmail"
+placeholder="Email">
 
 
 </div>
 
 
+
+
+<div class="admin-group">
+
+
+<label>
+Password
+</label>
+
+
+<input
+type="password"
+id="loginPassword"
+placeholder="Password">
+
+
+</div>
+
+
+
+
+
+<p
+id="loginError"
+class="login-error"
+style="display:none;">
+
+</p>
+
+
+
+
+
+<div class="button-row">
+
+
+<button
+id="loginBtn"
+class="save-btn">
+
+Sign In
+
+</button>
+
+
+
+<button
+id="loginCancelBtn"
+class="cancel-btn">
+
+Cancel
+
+</button>
+
+
+</div>
+
+
+</div>
+
+</div>
 
 
 
@@ -670,235 +416,148 @@ class="admin-overlay"
 id="adminOverlay">
 
 
+<div class="admin-panel">
 
 
+<h2 class="admin-title">
 
-    <div class="admin-panel">
+Edit <span>Vehicle</span>
 
+</h2>
 
 
 
 
 
-        <h2 class="admin-title">
+<div class="admin-group">
 
 
-            Edit <span>Vehicle</span>
+<label>
+Vehicle Name
+</label>
 
 
-        </h2>
+<input
+type="text"
+id="vehicleName"
+placeholder="Vehicle Name">
 
 
+</div>
 
 
 
 
 
+<div class="admin-group">
 
 
-        <div class="admin-group">
+<label>
+Vehicle Value
+</label>
 
 
+<input
+type="number"
+id="vehicleValue"
+placeholder="125000">
 
-            <label>
 
-                Vehicle Name
+</div>
 
-            </label>
 
 
 
-            <input
-            type="text"
-            id="vehicleName"
-            placeholder="Vehicle Name">
 
+<div class="admin-group">
 
 
-        </div>
+<label>
+Vehicle Demand
+</label>
 
 
 
+<select id="vehicleDemand">
 
 
+<option value="10">
+10/10
+</option>
 
+<option value="9">
+9/10
+</option>
 
+<option value="8">
+8/10
+</option>
 
+<option value="7">
+7/10
+</option>
 
-        <div class="admin-group">
+<option value="6">
+6/10
+</option>
 
+<option value="5">
+5/10
+</option>
 
+<option value="4">
+4/10
+</option>
 
-            <label>
+<option value="3">
+3/10
+</option>
 
-                Vehicle Value
+<option value="2">
+2/10
+</option>
 
-            </label>
+<option value="1">
+1/10
+</option>
 
+<option value="0">
+0/10
+</option>
 
 
+</select>
 
-            <input
-            type="number"
-            id="vehicleValue"
-            placeholder="125000">
 
+</div>
+<!-- =====================================
+IMAGE URL
+===================================== -->
 
 
-        </div>
+<div class="admin-group">
 
 
+<label>
+Vehicle Image URL
+</label>
 
 
+<input
+type="text"
+id="vehicleImage"
+placeholder="https://example.com/car.png">
 
 
+</div>
 
 
 
-        <div class="admin-group">
 
 
 
-            <label>
 
-                Vehicle Demand
-
-            </label>
-
-
-
-
-
-
-            <select id="vehicleDemand">
-
-
-
-                <option value="10">
-
-                    10/10
-
-                </option>
-
-
-
-                <option value="9">
-
-                    9/10
-
-                </option>
-
-
-
-                <option value="8">
-
-                    8/10
-
-                </option>
-
-
-
-                <option value="7">
-
-                    7/10
-
-                </option>
-
-
-
-                <option value="6">
-
-                    6/10
-
-                </option>
-
-
-
-                <option value="5">
-
-                    5/10
-
-                </option>
-
-
-
-                <option value="4">
-
-                    4/10
-
-                </option>
-
-
-
-                <option value="3">
-
-                    3/10
-
-                </option>
-
-
-
-                <option value="2">
-
-                    2/10
-
-                </option>
-
-
-
-                <option value="1">
-
-                    1/10
-
-                </option>
-
-
-
-                <option value="0">
-
-                    0/10
-
-                </option>
-
-
-
-            </select>
-
-
-
-        </div>
-
-
-
-
-
-
-
-        <!-- IMAGE URL -->
-
-
-        <div class="admin-group">
-
-
-
-            <label>
-
-                Vehicle Image URL
-
-            </label>
-
-
-
-
-            <input
-            type="text"
-            id="vehicleImage"
-            placeholder="https://example.com/car.png">
-
-
-
-        </div>
-        <!-- =====================================
+<!-- =====================================
 LIMITED VEHICLE TOGGLE
 ===================================== -->
 
@@ -906,46 +565,33 @@ LIMITED VEHICLE TOGGLE
 <div class="admin-group">
 
 
-
-    <div class="limited-setting">
-
+<div class="limited-setting">
 
 
-        <span>
-
-            Limited Vehicle
-
-        </span>
+<span>
+Limited Vehicle
+</span>
 
 
 
+<label class="switch">
 
 
-        <label class="switch">
+<input
+type="checkbox"
+id="vehicleLimited">
 
 
-
-            <input
-            type="checkbox"
-            id="vehicleLimited">
+<span class="slider"></span>
 
 
-
-            <span class="slider"></span>
-
-
-
-        </label>
-
-
-
-    </div>
-
+</label>
 
 
 </div>
 
 
+</div>
 
 
 
@@ -961,43 +607,30 @@ ADMIN BUTTONS
 <div class="button-row">
 
 
+<button
+id="saveBtn"
+class="save-btn">
 
-    <button
-    id="saveBtn"
-    class="save-btn">
+Save
 
-
-        Save
-
-
-    </button>
+</button>
 
 
 
+<button
+id="cancelBtn"
+class="cancel-btn">
 
+Cancel
 
-
-
-    <button
-    id="cancelBtn"
-    class="cancel-btn">
-
-
-        Cancel
-
-
-    </button>
-
+</button>
 
 
 </div>
 
 
 
-
-
-
-    </div>
+</div>
 
 
 </div>
@@ -1015,7 +648,7 @@ JAVASCRIPT
 ===================================== -->
 
 
-<script
+<script 
 type="module"
 src="script.js">
 
@@ -1026,6 +659,5 @@ src="script.js">
 
 
 </body>
-
 
 </html>
