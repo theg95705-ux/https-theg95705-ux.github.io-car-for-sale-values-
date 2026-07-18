@@ -15,7 +15,7 @@
 
     --primary-light:#70a8ff;
 
-    --background:#06101f;
+    --background:#0b1220;
 
     --background-two:#0a1930;
 
@@ -34,6 +34,7 @@
     --gold:#caa64a;
 
 }
+
 
 
 
@@ -65,17 +66,13 @@ html{
 
 
 
+
+
 body{
 
     min-height:100vh;
 
-    background:
-    radial-gradient(
-        circle at top,
-        #194b97 0%,
-        #0d2448 30%,
-        #071321 100%
-    );
+    background:#0b1220;
 
     color:var(--text);
 
@@ -85,7 +82,7 @@ body{
 
 
 
-/* Blue background glow */
+/* Background glow */
 
 
 body::before{
@@ -106,10 +103,15 @@ body::before{
 
 
     background:
+
     radial-gradient(
+
         circle,
-        rgba(79,141,255,.45),
+
+        rgba(79,141,255,.25),
+
         transparent 70%
+
     );
 
 
@@ -175,6 +177,8 @@ body::before{
 
 
 }
+
+
 
 
 
@@ -319,7 +323,6 @@ nav a:hover{
 
 
 
-
 /* ==========================================
    PAGE TITLE
 ========================================== */
@@ -371,9 +374,6 @@ nav a:hover{
 
 
 }
-
-
-
 
 
 
@@ -460,9 +460,6 @@ nav a:hover{
 
 
 }
-
-
-
 
 
 
@@ -580,7 +577,6 @@ nav a:hover{
 
 
 
-
 /* ==========================================
    LIMITED CARD
 ========================================== */
@@ -615,7 +611,6 @@ nav a:hover{
 
 
 }
-
 
 
 
@@ -729,6 +724,7 @@ nav a:hover{
 
 
 
+
 .vehicle-image img{
 
 
@@ -745,6 +741,7 @@ nav a:hover{
 
 
 }
+
 
 
 
@@ -796,6 +793,8 @@ nav a:hover{
 
 
 
+
+
 .name-title{
 
 
@@ -826,6 +825,8 @@ nav a:hover{
 
 
 
+
+
 .name-value{
 
 
@@ -839,6 +840,7 @@ nav a:hover{
 
 
 }
+
 
 
 
@@ -875,6 +877,8 @@ nav a:hover{
 
 
 
+
+
 .stat-title{
 
 
@@ -905,6 +909,8 @@ nav a:hover{
 
 
 
+
+
 .value-text{
 
 
@@ -920,6 +926,8 @@ nav a:hover{
 
 
 }
+
+
 
 
 
@@ -980,7 +988,6 @@ nav a:hover{
 
 
 }
-
 
 
 
@@ -1079,7 +1086,6 @@ nav a:hover{
 
 
 
-
 /* ==========================================
    ADMIN TITLE
 ========================================== */
@@ -1122,7 +1128,6 @@ nav a:hover{
 
 
 
-
 /* ==========================================
    FORM GROUPS
 ========================================== */
@@ -1135,6 +1140,7 @@ nav a:hover{
 
 
 }
+
 
 
 
@@ -1203,6 +1209,8 @@ nav a:hover{
 
 
 
+
+
 .admin-group input:focus,
 .admin-group select:focus{
 
@@ -1218,6 +1226,7 @@ nav a:hover{
 
 
 }
+
 
 
 
@@ -1274,9 +1283,13 @@ nav a:hover{
     background:
 
     linear-gradient(
+
         180deg,
+
         #6ca8ff,
+
         #4f8dff
+
     );
 
 
@@ -1305,6 +1318,7 @@ nav a:hover{
 
 
 
+
 .save-btn:hover{
 
 
@@ -1319,7 +1333,6 @@ nav a:hover{
 
 
 }
-
 
 
 
@@ -1372,6 +1385,7 @@ nav a:hover{
 
 
 
+
 .cancel-btn:hover{
 
 
@@ -1384,7 +1398,6 @@ nav a:hover{
 
 
 }
-
 
 
 
@@ -1420,7 +1433,6 @@ nav a:hover{
 
 
 
-
 /* ==========================================
    LIMITED VEHICLE SWITCH
 ========================================== */
@@ -1447,6 +1459,8 @@ nav a:hover{
 
 
 
+
+
 .switch{
 
 
@@ -1463,6 +1477,8 @@ nav a:hover{
 
 
 }
+
+
 
 
 
@@ -1635,6 +1651,8 @@ nav a:hover{
 
 
 
+
+
 /* ==========================================
    TABLET
 ========================================== */
@@ -1656,6 +1674,7 @@ nav a:hover{
 
 
 
+
     .cards{
 
 
@@ -1665,6 +1684,8 @@ nav a:hover{
 
 
     }
+
+
 
 
 
@@ -1679,6 +1700,8 @@ nav a:hover{
 
 
 }
+
+
 
 
 
@@ -1711,6 +1734,7 @@ nav a:hover{
 
 
 
+
     .logo{
 
 
@@ -1723,6 +1747,8 @@ nav a:hover{
 
 
 
+
+
     nav{
 
 
@@ -1730,6 +1756,8 @@ nav a:hover{
 
 
     }
+
+
 
 
 
@@ -1753,6 +1781,8 @@ nav a:hover{
 
 
 
+
+
     .page-title{
 
 
@@ -1762,6 +1792,8 @@ nav a:hover{
 
 
     }
+
+
 
 
 
@@ -1779,6 +1811,8 @@ nav a:hover{
 
 
 
+
+
     .page-title p{
 
 
@@ -1786,6 +1820,8 @@ nav a:hover{
 
 
     }
+
+
 
 
 
@@ -1813,6 +1849,8 @@ nav a:hover{
 
 
 
+
+
     .card{
 
 
@@ -1820,6 +1858,8 @@ nav a:hover{
 
 
     }
+
+
 
 
 
@@ -1839,6 +1879,8 @@ nav a:hover{
 
 
 
+
+
     .name-value{
 
 
@@ -1846,6 +1888,8 @@ nav a:hover{
 
 
     }
+
+
 
 
 
@@ -1860,6 +1904,7 @@ nav a:hover{
 
 
     }
+
 
 
 
@@ -1885,6 +1930,8 @@ nav a:hover{
 
 
 
+
+
     .admin-title{
 
 
@@ -1892,6 +1939,8 @@ nav a:hover{
 
 
     }
+
+
 
 
 
@@ -1909,6 +1958,9 @@ nav a:hover{
 
 
 
+
+
+
     .save-btn,
     .cancel-btn{
 
@@ -1921,6 +1973,8 @@ nav a:hover{
 
 
 }
+
+
 
 
 
@@ -1948,6 +2002,9 @@ nav a:hover{
 
 
 
+
+
+
     .vehicle-image{
 
 
@@ -1959,6 +2016,9 @@ nav a:hover{
 
 
 
+
+
+
     .admin-title{
 
 
@@ -1966,6 +2026,9 @@ nav a:hover{
 
 
     }
+
+
+
 
 
 
@@ -1988,6 +2051,8 @@ nav a:hover{
 
 
 
+
+
 /* ==========================================
    HIDDEN IMAGE FIX
 ========================================== */
@@ -2000,6 +2065,10 @@ nav a:hover{
 
 
 }
+
+
+
+
 
 
 
