@@ -1,8 +1,21 @@
+// ==========================================
+// VEHICLE VALUES
+// VALUES.CSS
+// UPDATED VERSION
+// PART 1 - VARIABLES + GLOBAL + HEADER
+// ==========================================
+
+
 /* ==========================================
-   VEHICLE VALUES
-   MERGED STYLE.CSS
-   PART 1 - GLOBAL + HEADER + GRID
+   GOOGLE FONT
 ========================================== */
+
+@import url(
+"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+);
+
+
+
 
 
 /* ==========================================
@@ -11,29 +24,45 @@
 
 :root{
 
+
     --primary:#4f8dff;
 
     --primary-light:#70a8ff;
+
 
     --background:#0b1220;
 
     --background-two:#0a1930;
 
+
     --panel:#121b2b;
 
     --panel-light:#182438;
 
+
     --border:#2b3d5d;
+
 
     --text:#ffffff;
 
     --muted:#b9c9e9;
 
+
     --success:#34d399;
 
     --gold:#caa64a;
 
+
+    --danger:#ef4444;
+
+
+    --shadow:
+    0 20px 60px rgba(0,0,0,.35);
+
+
 }
+
+
 
 
 
@@ -46,6 +75,7 @@
 
 *{
 
+
     margin:0;
 
     padding:0;
@@ -54,13 +84,18 @@
 
     font-family:"Inter",sans-serif;
 
+
 }
+
+
 
 
 
 html{
 
+
     scroll-behavior:smooth;
+
 
 }
 
@@ -70,39 +105,59 @@ html{
 
 body{
 
+
     min-height:100vh;
 
-    background:#0b1220;
 
-    color:var(--text);
+    background:
+    var(--background);
+
+
+    color:
+    var(--text);
+
 
     overflow-x:hidden;
+
 
 }
 
 
 
-/* Background glow */
+
+
+/* ==========================================
+   BACKGROUND GLOW
+========================================== */
 
 
 body::before{
 
+
     content:"";
+
 
     position:fixed;
 
-    top:-400px;
+
+    top:-350px;
+
 
     left:50%;
 
-    transform:translateX(-50%);
+
+    transform:
+    translateX(-50%);
+
 
     width:900px;
+
 
     height:900px;
 
 
     background:
+
 
     radial-gradient(
 
@@ -115,13 +170,62 @@ body::before{
     );
 
 
-    filter:blur(60px);
+
+    filter:
+    blur(70px);
+
+
 
     z-index:-1;
 
+
     pointer-events:none;
 
+
 }
+
+
+
+
+
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+
+::-webkit-scrollbar{
+
+
+    width:10px;
+
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+
+    background:#08111f;
+
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+
+    background:
+    var(--primary);
+
+
+    border-radius:20px;
+
+
+}
+
 
 
 
@@ -138,33 +242,46 @@ body::before{
 
     width:100%;
 
+
     height:82px;
+
 
 
     display:flex;
 
+
     align-items:center;
+
 
     justify-content:space-between;
 
 
-    padding:0 70px;
+
+    padding:
+    0 70px;
+
 
 
     background:
 
+
     rgba(7,18,34,.75);
 
 
-    backdrop-filter:blur(18px);
+
+    backdrop-filter:
+    blur(18px);
 
 
-    border-top:3px solid var(--primary);
+
+    border-top:
+    3px solid var(--primary);
+
 
 
     border-bottom:
-
     1px solid rgba(255,255,255,.08);
+
 
 
     position:sticky;
@@ -198,7 +315,7 @@ body::before{
     font-weight:900;
 
 
-    letter-spacing:.3px;
+    letter-spacing:.5px;
 
 
     color:white;
@@ -211,10 +328,12 @@ body::before{
 .logo span{
 
 
-    color:var(--primary);
+    color:
+    var(--primary);
 
 
 }
+
 
 
 
@@ -232,10 +351,15 @@ nav{
     display:flex;
 
 
+    align-items:center;
+
+
     gap:40px;
 
 
 }
+
+
 
 
 
@@ -258,13 +382,21 @@ nav a{
 
 
 
+
+
 nav a:hover{
 
 
-    color:var(--primary);
+    color:
+    var(--primary);
+
+
+    transform:
+    translateY(-2px);
 
 
 }
+
 
 
 
@@ -279,7 +411,8 @@ nav a:hover{
 .logout-btn{
 
 
-    background:#ef4444;
+    background:
+    var(--danger);
 
 
     color:white;
@@ -288,16 +421,21 @@ nav a:hover{
     border:none;
 
 
-    padding:12px 24px;
+    padding:
+    12px 24px;
+
 
 
     border-radius:12px;
 
 
+
     font-weight:800;
 
 
+
     cursor:pointer;
+
 
 
     transition:.3s;
@@ -307,13 +445,20 @@ nav a:hover{
 
 
 
+
+
 .logout-btn:hover{
 
 
     background:#dc2626;
 
 
-    transform:translateY(-3px);
+    transform:
+    translateY(-3px);
+
+
+    box-shadow:
+    0 10px 25px rgba(239,68,68,.35);
 
 
 }
@@ -335,11 +480,12 @@ nav a:hover{
 
 
     padding:
-
     70px 20px 35px;
 
 
 }
+
+
 
 
 
@@ -357,6 +503,7 @@ nav a:hover{
 
     text-shadow:
 
+
     0 0 40px rgba(79,141,255,.45);
 
 
@@ -364,102 +511,22 @@ nav a:hover{
 
 
 
+
+
 .page-title p{
 
 
-    color:var(--muted);
+    color:
+    var(--muted);
 
 
     font-size:18px;
 
 
 }
-
-
-
-
-
-/* ==========================================
-   BACK BUTTON
-========================================== */
-
-
-.page-header{
-
-
-    width:95%;
-
-
-    max-width:1500px;
-
-
-    margin:auto;
-
-
-    margin-bottom:25px;
-
-
-}
-
-
-
-.back-btn{
-
-
-    display:inline-flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
-
-
-    width:45px;
-
-
-    height:45px;
-
-
-    border-radius:12px;
-
-
-    background:
-
-    rgba(255,255,255,.05);
-
-
-    border:
-
-    1px solid rgba(255,255,255,.1);
-
-
-    color:white;
-
-
-    font-size:25px;
-
-
-    text-decoration:none;
-
-
-    transition:.3s;
-
-
-}
-
-
-
-.back-btn:hover{
-
-
-    background:rgba(79,141,255,.25);
-
-
-    transform:translateX(-5px);
-
-
-}
+// ==========================================
+// PART 2 - VEHICLE GRID + CARDS
+// ==========================================
 
 
 
@@ -476,10 +543,11 @@ nav a:hover{
     width:95%;
 
 
-    max-width:1500px;
+    max-width:1600px;
 
 
-    margin:auto;
+    margin:40px auto 80px;
+
 
 
     display:grid;
@@ -487,19 +555,24 @@ nav a:hover{
 
     grid-template-columns:
 
-    repeat(auto-fit,minmax(320px,1fr));
+
+    repeat(
+        auto-fit,
+        minmax(320px,1fr)
+    );
+
 
 
     gap:30px;
 
 
-    padding-bottom:70px;
-
 
 }
-/* ==========================================
-   PART 2 - VEHICLE CARDS
-========================================== */
+
+
+
+
+
 
 
 /* ==========================================
@@ -513,40 +586,110 @@ nav a:hover{
     position:relative;
 
 
+
     background:
 
-    rgba(15,32,60,.65);
+
+    rgba(15,32,60,.70);
 
 
-    backdrop-filter:blur(18px);
+
+    backdrop-filter:
+    blur(18px);
+
 
 
     border:
-
     2px solid var(--border);
+
 
 
     border-radius:22px;
 
 
+
     padding:20px;
+
 
 
     overflow:hidden;
 
 
+
     cursor:pointer;
 
 
-    transition:.35s;
+
+    transition:
+    .35s ease;
+
 
 
     box-shadow:
+    var(--shadow);
 
-    0 15px 40px rgba(0,0,0,.25);
 
 
 }
+
+
+
+
+
+.card::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    top:0;
+
+
+    left:-100%;
+
+
+    width:100%;
+
+
+    height:100%;
+
+
+    background:
+
+
+    linear-gradient(
+
+        120deg,
+
+        transparent,
+
+        rgba(255,255,255,.08),
+
+        transparent
+
+    );
+
+
+
+    transition:.6s;
+
+
+}
+
+
+
+
+.card:hover::before{
+
+
+    left:100%;
+
+
+}
+
 
 
 
@@ -557,20 +700,24 @@ nav a:hover{
 
     transform:
 
+
     translateY(-10px);
 
 
-    border-color:
 
+    border-color:
     var(--primary);
+
 
 
     box-shadow:
 
-    0 25px 60px rgba(79,141,255,.25);
+
+    0 25px 70px rgba(79,141,255,.25);
 
 
 }
+
 
 
 
@@ -578,7 +725,7 @@ nav a:hover{
 
 
 /* ==========================================
-   LIMITED CARD
+   LIMITED VEHICLE CARD
 ========================================== */
 
 
@@ -586,28 +733,34 @@ nav a:hover{
 
 
     border-color:
-
     var(--gold);
+
 
 
     box-shadow:
 
-    0 0 20px rgba(202,166,74,.25);
+
+    0 0 25px rgba(202,166,74,.25);
+
 
 
 }
 
 
 
+
 .card.limited:hover{
 
 
-    border-color:#e0c060;
+    border-color:#e4c56a;
+
 
 
     box-shadow:
 
-    0 0 30px rgba(202,166,74,.4);
+
+    0 0 45px rgba(202,166,74,.45);
+
 
 
 }
@@ -629,50 +782,69 @@ nav a:hover{
     position:absolute;
 
 
+
     top:15px;
 
 
     left:15px;
 
 
-    background:
-
-    var(--gold);
-
-
-    color:white;
-
-
-    font-size:11px;
-
-
-    font-weight:900;
-
-
-    letter-spacing:1px;
-
-
-    padding:
-
-    7px 13px;
-
-
-    border-radius:999px;
-
 
     z-index:5;
+
 
 
     display:none;
 
 
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+
+    padding:
+
+
+    7px 14px;
+
+
+
+    border-radius:999px;
+
+
+
+    background:
+    var(--gold);
+
+
+
+    color:white;
+
+
+
+    font-size:11px;
+
+
+
+    font-weight:900;
+
+
+
+    letter-spacing:1px;
+
+
+
     box-shadow:
 
-    0 0 15px rgba(202,166,74,.5);
+
+    0 0 20px rgba(202,166,74,.5);
+
 
 
 }
-
 
 
 
@@ -691,34 +863,43 @@ nav a:hover{
     width:100%;
 
 
+
     height:220px;
+
 
 
     background:
 
-    rgba(24,36,56,.9);
+
+    rgba(24,36,56,.95);
+
 
 
     border-radius:18px;
 
 
+
     overflow:hidden;
+
 
 
     display:flex;
 
 
-    align-items:center;
-
 
     justify-content:center;
+
+
+
+    align-items:center;
+
 
 
     margin-bottom:20px;
 
 
-}
 
+}
 
 
 
@@ -731,18 +912,21 @@ nav a:hover{
     width:100%;
 
 
+
     height:100%;
+
 
 
     object-fit:cover;
 
 
-    transition:.35s;
+
+    transition:
+    .35s ease;
+
 
 
 }
-
-
 
 
 
@@ -752,12 +936,32 @@ nav a:hover{
 
 
     transform:
+    scale(1.06);
 
-    scale(1.05);
 
 
 }
 
+
+
+
+
+
+
+/* ==========================================
+   IMAGE PLACEHOLDER
+========================================== */
+
+
+.vehicle-image img:not([src]),
+
+.vehicle-image img[src=""]{
+
+
+    opacity:0;
+
+
+}
 
 
 
@@ -775,16 +979,21 @@ nav a:hover{
 
     background:
 
+
     rgba(24,36,56,.9);
+
 
 
     border-radius:15px;
 
 
+
     padding:15px;
 
 
+
     margin-bottom:15px;
+
 
 
 }
@@ -801,22 +1010,29 @@ nav a:hover{
     display:block;
 
 
+
     color:#8ea3bf;
+
 
 
     font-size:12px;
 
 
+
     font-weight:800;
+
 
 
     letter-spacing:1px;
 
 
+
     text-transform:uppercase;
 
 
+
     margin-bottom:7px;
+
 
 
 }
@@ -833,15 +1049,20 @@ nav a:hover{
     color:white;
 
 
+
     font-size:23px;
+
 
 
     font-weight:900;
 
 
+
+    word-break:break-word;
+
+
+
 }
-
-
 
 
 
@@ -859,16 +1080,21 @@ nav a:hover{
 
     background:
 
+
     rgba(24,36,56,.9);
+
 
 
     border-radius:15px;
 
 
+
     padding:15px;
 
 
+
     margin-bottom:12px;
+
 
 
 }
@@ -885,22 +1111,29 @@ nav a:hover{
     display:block;
 
 
+
     color:#8ea3bf;
+
 
 
     font-size:12px;
 
 
+
     font-weight:800;
+
 
 
     text-transform:uppercase;
 
 
+
     letter-spacing:1px;
 
 
+
     margin-bottom:7px;
+
 
 
 }
@@ -915,14 +1148,16 @@ nav a:hover{
 
 
     color:
-
     var(--primary-light);
+
 
 
     font-size:24px;
 
 
+
     font-weight:900;
+
 
 
 }
@@ -937,28 +1172,34 @@ nav a:hover{
 
 
     color:
-
     var(--success);
+
 
 
     font-size:24px;
 
 
+
     font-weight:900;
 
 
+
 }
+// ==========================================
+// PART 3 - ADMIN PANEL + LOGIN + FORMS
+// ==========================================
+
+
+
+
+
 /* ==========================================
-   PART 3 - ADMIN PANEL
+   OVERLAY SYSTEM
 ========================================== */
 
 
-/* ==========================================
-   ADMIN OVERLAY
-========================================== */
-
-
-.admin-overlay{
+.admin-overlay,
+.login-overlay{
 
 
     position:fixed;
@@ -967,24 +1208,33 @@ nav a:hover{
     inset:0;
 
 
+
     background:
 
+
     rgba(0,0,0,.75);
+
 
 
     display:none;
 
 
+
     align-items:center;
+
 
 
     justify-content:center;
 
 
+
     z-index:5000;
 
 
-    backdrop-filter:blur(6px);
+
+    backdrop-filter:
+    blur(8px);
+
 
 
 }
@@ -996,46 +1246,65 @@ nav a:hover{
 
 
 /* ==========================================
-   ADMIN PANEL BOX
+   ADMIN PANEL
 ========================================== */
 
 
-.admin-panel{
+.admin-panel,
+
+
+.login-panel{
 
 
     width:500px;
 
 
+
     max-width:95%;
+
 
 
     background:
 
-    rgba(18,27,43,.95);
+
+    rgba(18,27,43,.96);
 
 
-    backdrop-filter:blur(20px);
+
+    backdrop-filter:
+
+
+    blur(20px);
+
 
 
     border:
 
+
     2px solid var(--border);
+
 
 
     border-radius:24px;
 
 
+
     padding:32px;
+
 
 
     box-shadow:
 
-    0 30px 70px rgba(0,0,0,.5);
+
+    0 30px 80px rgba(0,0,0,.55);
+
 
 
     animation:
 
+
     popup .25s ease;
+
 
 
 }
@@ -1056,8 +1325,8 @@ nav a:hover{
 
 
         transform:
-
         scale(.9);
+
 
 
     }
@@ -1071,8 +1340,8 @@ nav a:hover{
 
 
         transform:
-
         scale(1);
+
 
 
     }
@@ -1087,23 +1356,30 @@ nav a:hover{
 
 
 /* ==========================================
-   ADMIN TITLE
+   PANEL TITLES
 ========================================== */
 
 
-.admin-title{
+.admin-title,
+
+
+.login-title{
 
 
     text-align:center;
 
 
+
     font-size:36px;
+
 
 
     font-weight:900;
 
 
+
     margin-bottom:30px;
+
 
 
 }
@@ -1116,7 +1392,6 @@ nav a:hover{
 
 
     color:
-
     var(--primary);
 
 
@@ -1139,6 +1414,7 @@ nav a:hover{
     margin-bottom:22px;
 
 
+
 }
 
 
@@ -1151,13 +1427,17 @@ nav a:hover{
     display:block;
 
 
+
     color:#cbd5e1;
+
 
 
     font-weight:700;
 
 
+
     margin-bottom:8px;
+
 
 
 }
@@ -1168,39 +1448,100 @@ nav a:hover{
 
 
 
+/* ==========================================
+   INPUTS + DROPDOWNS
+========================================== */
+
+
 .admin-group input,
-.admin-group select{
+
+.admin-group select,
+
+
+.login-panel input{
 
 
     width:100%;
 
 
+
     padding:14px;
+
 
 
     background:
 
+
     rgba(24,36,56,.95);
+
 
 
     border:
 
+
     2px solid var(--border);
+
 
 
     border-radius:12px;
 
 
+
     color:white;
+
 
 
     font-size:16px;
 
 
+
     outline:none;
 
 
+
     transition:.25s;
+
+
+
+}
+
+
+
+
+
+
+
+/* FIX DROPDOWN VISIBILITY */
+
+
+.admin-group select{
+
+
+    appearance:none;
+
+
+
+    cursor:pointer;
+
+
+
+}
+
+
+
+
+
+
+
+.admin-group select option{
+
+
+    background:#182438;
+
+
+
+    color:white;
+
 
 
 }
@@ -1212,21 +1553,28 @@ nav a:hover{
 
 
 .admin-group input:focus,
-.admin-group select:focus{
+
+.admin-group select:focus,
+
+
+.login-panel input:focus{
 
 
     border-color:
 
+
     var(--primary);
+
 
 
     box-shadow:
 
-    0 0 15px rgba(79,141,255,.25);
+
+    0 0 20px rgba(79,141,255,.3);
+
 
 
 }
-
 
 
 
@@ -1245,14 +1593,16 @@ nav a:hover{
     display:flex;
 
 
+
     gap:15px;
+
 
 
     margin-top:25px;
 
 
-}
 
+}
 
 
 
@@ -1271,16 +1621,21 @@ nav a:hover{
     flex:1;
 
 
+
     padding:15px;
+
 
 
     border:none;
 
 
+
     border-radius:14px;
 
 
+
     background:
+
 
     linear-gradient(
 
@@ -1293,24 +1648,25 @@ nav a:hover{
     );
 
 
+
     color:white;
+
 
 
     font-size:17px;
 
 
+
     font-weight:800;
+
 
 
     cursor:pointer;
 
 
+
     transition:.3s;
 
-
-    box-shadow:
-
-    0 0 25px rgba(79,141,255,.35);
 
 
 }
@@ -1324,12 +1680,16 @@ nav a:hover{
 
     transform:
 
+
     translateY(-3px);
+
 
 
     box-shadow:
 
-    0 0 40px rgba(79,141,255,.65);
+
+    0 0 35px rgba(79,141,255,.55);
+
 
 
 }
@@ -1351,33 +1711,44 @@ nav a:hover{
     flex:1;
 
 
+
     padding:15px;
+
 
 
     border:none;
 
 
+
     border-radius:14px;
+
 
 
     background:
 
+
     #334155;
+
 
 
     color:white;
 
 
+
     font-size:17px;
+
 
 
     font-weight:800;
 
 
+
     cursor:pointer;
 
 
+
     transition:.3s;
+
 
 
 }
@@ -1389,12 +1760,18 @@ nav a:hover{
 .cancel-btn:hover{
 
 
-    background:#475569;
+    background:
+
+
+    #475569;
+
 
 
     transform:
 
+
     translateY(-3px);
+
 
 
 }
@@ -1406,23 +1783,114 @@ nav a:hover{
 
 
 /* ==========================================
-   LOGIN ERROR
+   LOGIN BUTTON
+========================================== */
+
+
+.login-btn{
+
+
+    width:100%;
+
+
+
+    padding:15px;
+
+
+
+    border:none;
+
+
+
+    border-radius:14px;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        180deg,
+
+        #6ca8ff,
+
+        #4f8dff
+
+    );
+
+
+
+    color:white;
+
+
+
+    font-size:17px;
+
+
+
+    font-weight:800;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:.3s;
+
+
+
+}
+
+
+
+
+
+.login-btn:hover{
+
+
+    transform:
+
+
+    translateY(-3px);
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   ERROR MESSAGE
 ========================================== */
 
 
 .login-error{
 
 
+    display:none;
+
+
+
     color:#ef4444;
+
 
 
     font-weight:800;
 
 
+
     text-align:center;
 
 
-    margin-top:10px;
+
+    margin-top:12px;
+
 
 
 }
@@ -1434,7 +1902,7 @@ nav a:hover{
 
 
 /* ==========================================
-   LIMITED VEHICLE SWITCH
+   LIMITED SWITCH
 ========================================== */
 
 
@@ -1444,13 +1912,17 @@ nav a:hover{
     display:flex;
 
 
+
     justify-content:space-between;
+
 
 
     align-items:center;
 
 
+
     padding:10px 0;
+
 
 
 }
@@ -1467,13 +1939,13 @@ nav a:hover{
     position:relative;
 
 
+
     width:60px;
+
 
 
     height:34px;
 
-
-    display:inline-block;
 
 
 }
@@ -1490,10 +1962,13 @@ nav a:hover{
     opacity:0;
 
 
+
     width:0;
 
 
+
     height:0;
+
 
 
 }
@@ -1510,19 +1985,25 @@ nav a:hover{
     position:absolute;
 
 
+
     inset:0;
+
 
 
     background:#475569;
 
 
+
     border-radius:999px;
+
 
 
     cursor:pointer;
 
 
+
     transition:.25s;
+
 
 
 }
@@ -1539,28 +2020,37 @@ nav a:hover{
     content:"";
 
 
+
     position:absolute;
+
 
 
     width:26px;
 
 
+
     height:26px;
+
 
 
     left:4px;
 
 
+
     bottom:4px;
+
 
 
     background:white;
 
 
+
     border-radius:50%;
 
 
+
     transition:.25s;
+
 
 
 }
@@ -1575,13 +2065,11 @@ nav a:hover{
 
 
     background:
-
     var(--gold);
 
 
+
 }
-
-
 
 
 
@@ -1592,14 +2080,17 @@ nav a:hover{
 
     transform:
 
+
     translateX(26px);
+
 
 
 }
 /* ==========================================
+   VEHICLE VALUES
+   VALUES.CSS
    PART 4 - RESPONSIVE + FINAL FIXES
 ========================================== */
-
 
 
 /* ==========================================
@@ -1609,46 +2100,71 @@ nav a:hover{
 
 @keyframes glowPulse{
 
-
     0%{
 
-
         box-shadow:
-
         0 0 10px rgba(79,141,255,.25);
 
-
     }
-
 
 
     50%{
 
-
         box-shadow:
-
         0 0 35px rgba(79,141,255,.55);
 
-
     }
-
 
 
     100%{
 
-
         box-shadow:
-
         0 0 10px rgba(79,141,255,.25);
 
-
     }
-
 
 }
 
 
 
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(15px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
+
+}
+
+
+
+
+/* ==========================================
+   VEHICLE CARD LOAD ANIMATION
+========================================== */
+
+
+.card{
+
+    animation:
+    fadeIn .35s ease forwards;
+
+}
 
 
 
@@ -1665,8 +2181,19 @@ nav a:hover{
 
 
         padding:
-
         0 35px;
+
+
+    }
+
+
+
+
+
+    nav{
+
+
+        gap:20px;
 
 
     }
@@ -1680,7 +2207,10 @@ nav a:hover{
 
         grid-template-columns:
 
-        repeat(auto-fit,minmax(280px,1fr));
+        repeat(
+            auto-fit,
+            minmax(280px,1fr)
+        );
 
 
     }
@@ -1699,9 +2229,18 @@ nav a:hover{
 
 
 
+
+
+    .admin-panel{
+
+
+        width:90%;
+
+
+    }
+
+
 }
-
-
 
 
 
@@ -1735,6 +2274,7 @@ nav a:hover{
 
 
 
+
     .logo{
 
 
@@ -1742,7 +2282,6 @@ nav a:hover{
 
 
     }
-
 
 
 
@@ -1762,7 +2301,6 @@ nav a:hover{
 
 
 
-
     .logout-btn{
 
 
@@ -1775,7 +2313,6 @@ nav a:hover{
 
 
     }
-
 
 
 
@@ -1827,6 +2364,19 @@ nav a:hover{
 
 
 
+    .page-header{
+
+
+        width:90%;
+
+
+    }
+
+
+
+
+
+
 
     .cards{
 
@@ -1850,7 +2400,6 @@ nav a:hover{
 
 
 
-
     .card{
 
 
@@ -1858,7 +2407,6 @@ nav a:hover{
 
 
     }
-
 
 
 
@@ -1880,7 +2428,6 @@ nav a:hover{
 
 
 
-
     .name-value{
 
 
@@ -1888,7 +2435,6 @@ nav a:hover{
 
 
     }
-
 
 
 
@@ -1904,7 +2450,6 @@ nav a:hover{
 
 
     }
-
 
 
 
@@ -1946,11 +2491,12 @@ nav a:hover{
 
 
 
-
     .button-row{
 
 
-        flex-direction:column;
+        flex-direction:
+
+        column;
 
 
     }
@@ -1972,9 +2518,8 @@ nav a:hover{
 
 
 
+
 }
-
-
 
 
 
@@ -2043,6 +2588,8 @@ nav a:hover{
     }
 
 
+
+
 }
 
 
@@ -2052,13 +2599,46 @@ nav a:hover{
 
 
 
-
 /* ==========================================
-   HIDDEN IMAGE FIX
+   IMAGE FALLBACK FIX
 ========================================== */
 
 
-.vehicle-image img[src=""]{
+.vehicle-image img[src=""],
+.vehicle-image img:not([src]){
+
+
+    display:none;
+
+
+}
+
+
+
+
+
+.vehicle-image::before{
+
+
+    content:"No Image";
+
+
+    color:#8ea3bf;
+
+
+    font-weight:700;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+
+
+.vehicle-image img[src]:not([src=""]) + *{
 
 
     display:none;
@@ -2074,7 +2654,41 @@ nav a:hover{
 
 
 /* ==========================================
-   SMOOTH EVERYTHING
+   DROPDOWN FIX
+========================================== */
+
+
+select{
+
+
+    appearance:auto;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+select option{
+
+
+    background:#121b2b;
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+
+/* ==========================================
+   REMOVE MOBILE TAP FLASH
 ========================================== */
 
 
@@ -2085,7 +2699,123 @@ input,
 select{
 
 
-    -webkit-tap-highlight-color:transparent;
+    -webkit-tap-highlight-color:
+
+    transparent;
 
 
 }
+
+
+
+
+
+
+
+/* ==========================================
+   SMOOTH SCROLLBAR
+========================================== */
+
+
+::-webkit-scrollbar{
+
+
+    width:10px;
+
+
+}
+
+
+
+
+
+::-webkit-scrollbar-track{
+
+
+    background:#0b1220;
+
+
+}
+
+
+
+
+
+::-webkit-scrollbar-thumb{
+
+
+    background:#2b3d5d;
+
+
+    border-radius:20px;
+
+
+}
+
+
+
+
+
+::-webkit-scrollbar-thumb:hover{
+
+
+    background:#4f8dff;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   FINAL SAFETY FIXES
+========================================== */
+
+
+img{
+
+
+    max-width:100%;
+
+
+    user-select:none;
+
+
+}
+
+
+
+
+
+button{
+
+
+    user-select:none;
+
+
+}
+
+
+
+
+
+input,
+select{
+
+
+    color-scheme:dark;
+
+
+}
+
+
+
+
+
+
+/* ==========================================
+   END OF VALUES.CSS
+========================================== */
