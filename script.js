@@ -1,8 +1,8 @@
 // ==========================================
 // VEHICLE VALUES
 // SCRIPT.JS
-// UPDATED VERSION
-// PART 1 - FIREBASE SETUP + AUTH SYSTEM
+// COMPLETE REBUILD
+// PART 1A - FIREBASE + GLOBALS
 // ==========================================
 
 console.clear();
@@ -10,7 +10,6 @@ console.clear();
 console.log("=================================");
 console.log("Vehicle Values Starting...");
 console.log("=================================");
-
 
 // ==========================================
 // FIREBASE IMPORTS
@@ -20,7 +19,6 @@ import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
 
-
 import {
     getFirestore,
     collection,
@@ -29,14 +27,12 @@ import {
     setDoc
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
-
 import {
     getAuth,
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
-
 
 // ==========================================
 // FIREBASE CONFIG
@@ -45,248 +41,279 @@ import {
 const firebaseConfig = {
 
     apiKey: "AIzaSyCzyyZcuQsR19fsHnffGV0L2LCQ-RRuaGw",
-
     authDomain: "admin-pannel-268a9.firebaseapp.com",
-
     projectId: "admin-pannel-268a9",
-
     storageBucket: "admin-pannel-268a9.firebasestorage.app",
-
     messagingSenderId: "619934011757",
-
     appId: "1:619934011757:web:8b4b98362df5f932fc0a64"
 
 };
 
-
 // ==========================================
-// START FIREBASE
+// INITIALISE FIREBASE
 // ==========================================
 
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
-
 const auth = getAuth(app);
-
 
 console.log("Firebase Connected");
 
-
 // ==========================================
-// ADMIN SETTINGS
+// SETTINGS
 // ==========================================
 
-const ADMIN_EMAIL =
-    "theg95705@gmail.com".toLowerCase();
+const ADMIN_EMAIL = "theg95705@gmail.com".toLowerCase();
 
+// Change this number whenever you want more
+// vehicle cards automatically.
+
+const TOTAL_VEHICLES = 250;
 
 let currentUser = null;
-
 let isAdmin = false;
-
 let selectedCard = null;
-
-
 
 // ==========================================
 // HTML ELEMENTS
 // ==========================================
 
-
 // LOGIN
 
-const loginOverlay =
-    document.getElementById("loginOverlay");
-
-const loginEmail =
-    document.getElementById("loginEmail");
-
-const loginPassword =
-    document.getElementById("loginPassword");
-
-const loginBtn =
-    document.getElementById("loginBtn");
-
-const loginCancelBtn =
-    document.getElementById("loginCancelBtn");
-
-const loginError =
-    document.getElementById("loginError");
-
-
+const loginOverlay = document.getElementById("loginOverlay");
+const loginEmail = document.getElementById("loginEmail");
+const loginPassword = document.getElementById("loginPassword");
+const loginBtn = document.getElementById("loginBtn");
+const loginCancelBtn = document.getElementById("loginCancelBtn");
+const loginError = document.getElementById("loginError");
 
 // ADMIN PANEL
 
-const adminOverlay =
-    document.getElementById("adminOverlay");
-
-
-const vehicleName =
-    document.getElementById("vehicleName");
-
-
-const vehicleValue =
-    document.getElementById("vehicleValue");
-
-
-const vehicleDemand =
-    document.getElementById("vehicleDemand");
-
-
-const vehicleImage =
-    document.getElementById("vehicleImage");
-
-
-const vehicleLimited =
-    document.getElementById("vehicleLimited");
-
-
+const adminOverlay = document.getElementById("adminOverlay");
+const vehicleName = document.getElementById("vehicleName");
+const vehicleValue = document.getElementById("vehicleValue");
+const vehicleDemand = document.getElementById("vehicleDemand");
+const vehicleImage = document.getElementById("vehicleImage");
+const vehicleLimited = document.getElementById("vehicleLimited");
 
 // BUTTONS
 
-const saveBtn =
-    document.getElementById("saveBtn");
+const saveBtn = document.getElementById("saveBtn");
+const cancelBtn = document.getElementById("cancelBtn");
+const logoutBtn = document.getElementById("logoutBtn");
 
-
-const cancelBtn =
-    document.getElementById("cancelBtn");
-
-
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
-
-
-// ==========================================
-// CARD CONTAINER
-// ==========================================
+// GRID
 
 const cardsContainer =
-    document.querySelector(".cards");
-
-
+    document.getElementById("vehicleGrid");
 
 // ==========================================
-// STARTUP
+// CREATE CARDS AUTOMATICALLY
 // ==========================================
 
-console.log("HTML Loaded");
+function createVehicleCards() {
 
-console.log("Firebase Ready");
+    if (!cardsContainer) {
 
-console.log("Waiting for Authentication...");
-
-
-
-// ==========================================
-// AUTH STATE SYSTEM
-// ==========================================
-
-onAuthStateChanged(auth, async (user) => {
-
-
-    currentUser = user;
-
-
-
-    // IMPORTANT FIX:
-    // EVERYONE loads vehicles
-    // not only admins
-
-    await loadVehicles();
-
-
-
-    if (!user) {
-
-
-        isAdmin = false;
-
-
-        logoutBtn.style.display = "none";
-
-
-        console.log("No user logged in.");
-
+        console.error("vehicleGrid not found.");
         return;
 
     }
 
+    cardsContainer.innerHTML = "";
 
+    for (let i = 1; i <= TOTAL_VEHICLES; i++) {
 
-    console.log(
-        "Logged in as:",
-        user.email
-    );
+        const card = document.createElement("div");
 
+        card.className = "card";
 
+        card.dataset.id = i;
 
-    if (
-        user.email &&
-        user.email.toLowerCase() === ADMIN_EMAIL
-    ) {
+        card.innerHTML = `
 
+            <div class="limited-badge" id="limitedBadge${i}">
+                LIMITED
+            </div>
 
+            <div class="vehicle-image">
+                <img id="image${i}" src="">
+            </div>
 
-        isAdmin = true;
+            <div class="vehicle-name-box">
 
+                <span class="name-title">
+                    VEHICLE
+                </span>
 
-        logoutBtn.style.display =
-            "inline-flex";
+                <div class="name-value" id="name${i}">
+                    Vehicle ${i}
+                </div>
 
+            </div>
 
-        loginOverlay.style.display =
-            "none";
+            <div class="stat-box">
 
+                <span class="stat-title">
+                    VALUE
+                </span>
 
+                <div class="value-text" id="value${i}">
+                    $0
+                </div>
 
-        console.log("==============================");
+            </div>
 
-        console.log("ADMIN ACCESS GRANTED");
+            <div class="stat-box">
 
-        console.log("==============================");
+                <span class="stat-title">
+                    DEMAND
+                </span>
 
+                <div class="demand-value" id="demand${i}">
+                    0/10
+                </div>
 
+            </div>
+
+        `;
+
+        cardsContainer.appendChild(card);
 
     }
 
+    console.log(
+        `${TOTAL_VEHICLES} cards created.`
+    );
 
-    else {
+}
+// ==========================================
+// PART 1B - AUTH SYSTEM
+// ==========================================
+
+
+// ==========================================
+// AUTH STATE CHECK
+// ==========================================
+
+onAuthStateChanged(
+    auth,
+    async (user)=>{
+
+
+        currentUser = user;
+
+
+        // Everyone can view vehicles
+
+        await loadVehicles();
 
 
 
-        isAdmin = false;
+        if(!user){
 
 
-        logoutBtn.style.display =
-            "none";
+            isAdmin = false;
+
+
+            if(logoutBtn)
+                logoutBtn.style.display =
+                "none";
+
+
+            console.log(
+                "No user logged in."
+            );
+
+
+            return;
+
+
+        }
 
 
 
         console.log(
-            "Normal user logged in."
+            "Logged in:",
+            user.email
         );
 
 
+
+        if(
+            user.email &&
+            user.email.toLowerCase()
+            === ADMIN_EMAIL
+        ){
+
+
+            isAdmin = true;
+
+
+            if(logoutBtn)
+                logoutBtn.style.display =
+                "inline-flex";
+
+
+
+            console.log(
+                "=============================="
+            );
+
+            console.log(
+                "ADMIN ACCESS GRANTED"
+            );
+
+            console.log(
+                "=============================="
+            );
+
+
+        }
+
+
+        else{
+
+
+            isAdmin = false;
+
+
+            if(logoutBtn)
+                logoutBtn.style.display =
+                "none";
+
+
+
+            console.log(
+                "Normal user account."
+            );
+
+
+        }
+
+
+
     }
+);
 
-
-
-});
 
 
 
 // ==========================================
-// LOGIN
+// LOGIN SYSTEM
 // ==========================================
+
+
+if(loginBtn){
+
 
 loginBtn.addEventListener(
 "click",
-async () => {
+async ()=>{
 
 
-    loginError.style.display =
+    if(loginError)
+        loginError.style.display =
         "none";
 
 
@@ -303,11 +330,14 @@ async () => {
 
 
 
-    if (!email || !password) {
+    if(
+        !email ||
+        !password
+    ){
 
 
         loginError.textContent =
-        "Please enter your email and password.";
+        "Enter email and password.";
 
 
         loginError.style.display =
@@ -329,42 +359,44 @@ async () => {
 
 
 
-    try {
+    try{
 
 
         await signInWithEmailAndPassword(
-
             auth,
-
             email,
-
             password
-
         );
 
 
 
-        loginEmail.value = "";
+        loginEmail.value =
+        "";
 
-        loginPassword.value = "";
+        loginPassword.value =
+        "";
 
+
+
+        console.log(
+            "Login successful"
+        );
 
 
     }
 
 
-    catch(error) {
+    catch(error){
 
 
         console.error(
-            "Login Error:",
             error
         );
 
 
 
         loginError.textContent =
-        "Incorrect email or password.";
+        "Incorrect login details.";
 
 
 
@@ -376,7 +408,9 @@ async () => {
 
 
 
-    loginBtn.disabled = false;
+    loginBtn.disabled =
+    false;
+
 
 
     loginBtn.textContent =
@@ -387,22 +421,32 @@ async () => {
 });
 
 
+}
+
+
+
+
 // ==========================================
-// LOGOUT
+// LOGOUT SYSTEM
 // ==========================================
+
+
+if(logoutBtn){
+
 
 logoutBtn.addEventListener(
 "click",
-async () => {
+async ()=>{
 
 
     const confirmLogout =
-        confirm(
-        "Are you sure you want to log out?"
-        );
+    confirm(
+        "Logout from admin?"
+    );
 
 
-    if (!confirmLogout)
+
+    if(!confirmLogout)
         return;
 
 
@@ -411,571 +455,48 @@ async () => {
 
 
 
-    adminOverlay.style.display =
-        "none";
-
-
-    selectedCard = null;
-
-
     isAdmin = false;
 
 
     currentUser = null;
 
 
-    logoutBtn.style.display =
+    selectedCard = null;
+
+
+
+    if(adminOverlay)
+        adminOverlay.style.display =
         "none";
 
 
 
+    logoutBtn.style.display =
+    "none";
+
+
+
     console.log(
-        "Logged Out"
+        "Logged out."
     );
 
 
+
 });
-
-
-// ==========================================
-// PART 1 END
-// ==========================================
-// ==========================================
-// PART 2 - VEHICLE LOADING SYSTEM
-// ==========================================
-
-
-// ==========================================
-// LOAD VEHICLES FROM FIREBASE
-// ==========================================
-
-async function loadVehicles() {
-
-
-    try {
-
-
-        console.log(
-            "Loading vehicles from Firebase..."
-        );
-
-
-
-        const snapshot =
-            await getDocs(
-                collection(
-                    db,
-                    "vehicles"
-                )
-            );
-
-
-
-        if (snapshot.empty) {
-
-
-            console.log(
-                "No vehicles found in Firebase."
-            );
-
-
-            return;
-
-
-        }
-
-
-
-        snapshot.forEach(
-        (vehicle) => {
-
-
-            const id =
-                vehicle.id;
-
-
-
-            const data =
-                vehicle.data();
-
-
-
-            console.log(
-                "Loading vehicle:",
-                id,
-                data
-            );
-
-
-
-            const card =
-                document.querySelector(
-                    `.card[data-id="${id}"]`
-                );
-
-
-
-            // If Firebase has a vehicle
-            // without a HTML card
-
-            if (!card) {
-
-
-                console.warn(
-                    "Missing HTML card for:",
-                    id
-                );
-
-
-                return;
-
-
-            }
-
-
-
-            // ==========================
-            // NAME
-            // ==========================
-
-            const name =
-                document.getElementById(
-                    `name${id}`
-                );
-
-
-            if (name) {
-
-
-                name.textContent =
-                    data.name ||
-                    "Unknown Vehicle";
-
-
-            }
-
-
-
-            // ==========================
-            // VALUE
-            // ==========================
-
-            const value =
-                document.getElementById(
-                    `value${id}`
-                );
-
-
-            if (value) {
-
-
-                value.textContent =
-                "$" +
-                Number(
-                    data.value || 0
-                )
-                .toLocaleString();
-
-
-            }
-
-
-
-            // ==========================
-            // DEMAND
-            // ==========================
-
-            const demand =
-                document.getElementById(
-                    `demand${id}`
-                );
-
-
-            if (demand) {
-
-
-                demand.textContent =
-                (
-                    data.demand || 0
-                )
-                + "/10";
-
-
-            }
-
-
-
-            // ==========================
-            // IMAGE
-            // ==========================
-
-            const image =
-                document.getElementById(
-                    `image${id}`
-                );
-
-
-
-            if (image) {
-
-
-                image.src =
-                    data.image ||
-                    "";
-
-
-            }
-
-
-
-            // ==========================
-            // LIMITED VEHICLE
-            // ==========================
-
-            const badge =
-                document.getElementById(
-                    `limitedBadge${id}`
-                );
-
-
-
-            if (
-                data.limited === true
-            ) {
-
-
-
-                card.classList.add(
-                    "limited"
-                );
-
-
-
-                if (badge) {
-
-
-                    badge.style.display =
-                    "flex";
-
-
-                }
-
-
-            }
-
-
-            else {
-
-
-
-                card.classList.remove(
-                    "limited"
-                );
-
-
-
-                if (badge) {
-
-
-                    badge.style.display =
-                    "none";
-
-
-                }
-
-
-            }
-
-
-
-        });
-
-
-
-        console.log(
-            "Vehicles Loaded Successfully"
-        );
-
-
-
-    }
-
-
-    catch(error) {
-
-
-
-        console.error(
-            "Vehicle Loading Error:"
-        );
-
-
-
-        console.error(
-            error
-        );
-
-
-
-        alert(
-            "Unable to load vehicles. Check Firebase rules."
-        );
-
-
-    }
-
 
 
 }
 
 
 
-// ==========================================
-// MANUAL REFRESH FUNCTION
-// ==========================================
-
-window.refreshVehicles =
-async function(){
-
-
-    console.log(
-        "Refreshing vehicles..."
-    );
-
-
-    await loadVehicles();
-
-
-};
-// ==========================================
-// PART 3 - VEHICLE EDITOR SYSTEM
-// ==========================================
-
 
 // ==========================================
-// OPEN VEHICLE EDITOR
-// ==========================================
-
-document
-.querySelectorAll(".card")
-.forEach((card) => {
-
-
-    card.addEventListener(
-    "click",
-    () => {
-
-
-        // Only admins can edit
-
-        if (!isAdmin) {
-
-
-            return;
-
-
-        }
-
-
-
-        selectedCard = card;
-
-
-
-        const id =
-            card.dataset.id;
-
-
-
-        // ==========================
-        // LOAD CURRENT VALUES
-        // ==========================
-
-
-        const name =
-            document.getElementById(
-                `name${id}`
-            );
-
-
-        const value =
-            document.getElementById(
-                `value${id}`
-            );
-
-
-        const demand =
-            document.getElementById(
-                `demand${id}`
-            );
-
-
-        const image =
-            document.getElementById(
-                `image${id}`
-            );
-
-
-
-        if(name)
-            vehicleName.value =
-            name.textContent;
-
-
-
-        if(value)
-            vehicleValue.value =
-            value.textContent
-            .replace("$","")
-            .replace(/,/g,"");
-
-
-
-        if(demand)
-            vehicleDemand.value =
-            demand.textContent
-            .replace("/10","");
-
-
-
-        if(image)
-            vehicleImage.value =
-            image.src;
-
-
-
-        vehicleLimited.checked =
-        card.classList.contains(
-            "limited"
-        );
-
-
-
-        adminOverlay.style.display =
-            "flex";
-
-
-
-        console.log(
-            "Editing vehicle:",
-            id
-        );
-
-
-    });
-
-
-});
-
-
-
-// ==========================================
-// CANCEL EDIT
-// ==========================================
-
-cancelBtn.addEventListener(
-"click",
-() => {
-
-
-    adminOverlay.style.display =
-        "none";
-
-
-    selectedCard = null;
-
-
-
-});
-
-
-
-// ==========================================
-// CLICK OUTSIDE ADMIN PANEL
-// ==========================================
-
-adminOverlay.addEventListener(
-"click",
-(event) => {
-
-
-    if(
-        event.target === adminOverlay
-    ){
-
-
-        adminOverlay.style.display =
-            "none";
-
-
-        selectedCard = null;
-
-
-    }
-
-
-});
-
-
-
-// ==========================================
-// CLOSE LOGIN PANEL
-// ==========================================
-
-loginCancelBtn.addEventListener(
-"click",
-() => {
-
-
-    loginOverlay.style.display =
-        "none";
-
-
-    loginPassword.value =
-        "";
-
-
-    loginError.style.display =
-        "none";
-
-
-});
-
-
-
-// ==========================================
-// CLICK OUTSIDE LOGIN
-// ==========================================
-
-loginOverlay.addEventListener(
-"click",
-(event)=>{
-
-
-    if(
-        event.target === loginOverlay
-    ){
-
-
-        loginOverlay.style.display =
-            "none";
-
-
-    }
-
-
-});
-
-
-
-// ==========================================
-// ADMIN SHORTCUT
+// ADMIN LOGIN SHORTCUT
 // CTRL + ALT + RIGHT ARROW
 // ==========================================
 
 
 let ctrlPressed = false;
-
 let altPressed = false;
 
 
@@ -987,6 +508,7 @@ document.addEventListener(
 
     if(event.key === "Control")
         ctrlPressed = true;
+
 
 
     if(event.key === "Alt")
@@ -1001,11 +523,19 @@ document.addEventListener(
     ){
 
 
-        loginOverlay.style.display =
+        if(loginOverlay)
+        {
+
+
+            loginOverlay.style.display =
             "flex";
 
 
-        loginEmail.focus();
+            if(loginEmail)
+                loginEmail.focus();
+
+
+        }
 
 
 
@@ -1017,7 +547,9 @@ document.addEventListener(
     }
 
 
+
 });
+
 
 
 
@@ -1030,29 +562,640 @@ document.addEventListener(
         ctrlPressed = false;
 
 
+
     if(event.key === "Alt")
         altPressed = false;
+
 
 
 });
 
 
 
+
 // ==========================================
-// PART 3 END
+// PART 1B END
 // ==========================================
 // ==========================================
-// PART 4 - SAVE SYSTEM + STARTUP
+// PART 2 - FIREBASE VEHICLE SYSTEM
 // ==========================================
+
+
+// ==========================================
+// LOAD VEHICLES FROM FIREBASE
+// ==========================================
+
+async function loadVehicles(){
+
+
+    try{
+
+
+        console.log(
+            "Loading vehicles..."
+        );
+
+
+
+        const snapshot =
+        await getDocs(
+            collection(
+                db,
+                "vehicles"
+            )
+        );
+
+
+
+        if(snapshot.empty){
+
+
+            console.log(
+                "No vehicles in database."
+            );
+
+
+            return;
+
+
+        }
+
+
+
+        snapshot.forEach(
+        (vehicle)=>{
+
+
+            const id =
+            vehicle.id;
+
+
+
+            const data =
+            vehicle.data();
+
+
+
+            updateVehicleCard(
+                id,
+                data
+            );
+
+
+
+        });
+
+
+
+        console.log(
+            "Vehicles loaded successfully."
+        );
+
+
+
+    }
+
+
+    catch(error){
+
+
+        console.error(
+            "Firebase loading error:",
+            error
+        );
+
+
+    }
+
+
+
+}
+
+
+
+
+// ==========================================
+// UPDATE VEHICLE CARD
+// ==========================================
+
+
+function updateVehicleCard(
+    id,
+    data
+){
+
+
+
+    const card =
+    document.querySelector(
+        `.card[data-id="${id}"]`
+    );
+
+
+
+    if(!card){
+
+
+        console.warn(
+            "Missing card:",
+            id
+        );
+
+
+        return;
+
+
+    }
+
+
+
+    // ===============================
+    // NAME
+    // ===============================
+
+
+    const name =
+    document.getElementById(
+        `name${id}`
+    );
+
+
+
+    if(name){
+
+
+        name.textContent =
+        data.name ||
+        `Vehicle ${id}`;
+
+
+    }
+
+
+
+
+
+    // ===============================
+    // VALUE
+    // ===============================
+
+
+    const value =
+    document.getElementById(
+        `value${id}`
+    );
+
+
+
+    if(value){
+
+
+        value.textContent =
+        "$" +
+        Number(
+            data.value || 0
+        )
+        .toLocaleString();
+
+
+    }
+
+
+
+
+    // ===============================
+    // DEMAND
+    // ===============================
+
+
+    const demand =
+    document.getElementById(
+        `demand${id}`
+    );
+
+
+
+    if(demand){
+
+
+        demand.textContent =
+        Number(
+            data.demand || 0
+        )
+        +
+        "/10";
+
+
+    }
+
+
+
+
+
+    // ===============================
+    // IMAGE
+    // ===============================
+
+
+    const image =
+    document.getElementById(
+        `image${id}`
+    );
+
+
+
+    if(image){
+
+
+        if(data.image){
+
+
+            image.src =
+            data.image;
+
+
+        }
+        else{
+
+
+            image.removeAttribute(
+                "src"
+            );
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+    // ===============================
+    // LIMITED VEHICLE
+    // ===============================
+
+
+    const badge =
+    document.getElementById(
+        `limitedBadge${id}`
+    );
+
+
+
+    if(data.limited === true){
+
+
+
+        card.classList.add(
+            "limited"
+        );
+
+
+
+        if(badge){
+
+
+            badge.style.display =
+            "flex";
+
+
+        }
+
+
+
+    }
+
+
+    else{
+
+
+
+        card.classList.remove(
+            "limited"
+        );
+
+
+
+        if(badge){
+
+
+            badge.style.display =
+            "none";
+
+
+        }
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+// ==========================================
+// REFRESH BUTTON SUPPORT
+// ==========================================
+
+
+window.refreshVehicles =
+async function(){
+
+
+    console.log(
+        "Refreshing vehicles..."
+    );
+
+
+    await loadVehicles();
+
+
+};
+
+
+
+
+
+// ==========================================
+// CREATE CARDS + LOAD DATA
+// ==========================================
+
+
+createVehicleCards();
+
+
+loadVehicles();
+
+
+
+// ==========================================
+// PART 2 END
+// ==========================================
+// ==========================================
+// PART 3 - ADMIN VEHICLE EDITOR
+// ==========================================
+
+
+// ==========================================
+// CARD CLICK EDIT SYSTEM
+// ==========================================
+
+
+function setupCardEditing(){
+
+
+    document
+    .querySelectorAll(".card")
+    .forEach(
+    (card)=>{
+
+
+        card.addEventListener(
+        "click",
+        ()=>{
+
+
+            // Only admin can edit
+
+            if(!isAdmin){
+
+
+                return;
+
+
+            }
+
+
+
+            selectedCard =
+            card;
+
+
+
+            const id =
+            card.dataset.id;
+
+
+
+            loadEditorData(id);
+
+
+
+        });
+
+
+    });
+
+
+}
+
+
+
+
+// ==========================================
+// LOAD CARD DATA INTO EDITOR
+// ==========================================
+
+
+function loadEditorData(id){
+
+
+
+    const name =
+    document.getElementById(
+        `name${id}`
+    );
+
+
+
+    const value =
+    document.getElementById(
+        `value${id}`
+    );
+
+
+
+    const demand =
+    document.getElementById(
+        `demand${id}`
+    );
+
+
+
+    const image =
+    document.getElementById(
+        `image${id}`
+    );
+
+
+
+    if(vehicleName && name)
+
+        vehicleName.value =
+        name.textContent;
+
+
+
+    if(vehicleValue && value)
+
+        vehicleValue.value =
+        value.textContent
+        .replace(
+            "$",
+            ""
+        )
+        .replace(
+            /,/g,
+            ""
+        );
+
+
+
+    if(vehicleDemand && demand)
+
+        vehicleDemand.value =
+        demand.textContent
+        .replace(
+            "/10",
+            ""
+        );
+
+
+
+    if(vehicleImage && image)
+
+        vehicleImage.value =
+        image.src || "";
+
+
+
+    if(vehicleLimited)
+
+        vehicleLimited.checked =
+        selectedCard.classList
+        .contains(
+            "limited"
+        );
+
+
+
+    if(adminOverlay)
+
+        adminOverlay.style.display =
+        "flex";
+
+
+
+    console.log(
+        "Editing:",
+        id
+    );
+
+
+
+}
+
+
+
+
+// ==========================================
+// CLOSE ADMIN PANEL
+// ==========================================
+
+
+function closeAdmin(){
+
+
+
+    if(adminOverlay)
+
+        adminOverlay.style.display =
+        "none";
+
+
+
+    selectedCard =
+    null;
+
+
+
+}
+
+
+
+
+// CANCEL BUTTON
+
+
+if(cancelBtn){
+
+
+cancelBtn.addEventListener(
+"click",
+()=>{
+
+
+    closeAdmin();
+
+
+});
+
+
+}
+
+
+
+
+// CLICK OUTSIDE PANEL
+
+
+if(adminOverlay){
+
+
+adminOverlay.addEventListener(
+"click",
+(event)=>{
+
+
+    if(
+        event.target === adminOverlay
+    ){
+
+
+        closeAdmin();
+
+
+    }
+
+
+});
+
+
+}
+
+
+
 
 
 // ==========================================
 // SAVE VEHICLE
 // ==========================================
 
+
+if(saveBtn){
+
+
 saveBtn.addEventListener(
 "click",
-async () => {
+async ()=>{
+
 
 
     if(!isAdmin){
@@ -1085,62 +1228,70 @@ async () => {
 
 
 
-    saveBtn.disabled = true;
+    const id =
+    selectedCard.dataset.id;
+
+
+
+
+    const vehicleData = {
+
+
+        name:
+        vehicleName.value.trim()
+        ||
+        "Unnamed Vehicle",
+
+
+
+        value:
+        Number(
+            vehicleValue.value
+        )
+        ||
+        0,
+
+
+
+        demand:
+        Number(
+            vehicleDemand.value
+        )
+        ||
+        0,
+
+
+
+        image:
+        vehicleImage.value.trim()
+        ||
+        "",
+
+
+
+        limited:
+        vehicleLimited.checked
+
+
+
+    };
+
+
+
+
+    saveBtn.disabled =
+    true;
+
 
 
     saveBtn.textContent =
-        "Saving...";
+    "Saving...";
 
 
 
-    try {
+    try{
 
 
-        const id =
-            selectedCard.dataset.id;
-
-
-
-        const vehicleData = {
-
-
-            name:
-                vehicleName.value.trim(),
-
-
-            value:
-                Number(
-                    vehicleValue.value
-                ),
-
-
-            demand:
-                Number(
-                    vehicleDemand.value
-                ),
-
-
-            image:
-                vehicleImage.value.trim(),
-
-
-            limited:
-                vehicleLimited.checked
-
-
-        };
-
-
-
-        console.log(
-            "Saving vehicle:",
-            id,
-            vehicleData
-        );
-
-
-
-        // SAVE TO FIRESTORE
 
         await setDoc(
 
@@ -1156,97 +1307,28 @@ async () => {
 
 
 
-        // UPDATE DISPLAY
-
-        document.getElementById(
-            `name${id}`
-        ).textContent =
-            vehicleData.name;
-
-
-
-        document.getElementById(
-            `value${id}`
-        ).textContent =
-        "$" +
-        vehicleData.value
-        .toLocaleString();
-
-
-
-        document.getElementById(
-            `demand${id}`
-        ).textContent =
-        vehicleData.demand + "/10";
-
-
-
-        document.getElementById(
-            `image${id}`
-        ).src =
-            vehicleData.image;
-
-
-
-        const badge =
-            document.getElementById(
-                `limitedBadge${id}`
-            );
-
-
-
-        if(
-            vehicleData.limited
-        ){
-
-
-            selectedCard.classList.add(
-                "limited"
-            );
-
-
-            if(badge)
-                badge.style.display =
-                "flex";
-
-
-        }
-
-        else {
-
-
-            selectedCard.classList.remove(
-                "limited"
-            );
-
-
-            if(badge)
-                badge.style.display =
-                "none";
-
-
-        }
-
-
-
-        adminOverlay.style.display =
-            "none";
-
-
-
-        selectedCard = null;
-
-
-
-        console.log(
-            "Vehicle saved successfully"
+        updateVehicleCard(
+            id,
+            vehicleData
         );
+
+
+
+        closeAdmin();
 
 
 
         alert(
-            "Vehicle saved successfully!"
+            "Vehicle saved!"
         );
+
+
+
+        console.log(
+            "Saved:",
+            vehicleData
+        );
+
 
 
     }
@@ -1257,7 +1339,7 @@ async () => {
 
 
         console.error(
-            "SAVE ERROR:",
+            "Save error:",
             error
         );
 
@@ -1272,15 +1354,251 @@ async () => {
 
 
 
-    saveBtn.disabled = false;
+    saveBtn.disabled =
+    false;
+
 
 
     saveBtn.textContent =
-        "Save";
+    "Save";
 
 
 
 });
+
+
+}
+
+
+
+
+
+// ==========================================
+// LOGIN PANEL CLOSE
+// ==========================================
+
+
+if(loginCancelBtn){
+
+
+loginCancelBtn.addEventListener(
+"click",
+()=>{
+
+
+    if(loginOverlay)
+
+        loginOverlay.style.display =
+        "none";
+
+
+
+    if(loginPassword)
+
+        loginPassword.value =
+        "";
+
+
+
+    if(loginError)
+
+        loginError.style.display =
+        "none";
+
+
+});
+
+
+}
+
+
+
+
+
+
+// ==========================================
+// START CARD EDIT EVENTS
+// ==========================================
+
+
+setupCardEditing();
+
+
+
+// ==========================================
+// PART 3 END
+// ==========================================
+// ==========================================
+// PART 4 - FINAL SYSTEM + STARTUP FIXES
+// ==========================================
+
+
+// ==========================================
+// CREATE DEFAULT VEHICLE DATABASE ENTRIES
+// ==========================================
+
+async function createMissingVehicles(){
+
+
+    try{
+
+
+        const snapshot =
+        await getDocs(
+            collection(
+                db,
+                "vehicles"
+            )
+        );
+
+
+
+        const existing =
+        new Set();
+
+
+
+        snapshot.forEach(
+        (vehicle)=>{
+
+
+            existing.add(
+                vehicle.id
+            );
+
+
+        });
+
+
+
+        for(
+            let i = 1;
+            i <= TOTAL_VEHICLES;
+            i++
+        ){
+
+
+            if(
+                !existing.has(
+                    String(i)
+                )
+            ){
+
+
+                await setDoc(
+
+                    doc(
+                        db,
+                        "vehicles",
+                        String(i)
+                    ),
+
+                    {
+
+
+                        name:
+                        `Vehicle ${i}`,
+
+
+
+                        value:
+                        0,
+
+
+
+                        demand:
+                        0,
+
+
+
+                        image:
+                        "",
+
+
+
+                        limited:
+                        false
+
+
+
+                    }
+
+
+                );
+
+
+
+            }
+
+
+
+        }
+
+
+
+        console.log(
+            "Database check complete."
+        );
+
+
+
+    }
+
+
+    catch(error){
+
+
+        console.error(
+            "Database setup error:",
+            error
+        );
+
+
+    }
+
+
+}
+
+
+
+
+
+
+// ==========================================
+// IMAGE ERROR FIX
+// ==========================================
+
+
+document.addEventListener(
+"error",
+(event)=>{
+
+
+    if(
+        event.target.tagName === "IMG"
+    ){
+
+
+        event.target.style.display =
+        "none";
+
+
+
+        console.warn(
+            "Image failed:",
+            event.target.src
+        );
+
+
+    }
+
+
+},
+true
+);
+
+
+
 
 
 
@@ -1288,18 +1606,20 @@ async () => {
 // GLOBAL ERROR HANDLING
 // ==========================================
 
+
 window.addEventListener(
 "error",
 (event)=>{
 
 
     console.error(
-        "JavaScript Error:",
+        "Javascript Error:",
         event.message
     );
 
 
 });
+
 
 
 
@@ -1318,14 +1638,65 @@ window.addEventListener(
 
 
 
+
+
+
 // ==========================================
-// PAGE STARTUP
+// LOADING SCREEN SUPPORT
+// ==========================================
+
+
+function removeLoading(){
+
+
+
+    const loader =
+    document.getElementById(
+        "loadingScreen"
+    );
+
+
+
+    if(loader){
+
+
+        loader.style.opacity =
+        "0";
+
+
+
+        setTimeout(
+        ()=>{
+
+
+            loader.style.display =
+            "none";
+
+
+        },
+        300
+        );
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+// ==========================================
+// FINAL STARTUP
 // ==========================================
 
 
 window.addEventListener(
 "load",
-()=>{
+async ()=>{
 
 
     console.log(
@@ -1344,6 +1715,12 @@ window.addEventListener(
 
 
     console.log(
+        "Cards:",
+        TOTAL_VEHICLES
+    );
+
+
+    console.log(
         "Admin Shortcut:"
     );
 
@@ -1358,17 +1735,38 @@ window.addEventListener(
     );
 
 
+
+    await createMissingVehicles();
+
+
+
+    await loadVehicles();
+
+
+
+    removeLoading();
+
+
+
 });
 
 
 
-// IMPORTANT:
-// LOAD VEHICLES FOR EVERYONE
 
-loadVehicles();
 
+
+
+// ==========================================
+// SYSTEM READY
+// ==========================================
 
 
 console.log(
-    "System Ready"
+    "Vehicle Values System Ready"
 );
+
+
+
+// ==========================================
+// PART 4 END
+// ==========================================
