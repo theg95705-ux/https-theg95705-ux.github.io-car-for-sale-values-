@@ -103,15 +103,12 @@ console.log(
 // ==========================================
 
 
-const ADMIN_EMAILS = [
-    "theg95705@gmail.com",
-    "ellocosigma@gmail.com"
-];
-
+const ADMIN_EMAIL =
+"theg95705@gmail.com";
 
 
 const TOTAL_VEHICLES =
-82;
+250;
 
 
 
