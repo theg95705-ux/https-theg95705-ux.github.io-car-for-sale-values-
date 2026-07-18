@@ -105,7 +105,6 @@ console.log(
 
 const ADMIN_EMAILS = [
     "theg95705@gmail.com",
-    "ellocosigma@gmail.com"
 ];
 
 
