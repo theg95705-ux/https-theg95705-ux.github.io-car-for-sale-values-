@@ -1,553 +1,540 @@
-<!-- ==========================================
-     VEHICLE VALUES
-     VALUES.HTML
-     COMPLETE UPDATED VERSION
-     PART 1 - HEAD + HEADER + SEARCH
-========================================== -->
+/* ==========================================
+   VEHICLE VALUES
+   VALUES.CSS
+   FIXED VERSION
+   PART 1 - GLOBAL + HEADER
+========================================== */
 
 
-<!DOCTYPE html>
+@import url(
+"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+);
 
-<html lang="en">
 
+/* ==========================================
+   VARIABLES
+========================================== */
 
-<head>
 
+:root{
 
-<meta charset="UTF-8">
+    --primary:#4f8dff;
+    --primary-light:#70a8ff;
 
+    --background:#0b1220;
+    --background-two:#0a1930;
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    --panel:#121b2b;
+    --panel-light:#182438;
 
+    --border:#2b3d5d;
 
+    --text:#ffffff;
+    --muted:#b9c9e9;
 
-<title>
-Vehicle Values
-</title>
+    --success:#34d399;
+    --gold:#caa64a;
 
+    --danger:#ef4444;
 
+    --shadow:
+    0 20px 60px rgba(0,0,0,.35);
 
-<!-- SEO -->
+}
 
-<meta 
-name="description"
-content="Track vehicle prices, demand, rarity and trading values in one place."
->
 
 
-<meta 
-name="robots"
-content="index, follow"
->
 
 
+/* ==========================================
+   GLOBAL RESET
+========================================== */
 
-<!-- Open Graph -->
 
-<meta 
-property="og:title"
-content="Vehicle Values"
->
+*{
 
+    margin:0;
 
-<meta 
-property="og:description"
-content="Track vehicle prices, demand, rarity and trading values."
->
+    padding:0;
 
+    box-sizing:border-box;
 
+    font-family:
+    "Inter",
+    sans-serif;
 
-<meta 
-property="og:type"
-content="website"
->
+}
 
 
 
-<!-- FONT -->
+html{
 
-<link 
-href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-rel="stylesheet"
->
+    scroll-behavior:smooth;
 
+}
 
 
-<!-- CSS -->
 
-<link 
-rel="stylesheet"
-href="values.css"
->
+body{
 
+    min-height:100vh;
 
+    background:
+    var(--background);
 
-</head>
+    color:
+    var(--text);
 
+    overflow-x:hidden;
 
+}
 
 
 
 
-<body>
 
+/* ==========================================
+   BACKGROUND GLOW
+========================================== */
 
 
+body::before{
 
-<!-- ==========================================
-     HEADER
-========================================== -->
 
+    content:"";
 
-<header class="header">
 
+    position:fixed;
 
 
-<div class="header-left">
+    top:-350px;
 
 
-<a 
-href="index.html"
-class="back-btn"
->
+    left:50%;
 
-← Back
 
-</a>
+    transform:
+    translateX(-50%);
 
 
-</div>
 
+    width:900px;
 
 
+    height:900px;
 
 
-<div class="logo">
 
+    background:
 
-<h1>
 
-Vehicle 
-<span>
-Values
-</span>
+    radial-gradient(
 
-</h1>
+        circle,
 
+        rgba(79,141,255,.25),
 
-<p>
-Vehicle Price Database
-</p>
+        transparent 70%
 
+    );
 
-</div>
 
 
+    filter:
+    blur(70px);
 
 
 
-<div class="header-right">
+    z-index:-1;
 
 
-<button 
-id="logoutBtn"
-class="logout-btn"
-style="display:none;"
->
+    pointer-events:none;
 
-Logout
 
-</button>
+}
 
 
-</div>
 
 
 
-</header>
 
+/* ==========================================
+   HEADER
+========================================== */
 
 
+.header{
 
 
+    width:100%;
 
 
+    height:82px;
 
-<!-- ==========================================
-     MAIN CONTENT
-========================================== -->
 
+    display:flex;
 
-<main class="main-container">
 
+    align-items:center;
 
 
+    justify-content:space-between;
 
 
 
-<h2 class="page-title">
+    padding:
+    0 70px;
 
-Vehicle Values
 
-</h2>
 
+    background:
 
 
-<p class="page-description">
+    rgba(7,18,34,.75);
 
-Search vehicles and view current trading values, demand and rarity.
 
-</p>
 
+    backdrop-filter:
+    blur(18px);
 
 
 
+    border-top:
+    3px solid var(--primary);
 
 
 
+    border-bottom:
+    1px solid rgba(255,255,255,.08);
 
-<!-- ==========================================
-     SEARCH + FILTER BAR
-========================================== -->
 
 
-<section class="filter-panel">
+    position:sticky;
 
 
+    top:0;
 
 
+    z-index:999;
 
-<div class="search-box">
 
+}
 
-<input
 
-type="text"
 
-id="searchInput"
 
-placeholder="Search vehicle..."
 
->
 
+/* ==========================================
+   LOGO
+========================================== */
 
-</div>
 
+.logo{
 
 
+    font-size:30px;
 
 
+    font-weight:900;
 
 
-<div class="filter-box">
+    letter-spacing:.5px;
 
 
-<select id="demandFilter">
+}
 
 
-<option value="all">
 
-All Demand
+.logo span{
 
-</option>
 
+    color:
+    var(--primary);
 
 
-<option value="10">
+}
 
-10/10
 
-</option>
 
 
-<option value="9">
 
-9/10
 
-</option>
+/* ==========================================
+   NAVIGATION
+========================================== */
 
 
-<option value="8">
+nav{
 
-8/10
 
-</option>
+    display:flex;
 
 
-<option value="7">
+    align-items:center;
 
-7/10
 
-</option>
+    gap:40px;
 
 
-<option value="6">
+}
 
-6/10
 
-</option>
 
 
-<option value="5">
 
-5/10
+nav a{
 
-</option>
 
+    text-decoration:none;
 
-<option value="4">
 
-4/10
+    color:white;
 
-</option>
 
+    font-weight:600;
 
-<option value="3">
 
-3/10
+    transition:.3s;
 
-</option>
 
+}
 
-<option value="2">
 
-2/10
 
-</option>
 
 
-<option value="1">
+nav a:hover,
+nav a.active{
 
-1/10
 
-</option>
+    color:
+    var(--primary);
 
 
-<option value="0">
+}
 
-0/10
 
-</option>
 
 
 
-</select>
 
 
-</div>
+/* ==========================================
+   LOGOUT BUTTON
+========================================== */
 
 
+.logout-btn{
 
 
+    background:
+    var(--danger);
 
 
 
-<div class="filter-box">
+    color:white;
 
 
-<select id="sortFilter">
 
+    border:none;
 
-<option value="default">
 
-Sort By
 
-</option>
+    padding:
+    12px 24px;
 
 
-<option value="valueHigh">
 
-Highest Value
+    border-radius:12px;
 
-</option>
 
 
-<option value="valueLow">
+    font-weight:800;
 
-Lowest Value
 
-</option>
 
+    cursor:pointer;
 
-<option value="nameAZ">
 
-Name A-Z
 
-</option>
+    transition:.3s;
 
 
-<option value="nameZA">
+}
 
-Name Z-A
 
-</option>
 
 
-<option value="demandHigh">
 
-Highest Demand
+.logout-btn:hover{
 
-</option>
 
+    transform:
+    translateY(-3px);
 
-<option value="demandLow">
 
-Lowest Demand
+}
 
-</option>
 
 
 
-</select>
 
 
-</div>
 
+/* ==========================================
+   PAGE TITLE
+========================================== */
 
 
+.page-title{
 
 
+    text-align:center;
 
 
+    padding:
 
-<div class="limited-filter">
 
+    70px 20px 35px;
 
-<label>
 
+}
 
-<input
 
-type="checkbox"
 
-id="limitedOnly"
 
->
 
+.page-title h1{
 
-Limited Only
 
+    font-size:52px;
 
-</label>
 
+    font-weight:900;
 
-</div>
 
+    text-shadow:
 
 
+    0 0 40px rgba(79,141,255,.45);
 
 
-</section>
+}
 
 
 
 
 
+.page-title p{
 
 
+    margin-top:15px;
 
-<!-- ==========================================
-     VEHICLE GRID START
-========================================== -->
 
+    color:
+    var(--muted);
 
-<section
 
-id="cardsContainer"
+    font-size:18px;
 
-class="vehicle-grid"
 
+}
+/* ==========================================
+   PART 2 - TOOLBAR + VEHICLE CARDS
+========================================== */
 
->
 
 
-    <!-- ==========================================
-     VEHICLE CARD TEMPLATE
-========================================== -->
 
 
-<template id="vehicleCardTemplate">
+/* ==========================================
+   PAGE HEADER / BACK BUTTON
+========================================== */
 
 
-<div class="card">
+.page-header{
 
+    width:95%;
 
+    max-width:1600px;
 
-<div class="limited-badge">
+    margin:20px auto;
 
-LIMITED
+}
 
-</div>
 
 
+.back-btn{
 
 
+    display:inline-flex;
 
 
-<div class="vehicle-image">
+    align-items:center;
 
 
-<img 
+    justify-content:center;
 
-src=""
 
-alt="Vehicle Image"
 
->
+    width:45px;
 
 
-</div>
+    height:45px;
 
 
 
+    border-radius:14px;
 
 
 
+    background:
+    var(--panel);
 
-<div class="vehicle-info">
 
 
+    border:
+    1px solid var(--border);
 
-<div class="name-box">
 
 
-<h3 class="name-value">
+    color:white;
 
-Unnamed Vehicle
 
-</h3>
 
+    text-decoration:none;
 
-</div>
 
 
+    font-size:28px;
 
 
 
+    font-weight:900;
 
 
-<div class="stats">
 
+    transition:.3s;
 
 
-<div class="stat-box">
+}
 
 
-<span class="stat-title">
 
-Demand
+.back-btn:hover{
 
-</span>
 
+    background:
+    var(--primary);
 
-<span class="demand-value">
 
-0/10
 
-</span>
+    transform:
+    translateX(-5px);
 
 
-</div>
+}
 
 
 
@@ -555,532 +542,504 @@ Demand
 
 
 
-<div class="stat-box">
 
+/* ==========================================
+   TOOLBAR
+========================================== */
 
-<span class="stat-title">
 
-Value
+.toolbar{
 
-</span>
 
+    width:95%;
 
-<span class="value-text">
 
-$0
+    max-width:1600px;
 
-</span>
 
 
-</div>
+    margin:30px auto;
 
 
 
+    display:flex;
 
-</div>
 
 
+    justify-content:space-between;
 
 
 
+    align-items:center;
 
-</div>
 
 
+    gap:20px;
 
 
 
-</div>
+    padding:20px;
 
 
-</template>
 
+    background:
 
 
+    rgba(18,27,43,.75);
 
 
 
+    border:
 
 
+    1px solid var(--border);
 
-<!-- ==========================================
-     ADMIN LOGIN OVERLAY
-========================================== -->
 
 
-<div
+    border-radius:22px;
 
-id="loginOverlay"
 
-class="overlay"
 
+    backdrop-filter:
+    blur(18px);
 
->
 
 
+}
 
 
 
-<div class="admin-box">
 
 
 
-<h2>
+/* ==========================================
+   SEARCH BOX
+========================================== */
 
-Admin Login
 
-</h2>
+.search-box{
 
 
+    flex:1;
 
 
+}
 
 
-<input
 
-id="loginEmail"
 
-type="email"
 
-placeholder="Email"
+.search-box input{
 
->
 
+    width:100%;
 
 
 
+    padding:16px 20px;
 
-<input
 
-id="loginPassword"
 
-type="password"
+    border-radius:15px;
 
-placeholder="Password"
 
->
 
+    border:
 
 
+    2px solid var(--border);
 
 
 
+    background:
 
-<div class="admin-buttons">
 
+    var(--panel-light);
 
 
-<button
 
-id="loginBtn"
+    color:white;
 
-class="primary-btn"
 
->
 
-Sign In
+    font-size:16px;
 
-</button>
 
 
+    outline:none;
 
 
 
-<button
+}
 
-id="loginCancelBtn"
 
-class="secondary-btn"
 
->
 
-Cancel
 
-</button>
+.search-box input::placeholder{
 
 
+    color:
+    var(--muted);
 
-</div>
 
+}
 
 
 
 
-</div>
 
+.search-box input:focus{
 
 
+    border-color:
+    var(--primary);
 
 
-</div>
 
+    box-shadow:
 
 
+    0 0 20px rgba(79,141,255,.3);
 
 
+}
 
 
 
 
-<!-- ==========================================
-     ADMIN VEHICLE EDITOR
-========================================== -->
 
 
-<div
 
-id="adminOverlay"
 
-class="overlay"
+/* ==========================================
+   FILTER GROUP
+========================================== */
 
 
->
+.filter-group{
 
 
+    display:flex;
 
 
 
-<div class="admin-box editor">
+    align-items:center;
 
 
 
+    gap:15px;
 
 
 
-<h2>
+    flex-wrap:wrap;
 
-Edit Vehicle
 
-</h2>
 
+}
 
 
 
 
 
+.filter-group select{
 
 
-<label>
+    padding:
 
-Vehicle Name
+    14px 18px;
 
-</label>
 
 
-<input
+    background:
 
-id="vehicleName"
 
-type="text"
+    var(--panel-light);
 
-placeholder="Vehicle Name"
 
->
 
+    color:white;
 
 
 
+    border:
 
 
+    2px solid var(--border);
 
 
-<label>
 
-Vehicle Value
+    border-radius:14px;
 
-</label>
 
 
-<input
+    outline:none;
 
-id="vehicleValue"
 
-type="number"
 
-placeholder="Value"
+    cursor:pointer;
 
->
 
 
+    font-weight:700;
 
 
 
+}
 
 
 
 
-<label>
 
-Demand
+.filter-group select:hover{
 
-</label>
 
+    border-color:
+    var(--primary);
 
 
-<select
+}
 
-id="vehicleDemand"
 
->
 
 
-<option value="10">
 
-10/10
 
-</option>
 
+.filter-group select option{
 
-<option value="9">
 
-9/10
+    background:
+    #121b2b;
 
-</option>
 
 
-<option value="8">
+    color:white;
 
-8/10
 
-</option>
+}
 
 
-<option value="7">
 
-7/10
 
-</option>
 
 
-<option value="6">
 
-6/10
+/* ==========================================
+   LIMITED FILTER
+========================================== */
 
-</option>
 
+.limited-filter{
 
-<option value="5">
 
-5/10
+    display:flex;
 
-</option>
 
 
-<option value="4">
+    align-items:center;
 
-4/10
 
-</option>
 
+    gap:10px;
 
-<option value="3">
 
-3/10
 
-</option>
+    color:white;
 
 
-<option value="2">
 
-2/10
+    font-weight:700;
 
-</option>
 
 
-<option value="1">
+    cursor:pointer;
 
-1/10
 
-</option>
 
+}
 
-<option value="0">
 
-0/10
 
-</option>
 
 
-</select>
+.limited-filter input{
 
 
+    width:18px;
 
 
+    height:18px;
 
 
+    cursor:pointer;
 
 
-<label>
+}
 
-Image URL
 
-</label>
 
 
-<input
 
-id="vehicleImage"
 
-type="text"
 
-placeholder="Image URL"
+/* ==========================================
+   VEHICLE GRID
+========================================== */
 
->
 
+.cards{
 
 
+    width:95%;
 
 
 
+    max-width:1600px;
 
 
-<label class="checkbox-row">
 
+    margin:
 
-<input
 
-id="vehicleLimited"
+    40px auto 80px;
 
-type="checkbox"
 
->
 
+    display:grid;
 
-Limited Vehicle
 
 
-</label>
+    grid-template-columns:
 
 
+    repeat(
+        auto-fit,
+        minmax(300px,1fr)
+    );
 
 
 
+    gap:30px;
 
 
+}
 
-<div class="admin-buttons">
 
 
 
-<button
 
-id="saveBtn"
 
-class="primary-btn"
 
->
+/* ==========================================
+   VEHICLE CARD
+========================================== */
 
-Save
 
-</button>
+.card{
 
 
+    position:relative;
 
 
 
+    background:
 
 
-<button
+    rgba(18,27,43,.85);
 
-id="cancelBtn"
 
-class="secondary-btn"
 
->
+    border:
 
-Cancel
 
-</button>
+    2px solid var(--border);
 
 
 
-</div>
+    border-radius:22px;
 
 
 
+    padding:20px;
 
 
 
+    overflow:hidden;
 
 
-</div>
 
+    cursor:pointer;
 
 
 
+    transition:.35s;
 
-</div>
 
-    <!-- ==========================================
-     CLOSE VEHICLE GRID
-========================================== -->
 
+    box-shadow:
+    var(--shadow);
 
-</section>
 
 
+}
 
 
 
 
 
-<!-- ==========================================
-     PAGINATION
-========================================== -->
+.card:hover{
 
 
-<section class="pagination-container">
+    transform:
 
 
+    translateY(-10px);
 
-<button
 
-id="previousPage"
 
-class="page-btn"
+    border-color:
 
->
 
-← Previous
+    var(--primary);
 
-</button>
 
 
+    box-shadow:
 
 
+    0 25px 70px rgba(79,141,255,.25);
 
 
-<div
+}
 
-id="pageNumbers"
 
-class="page-numbers"
 
->
 
-</div>
 
 
 
 
+/* ==========================================
+   LIMITED CARD
+========================================== */
 
 
+.card.limited{
 
-<button
 
-id="nextPage"
+    border-color:
+    var(--gold);
 
-class="page-btn"
 
->
 
-Next →
+    box-shadow:
 
-</button>
 
+    0 0 30px rgba(202,166,74,.3);
 
 
-</section>
+}
 
 
 
@@ -1088,69 +1047,1489 @@ Next →
 
 
 
+/* ==========================================
+   LIMITED BADGE
+========================================== */
 
-</main>
 
+.limited-badge{
 
 
+    position:absolute;
 
 
 
+    top:15px;
 
 
 
-<!-- ==========================================
-     FOOTER
-========================================== -->
+    left:15px;
 
 
-<footer class="footer">
 
+    display:none;
 
-<p>
 
-© 2026 Vehicle Values
 
-</p>
+    padding:
 
 
-<p>
+    8px 15px;
 
-Track prices • Demand • Rarity • Trading Values
 
-</p>
 
+    border-radius:999px;
 
-</footer>
 
 
+    background:
 
 
+    var(--gold);
 
 
 
+    color:white;
 
 
-<!-- ==========================================
-     JAVASCRIPT
-========================================== -->
 
+    font-size:12px;
 
-<script
 
-type="module"
 
-src="script.js"
+    font-weight:900;
 
-></script>
 
 
+    z-index:10;
 
 
+}
 
 
 
-</body>
 
 
-</html>
+
+
+.card.limited .limited-badge{
+
+
+    display:flex;
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================
+   VEHICLE IMAGE
+========================================== */
+
+
+.vehicle-image{
+
+
+    width:100%;
+
+
+
+    height:220px;
+
+
+
+    background:
+
+
+    var(--panel-light);
+
+
+
+    border-radius:18px;
+
+
+
+    overflow:hidden;
+
+
+
+    display:flex;
+
+
+
+    justify-content:center;
+
+
+
+    align-items:center;
+
+
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+
+
+.vehicle-image img{
+
+
+    width:100%;
+
+
+
+    height:100%;
+
+
+
+    object-fit:cover;
+
+
+}
+
+
+
+
+
+
+
+.vehicle-image img[src=""]{
+
+
+    display:none;
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================
+   VEHICLE NAME
+========================================== */
+
+
+.vehicle-name-box{
+
+
+    background:
+
+
+    var(--panel-light);
+
+
+
+    padding:15px;
+
+
+
+    border-radius:15px;
+
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+
+
+.name-title{
+
+
+    display:block;
+
+
+
+    font-size:12px;
+
+
+
+    color:
+    var(--muted);
+
+
+
+    font-weight:800;
+
+
+}
+
+
+
+
+
+.name-value{
+
+
+    display:block;
+
+
+
+    margin-top:6px;
+
+
+
+    font-size:22px;
+
+
+
+    font-weight:900;
+
+
+
+    color:white;
+
+
+}
+/* ==========================================
+   PART 3 - STATS + ADMIN SYSTEM
+========================================== */
+
+
+
+
+
+/* ==========================================
+   STAT BOXES
+========================================== */
+
+
+.stat-box{
+
+
+    background:
+
+
+    var(--panel-light);
+
+
+
+    border-radius:15px;
+
+
+
+    padding:15px;
+
+
+
+    margin-top:12px;
+
+
+
+}
+
+
+
+
+
+.stat-title{
+
+
+    display:block;
+
+
+
+    color:
+
+
+    var(--muted);
+
+
+
+    font-size:12px;
+
+
+
+    font-weight:800;
+
+
+
+    letter-spacing:1px;
+
+
+
+    text-transform:uppercase;
+
+
+
+    margin-bottom:8px;
+
+
+}
+
+
+
+
+
+.value-text{
+
+
+    color:
+
+
+    var(--primary-light);
+
+
+
+    font-size:24px;
+
+
+
+    font-weight:900;
+
+
+}
+
+
+
+
+
+.demand-value{
+
+
+    color:
+
+
+    var(--success);
+
+
+
+    font-size:24px;
+
+
+
+    font-weight:900;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   ADMIN OVERLAY
+========================================== */
+
+
+.admin-overlay{
+
+
+    position:fixed;
+
+
+
+    inset:0;
+
+
+
+    display:none;
+
+
+
+    align-items:center;
+
+
+
+    justify-content:center;
+
+
+
+    background:
+
+
+    rgba(0,0,0,.75);
+
+
+
+    backdrop-filter:
+
+
+    blur(10px);
+
+
+
+    z-index:5000;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   ADMIN PANEL
+========================================== */
+
+
+.admin-panel{
+
+
+    width:500px;
+
+
+
+    max-width:95%;
+
+
+
+    background:
+
+
+    rgba(18,27,43,.98);
+
+
+
+    border:
+
+
+    2px solid var(--border);
+
+
+
+    border-radius:24px;
+
+
+
+    padding:35px;
+
+
+
+    box-shadow:
+
+
+    0 30px 80px rgba(0,0,0,.6);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   TITLES
+========================================== */
+
+
+.admin-title{
+
+
+    text-align:center;
+
+
+
+    font-size:36px;
+
+
+
+    font-weight:900;
+
+
+
+    margin-bottom:30px;
+
+
+}
+
+
+
+.admin-title span{
+
+
+    color:
+
+
+    var(--primary);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   FORM GROUP
+========================================== */
+
+
+.admin-group{
+
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+.admin-group label{
+
+
+    display:block;
+
+
+
+    color:white;
+
+
+
+    font-weight:700;
+
+
+
+    margin-bottom:8px;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   INPUTS
+========================================== */
+
+
+.admin-group input,
+
+.admin-group select{
+
+
+    width:100%;
+
+
+
+    padding:14px;
+
+
+
+    background:
+
+
+    var(--panel-light);
+
+
+
+    color:white;
+
+
+
+    border:
+
+
+    2px solid var(--border);
+
+
+
+    border-radius:12px;
+
+
+
+    outline:none;
+
+
+
+    font-size:16px;
+
+
+}
+
+
+
+
+
+.admin-group input:focus,
+
+.admin-group select:focus{
+
+
+    border-color:
+
+
+    var(--primary);
+
+
+
+    box-shadow:
+
+
+    0 0 20px rgba(79,141,255,.3);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   DROPDOWN FIX
+========================================== */
+
+
+select{
+
+
+    color:white;
+
+
+
+    background:
+
+
+    var(--panel-light);
+
+
+}
+
+
+
+select option{
+
+
+    background:#121b2b;
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================
+   BUTTON ROW
+========================================== */
+
+
+.button-row{
+
+
+    display:flex;
+
+
+
+    gap:15px;
+
+
+
+    margin-top:25px;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   SAVE BUTTON
+========================================== */
+
+
+.save-btn{
+
+
+    flex:1;
+
+
+
+    padding:15px;
+
+
+
+    border:none;
+
+
+
+    border-radius:14px;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        180deg,
+
+        #70a8ff,
+
+        #4f8dff
+
+    );
+
+
+
+    color:white;
+
+
+
+    font-size:17px;
+
+
+
+    font-weight:900;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+.save-btn:hover{
+
+
+    transform:
+
+
+    translateY(-3px);
+
+
+
+    box-shadow:
+
+
+    0 0 30px rgba(79,141,255,.5);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   CANCEL BUTTON
+========================================== */
+
+
+.cancel-btn{
+
+
+    flex:1;
+
+
+
+    padding:15px;
+
+
+
+    border:none;
+
+
+
+    border-radius:14px;
+
+
+
+    background:
+
+
+    #334155;
+
+
+
+    color:white;
+
+
+
+    font-size:17px;
+
+
+
+    font-weight:900;
+
+
+
+    cursor:pointer;
+
+
+
+}
+
+
+
+
+
+.cancel-btn:hover{
+
+
+    background:
+
+
+    #475569;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   LOGIN ERROR
+========================================== */
+
+
+.login-error{
+
+
+    color:
+
+
+    var(--danger);
+
+
+
+    font-weight:800;
+
+
+
+    text-align:center;
+
+
+
+    margin-top:15px;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   LIMITED SWITCH
+========================================== */
+
+
+.limited-setting{
+
+
+    display:flex;
+
+
+
+    align-items:center;
+
+
+
+    justify-content:space-between;
+
+
+
+    color:white;
+
+
+
+    font-weight:800;
+
+
+}
+
+
+
+
+
+
+
+.switch{
+
+
+    position:relative;
+
+
+
+    width:60px;
+
+
+
+    height:34px;
+
+
+}
+
+
+
+
+
+
+
+.switch input{
+
+
+    opacity:0;
+
+
+
+    width:0;
+
+
+
+    height:0;
+
+
+}
+
+
+
+
+
+
+
+.slider{
+
+
+    position:absolute;
+
+
+
+    inset:0;
+
+
+
+    background:#475569;
+
+
+
+    border-radius:50px;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+.slider:before{
+
+
+    content:"";
+
+
+
+    position:absolute;
+
+
+
+    width:26px;
+
+
+
+    height:26px;
+
+
+
+    left:4px;
+
+
+
+    bottom:4px;
+
+
+
+    background:white;
+
+
+
+    border-radius:50%;
+
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+
+
+.switch input:checked + .slider{
+
+
+    background:
+
+
+    var(--gold);
+
+
+}
+
+
+
+
+
+
+
+.switch input:checked + .slider:before{
+
+
+    transform:
+
+
+    translateX(26px);
+
+
+}/* ==========================================
+   PART 4 - RESPONSIVE + FINAL FIXES
+========================================== */
+
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
+
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(15px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
+
+}
+
+
+
+
+.card{
+
+    animation:
+    fadeIn .35s ease;
+
+}
+
+
+
+
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+
+::-webkit-scrollbar-track{
+
+    background:#08111f;
+
+}
+
+
+::-webkit-scrollbar-thumb{
+
+    background:
+    var(--border);
+
+    border-radius:20px;
+
+}
+
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:
+    var(--primary);
+
+}
+
+
+
+
+
+
+/* ==========================================
+   FINAL ELEMENT FIXES
+========================================== */
+
+
+button,
+a,
+input,
+select,
+.card{
+
+    -webkit-tap-highlight-color:
+    transparent;
+
+}
+
+
+
+img{
+
+    max-width:100%;
+
+    user-select:none;
+
+}
+
+
+
+
+
+input,
+select{
+
+    color-scheme:dark;
+
+}
+
+
+
+
+
+button{
+
+    user-select:none;
+
+}
+
+
+
+
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+
+@media(max-width:1000px){
+
+
+    .header{
+
+        padding:
+        0 35px;
+
+    }
+
+
+
+    nav{
+
+        gap:20px;
+
+    }
+
+
+
+    .toolbar{
+
+        flex-direction:
+        column;
+
+        align-items:stretch;
+
+    }
+
+
+
+    .filter-group{
+
+        justify-content:center;
+
+    }
+
+
+
+    .cards{
+
+        grid-template-columns:
+
+        repeat(
+            auto-fit,
+            minmax(280px,1fr)
+        );
+
+    }
+
+
+
+    .page-title h1{
+
+        font-size:42px;
+
+    }
+
+
+}
+
+
+
+
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+
+@media(max-width:700px){
+
+
+    .header{
+
+        height:75px;
+
+        padding:
+        0 20px;
+
+    }
+
+
+
+    .logo{
+
+        font-size:24px;
+
+    }
+
+
+
+    nav{
+
+        display:none;
+
+    }
+
+
+
+    .logout-btn{
+
+        padding:
+        10px 15px;
+
+        font-size:14px;
+
+    }
+
+
+
+    .page-title{
+
+        padding:
+
+        45px 15px 25px;
+
+    }
+
+
+
+    .page-title h1{
+
+        font-size:34px;
+
+    }
+
+
+
+    .toolbar{
+
+        width:92%;
+
+        padding:15px;
+
+    }
+
+
+
+    .filter-group{
+
+        flex-direction:
+
+        column;
+
+    }
+
+
+
+    .filter-group select{
+
+        width:100%;
+
+    }
+
+
+
+    .cards{
+
+        width:92%;
+
+        grid-template-columns:
+
+        1fr;
+
+    }
+
+
+
+    .vehicle-image{
+
+        height:180px;
+
+    }
+
+
+
+    .admin-panel{
+
+        width:95%;
+
+        padding:25px;
+
+    }
+
+
+
+    .admin-title{
+
+        font-size:28px;
+
+    }
+
+
+
+    .button-row{
+
+        flex-direction:
+
+        column;
+
+    }
+
+
+}
+
+
+
+
+
+
+/* ==========================================
+   SMALL PHONES
+========================================== */
+
+
+@media(max-width:400px){
+
+
+    .logo{
+
+        font-size:20px;
+
+    }
+
+
+
+    .vehicle-image{
+
+        height:150px;
+
+    }
+
+
+
+    .admin-title{
+
+        font-size:24px;
+
+    }
+
+
+}
+
+
+
+
+
+
+/* ==========================================
+   END VALUES.CSS
+========================================== */
