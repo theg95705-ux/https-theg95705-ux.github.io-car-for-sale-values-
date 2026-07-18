@@ -229,40 +229,11 @@
 
 </section>
 
-<!-- ========================================= -->
-<!-- VEHICLE GRID -->
-<!-- ========================================= -->
-
-<main
-    class="cards"
-    id="cardsContainer">
-
-    <!--
-        Vehicle cards are now generated
-        automatically by script.js.
-
-        To add more vehicles later,
-        simply change:
-
-        const TOTAL_CARDS = 82;
-
-        inside script.js
-
-        No HTML editing required.
-    -->
-
-</main>
 <!-- =====================================
 VEHICLE GRID
 ===================================== -->
 
-
-<main class="cards">
-<!-- =====================================
-VEHICLE GRID
-===================================== -->
-
-<main class="cards" id="vehicleGrid">
+<main class="cards" id="cardsContainer">
 
     <!--
     Vehicle cards are generated automatically
@@ -273,6 +244,56 @@ VEHICLE GRID
     -->
 
 </main>
+
+<!-- =====================================
+CARD TEMPLATE
+===================================== -->
+
+<template id="vehicleCardTemplate">
+
+    <div class="card">
+
+        <div class="limited-badge">
+            ★ LIMITED
+        </div>
+
+        <div class="vehicle-image">
+            <img src="" alt="Vehicle">
+        </div>
+
+        <div class="vehicle-name-box">
+
+            <span class="name-title">NAME</span>
+
+            <span class="name-value">
+                Loading...
+            </span>
+
+        </div>
+
+        <div class="stat-box">
+
+            <span class="stat-title">Demand</span>
+
+            <span class="demand-value">
+                0/10
+            </span>
+
+        </div>
+
+        <div class="stat-box">
+
+            <span class="stat-title">Value</span>
+
+            <span class="value-text">
+                $0
+            </span>
+
+        </div>
+
+    </div>
+
+</template>
 
 
 
