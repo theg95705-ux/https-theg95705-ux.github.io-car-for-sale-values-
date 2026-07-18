@@ -1,433 +1,1535 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
+
 :root {
-  --primary: #4f8dff;
-  --primary2: #70a8ff;
 
-  --background: #06101f;
-  --background2: #0a1930;
+    --primary:#4f8dff;
+    --primary2:#70a8ff;
 
-  --text: #ffffff;
-  --muted: #b9c9e9;
+    --background:#0b1220;
+    --background2:#111c33;
+
+    --text:#ffffff;
+    --muted:#b9c9e9;
+
 }
+
+
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Inter",sans-serif;
+
 }
+
+
 
 html {
-  scroll-behavior: smooth;
+
+    scroll-behavior:smooth;
+
 }
+
+
 
 body {
-  background: radial-gradient(
-    circle at top,
-    #194b97 0%,
-    #0d2448 30%,
-    #071321 100%
-  );
 
-  color: white;
 
-  overflow-x: hidden;
+    background:#0b1220;
 
-  min-height: 100vh;
+    color:white;
+
+    overflow-x:hidden;
+
+    min-height:100vh;
+
+
 }
 
-/* Blue Glow */
+
+
+/* =========================
+BLUE GLOW
+========================= */
+
 
 body::before {
-  content: "";
 
-  position: fixed;
 
-  top: -400px;
-  left: 50%;
+    content:"";
 
-  transform: translateX(-50%);
+    position:fixed;
 
-  width: 900px;
-  height: 900px;
+    top:-400px;
 
-  background: radial-gradient(
-    circle,
-    rgba(79, 141, 255, 0.45),
-    transparent 70%
-  );
+    left:50%;
 
-  filter: blur(60px);
 
-  z-index: -1;
+    transform:translateX(-50%);
 
-  pointer-events: none;
+
+    width:900px;
+
+    height:900px;
+
+
+    background:radial-gradient(
+        circle,
+        rgba(79,141,255,0.25),
+        transparent 70%
+    );
+
+
+    filter:blur(80px);
+
+
+    z-index:-1;
+
+
+    pointer-events:none;
+
+
 }
 
-/* ========================= */
-/* NAVBAR */
-/* ========================= */
+
+
+/* =========================
+NAVBAR
+========================= */
+
 
 .navbar {
-  position: fixed;
 
-  top: 0;
-  left: 0;
 
-  width: 100%;
-  height: 82px;
+    position:fixed;
 
-  display: flex;
 
-  align-items: center;
-  justify-content: space-between;
+    top:0;
+    left:0;
 
-  padding: 0 70px;
 
-  background: rgba(7, 18, 34, 0.7);
+    width:100%;
 
-  backdrop-filter: blur(18px);
 
-  border-top: 3px solid var(--primary);
+    height:82px;
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
-  z-index: 999;
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:space-between;
+
+
+    padding:0 70px;
+
+
+
+    background:rgba(11,18,32,0.85);
+
+
+
+    backdrop-filter:blur(18px);
+
+
+
+    border-top:3px solid var(--primary);
+
+
+
+    border-bottom:1px solid rgba(255,255,255,0.05);
+
+
+
+    z-index:999;
+
+
 }
+
+
 
 .logo {
-  font-size: 30px;
 
-  font-weight: 800;
 
-  letter-spacing: 0.3px;
+    font-size:30px;
+
+
+    font-weight:800;
+
+
 }
+
+
 
 .logo span {
-  color: var(--primary);
+
+
+    color:var(--primary);
+
+
 }
+
+
+
+/* NAV LINKS */
+
 
 nav {
-  display: flex;
 
-  gap: 40px;
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:40px;
+
+
 }
+
+
 
 nav a {
-  text-decoration: none;
 
-  color: white;
 
-  font-weight: 600;
+    text-decoration:none;
 
-  transition: 0.3s;
+
+    color:white;
+
+
+    font-weight:600;
+
+
+    transition:.3s;
+
+
 }
+
+
 
 nav a:hover {
-  color: var(--primary);
+
+
+    color:var(--primary);
+
+
 }
 
-/* Buttons */
+
+
+/* MOBILE MENU BUTTON */
+
+
+.menu-toggle {
+
+
+    display:none;
+
+
+    background:none;
+
+
+    border:none;
+
+
+    color:white;
+
+
+    font-size:30px;
+
+
+    cursor:pointer;
+
+
+}
+/* =========================
+DROPDOWN MENU
+========================= */
+
+
+.dropdown {
+
+
+    position:relative;
+
+
+}
+
+
+
+.dropbtn {
+
+
+    background:none;
+
+
+    border:none;
+
+
+    color:white;
+
+
+    font-size:16px;
+
+
+    font-weight:600;
+
+
+    cursor:pointer;
+
+
+    font-family:inherit;
+
+
+}
+
+
+
+.dropbtn:hover {
+
+
+    color:var(--primary);
+
+
+}
+
+
+
+.dropdown-content {
+
+
+    display:none;
+
+
+    position:absolute;
+
+
+    top:35px;
+
+
+    left:0;
+
+
+    min-width:190px;
+
+
+    background:rgba(11,18,32,0.95);
+
+
+    backdrop-filter:blur(15px);
+
+
+    border-radius:14px;
+
+
+    border:1px solid rgba(79,141,255,0.2);
+
+
+    overflow:hidden;
+
+
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+
+
+}
+
+
+
+.dropdown-content a {
+
+
+    display:block;
+
+
+    padding:14px 18px;
+
+
+    color:white;
+
+
+    text-decoration:none;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.dropdown-content a:hover {
+
+
+    background:rgba(79,141,255,0.2);
+
+
+    color:white;
+
+
+}
+
+
+
+.dropdown:hover .dropdown-content,
+
+
+.dropdown.show .dropdown-content {
+
+
+    display:block;
+
+
+}
+
+
+
+
+/* =========================
+BUTTONS
+========================= */
+
 
 .button,
 .primary,
 .secondary {
-  display: inline-flex;
 
-  align-items: center;
 
-  justify-content: center;
+    display:inline-flex;
 
-  padding: 15px 34px;
 
-  border-radius: 14px;
+    align-items:center;
 
-  font-weight: 700;
 
-  text-decoration: none;
+    justify-content:center;
 
-  transition: 0.35s;
+
+    padding:15px 34px;
+
+
+    border-radius:14px;
+
+
+    font-weight:700;
+
+
+    text-decoration:none;
+
+
+    transition:.35s;
+
+
 }
+
+
 
 .button,
 .primary {
-  background: linear-gradient(180deg, #6ca8ff, #4f8dff);
 
-  box-shadow: 0 0 30px rgba(79, 141, 255, 0.45);
 
-  color: white;
+    background:linear-gradient(
+        180deg,
+        #6ca8ff,
+        #4f8dff
+    );
+
+
+    color:white;
+
+
+    box-shadow:
+    0 0 30px rgba(79,141,255,.45);
+
+
 }
+
+
 
 .button:hover,
 .primary:hover {
-  transform: translateY(-3px);
 
-  box-shadow: 0 0 45px rgba(79, 141, 255, 0.75);
+
+    transform:translateY(-3px);
+
+
+    box-shadow:
+    0 0 45px rgba(79,141,255,.75);
+
+
 }
+
+
 
 .secondary {
-  margin-left: 18px;
 
-  background: rgba(255, 255, 255, 0.05);
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
+    margin-left:18px;
 
-  color: white;
 
-  backdrop-filter: blur(10px);
+    background:rgba(255,255,255,.05);
+
+
+    border:1px solid rgba(255,255,255,.1);
+
+
+    color:white;
+
+
+    backdrop-filter:blur(10px);
+
+
 }
+
+
 
 .secondary:hover {
-  background: rgba(79, 141, 255, 0.2);
+
+
+    background:rgba(79,141,255,.2);
+
+
 }
 
-/* ========================= */
-/* HERO */
-/* ========================= */
+
+
+
+/* =========================
+HERO SECTION
+========================= */
+
 
 .hero {
-  position: relative;
 
-  display: flex;
 
-  justify-content: center;
+    position:relative;
 
-  align-items: center;
 
-  min-height: 100vh;
+    min-height:100vh;
 
-  padding-top: 90px;
 
-  overflow: hidden;
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    padding-top:90px;
+
+
+    overflow:hidden;
+
+
 }
+
+
 
 .content {
-  position: relative;
 
-  z-index: 20;
 
-  max-width: 900px;
+    position:relative;
 
-  text-align: center;
 
-  padding: 20px;
+    z-index:20;
+
+
+    max-width:900px;
+
+
+    text-align:center;
+
+
+    padding:20px;
+
+
 }
+
+
 
 .content h1 {
-  font-size: 84px;
 
-  font-weight: 900;
 
-  line-height: 1;
+    font-size:84px;
 
-  margin-bottom: 30px;
 
-  text-shadow: 0 0 40px rgba(79, 141, 255, 0.45);
+    font-weight:900;
+
+
+    line-height:1;
+
+
+    margin-bottom:30px;
+
+
+    text-shadow:
+    0 0 40px rgba(79,141,255,.45);
+
+
 }
+
+
 
 .content span {
-  color: var(--primary);
+
+
+    color:var(--primary);
+
+
 }
+
+
 
 .content p {
-  max-width: 760px;
 
-  margin: auto;
 
-  font-size: 22px;
+    max-width:760px;
 
-  line-height: 1.8;
 
-  color: var(--muted);
+    margin:auto;
 
-  margin-bottom: 45px;
+
+    font-size:22px;
+
+
+    line-height:1.8;
+
+
+    color:var(--muted);
+
+
+    margin-bottom:45px;
+
+
 }
+
+
 
 .buttons {
-  display: flex;
 
-  justify-content: center;
 
-  gap: 18px;
+    display:flex;
 
-  flex-wrap: wrap;
+
+    justify-content:center;
+
+
+    gap:18px;
+
+
+    flex-wrap:wrap;
+
+
 }
-/* ========================= */
-/* HERO BACKGROUND SLIDER */
-/* ========================= */
+/* =========================
+HERO BACKGROUND SLIDER
+========================= */
+
 
 .background {
-  position: absolute;
 
-  inset: 0;
 
-  overflow: hidden;
+    position:absolute;
 
-  z-index: 1;
+
+    inset:0;
+
+
+    overflow:hidden;
+
+
+    z-index:1;
+
+
 }
+
+
 
 .background img {
-  position: absolute;
 
-  inset: 0;
 
-  width: 100%;
-  height: 100%;
+    position:absolute;
 
-  object-fit: cover;
 
-  opacity: 0;
+    inset:0;
 
-  animation: heroSlider 18s infinite;
 
-  transform: scale(1.12);
+    width:100%;
 
-  filter: brightness(0.65);
+
+    height:100%;
+
+
+    object-fit:cover;
+
+
+    opacity:0;
+
+
+    animation:heroSlider 18s infinite;
+
+
+    transform:scale(1.12);
+
+
+    filter:brightness(.55);
+
+
 }
 
-/* Image Timing */
 
-.background img:nth-child(1) {
-  animation-delay: 0s;
+
+.background img:nth-child(1){
+
+    animation-delay:0s;
+
 }
 
-.background img:nth-child(2) {
-  animation-delay: 6s;
+
+
+.background img:nth-child(2){
+
+    animation-delay:6s;
+
 }
 
-.background img:nth-child(3) {
-  animation-delay: 12s;
+
+
+.background img:nth-child(3){
+
+    animation-delay:12s;
+
 }
 
-/* Fade Animation */
+
 
 @keyframes heroSlider {
-  0% {
-    opacity: 0;
 
-    transform: scale(1.12);
-  }
 
-  6% {
-    opacity: 1;
-  }
+    0% {
 
-  30% {
-    opacity: 1;
 
-    transform: scale(1);
-  }
+        opacity:0;
 
-  36% {
-    opacity: 0;
-  }
 
-  100% {
-    opacity: 0;
+        transform:scale(1.12);
 
-    transform: scale(1);
-  }
+
+    }
+
+
+
+    6% {
+
+
+        opacity:1;
+
+
+    }
+
+
+
+    30% {
+
+
+        opacity:1;
+
+
+        transform:scale(1);
+
+
+    }
+
+
+
+    36% {
+
+
+        opacity:0;
+
+
+    }
+
+
+
+    100% {
+
+
+        opacity:0;
+
+
+        transform:scale(1);
+
+
+    }
+
+
 }
 
-/* ========================= */
-/* DARK OVERLAY */
-/* ========================= */
+
+
+
+
+/* =========================
+OVERLAY
+========================= */
+
 
 .overlay {
-  position: absolute;
 
-  inset: 0;
 
-  background:
-    linear-gradient(rgba(5, 15, 30, 0.55), rgba(5, 15, 30, 0.9)),
-    radial-gradient(circle at top, rgba(79, 141, 255, 0.2), transparent 65%);
+    position:absolute;
 
-  z-index: 2;
+
+    inset:0;
+
+
+    background:
+
+
+    linear-gradient(
+        rgba(11,18,32,.45),
+        rgba(11,18,32,.95)
+    ),
+
+
+    radial-gradient(
+        circle at top,
+        rgba(79,141,255,.25),
+        transparent 65%
+    );
+
+
+    z-index:2;
+
+
 }
 
-/* ========================= */
-/* HERO GLOW */
-/* ========================= */
+
+
+
+
+/* =========================
+HERO GLOW
+========================= */
+
 
 .hero-glow {
-  position: absolute;
 
-  top: 50%;
 
-  left: 50%;
+    position:absolute;
 
-  transform: translate(-50%, -50%);
 
-  width: 900px;
+    top:50%;
 
-  height: 900px;
 
-  background: radial-gradient(
-    circle,
-    rgba(79, 141, 255, 0.18),
-    transparent 70%
-  );
+    left:50%;
 
-  filter: blur(90px);
 
-  pointer-events: none;
+    transform:translate(-50%,-50%);
 
-  z-index: 3;
+
+
+    width:900px;
+
+
+    height:900px;
+
+
+
+    background:radial-gradient(
+        circle,
+        rgba(79,141,255,.2),
+        transparent 70%
+    );
+
+
+    filter:blur(90px);
+
+
+    pointer-events:none;
+
+
+    z-index:3;
+
+
 }
 
-/* ========================= */
-/* FEATURE CARDS */
-/* ========================= */
+
+
+
+
+/* =========================
+FEATURE CARDS
+========================= */
+
 
 .features {
-  display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
 
-  gap: 30px;
+    display:grid;
 
-  max-width: 1200px;
 
-  margin: 120px auto;
+    grid-template-columns:repeat(3,1fr);
 
-  padding: 0 40px;
+
+    gap:30px;
+
+
+    max-width:1200px;
+
+
+    margin:120px auto;
+
+
+    padding:0 40px;
+
+
 }
+
+
+
+
 
 .card {
-  background: rgba(15, 32, 60, 0.55);
 
-  backdrop-filter: blur(18px);
 
-  border: 1px solid rgba(79, 141, 255, 0.18);
+    background:rgba(15,32,60,.55);
 
-  border-radius: 22px;
 
-  padding: 35px;
+    backdrop-filter:blur(18px);
 
-  transition: 0.35s;
 
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+
+    border:1px solid rgba(79,141,255,.18);
+
+
+
+    border-radius:22px;
+
+
+
+    padding:35px;
+
+
+
+    transition:.35s;
+
+
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.25);
+
+
+
 }
+
+
 
 .card:hover {
-  transform: translateY(-10px);
 
-  border-color: #4f8dff;
 
-  box-shadow: 0 25px 60px rgba(79, 141, 255, 0.2);
+    transform:translateY(-10px);
+
+
+
+    border-color:var(--primary);
+
+
+
+    box-shadow:
+    0 25px 60px rgba(79,141,255,.25);
+
+
+
 }
+
+
 
 .card h2 {
-  margin-bottom: 18px;
 
-  font-size: 28px;
 
-  color: #6ea8ff;
+    margin-bottom:18px;
+
+
+    font-size:28px;
+
+
+    color:#6ea8ff;
+
+
 }
 
-.card p {
-  color: #b9c9e9;
 
-  line-height: 1.7;
+
+.card p {
+
+
+    color:var(--muted);
+
+
+    line-height:1.7;
+
+
+}
+
+
+
+
+
+.icon {
+
+
+    font-size:40px;
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+
+
+/* =========================
+LATEST UPDATES
+========================= */
+
+
+.latest {
+
+
+    max-width:1200px;
+
+
+    margin:100px auto;
+
+
+    padding:0 40px;
+
+
+}
+
+
+
+
+.section-title {
+
+
+    text-align:center;
+
+
+    font-size:42px;
+
+
+    margin-bottom:50px;
+
+
+}
+
+
+
+
+.update-grid {
+
+
+    display:grid;
+
+
+    grid-template-columns:repeat(4,1fr);
+
+
+    gap:25px;
+
+
+}
+
+
+
+
+
+.update {
+
+
+    background:rgba(15,32,60,.55);
+
+
+    backdrop-filter:blur(18px);
+
+
+    border-radius:20px;
+
+
+    padding:30px;
+
+
+    border:1px solid rgba(79,141,255,.15);
+
+
+    transition:.35s;
+
+
+}
+
+
+
+
+
+.update:hover {
+
+
+    transform:translateY(-8px);
+
+
+    border-color:var(--primary);
+
+
+}
+
+
+
+
+
+.update h3 {
+
+
+    margin-bottom:15px;
+
+
+    color:#6ea8ff;
+
+
+}
+
+
+
+
+
+.update p {
+
+
+    color:var(--muted);
+
+
+    line-height:1.6;
+
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+
+
+.update a {
+
+
+    color:white;
+
+
+    text-decoration:none;
+
+
+    font-weight:700;
+
+
+}
+
+
+
+.update a:hover {
+
+
+    color:var(--primary);
+
+
+}
+/* =========================
+FOOTER
+========================= */
+
+
+footer {
+
+
+    margin-top:100px;
+
+
+    padding:50px 40px 30px;
+
+
+    background:rgba(7,14,28,.85);
+
+
+    border-top:1px solid rgba(79,141,255,.15);
+
+
+    text-align:center;
+
+
+}
+
+
+
+.footer-content p {
+
+
+    color:var(--muted);
+
+
+    margin-top:15px;
+
+
+}
+
+
+
+.footer-links {
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    gap:35px;
+
+
+    margin:35px 0;
+
+
+    flex-wrap:wrap;
+
+
+}
+
+
+
+.footer-links a {
+
+
+    color:white;
+
+
+    text-decoration:none;
+
+
+    font-weight:600;
+
+
+}
+
+
+
+.footer-links a:hover {
+
+
+    color:var(--primary);
+
+
+}
+
+
+
+.copyright {
+
+
+    color:#8fa5c7;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+
+
+/* =========================
+MOBILE RESPONSIVE
+========================= */
+
+
+@media(max-width:900px){
+
+
+
+.navbar {
+
+
+    padding:0 25px;
+
+
+}
+
+
+
+.menu-toggle {
+
+
+    display:block;
+
+
+}
+
+
+
+nav {
+
+
+    position:absolute;
+
+
+    top:82px;
+
+
+    left:0;
+
+
+    width:100%;
+
+
+    background:rgba(11,18,32,.95);
+
+
+    backdrop-filter:blur(20px);
+
+
+    flex-direction:column;
+
+
+    gap:20px;
+
+
+    padding:30px;
+
+
+    display:none;
+
+
+}
+
+
+
+nav.active {
+
+
+    display:flex;
+
+
+}
+
+
+
+.navbar .button {
+
+
+    display:none;
+
+
+}
+
+
+
+.dropdown {
+
+
+    width:100%;
+
+
+}
+
+
+
+.dropdown-content {
+
+
+    position:static;
+
+
+    width:100%;
+
+
+    margin-top:10px;
+
+
+}
+
+
+
+.content h1 {
+
+
+    font-size:55px;
+
+
+}
+
+
+
+.content p {
+
+
+    font-size:18px;
+
+
+}
+
+
+
+.features {
+
+
+    grid-template-columns:1fr;
+
+
+    padding:0 25px;
+
+
+}
+
+
+
+.update-grid {
+
+
+    grid-template-columns:1fr;
+
+
+}
+
+
+
+.latest {
+
+
+    padding:0 25px;
+
+
+}
+
+
+
+}
+
+
+
+
+@media(max-width:500px){
+
+
+
+.logo {
+
+
+    font-size:22px;
+
+
+}
+
+
+
+.content h1 {
+
+
+    font-size:45px;
+
+
+}
+
+
+
+.primary,
+.secondary {
+
+
+    width:100%;
+
+
+}
+
+
+
+.secondary {
+
+
+    margin-left:0;
+
+
+}
+
+
+
+.hero {
+
+
+    padding-top:120px;
+
+
+}
+
+
+
+}
+
+
+
+
+
+/* =========================
+SCROLLBAR
+========================= */
+
+
+::-webkit-scrollbar {
+
+
+    width:10px;
+
+
+}
+
+
+
+::-webkit-scrollbar-track {
+
+
+    background:#07111f;
+
+
+}
+
+
+
+::-webkit-scrollbar-thumb {
+
+
+    background:#4f8dff;
+
+
+    border-radius:20px;
+
+
+}
+
+
+
+::-webkit-scrollbar-thumb:hover {
+
+
+    background:#70a8ff;
+
+
 }
