@@ -1,19 +1,14 @@
 /* ==========================================
    VEHICLE VALUES
    VALUES.CSS
-   UPDATED VERSION
+   FIXED VERSION
    PART 1 - GLOBAL + HEADER
 ========================================== */
 
 
-/* ==========================================
-   FONT
-========================================== */
-
 @import url(
 "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
 );
-
 
 
 /* ==========================================
@@ -27,7 +22,7 @@
     --primary-light:#70a8ff;
 
     --background:#0b1220;
-    --background-two:#0f1b30;
+    --background-two:#0a1930;
 
     --panel:#121b2b;
     --panel-light:#182438;
@@ -39,13 +34,15 @@
 
     --success:#34d399;
     --gold:#caa64a;
+
     --danger:#ef4444;
 
-
     --shadow:
-    0 20px 55px rgba(0,0,0,.45);
+    0 20px 60px rgba(0,0,0,.35);
 
 }
+
+
 
 
 
@@ -82,17 +79,11 @@ body{
 
     min-height:100vh;
 
-
     background:
+    var(--background);
 
-    linear-gradient(
-        180deg,
-        #0b1220,
-        #08111f
-    );
-
-
-    color:var(--text);
+    color:
+    var(--text);
 
     overflow-x:hidden;
 
@@ -100,12 +91,15 @@ body{
 
 
 
+
+
 /* ==========================================
-   BACKGROUND EFFECT
+   BACKGROUND GLOW
 ========================================== */
 
 
 body::before{
+
 
     content:"";
 
@@ -113,7 +107,7 @@ body::before{
     position:fixed;
 
 
-    top:-400px;
+    top:-350px;
 
 
     left:50%;
@@ -138,16 +132,16 @@ body::before{
 
         circle,
 
-        rgba(79,141,255,.20),
+        rgba(79,141,255,.25),
 
-        transparent 65%
+        transparent 70%
 
     );
 
 
 
     filter:
-    blur(90px);
+    blur(70px);
 
 
 
@@ -156,44 +150,9 @@ body::before{
 
     pointer-events:none;
 
-}
-
-
-
-
-/* ==========================================
-   GLOBAL ELEMENTS
-========================================== */
-
-
-a{
-
-    color:inherit;
 
 }
 
-
-
-button,
-input,
-select{
-
-    font-family:
-    "Inter",
-    sans-serif;
-
-}
-
-
-
-
-img{
-
-    display:block;
-
-    max-width:100%;
-
-}
 
 
 
@@ -210,8 +169,7 @@ img{
     width:100%;
 
 
-    height:78px;
-
+    height:82px;
 
 
     display:flex;
@@ -225,32 +183,28 @@ img{
 
 
     padding:
-
-    0 60px;
+    0 70px;
 
 
 
     background:
 
 
-    rgba(7,18,34,.85);
+    rgba(7,18,34,.75);
 
 
 
     backdrop-filter:
-
     blur(18px);
 
 
 
     border-top:
-
     3px solid var(--primary);
 
 
 
     border-bottom:
-
     1px solid rgba(255,255,255,.08);
 
 
@@ -270,6 +224,7 @@ img{
 
 
 
+
 /* ==========================================
    LOGO
 ========================================== */
@@ -278,7 +233,7 @@ img{
 .logo{
 
 
-    font-size:28px;
+    font-size:30px;
 
 
     font-weight:900;
@@ -287,11 +242,7 @@ img{
     letter-spacing:.5px;
 
 
-    cursor:pointer;
-
-
 }
-
 
 
 
@@ -299,7 +250,6 @@ img{
 
 
     color:
-
     var(--primary);
 
 
@@ -324,7 +274,7 @@ nav{
     align-items:center;
 
 
-    gap:35px;
+    gap:40px;
 
 
 }
@@ -336,19 +286,13 @@ nav{
 nav a{
 
 
-    position:relative;
-
-
     text-decoration:none;
 
 
     color:white;
 
 
-    font-size:16px;
-
-
-    font-weight:700;
+    font-weight:600;
 
 
     transition:.3s;
@@ -356,53 +300,6 @@ nav a{
 
 }
 
-
-
-
-
-nav a::after{
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    left:0;
-
-
-    bottom:-8px;
-
-
-    width:0;
-
-
-    height:2px;
-
-
-    background:
-
-    var(--primary);
-
-
-    transition:.3s;
-
-
-}
-
-
-
-
-
-nav a:hover::after,
-nav a.active::after{
-
-
-    width:100%;
-
-
-}
 
 
 
@@ -412,11 +309,12 @@ nav a.active{
 
 
     color:
-
     var(--primary);
 
 
 }
+
+
 
 
 
@@ -431,7 +329,6 @@ nav a.active{
 
 
     background:
-
     var(--danger);
 
 
@@ -445,20 +342,15 @@ nav a.active{
 
 
     padding:
-
-    11px 24px;
-
-
-
-    border-radius:14px;
+    12px 24px;
 
 
 
-    font-size:15px;
+    border-radius:12px;
 
 
 
-    font-weight:900;
+    font-weight:800;
 
 
 
@@ -467,7 +359,6 @@ nav a.active{
 
 
     transition:.3s;
-
 
 
 }
@@ -480,17 +371,12 @@ nav a.active{
 
 
     transform:
-
     translateY(-3px);
 
 
-
-    box-shadow:
-
-    0 10px 25px rgba(239,68,68,.35);
-
-
 }
+
+
 
 
 
@@ -510,8 +396,7 @@ nav a.active{
     padding:
 
 
-    65px 20px 35px;
-
+    70px 20px 35px;
 
 
 }
@@ -523,20 +408,16 @@ nav a.active{
 .page-title h1{
 
 
-    font-size:50px;
+    font-size:52px;
 
 
     font-weight:900;
 
 
-    letter-spacing:-1px;
-
-
-
     text-shadow:
 
 
-    0 0 45px rgba(79,141,255,.45);
+    0 0 40px rgba(79,141,255,.45);
 
 
 }
@@ -551,37 +432,19 @@ nav a.active{
     margin-top:15px;
 
 
-    max-width:700px;
-
-
-    margin-left:auto;
-
-
-    margin-right:auto;
-
-
     color:
-
     var(--muted);
 
 
     font-size:18px;
 
 
-    line-height:1.6;
-
-
 }
-
-
-
 /* ==========================================
-   END PART 1
-========================================== */
-/* ==========================================
-   VEHICLE VALUES
    PART 2 - TOOLBAR + VEHICLE CARDS
 ========================================== */
+
+
 
 
 
@@ -592,18 +455,13 @@ nav a.active{
 
 .page-header{
 
-
     width:95%;
 
+    max-width:1600px;
 
-    max-width:1400px;
-
-
-    margin:25px auto;
-
+    margin:20px auto;
 
 }
-
 
 
 
@@ -632,13 +490,11 @@ nav a.active{
 
 
     background:
-
     var(--panel);
 
 
 
     border:
-
     1px solid var(--border);
 
 
@@ -662,10 +518,7 @@ nav a.active{
     transition:.3s;
 
 
-
 }
-
-
 
 
 
@@ -673,23 +526,17 @@ nav a.active{
 
 
     background:
-
-    var(--primary);
-
-
-
-    border-color:
-
     var(--primary);
 
 
 
     transform:
-
     translateX(-5px);
 
 
 }
+
+
 
 
 
@@ -707,13 +554,11 @@ nav a.active{
     width:95%;
 
 
-    max-width:1400px;
+    max-width:1600px;
 
 
 
-    margin:
-
-    30px auto;
+    margin:30px auto;
 
 
 
@@ -721,11 +566,11 @@ nav a.active{
 
 
 
-    align-items:center;
-
-
-
     justify-content:space-between;
+
+
+
+    align-items:center;
 
 
 
@@ -740,7 +585,7 @@ nav a.active{
     background:
 
 
-    rgba(18,27,43,.85);
+    rgba(18,27,43,.75);
 
 
 
@@ -756,14 +601,7 @@ nav a.active{
 
 
     backdrop-filter:
-
     blur(18px);
-
-
-
-    box-shadow:
-
-    var(--shadow);
 
 
 
@@ -773,8 +611,9 @@ nav a.active{
 
 
 
+
 /* ==========================================
-   SEARCH
+   SEARCH BOX
 ========================================== */
 
 
@@ -797,25 +636,25 @@ nav a.active{
 
 
 
-    padding:
-
-    15px 20px;
+    padding:16px 20px;
 
 
 
-    background:
-
-    var(--panel-light);
+    border-radius:15px;
 
 
 
     border:
 
+
     2px solid var(--border);
 
 
 
-    border-radius:15px;
+    background:
+
+
+    var(--panel-light);
 
 
 
@@ -827,15 +666,7 @@ nav a.active{
 
 
 
-    font-weight:600;
-
-
-
     outline:none;
-
-
-
-    transition:.3s;
 
 
 
@@ -849,7 +680,6 @@ nav a.active{
 
 
     color:
-
     var(--muted);
 
 
@@ -863,14 +693,14 @@ nav a.active{
 
 
     border-color:
-
     var(--primary);
 
 
 
     box-shadow:
 
-    0 0 25px rgba(79,141,255,.35);
+
+    0 0 20px rgba(79,141,255,.3);
 
 
 }
@@ -880,8 +710,10 @@ nav a.active{
 
 
 
+
+
 /* ==========================================
-   FILTER AREA
+   FILTER GROUP
 ========================================== */
 
 
@@ -891,17 +723,20 @@ nav a.active{
     display:flex;
 
 
+
     align-items:center;
+
 
 
     gap:15px;
 
 
+
     flex-wrap:wrap;
 
 
-}
 
+}
 
 
 
@@ -916,23 +751,10 @@ nav a.active{
 
 
 
-    min-width:150px;
-
-
-
     background:
 
+
     var(--panel-light);
-
-
-
-    border:
-
-    2px solid var(--border);
-
-
-
-    border-radius:15px;
 
 
 
@@ -940,7 +762,14 @@ nav a.active{
 
 
 
-    font-weight:800;
+    border:
+
+
+    2px solid var(--border);
+
+
+
+    border-radius:14px;
 
 
 
@@ -952,7 +781,7 @@ nav a.active{
 
 
 
-    transition:.3s;
+    font-weight:700;
 
 
 
@@ -966,7 +795,6 @@ nav a.active{
 
 
     border-color:
-
     var(--primary);
 
 
@@ -976,38 +804,21 @@ nav a.active{
 
 
 
-.filter-group select:focus{
 
 
-    border-color:
-
-    var(--primary);
-
-
-
-    box-shadow:
-
-    0 0 20px rgba(79,141,255,.3);
-
-
-}
-
-
-
-
-
-.filter-group option{
+.filter-group select option{
 
 
     background:
-
     #121b2b;
+
 
 
     color:white;
 
 
 }
+
 
 
 
@@ -1025,7 +836,9 @@ nav a.active{
     display:flex;
 
 
+
     align-items:center;
+
 
 
     gap:10px;
@@ -1035,11 +848,13 @@ nav a.active{
     color:white;
 
 
-    font-weight:800;
+
+    font-weight:700;
 
 
 
     cursor:pointer;
+
 
 
 }
@@ -1057,7 +872,6 @@ nav a.active{
     height:18px;
 
 
-
     cursor:pointer;
 
 
@@ -1068,8 +882,9 @@ nav a.active{
 
 
 
+
 /* ==========================================
-   VEHICLE GRID (UPDATED SMALLER CARDS)
+   VEHICLE GRID
 ========================================== */
 
 
@@ -1079,11 +894,13 @@ nav a.active{
     width:95%;
 
 
-    max-width:1400px;
+
+    max-width:1600px;
 
 
 
     margin:
+
 
     40px auto 80px;
 
@@ -1097,21 +914,13 @@ nav a.active{
 
 
     repeat(
-
         auto-fit,
-
-        minmax(240px,280px)
-
+        minmax(300px,1fr)
     );
 
 
 
-    justify-content:center;
-
-
-
-    gap:25px;
-
+    gap:30px;
 
 
 }
@@ -1137,7 +946,7 @@ nav a.active{
     background:
 
 
-    rgba(18,27,43,.9);
+    rgba(18,27,43,.85);
 
 
 
@@ -1152,7 +961,7 @@ nav a.active{
 
 
 
-    padding:16px;
+    padding:20px;
 
 
 
@@ -1164,18 +973,16 @@ nav a.active{
 
 
 
-    box-shadow:
-
-    var(--shadow);
-
-
-
     transition:.35s;
 
 
 
-}
+    box-shadow:
+    var(--shadow);
 
+
+
+}
 
 
 
@@ -1186,11 +993,13 @@ nav a.active{
 
     transform:
 
+
     translateY(-10px);
 
 
 
     border-color:
+
 
     var(--primary);
 
@@ -1199,7 +1008,7 @@ nav a.active{
     box-shadow:
 
 
-    0 30px 70px rgba(79,141,255,.25);
+    0 25px 70px rgba(79,141,255,.25);
 
 
 }
@@ -1209,8 +1018,10 @@ nav a.active{
 
 
 
+
+
 /* ==========================================
-   LIMITED VEHICLE CARD
+   LIMITED CARD
 ========================================== */
 
 
@@ -1218,14 +1029,14 @@ nav a.active{
 
 
     border-color:
-
     var(--gold);
 
 
 
     box-shadow:
 
-    0 0 35px rgba(202,166,74,.25);
+
+    0 0 30px rgba(202,166,74,.3);
 
 
 }
@@ -1248,10 +1059,11 @@ nav a.active{
 
 
 
-    top:14px;
+    top:15px;
 
 
-    left:14px;
+
+    left:15px;
 
 
 
@@ -1261,7 +1073,8 @@ nav a.active{
 
     padding:
 
-    7px 14px;
+
+    8px 15px;
 
 
 
@@ -1270,6 +1083,7 @@ nav a.active{
 
 
     background:
+
 
     var(--gold);
 
@@ -1287,10 +1101,12 @@ nav a.active{
 
 
 
-    z-index:5;
+    z-index:10;
 
 
 }
+
+
 
 
 
@@ -1310,8 +1126,9 @@ nav a.active{
 
 
 
+
 /* ==========================================
-   VEHICLE IMAGE FIXED
+   VEHICLE IMAGE
 ========================================== */
 
 
@@ -1321,11 +1138,13 @@ nav a.active{
     width:100%;
 
 
-    height:180px;
+
+    height:220px;
 
 
 
     background:
+
 
     var(--panel-light);
 
@@ -1351,8 +1170,7 @@ nav a.active{
 
 
 
-    padding:10px;
-
+    margin-bottom:20px;
 
 
 }
@@ -1367,24 +1185,12 @@ nav a.active{
     width:100%;
 
 
+
     height:100%;
 
 
 
-    object-fit:contain;
-
-
-
-    object-position:center;
-
-
-
-    max-height:160px;
-
-
-
-    transition:.35s;
-
+    object-fit:cover;
 
 
 }
@@ -1394,15 +1200,16 @@ nav a.active{
 
 
 
-.card:hover .vehicle-image img{
+
+.vehicle-image img[src=""]{
 
 
-    transform:
-
-    scale(1.03);
+    display:none;
 
 
 }
+
+
 
 
 
@@ -1410,7 +1217,7 @@ nav a.active{
 
 
 /* ==========================================
-   VEHICLE NAME BOX
+   VEHICLE NAME
 ========================================== */
 
 
@@ -1419,11 +1226,12 @@ nav a.active{
 
     background:
 
+
     var(--panel-light);
 
 
 
-    padding:14px;
+    padding:15px;
 
 
 
@@ -1431,11 +1239,10 @@ nav a.active{
 
 
 
-    margin-bottom:12px;
+    margin-bottom:15px;
 
 
 }
-
 
 
 
@@ -1448,26 +1255,16 @@ nav a.active{
 
 
 
-    color:
-
-    var(--muted);
-
-
-
     font-size:12px;
 
 
 
-    font-weight:900;
+    color:
+    var(--muted);
 
 
 
-    text-transform:uppercase;
-
-
-
-    letter-spacing:1px;
-
+    font-weight:800;
 
 
 }
@@ -1483,15 +1280,11 @@ nav a.active{
 
 
 
-    margin-top:7px;
+    margin-top:6px;
 
 
 
-    color:white;
-
-
-
-    font-size:20px;
+    font-size:22px;
 
 
 
@@ -1499,15 +1292,11 @@ nav a.active{
 
 
 
+    color:white;
+
+
 }
-
-
-
 /* ==========================================
-   END PART 2
-========================================== */
-/* ==========================================
-   VEHICLE VALUES
    PART 3 - STATS + ADMIN SYSTEM
 ========================================== */
 
@@ -1534,23 +1323,15 @@ nav a.active{
 
 
 
-    padding:14px;
+    padding:15px;
 
 
 
-    margin-top:10px;
+    margin-top:12px;
 
-
-
-    border:
-
-
-    1px solid rgba(255,255,255,.05);
 
 
 }
-
-
 
 
 
@@ -1574,7 +1355,7 @@ nav a.active{
 
 
 
-    font-weight:900;
+    font-weight:800;
 
 
 
@@ -1586,12 +1367,10 @@ nav a.active{
 
 
 
-    margin-bottom:7px;
+    margin-bottom:8px;
 
 
 }
-
-
 
 
 
@@ -1607,7 +1386,7 @@ nav a.active{
 
 
 
-    font-size:23px;
+    font-size:24px;
 
 
 
@@ -1615,8 +1394,6 @@ nav a.active{
 
 
 }
-
-
 
 
 
@@ -1632,7 +1409,7 @@ nav a.active{
 
 
 
-    font-size:23px;
+    font-size:24px;
 
 
 
@@ -1640,8 +1417,6 @@ nav a.active{
 
 
 }
-
-
 
 
 
@@ -1687,7 +1462,7 @@ nav a.active{
     backdrop-filter:
 
 
-    blur(12px);
+    blur(10px);
 
 
 
@@ -1695,8 +1470,6 @@ nav a.active{
 
 
 }
-
-
 
 
 
@@ -1745,14 +1518,7 @@ nav a.active{
     box-shadow:
 
 
-    0 40px 90px rgba(0,0,0,.7);
-
-
-
-    animation:
-
-
-    fadeIn .3s ease;
+    0 30px 80px rgba(0,0,0,.6);
 
 
 }
@@ -1763,10 +1529,8 @@ nav a.active{
 
 
 
-
-
 /* ==========================================
-   ADMIN TITLE
+   TITLES
 ========================================== */
 
 
@@ -1785,14 +1549,10 @@ nav a.active{
 
 
 
-    margin-bottom:25px;
+    margin-bottom:30px;
 
 
 }
-
-
-
-
 
 
 
@@ -1806,8 +1566,6 @@ nav a.active{
 
 
 }
-
-
 
 
 
@@ -1830,10 +1588,6 @@ nav a.active{
 
 
 
-
-
-
-
 .admin-group label{
 
 
@@ -1845,7 +1599,7 @@ nav a.active{
 
 
 
-    font-weight:800;
+    font-weight:700;
 
 
 
@@ -1853,8 +1607,6 @@ nav a.active{
 
 
 }
-
-
 
 
 
@@ -1876,10 +1628,7 @@ nav a.active{
 
 
 
-    padding:
-
-
-    14px;
+    padding:14px;
 
 
 
@@ -1890,6 +1639,10 @@ nav a.active{
 
 
 
+    color:white;
+
+
+
     border:
 
 
@@ -1897,11 +1650,7 @@ nav a.active{
 
 
 
-    border-radius:14px;
-
-
-
-    color:white;
+    border-radius:12px;
 
 
 
@@ -1912,37 +1661,7 @@ nav a.active{
     font-size:16px;
 
 
-
-    font-weight:600;
-
-
-
-    transition:.3s;
-
-
-
 }
-
-
-
-
-
-
-
-
-.admin-group input::placeholder{
-
-
-    color:
-
-
-    var(--muted);
-
-
-}
-
-
-
 
 
 
@@ -1963,12 +1682,10 @@ nav a.active{
     box-shadow:
 
 
-    0 0 25px rgba(79,141,255,.35);
+    0 0 20px rgba(79,141,255,.3);
 
 
 }
-
-
 
 
 
@@ -1984,7 +1701,7 @@ nav a.active{
 select{
 
 
-    appearance:auto;
+    color:white;
 
 
 
@@ -1994,31 +1711,20 @@ select{
     var(--panel-light);
 
 
-
-    color:white;
-
-
 }
-
-
 
 
 
 select option{
 
 
-    background:
-
-
-    #121b2b;
-
+    background:#121b2b;
 
 
     color:white;
 
 
 }
-
 
 
 
@@ -2054,8 +1760,6 @@ select option{
 
 
 
-
-
 /* ==========================================
    SAVE BUTTON
 ========================================== */
@@ -2068,10 +1772,7 @@ select option{
 
 
 
-    padding:
-
-
-    15px;
+    padding:15px;
 
 
 
@@ -2079,7 +1780,7 @@ select option{
 
 
 
-    border-radius:15px;
+    border-radius:14px;
 
 
 
@@ -2102,7 +1803,7 @@ select option{
 
 
 
-    font-size:16px;
+    font-size:17px;
 
 
 
@@ -2123,27 +1824,23 @@ select option{
 
 
 
-
-
 .save-btn:hover{
 
 
     transform:
 
 
-    translateY(-4px);
+    translateY(-3px);
 
 
 
     box-shadow:
 
 
-    0 15px 35px rgba(79,141,255,.45);
+    0 0 30px rgba(79,141,255,.5);
 
 
 }
-
-
 
 
 
@@ -2163,10 +1860,7 @@ select option{
 
 
 
-    padding:
-
-
-    15px;
+    padding:15px;
 
 
 
@@ -2174,7 +1868,7 @@ select option{
 
 
 
-    border-radius:15px;
+    border-radius:14px;
 
 
 
@@ -2189,7 +1883,7 @@ select option{
 
 
 
-    font-size:16px;
+    font-size:17px;
 
 
 
@@ -2201,12 +1895,7 @@ select option{
 
 
 
-    transition:.3s;
-
-
 }
-
-
 
 
 
@@ -2221,16 +1910,7 @@ select option{
     #475569;
 
 
-
-    transform:
-
-
-    translateY(-3px);
-
-
 }
-
-
 
 
 
@@ -2253,7 +1933,7 @@ select option{
 
 
 
-    font-weight:900;
+    font-weight:800;
 
 
 
@@ -2265,8 +1945,6 @@ select option{
 
 
 }
-
-
 
 
 
@@ -2298,11 +1976,10 @@ select option{
 
 
 
-    font-weight:900;
+    font-weight:800;
 
 
 }
-
 
 
 
@@ -2317,7 +1994,7 @@ select option{
 
 
 
-    width:62px;
+    width:60px;
 
 
 
@@ -2325,7 +2002,6 @@ select option{
 
 
 }
-
 
 
 
@@ -2348,7 +2024,6 @@ select option{
 
 
 }
-
 
 
 
@@ -2383,9 +2058,6 @@ select option{
 
 
 }
-
-
-
 
 
 
@@ -2437,7 +2109,6 @@ select option{
 
 
 
-
 .switch input:checked + .slider{
 
 
@@ -2455,34 +2126,18 @@ select option{
 
 
 
-
 .switch input:checked + .slider:before{
 
 
     transform:
 
 
-    translateX(28px);
+    translateX(26px);
 
 
-}
-
-
-
-
-
-
-
-/* ==========================================
-   END PART 3
-========================================== */
-/* ==========================================
-   VEHICLE VALUES
+}/* ==========================================
    PART 4 - RESPONSIVE + FINAL FIXES
 ========================================== */
-
-
-
 
 
 /* ==========================================
@@ -2492,56 +2147,36 @@ select option{
 
 @keyframes fadeIn{
 
-
     from{
-
 
         opacity:0;
 
-
         transform:
-
-        translateY(20px);
-
+        translateY(15px);
 
     }
-
 
 
     to{
 
-
         opacity:1;
 
-
         transform:
-
         translateY(0);
-
 
     }
 
-
 }
-
-
-
 
 
 
 
 .card{
 
-
     animation:
-
-
     fadeIn .35s ease;
 
-
 }
-
-
 
 
 
@@ -2554,60 +2189,34 @@ select option{
 
 ::-webkit-scrollbar{
 
-
     width:10px;
 
-
 }
-
-
-
 
 
 ::-webkit-scrollbar-track{
 
-
     background:#08111f;
 
-
 }
-
-
-
 
 
 ::-webkit-scrollbar-thumb{
 
-
     background:
-
-
     var(--border);
-
-
 
     border-radius:20px;
 
-
 }
-
-
-
 
 
 ::-webkit-scrollbar-thumb:hover{
 
-
     background:
-
-
     var(--primary);
 
-
 }
-
-
-
 
 
 
@@ -2625,30 +2234,20 @@ input,
 select,
 .card{
 
-
     -webkit-tap-highlight-color:
-
-
     transparent;
-
 
 }
 
 
 
+img{
 
-
-
-
-button{
-
+    max-width:100%;
 
     user-select:none;
 
-
 }
-
-
 
 
 
@@ -2657,9 +2256,7 @@ button{
 input,
 select{
 
-
     color-scheme:dark;
-
 
 }
 
@@ -2667,18 +2264,11 @@ select{
 
 
 
-
-
-img{
-
+button{
 
     user-select:none;
 
-
 }
-
-
-
 
 
 
@@ -2693,136 +2283,63 @@ img{
 @media(max-width:1000px){
 
 
-
     .header{
 
-
         padding:
-
-
         0 35px;
 
-
     }
-
-
-
-
 
 
 
     nav{
 
-
-        gap:
-
-
-        22px;
-
+        gap:20px;
 
     }
-
-
-
-
 
 
 
     .toolbar{
 
-
         flex-direction:
-
-
         column;
 
-
-
-        align-items:
-
-
-        stretch;
-
+        align-items:stretch;
 
     }
-
-
-
-
-
-
-
-    .search-box{
-
-
-        width:100%;
-
-
-    }
-
-
-
-
 
 
 
     .filter-group{
 
-
         justify-content:center;
 
-
     }
-
-
-
-
 
 
 
     .cards{
 
-
         grid-template-columns:
 
-
         repeat(
-
             auto-fit,
-
-            minmax(240px,280px)
-
+            minmax(280px,1fr)
         );
 
-
     }
-
-
-
-
 
 
 
     .page-title h1{
 
-
-        font-size:
-
-
-        44px;
-
+        font-size:42px;
 
     }
 
 
-
 }
-
-
-
-
-
-
 
 
 
@@ -2837,333 +2354,138 @@ img{
 @media(max-width:700px){
 
 
-
     .header{
 
-
-        height:
-
-
-        75px;
-
-
+        height:75px;
 
         padding:
-
-
         0 20px;
 
-
     }
-
-
-
-
 
 
 
     .logo{
 
-
-        font-size:
-
-
-        24px;
-
+        font-size:24px;
 
     }
-
-
-
-
 
 
 
     nav{
 
-
         display:none;
 
-
     }
-
-
-
-
 
 
 
     .logout-btn{
 
-
         padding:
+        10px 15px;
 
-
-        10px 16px;
-
-
-
-        font-size:
-
-
-        14px;
-
+        font-size:14px;
 
     }
-
-
-
-
 
 
 
     .page-title{
 
-
         padding:
 
-
-        50px 15px 30px;
-
+        45px 15px 25px;
 
     }
-
-
-
-
 
 
 
     .page-title h1{
 
-
-        font-size:
-
-
-        34px;
-
+        font-size:34px;
 
     }
-
-
-
-
-
-
-
-    .page-title p{
-
-
-        font-size:
-
-
-        15px;
-
-
-    }
-
-
-
-
-
-
-
-    .page-header{
-
-
-        width:
-
-
-        92%;
-
-
-    }
-
-
-
-
 
 
 
     .toolbar{
 
+        width:92%;
 
-        width:
-
-
-        92%;
-
-
-
-        padding:
-
-
-        16px;
-
+        padding:15px;
 
     }
-
-
-
-
 
 
 
     .filter-group{
 
-
         flex-direction:
-
 
         column;
 
-
-
-        width:100%;
-
-
     }
-
-
-
-
 
 
 
     .filter-group select{
 
-
         width:100%;
 
-
     }
-
-
-
-
 
 
 
     .cards{
 
-
-        width:
-
-
-        92%;
-
-
+        width:92%;
 
         grid-template-columns:
 
-
         1fr;
 
-
-
-        gap:
-
-
-        22px;
-
-
     }
-
-
-
-
-
-
-
-    .card{
-
-
-        max-width:100%;
-
-
-    }
-
-
-
-
 
 
 
     .vehicle-image{
 
-
-        height:
-
-
-        160px;
-
+        height:180px;
 
     }
-
-
-
-
 
 
 
     .admin-panel{
 
+        width:95%;
 
-        width:
-
-
-        95%;
-
-
-
-        padding:
-
-
-        25px;
-
+        padding:25px;
 
     }
-
-
-
-
 
 
 
     .admin-title{
 
-
-        font-size:
-
-
-        28px;
-
+        font-size:28px;
 
     }
-
-
-
-
 
 
 
     .button-row{
 
-
         flex-direction:
 
-
         column;
-
 
     }
 
 
-
 }
-
-
-
 
 
 
@@ -3178,189 +2500,30 @@ img{
 @media(max-width:400px){
 
 
-
     .logo{
 
-
-        font-size:
-
-
-        20px;
-
+        font-size:20px;
 
     }
-
-
-
-
-
-
-
-    .logout-btn{
-
-
-        padding:
-
-
-        8px 12px;
-
-
-    }
-
-
-
-
 
 
 
     .vehicle-image{
 
-
-        height:
-
-
-        150px;
-
+        height:150px;
 
     }
-
-
-
-
 
 
 
     .admin-title{
 
-
-        font-size:
-
-
-        24px;
-
+        font-size:24px;
 
     }
 
 
-
 }
-
-
-
-
-
-
-
-
-
-/* ==========================================
-   EXTRA CARD FIXES
-========================================== */
-
-
-.card img{
-
-
-    pointer-events:none;
-
-
-}
-
-
-
-
-
-
-
-.card:hover{
-
-
-    z-index:5;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================
-   EMPTY IMAGE FIX
-========================================== */
-
-
-.vehicle-image:empty::before{
-
-
-    content:
-
-
-    "No Image";
-
-
-
-    color:
-
-
-    var(--muted);
-
-
-
-    font-weight:
-
-
-    800;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================
-   IMAGE SIZE SAFETY FIX
-========================================== */
-
-
-.vehicle-image img{
-
-
-    object-fit:
-
-
-    contain !important;
-
-
-}
-
-
-
-
-
-
-
-.card .vehicle-image{
-
-
-    aspect-ratio:
-
-
-    16 / 10;
-
-
-}
-
-
-
 
 
 
