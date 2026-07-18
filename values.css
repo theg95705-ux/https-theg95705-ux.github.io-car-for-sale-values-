@@ -1314,53 +1314,32 @@ nav a.active{
 
 
 /* ==========================================
-   VEHICLE IMAGE
+   VEHICLE IMAGE FIX
 ========================================== */
 
 
 .vehicle-image{
 
-
     width:100%;
-
-
 
     height:230px;
 
-
-
     background:
-
     var(--panel-light);
-
-
 
     border-radius:20px;
 
-
-
     overflow:hidden;
-
-
 
     display:flex;
 
-
-
     justify-content:center;
-
-
 
     align-items:center;
 
-
-
-    margin-bottom:20px;
-
-
+    padding:15px;
 
 }
-
 
 
 
@@ -1368,23 +1347,18 @@ nav a.active{
 
 .vehicle-image img{
 
-
     width:100%;
-
-
 
     height:100%;
 
+    object-fit:contain;
 
+    object-position:center;
 
-    object-fit:cover;
-
-
-
-    transition:.4s;
-
+    transition:.35s;
 
 }
+
 
 
 
@@ -1392,18 +1366,9 @@ nav a.active{
 
 .card:hover .vehicle-image img{
 
-
-    transform:
-
-    scale(1.05);
-
+    transform:scale(1.03);
 
 }
-
-
-
-
-
 
 
 /* ==========================================
