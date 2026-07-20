@@ -108,6 +108,10 @@ const CARDS_PER_PAGE =
 16;
 
 
+const MAX_VEHICLES =
+32;
+
+
 
 
 
@@ -443,6 +447,21 @@ async function loadVehicles(){
 
 
         });
+
+
+
+
+        // CAP TOTAL VEHICLES
+
+        vehicles =
+
+        vehicles.slice(
+
+            0,
+
+            MAX_VEHICLES
+
+        );
 
 
 
