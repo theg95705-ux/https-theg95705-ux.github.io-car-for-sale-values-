@@ -430,7 +430,7 @@ nav a.active{
    SMALL TOGGLE SWITCH (toolbar checkbox)
 ========================================== */
 
-.switch-small{
+.switch.switch-small{
     width:42px;
     height:24px;
 }
