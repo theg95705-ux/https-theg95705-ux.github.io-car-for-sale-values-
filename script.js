@@ -288,6 +288,33 @@ console.log(
 
 
 // ==========================================
+// EXTRACT NUMBER FROM VEHICLE NAME
+// (so "Vehicle 2" sorts before "Vehicle 10"
+// instead of alphabetically)
+// ==========================================
+
+
+function getVehicleNumber(name){
+
+
+    const match =
+
+    (name || "")
+
+    .match(/\d+/);
+
+
+    return match
+
+    ? parseInt(match[0], 10)
+
+    : Number.MAX_SAFE_INTEGER;
+
+
+}
+
+
+// ==========================================
 // END PART 1
 // ==========================================
 // ==========================================
@@ -447,6 +474,25 @@ async function loadVehicles(){
 
 
         });
+
+
+
+
+        // SORT NUMERICALLY BY NAME
+
+        vehicles.sort(
+
+        (a,b)=>
+
+
+        getVehicleNumber(a.name)
+
+        -
+
+        getVehicleNumber(b.name)
+
+
+        );
 
 
 
