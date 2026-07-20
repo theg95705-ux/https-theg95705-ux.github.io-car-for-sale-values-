@@ -108,7 +108,7 @@ const ADMIN_EMAIL =
 
 
 const TOTAL_VEHICLES =
-82;
+32;
 
 
 
