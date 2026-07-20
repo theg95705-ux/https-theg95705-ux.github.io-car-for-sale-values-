@@ -1279,6 +1279,217 @@ document.getElementById(
 
 
 
+// ==========================================
+// CUSTOM DROPDOWN WIRING
+// (drives the real hidden <select> so the
+// filter/sort logic below needs no changes)
+// ==========================================
+
+
+function initCustomSelect(
+
+    wrapperId,
+
+    nativeSelect
+
+){
+
+
+    const wrapper =
+
+    document.getElementById(
+        wrapperId
+    );
+
+
+
+    if(!wrapper || !nativeSelect)
+
+        return;
+
+
+
+
+    const trigger =
+
+    wrapper.querySelector(
+        ".custom-select-trigger"
+    );
+
+
+
+    const options =
+
+    wrapper.querySelectorAll(
+        ".custom-select-options li"
+    );
+
+
+
+
+    trigger.addEventListener(
+
+    "click",
+
+    ()=>{
+
+
+
+        document
+
+        .querySelectorAll(
+            ".custom-select.open"
+        )
+
+        .forEach(el=>{
+
+            if(el !== wrapper)
+
+                el.classList.remove(
+                    "open"
+                );
+
+        });
+
+
+
+
+        wrapper.classList.toggle(
+            "open"
+        );
+
+
+
+    });
+
+
+
+
+    options.forEach(li=>{
+
+
+        li.addEventListener(
+
+        "click",
+
+        ()=>{
+
+
+
+            nativeSelect.value =
+
+            li.dataset.value;
+
+
+
+
+            nativeSelect.dispatchEvent(
+
+                new Event("change")
+
+            );
+
+
+
+
+            trigger.textContent =
+
+            li.textContent.trim();
+
+
+
+
+            options.forEach(o=>
+
+                o.classList.remove(
+                    "selected"
+                )
+
+            );
+
+
+
+
+            li.classList.add(
+                "selected"
+            );
+
+
+
+
+            wrapper.classList.remove(
+                "open"
+            );
+
+
+
+        });
+
+
+    });
+
+
+}
+
+
+
+
+document.addEventListener(
+
+"click",
+
+(event)=>{
+
+
+    document
+
+    .querySelectorAll(
+        ".custom-select.open"
+    )
+
+    .forEach(wrapper=>{
+
+
+        if(
+
+            !wrapper.contains(
+                event.target
+            )
+
+        ){
+
+
+            wrapper.classList.remove(
+                "open"
+            );
+
+
+        }
+
+
+    });
+
+
+});
+
+
+
+
+initCustomSelect(
+    "demandFilterCustom",
+    demandFilter
+);
+
+
+
+initCustomSelect(
+    "sortFilterCustom",
+    sortFilter
+);
+
+
+
+
 
 
 
