@@ -4,7 +4,6 @@
    UPDATED VERSION - FONTS FIXED
 ========================================== */
 
-
 /* ==========================================
    FONT
    Loaded in the HTML <head> via <link rel="stylesheet">
@@ -862,8 +861,10 @@ select option{
 
 .switch{
     position:relative;
+    display:inline-block;
     width:62px;
     height:34px;
+    flex-shrink:0;
 }
 
 .switch input{
