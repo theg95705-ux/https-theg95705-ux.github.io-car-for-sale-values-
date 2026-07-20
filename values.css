@@ -1075,44 +1075,22 @@ nav a.active{
 
 .cards{
 
-
     width:95%;
-
-
     max-width:1400px;
 
-
-
-    margin:
-
-    40px auto 80px;
-
-
+    margin:40px auto;
 
     display:grid;
 
-
-
     grid-template-columns:
-
-
     repeat(
-
-        auto-fit,
-
-        minmax(240px,280px)
-
+        auto-fill,
+        minmax(240px,1fr)
     );
-
-
-
-    justify-content:center;
-
-
 
     gap:25px;
 
-
+    align-items:start;
 
 }
 
@@ -3359,7 +3337,100 @@ img{
 
 }
 
+/* ==========================================
+   PAGINATION
+========================================== */
 
+.pagination{
+
+    width:95%;
+    max-width:1400px;
+
+    margin:20px auto 80px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+
+}
+
+.pagination button{
+
+    padding:14px 26px;
+
+    border:none;
+    border-radius:14px;
+
+    background:linear-gradient(
+        180deg,
+        var(--primary-light),
+        var(--primary)
+    );
+
+    color:white;
+
+    font-size:16px;
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.pagination button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 15px 35px rgba(79,141,255,.35);
+
+}
+
+.pagination button:disabled{
+
+    opacity:.4;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+    box-shadow:none;
+
+}
+
+#pageNumber{
+
+    min-width:150px;
+
+    text-align:center;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:900;
+
+}
+
+@media(max-width:700px){
+
+    .pagination{
+
+        flex-direction:column;
+
+        gap:15px;
+
+    }
+
+    .pagination button{
+
+        width:220px;
+
+    }
+
+}
 
 
 
