@@ -528,24 +528,6 @@ async function loadVehicles(){
 
 
 
-        // DEBUG: list every loaded vehicle
-        // and the number extracted from its name
-
-        console.table(
-
-            vehicles.map(v=>({
-
-                name:v.name,
-
-                extractedNumber:getVehicleNumber(v.name)
-
-            }))
-
-        );
-
-
-
-
 
 
 
@@ -2035,14 +2017,6 @@ if(loginBtn){
 
 
 
-        const email =
-
-        loginEmail.value.trim();
-
-
-
-
-
         const password =
 
         loginPassword.value;
@@ -2053,12 +2027,12 @@ if(loginBtn){
 
 
 
-        if(!email || !password){
+        if(!password){
 
 
 
             alert(
-                "Enter email and password"
+                "Enter password"
             );
 
 
@@ -2073,23 +2047,69 @@ if(loginBtn){
 
 
 
-        try{
-
-
-
-            await signInWithEmailAndPassword(
-
-                auth,
-
-                email,
-
-                password
-
-            );
+        let loggedIn = false;
 
 
 
 
+        for(
+
+            const email of ADMIN_EMAILS
+
+        ){
+
+
+
+            try{
+
+
+
+                await signInWithEmailAndPassword(
+
+                    auth,
+
+                    email,
+
+                    password
+
+                );
+
+
+
+                loggedIn = true;
+
+
+
+                break;
+
+
+
+            }
+
+
+
+            catch(error){
+
+
+
+                // wrong match for this
+
+                // admin email, try next
+
+
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+        if(loggedIn){
 
 
 
@@ -2105,15 +2125,9 @@ if(loginBtn){
 
 
 
-
-
-
-
             loginEmail.value = "";
 
             loginPassword.value = "";
-
-
 
 
 
@@ -2127,22 +2141,20 @@ if(loginBtn){
 
 
 
-        catch(error){
+        else{
 
 
 
             console.error(
 
-                "Login failed:",
-
-                error
+                "Login failed: no admin matched this password"
 
             );
 
 
 
             alert(
-                "Incorrect email or password"
+                "Incorrect password"
             );
 
 
