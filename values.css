@@ -867,14 +867,15 @@ select option{
 
 /* ==========================================
    CLEAR PRICE CHANGE BUTTON
-   Sits above Save/Cancel, full width. Neutral
-   styling (not "danger") since it's a small
-   cosmetic reset, not a destructive action.
+   Sits between the Image URL field and the
+   Limited Vehicle toggle. Neutral styling
+   (not "danger") since it's a small cosmetic
+   reset, not a destructive action.
 ========================================== */
 
 .clear-change-btn{
     width:100%;
-    margin-bottom:15px;
+    margin:5px 0 20px;
     padding:14px;
     border:2px solid var(--border);
     border-radius:15px;
