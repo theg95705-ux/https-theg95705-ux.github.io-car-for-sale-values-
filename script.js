@@ -1,7 +1,7 @@
 // ==========================================
 // VEHICLE VALUES
 // SCRIPT.JS
-// UPDATED CLEAN VERSION
+// UPDATED FIXED VERSION
 // PART 1 - FIREBASE + GLOBAL SYSTEM
 // ==========================================
 
@@ -15,11 +15,9 @@ console.log("=================================");
 
 
 
-
 // ==========================================
 // FIREBASE IMPORTS
 // ==========================================
-
 
 
 import {
@@ -42,7 +40,6 @@ import {
     signOut,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
-
 
 
 
@@ -77,28 +74,22 @@ const firebaseConfig = {
 
 
 
-
 // ==========================================
 // INITIALISE FIREBASE
 // ==========================================
 
 
-const app =
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 
-const db =
-getFirestore(app);
+const db = getFirestore(app);
 
 
-const auth =
-getAuth(app);
+const auth = getAuth(app);
 
 
 
-console.log(
-"Firebase Connected"
-);
+console.log("Firebase Connected");
 
 
 
@@ -113,9 +104,9 @@ const ADMIN_EMAIL =
 "theg95705@gmail.com";
 
 
-
 const CARDS_PER_PAGE =
 32;
+
 
 
 
@@ -135,12 +126,10 @@ let isAdmin = false;
 let selectedVehicle = null;
 
 
-
 let vehicles = [];
 
 
 let filteredVehicles = [];
-
 
 
 let currentPage = 1;
@@ -236,8 +225,7 @@ document.getElementById(
 
 
 
-
-// Pagination buttons
+// Pagination
 
 
 const prevPage =
@@ -263,10 +251,35 @@ document.getElementById(
 
 
 
+
+// ==========================================
+// HTML CHECK
+// ==========================================
+
+
+if(!cardsContainer){
+
+    console.error(
+        "ERROR: cardsContainer not found"
+    );
+
+}
+
+
+
+if(!template){
+
+    console.error(
+        "ERROR: vehicleCardTemplate not found"
+    );
+
+}
+
+
+
 console.log(
 "HTML Loaded"
 );
-
 
 
 
@@ -276,7 +289,6 @@ console.log(
 // ==========================================
 // PART 2 - VEHICLE DISPLAY + PAGINATION
 // ==========================================
-
 
 
 
@@ -291,23 +303,30 @@ function createVehicleCards(){
 
     if(!cardsContainer){
 
-
         console.error(
             "cardsContainer missing"
         );
 
-
         return;
 
+    }
+
+
+
+    if(!template){
+
+        console.error(
+            "vehicleCardTemplate missing"
+        );
+
+        return;
 
     }
 
 
 
 
-
     cardsContainer.innerHTML = "";
-
 
 
 
@@ -321,19 +340,27 @@ function createVehicleCards(){
 
 
         const clone =
+
         template.content.cloneNode(true);
 
 
 
 
         const card =
+
         clone.querySelector(
             ".card"
         );
 
 
 
-        card.dataset.id = "";
+
+        if(card){
+
+            card.dataset.id = "";
+
+        }
+
 
 
 
@@ -342,9 +369,7 @@ function createVehicleCards(){
         );
 
 
-
     }
-
 
 
 
@@ -352,6 +377,7 @@ function createVehicleCards(){
     console.log(
         "32 vehicle cards created"
     );
+
 
 
 }
@@ -382,7 +408,6 @@ async function loadVehicles(){
 
 
 
-
         const snapshot =
 
         await getDocs(
@@ -397,7 +422,6 @@ async function loadVehicles(){
 
 
 
-
         vehicles = [];
 
 
@@ -405,7 +429,8 @@ async function loadVehicles(){
 
 
         snapshot.forEach(
-        item=>{
+
+        (item)=>{
 
 
             vehicles.push({
@@ -417,9 +442,7 @@ async function loadVehicles(){
             });
 
 
-
         });
-
 
 
 
@@ -428,7 +451,12 @@ async function loadVehicles(){
 
         filteredVehicles =
 
-        [...vehicles];
+        [
+
+            ...vehicles
+
+        ];
+
 
 
 
@@ -436,7 +464,6 @@ async function loadVehicles(){
 
 
         currentPage = 1;
-
 
 
 
@@ -452,6 +479,7 @@ async function loadVehicles(){
         console.log(
 
             "Vehicles loaded:",
+
             vehicles.length
 
         );
@@ -467,7 +495,8 @@ async function loadVehicles(){
 
         console.error(
 
-            "Vehicle loading failed:",
+            "Firebase vehicle loading error:",
+
             error
 
         );
@@ -487,8 +516,10 @@ async function loadVehicles(){
 
 
 
+
+
 // ==========================================
-// DISPLAY CURRENT PAGE
+// DISPLAY VEHICLES
 // ==========================================
 
 
@@ -507,6 +538,7 @@ function displayVehicles(){
 
 
     const totalPages =
+
 
     Math.max(
 
@@ -532,12 +564,9 @@ function displayVehicles(){
 
     if(currentPage > totalPages){
 
-
         currentPage = totalPages;
 
-
     }
-
 
 
 
@@ -568,7 +597,6 @@ function displayVehicles(){
     +
 
     CARDS_PER_PAGE;
-
 
 
 
@@ -610,7 +638,6 @@ function displayVehicles(){
 
 
 
-
     cards.forEach(
 
     (card,index)=>{
@@ -630,6 +657,8 @@ function displayVehicles(){
 
 
         if(vehicle){
+
+
 
 
 
@@ -653,11 +682,9 @@ function displayVehicles(){
 
 
 
-
             card.style.display =
 
-            "block";
-
+            "flex";
 
 
 
@@ -679,8 +706,8 @@ function displayVehicles(){
 
 
 
-
     });
+
 
 
 
@@ -706,8 +733,11 @@ function displayVehicles(){
 
 
 
+
+
+
 // ==========================================
-// UPDATE CARD INFORMATION
+// UPDATE CARD DATA
 // ==========================================
 
 
@@ -731,7 +761,6 @@ function updateCard(
 
 
 
-
     const image =
 
     card.querySelector(
@@ -739,7 +768,6 @@ function updateCard(
         "img"
 
     );
-
 
 
 
@@ -753,7 +781,6 @@ function updateCard(
 
 
 
-
     const demand =
 
     card.querySelector(
@@ -761,7 +788,6 @@ function updateCard(
         ".demand-value"
 
     );
-
 
 
 
@@ -779,10 +805,7 @@ function updateCard(
 
 
 
-
-
     if(name){
-
 
         name.textContent =
 
@@ -790,9 +813,7 @@ function updateCard(
 
         "Unnamed Vehicle";
 
-
     }
-
 
 
 
@@ -813,7 +834,6 @@ function updateCard(
         )
 
         .toLocaleString();
-
 
 
     }
@@ -840,9 +860,7 @@ function updateCard(
         "/10";
 
 
-
     }
-
 
 
 
@@ -863,7 +881,6 @@ function updateCard(
             vehicle.image;
 
 
-
             image.style.display =
 
             "block";
@@ -877,11 +894,9 @@ function updateCard(
         else{
 
 
-
             image.removeAttribute(
                 "src"
             );
-
 
 
             image.style.display =
@@ -889,13 +904,10 @@ function updateCard(
             "none";
 
 
-
         }
 
 
-
     }
-
 
 
 
@@ -958,7 +970,7 @@ function updateCard(
 
 
 // ==========================================
-// UPDATE PAGINATION BUTTONS
+// PAGINATION DISPLAY
 // ==========================================
 
 
@@ -969,15 +981,12 @@ function updatePagination(totalPages){
     if(pageNumber){
 
 
-
         pageNumber.textContent =
 
         `Page ${currentPage} of ${totalPages}`;
 
 
-
     }
-
 
 
 
@@ -986,11 +995,9 @@ function updatePagination(totalPages){
     if(prevPage){
 
 
-
         prevPage.disabled =
 
         currentPage === 1;
-
 
 
     }
@@ -999,15 +1006,12 @@ function updatePagination(totalPages){
 
 
 
-
     if(nextPage){
-
 
 
         nextPage.disabled =
 
         currentPage === totalPages;
-
 
 
     }
@@ -1024,8 +1028,10 @@ function updatePagination(totalPages){
 
 
 
+
+
 // ==========================================
-// NEXT PAGE BUTTON
+// NEXT PAGE
 // ==========================================
 
 
@@ -1053,8 +1059,6 @@ if(nextPage){
 
 
 
-
-
         if(currentPage < totalPages){
 
 
@@ -1063,9 +1067,7 @@ if(nextPage){
 
 
 
-
             displayVehicles();
-
 
 
 
@@ -1084,7 +1086,6 @@ if(nextPage){
 
 
     });
-
 
 
 }
@@ -1098,7 +1099,7 @@ if(nextPage){
 
 
 // ==========================================
-// PREVIOUS PAGE BUTTON
+// PREVIOUS PAGE
 // ==========================================
 
 
@@ -1112,7 +1113,6 @@ if(prevPage){
     ()=>{
 
 
-
         if(currentPage > 1){
 
 
@@ -1121,11 +1121,7 @@ if(prevPage){
 
 
 
-
-
             displayVehicles();
-
-
 
 
 
@@ -1144,7 +1140,6 @@ if(prevPage){
 
 
     });
-
 
 
 }
@@ -1163,6 +1158,12 @@ if(prevPage){
 
 
 createVehicleCards();
+
+
+
+// ==========================================
+// END PART 2
+// ==========================================
 // ==========================================
 // PART 3 - SEARCH + FILTER + SORT SYSTEM
 // ==========================================
@@ -1170,9 +1171,8 @@ createVehicleCards();
 
 
 
-
 // ==========================================
-// HTML FILTER ELEMENTS
+// FILTER ELEMENTS
 // ==========================================
 
 
@@ -1184,8 +1184,6 @@ document.getElementById(
 
 
 
-
-
 const demandFilter =
 
 document.getElementById(
@@ -1194,15 +1192,11 @@ document.getElementById(
 
 
 
-
-
 const sortFilter =
 
 document.getElementById(
     "sortFilter"
 );
-
-
 
 
 
@@ -1218,9 +1212,8 @@ document.getElementById(
 
 
 
-
 // ==========================================
-// SEARCH EVENT
+// SEARCH LISTENER
 // ==========================================
 
 
@@ -1251,7 +1244,7 @@ if(searchInput){
 
 
 // ==========================================
-// DEMAND FILTER EVENT
+// DEMAND FILTER
 // ==========================================
 
 
@@ -1282,7 +1275,7 @@ if(demandFilter){
 
 
 // ==========================================
-// SORT EVENT
+// SORT FILTER
 // ==========================================
 
 
@@ -1313,7 +1306,7 @@ if(sortFilter){
 
 
 // ==========================================
-// LIMITED FILTER EVENT
+// LIMITED FILTER
 // ==========================================
 
 
@@ -1344,7 +1337,7 @@ if(limitedOnly){
 
 
 // ==========================================
-// FILTER + SORT FUNCTION
+// FILTER FUNCTION
 // ==========================================
 
 
@@ -1367,9 +1360,9 @@ function filterVehicles(){
 
 
 
-    // =========================
+    // ==========================
     // SEARCH
-    // =========================
+    // ==========================
 
 
     const search =
@@ -1394,12 +1387,12 @@ function filterVehicles(){
 
 
 
-
     if(search){
 
 
 
         result =
+
 
         result.filter(
 
@@ -1407,7 +1400,6 @@ function filterVehicles(){
 
 
             return (
-
 
                 vehicle.name &&
 
@@ -1418,13 +1410,10 @@ function filterVehicles(){
 
                 .includes(search)
 
-
-
             );
 
 
         });
-
 
 
     }
@@ -1437,9 +1426,9 @@ function filterVehicles(){
 
 
 
-    // =========================
-    // DEMAND FILTER
-    // =========================
+    // ==========================
+    // DEMAND
+    // ==========================
 
 
     if(
@@ -1475,9 +1464,7 @@ function filterVehicles(){
             );
 
 
-
         });
-
 
 
     }
@@ -1490,9 +1477,9 @@ function filterVehicles(){
 
 
 
-    // =========================
+    // ==========================
     // LIMITED ONLY
-    // =========================
+    // ==========================
 
 
     if(
@@ -1513,16 +1500,10 @@ function filterVehicles(){
         vehicle=>{
 
 
-            return (
-
-                vehicle.limited === true
-
-            );
-
+            return vehicle.limited === true;
 
 
         });
-
 
 
     }
@@ -1535,9 +1516,9 @@ function filterVehicles(){
 
 
 
-    // =========================
+    // ==========================
     // SORTING
-    // =========================
+    // ==========================
 
 
     if(sortFilter){
@@ -1555,30 +1536,32 @@ function filterVehicles(){
             case "valueHigh":
 
 
+
                 result.sort(
 
                 (a,b)=>
 
 
-                    Number(
+                Number(
 
-                        b.value || 0
+                    b.value || 0
 
-                    )
+                )
 
-                    -
+                -
 
-                    Number(
+                Number(
 
-                        a.value || 0
+                    a.value || 0
 
-                    )
+                )
 
 
                 );
 
 
             break;
+
 
 
 
@@ -1589,30 +1572,32 @@ function filterVehicles(){
             case "valueLow":
 
 
+
                 result.sort(
 
                 (a,b)=>
 
 
-                    Number(
+                Number(
 
-                        a.value || 0
+                    a.value || 0
 
-                    )
+                )
 
-                    -
+                -
 
-                    Number(
+                Number(
 
-                        b.value || 0
+                    b.value || 0
 
-                    )
+                )
 
 
                 );
 
 
             break;
+
 
 
 
@@ -1623,24 +1608,30 @@ function filterVehicles(){
             case "nameAZ":
 
 
+
                 result.sort(
 
                 (a,b)=>
 
 
-                    (a.name || "")
+                (
 
-                    .localeCompare(
+                    a.name || ""
 
-                        b.name || ""
+                )
 
-                    )
+                .localeCompare(
+
+                    b.name || ""
+
+                )
 
 
                 );
 
 
             break;
+
 
 
 
@@ -1651,24 +1642,30 @@ function filterVehicles(){
             case "nameZA":
 
 
+
                 result.sort(
 
                 (a,b)=>
 
 
-                    (b.name || "")
+                (
 
-                    .localeCompare(
+                    b.name || ""
 
-                        a.name || ""
+                )
 
-                    )
+                .localeCompare(
+
+                    a.name || ""
+
+                )
 
 
                 );
 
 
             break;
+
 
 
 
@@ -1679,24 +1676,25 @@ function filterVehicles(){
             case "demandHigh":
 
 
+
                 result.sort(
 
                 (a,b)=>
 
 
-                    Number(
+                Number(
 
-                        b.demand || 0
+                    b.demand || 0
 
-                    )
+                )
 
-                    -
+                -
 
-                    Number(
+                Number(
 
-                        a.demand || 0
+                    a.demand || 0
 
-                    )
+                )
 
 
                 );
@@ -1710,7 +1708,9 @@ function filterVehicles(){
 
 
 
+
             case "demandLow":
+
 
 
                 result.sort(
@@ -1718,19 +1718,19 @@ function filterVehicles(){
                 (a,b)=>
 
 
-                    Number(
+                Number(
 
-                        a.demand || 0
+                    a.demand || 0
 
-                    )
+                )
 
-                    -
+                -
 
-                    Number(
+                Number(
 
-                        b.demand || 0
+                    b.demand || 0
 
-                    )
+                )
 
 
                 );
@@ -1753,7 +1753,8 @@ function filterVehicles(){
 
 
 
-    // SAVE RESULTS
+
+    // UPDATE RESULTS
 
 
     filteredVehicles =
@@ -1777,7 +1778,7 @@ function filterVehicles(){
 
 
 
-    // UPDATE DISPLAY
+    // REDRAW CARDS
 
 
     displayVehicles();
@@ -1785,9 +1786,6 @@ function filterVehicles(){
 
 
 }
-
-
-
 
 
 
@@ -1804,9 +1802,8 @@ function filterVehicles(){
 
 
 
-
 // ==========================================
-// CHECK LOGIN STATUS
+// CHECK AUTH STATE
 // ==========================================
 
 
@@ -1818,11 +1815,7 @@ auth,
 
 
 
-    currentUser =
-
-    user;
-
-
+    currentUser = user;
 
 
 
@@ -1831,17 +1824,11 @@ auth,
     if(!user){
 
 
-
-        isAdmin =
-
-        false;
-
-
+        isAdmin = false;
 
 
 
         if(logoutBtn){
-
 
 
             logoutBtn.style.display =
@@ -1849,17 +1836,12 @@ auth,
             "none";
 
 
-
         }
 
 
 
-
-
         console.log(
-
             "No admin logged in"
-
         );
 
 
@@ -1867,10 +1849,7 @@ auth,
         return;
 
 
-
     }
-
-
 
 
 
@@ -1880,9 +1859,7 @@ auth,
 
     if(
 
-
         user.email &&
-
 
         user.email.toLowerCase()
 
@@ -1890,16 +1867,11 @@ auth,
 
         ADMIN_EMAIL.toLowerCase()
 
-
     ){
 
 
 
-        isAdmin =
-
-        true;
-
-
+        isAdmin = true;
 
 
 
@@ -1907,23 +1879,17 @@ auth,
         if(logoutBtn){
 
 
-
             logoutBtn.style.display =
 
             "inline-flex";
-
 
 
         }
 
 
 
-
-
         console.log(
-
             "Admin logged in"
-
         );
 
 
@@ -1932,25 +1898,16 @@ auth,
 
 
 
-
-
-
     else{
 
 
 
-        isAdmin =
-
-        false;
-
-
+        isAdmin = false;
 
 
 
         console.log(
-
-            "User is not admin"
-
+            "User logged in but not admin"
         );
 
 
@@ -1990,11 +1947,7 @@ if(loginBtn){
 
         const email =
 
-        loginEmail.value
-
-        .trim();
-
-
+        loginEmail.value.trim();
 
 
 
@@ -2010,31 +1963,19 @@ if(loginBtn){
 
 
 
-        if(
-
-            !email ||
-
-            !password
-
-        ){
+        if(!email || !password){
 
 
 
             alert(
-
                 "Enter email and password"
-
             );
-
 
 
             return;
 
 
-
         }
-
-
 
 
 
@@ -2062,20 +2003,15 @@ if(loginBtn){
 
 
 
-
-            loginOverlay.style.display =
-
-            "none";
+            if(loginOverlay){
 
 
+                loginOverlay.style.display =
+
+                "none";
 
 
-
-
-
-            loginEmail.value =
-
-            "";
+            }
 
 
 
@@ -2083,29 +2019,21 @@ if(loginBtn){
 
 
 
-            loginPassword.value =
+            loginEmail.value = "";
 
-            "";
-
-
+            loginPassword.value = "";
 
 
 
 
 
             console.log(
-
                 "Login successful"
-
             );
 
 
 
-
-
         }
-
-
 
 
 
@@ -2123,14 +2051,8 @@ if(loginBtn){
 
 
 
-
-
-
-
             alert(
-
-                "Login failed"
-
+                "Incorrect email or password"
             );
 
 
@@ -2140,11 +2062,7 @@ if(loginBtn){
 
 
 
-
-
-
     });
-
 
 
 }
@@ -2158,7 +2076,7 @@ if(loginBtn){
 
 
 // ==========================================
-// LOGOUT BUTTON
+// LOGOUT
 // ==========================================
 
 
@@ -2174,8 +2092,6 @@ if(logoutBtn){
 
 
 
-
-
         try{
 
 
@@ -2184,32 +2100,17 @@ if(logoutBtn){
 
 
 
+            isAdmin = false;
 
 
 
-            isAdmin =
-
-            false;
-
-
-
-
-
-
-
-            alert(
-
+            console.log(
                 "Logged out"
-
             );
 
 
 
         }
-
-
-
-
 
 
 
@@ -2218,9 +2119,8 @@ if(logoutBtn){
 
 
             console.error(
-
+                "Logout error:",
                 error
-
             );
 
 
@@ -2229,12 +2129,7 @@ if(logoutBtn){
 
 
 
-
-
-
-
     });
-
 
 
 }
@@ -2265,15 +2160,11 @@ document.addEventListener(
 
     if(
 
-
         event.ctrlKey &&
-
 
         event.altKey &&
 
-
         event.key === "ArrowRight"
-
 
     ){
 
@@ -2291,15 +2182,18 @@ document.addEventListener(
 
 
 
+            console.log(
+                "Admin login opened"
+            );
+
+
+
         }
 
 
 
 
-
     }
-
-
 
 
 
@@ -2314,7 +2208,7 @@ document.addEventListener(
 
 
 // ==========================================
-// LOGIN CANCEL BUTTON
+// CANCEL LOGIN
 // ==========================================
 
 
@@ -2335,11 +2229,9 @@ if(loginCancelBtn){
         if(loginOverlay){
 
 
-
             loginOverlay.style.display =
 
             "none";
-
 
 
         }
@@ -2348,15 +2240,10 @@ if(loginCancelBtn){
 
 
 
-
         if(loginPassword){
 
 
-
-            loginPassword.value =
-
-            "";
-
+            loginPassword.value = "";
 
 
         }
@@ -2368,11 +2255,7 @@ if(loginCancelBtn){
     });
 
 
-
 }
-
-
-
 
 
 
@@ -2383,7 +2266,7 @@ if(loginCancelBtn){
 // END PART 4
 // ==========================================
 // ==========================================
-// PART 5 - ADMIN VEHICLE EDITOR
+// PART 5 - ADMIN VEHICLE EDITOR + STARTUP
 // ==========================================
 
 
@@ -2391,30 +2274,22 @@ if(loginCancelBtn){
 
 
 // ==========================================
-// SETUP CARD EDITING
+// CARD EDITING
 // ==========================================
 
 
 function setupCardEditing(){
 
 
-
     const cards =
 
     document.querySelectorAll(
-
         ".card"
-
     );
 
 
 
-
-
-
-
     cards.forEach(card=>{
-
 
 
         card.addEventListener(
@@ -2422,8 +2297,6 @@ function setupCardEditing(){
         "click",
 
         ()=>{
-
-
 
 
 
@@ -2435,28 +2308,11 @@ function setupCardEditing(){
 
 
 
-
-
-            selectedVehicle =
-
-            card;
+            selectedVehicle = card;
 
 
 
-
-
-
-
-
-            openEditor(
-
-                card
-
-            );
-
-
-
-
+            openEditor(card);
 
 
 
@@ -2479,7 +2335,7 @@ function setupCardEditing(){
 
 
 // ==========================================
-// OPEN VEHICLE EDITOR
+// OPEN EDITOR
 // ==========================================
 
 
@@ -2487,115 +2343,75 @@ function openEditor(card){
 
 
 
-
-
     const name =
 
     card.querySelector(
-
         ".name-value"
-
     );
-
-
 
 
 
     const value =
 
     card.querySelector(
-
         ".value-text"
-
     );
-
-
 
 
 
     const demand =
 
     card.querySelector(
-
         ".demand-value"
-
     );
-
-
 
 
 
     const image =
 
     card.querySelector(
-
         "img"
-
     );
-
-
-
-
-
 
 
 
     const vehicleName =
 
     document.getElementById(
-
         "vehicleName"
-
     );
-
-
 
 
 
     const vehicleValue =
 
     document.getElementById(
-
         "vehicleValue"
-
     );
-
-
 
 
 
     const vehicleDemand =
 
     document.getElementById(
-
         "vehicleDemand"
-
     );
-
-
 
 
 
     const vehicleImage =
 
     document.getElementById(
-
         "vehicleImage"
-
     );
-
-
 
 
 
     const vehicleLimited =
 
     document.getElementById(
-
         "vehicleLimited"
-
     );
-
 
 
 
@@ -2609,14 +2425,9 @@ function openEditor(card){
 
         name
 
-        ?
+        ? name.textContent
 
-        name.textContent
-
-        :
-
-        "";
-
+        : "";
 
 
 
@@ -2630,17 +2441,13 @@ function openEditor(card){
 
         value
 
-        ?
-
-        value.textContent
+        ? value.textContent
 
         .replace("$","")
 
         .replace(/,/g,"")
 
-        :
-
-        0;
+        : 0;
 
 
 
@@ -2655,15 +2462,11 @@ function openEditor(card){
 
         demand
 
-        ?
-
-        demand.textContent
+        ? demand.textContent
 
         .replace("/10","")
 
-        :
-
-        0;
+        : 0;
 
 
 
@@ -2678,13 +2481,9 @@ function openEditor(card){
 
         image
 
-        ?
+        ? image.src
 
-        image.src
-
-        :
-
-        "";
+        : "";
 
 
 
@@ -2698,9 +2497,7 @@ function openEditor(card){
         vehicleLimited.checked =
 
         card.classList.contains(
-
             "limited"
-
         );
 
 
@@ -2710,18 +2507,11 @@ function openEditor(card){
 
 
 
-
-    if(adminOverlay){
-
-
+    if(adminOverlay)
 
         adminOverlay.style.display =
 
         "flex";
-
-
-
-    }
 
 
 
@@ -2743,7 +2533,6 @@ function openEditor(card){
 if(cancelBtn){
 
 
-
     cancelBtn.addEventListener(
 
     "click",
@@ -2751,12 +2540,7 @@ if(cancelBtn){
     ()=>{
 
 
-
-
-
-        if(adminOverlay){
-
-
+        if(adminOverlay)
 
             adminOverlay.style.display =
 
@@ -2764,20 +2548,7 @@ if(cancelBtn){
 
 
 
-        }
-
-
-
-
-
-
-
-        selectedVehicle =
-
-        null;
-
-
-
+        selectedVehicle = null;
 
 
 
@@ -2817,17 +2588,12 @@ if(saveBtn){
         if(!isAdmin){
 
 
-
             alert(
-
                 "Admin only"
-
             );
 
 
-
             return;
-
 
 
         }
@@ -2837,11 +2603,9 @@ if(saveBtn){
 
 
 
-
         if(!selectedVehicle)
 
             return;
-
 
 
 
@@ -2861,24 +2625,38 @@ if(saveBtn){
 
 
 
+        if(!id){
+
+
+            alert(
+                "Vehicle ID missing"
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+
+
         const vehicleData = {
-
-
 
 
 
             name:
 
             document.getElementById(
-
                 "vehicleName"
-
             )
-
             .value
-
             .trim(),
-
 
 
 
@@ -2890,15 +2668,11 @@ if(saveBtn){
             Number(
 
                 document.getElementById(
-
                     "vehicleValue"
-
                 )
-
                 .value
 
             ),
-
 
 
 
@@ -2910,11 +2684,8 @@ if(saveBtn){
             Number(
 
                 document.getElementById(
-
                     "vehicleDemand"
-
                 )
-
                 .value
 
             ),
@@ -2924,19 +2695,13 @@ if(saveBtn){
 
 
 
-
             image:
 
             document.getElementById(
-
                 "vehicleImage"
-
             )
-
             .value
-
             .trim(),
-
 
 
 
@@ -2946,14 +2711,9 @@ if(saveBtn){
             limited:
 
             document.getElementById(
-
                 "vehicleLimited"
-
             )
-
             .checked
-
-
 
 
 
@@ -2968,8 +2728,6 @@ if(saveBtn){
 
 
         try{
-
-
 
 
 
@@ -2995,15 +2753,10 @@ if(saveBtn){
 
 
 
-
             console.log(
-
-                "Saved vehicle:",
-
+                "Vehicle saved:",
                 id
-
             );
-
 
 
 
@@ -3012,11 +2765,27 @@ if(saveBtn){
 
 
             alert(
-
                 "Vehicle saved"
-
             );
 
+
+
+
+
+
+
+            if(adminOverlay)
+
+                adminOverlay.style.display =
+
+                "none";
+
+
+
+
+
+
+            selectedVehicle = null;
 
 
 
@@ -3029,48 +2798,13 @@ if(saveBtn){
 
 
 
-
-
-
-            if(adminOverlay){
-
-
-
-                adminOverlay.style.display =
-
-                "none";
-
-
-
-            }
-
-
-
-
-
-
-
-            selectedVehicle =
-
-            null;
-
-
-
-
-
-
-
         }
 
 
 
 
 
-
-
         catch(error){
-
-
 
 
 
@@ -3084,13 +2818,8 @@ if(saveBtn){
 
 
 
-
-
-
             alert(
-
                 "Save failed"
-
             );
 
 
@@ -3116,12 +2845,11 @@ if(saveBtn){
 
 
 // ==========================================
-// CLOSE OVERLAYS OUTSIDE CLICK
+// CLOSE OVERLAYS
 // ==========================================
 
 
 if(loginOverlay){
-
 
 
     loginOverlay.addEventListener(
@@ -3131,11 +2859,7 @@ if(loginOverlay){
     (event)=>{
 
 
-
-
-
         if(event.target === loginOverlay){
-
 
 
             loginOverlay.style.display =
@@ -3143,11 +2867,7 @@ if(loginOverlay){
             "none";
 
 
-
         }
-
-
-
 
 
     });
@@ -3155,6 +2875,7 @@ if(loginOverlay){
 
 
 }
+
 
 
 
@@ -3165,7 +2886,6 @@ if(loginOverlay){
 if(adminOverlay){
 
 
-
     adminOverlay.addEventListener(
 
     "click",
@@ -3173,11 +2893,7 @@ if(adminOverlay){
     (event)=>{
 
 
-
-
-
         if(event.target === adminOverlay){
-
 
 
             adminOverlay.style.display =
@@ -3186,16 +2902,10 @@ if(adminOverlay){
 
 
 
-            selectedVehicle =
-
-            null;
-
+            selectedVehicle = null;
 
 
         }
-
-
-
 
 
     });
@@ -3209,6 +2919,24 @@ if(adminOverlay){
 
 
 
+
+
+
+// ==========================================
+// START WEBSITE
+// ==========================================
+
+
+setupCardEditing();
+
+
+loadVehicles();
+
+
+
+console.log(
+    "Vehicle system ready"
+);
 
 
 
