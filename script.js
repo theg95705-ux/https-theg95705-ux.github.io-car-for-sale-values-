@@ -105,7 +105,7 @@ const ADMIN_EMAIL =
 
 
 const CARDS_PER_PAGE =
-32;
+16;
 
 
 
@@ -375,7 +375,7 @@ function createVehicleCards(){
 
 
     console.log(
-        "32 vehicle cards created"
+        `${CARDS_PER_PAGE} vehicle cards created`
     );
 
 
