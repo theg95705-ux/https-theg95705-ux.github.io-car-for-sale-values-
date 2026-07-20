@@ -867,22 +867,21 @@ select option{
 
 /* ==========================================
    CLEAR PRICE CHANGE BUTTON
-   Sits between the Image URL field and the
-   Limited Vehicle toggle. Neutral styling
-   (not "danger") since it's a small cosmetic
-   reset, not a destructive action.
+   Styled to match the other admin form
+   fields (same filled background, border,
+   and radius as inputs) instead of standing
+   out as a separate outline button.
 ========================================== */
 
 .clear-change-btn{
     width:100%;
-    margin:5px 0 20px;
     padding:14px;
     border:2px solid var(--border);
-    border-radius:15px;
-    background:transparent;
+    border-radius:14px;
+    background:var(--panel-light);
     color:var(--muted);
     font-size:15px;
-    font-weight:900;
+    font-weight:800;
     cursor:pointer;
     transition:.3s;
 }
