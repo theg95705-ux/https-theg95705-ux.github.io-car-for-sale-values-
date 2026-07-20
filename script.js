@@ -893,17 +893,112 @@ function updateCard(
     if(value){
 
 
+        const newVal =
+
+        Number(
+            vehicle.value || 0
+        );
+
+
         value.textContent =
 
         "$" +
 
-        Number(
+        newVal.toLocaleString();
 
-            vehicle.value || 0
 
-        )
 
-        .toLocaleString();
+
+        // ==========================
+        // VALUE CHANGE INDICATOR
+        // ==========================
+
+
+        const changeEl =
+
+        card.querySelector(
+            ".value-change"
+        );
+
+
+
+        if(changeEl){
+
+
+            const prevVal =
+
+            vehicle.previousValue;
+
+
+
+            const hasPrev =
+
+            prevVal !== undefined &&
+
+            prevVal !== null &&
+
+            Number(prevVal) !== newVal;
+
+
+
+            if(hasPrev){
+
+
+                const diff =
+
+                newVal - Number(prevVal);
+
+
+                const isUp =
+
+                diff > 0;
+
+
+                changeEl.textContent =
+
+                (isUp ? "▲ " : "▼ ") +
+
+                "$" +
+
+                Math.abs(diff).toLocaleString();
+
+
+                changeEl.classList.toggle(
+                    "positive",
+                    isUp
+                );
+
+
+                changeEl.classList.toggle(
+                    "negative",
+                    !isUp
+                );
+
+
+            }
+
+
+
+            else{
+
+
+                changeEl.textContent = "";
+
+
+                changeEl.classList.remove(
+                    "positive"
+                );
+
+
+                changeEl.classList.remove(
+                    "negative"
+                );
+
+
+            }
+
+
+        }
 
 
     }
@@ -2930,6 +3025,38 @@ if(saveBtn){
 
 
 
+        // ==========================
+        // GRAB THE VEHICLE'S CURRENT
+        // (PRE-EDIT) VALUE SO WE CAN
+        // STORE IT AS previousValue
+        // ==========================
+
+
+        const oldVehicle =
+
+        vehicles.find(
+
+            v => v.id === id
+
+        );
+
+
+
+        const oldValue =
+
+        oldVehicle
+
+        ? Number(oldVehicle.value || 0)
+
+        : 0;
+
+
+
+
+
+
+
+
 
         const vehicleData = {
 
@@ -2998,7 +3125,16 @@ if(saveBtn){
             document.getElementById(
                 "vehicleLimited"
             )
-            .checked
+            .checked,
+
+
+
+
+
+
+            previousValue:
+
+            oldValue
 
 
 
