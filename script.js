@@ -291,18 +291,20 @@ console.log(
 
 
 // ==========================================
-// EXTRACT NUMBER FROM VEHICLE NAME
-// (so "Vehicle 2" sorts before "Vehicle 10"
-// instead of alphabetically)
+// EXTRACT NUMBER FROM VEHICLE ID
+// (sorting off the document ID, which never
+// changes, instead of the editable name field
+// - so renaming a vehicle can't reshuffle
+// everyone else's position)
 // ==========================================
 
 
-function getVehicleNumber(name){
+function getVehicleNumber(id){
 
 
     const match =
 
-    (name || "")
+    (id || "")
 
     .match(/\d+/);
 
@@ -481,18 +483,18 @@ async function loadVehicles(){
 
 
 
-        // SORT NUMERICALLY BY NAME
+        // SORT NUMERICALLY BY DOCUMENT ID
 
         vehicles.sort(
 
         (a,b)=>
 
 
-        getVehicleNumber(a.name)
+        getVehicleNumber(a.id)
 
         -
 
-        getVehicleNumber(b.name)
+        getVehicleNumber(b.id)
 
 
         );
