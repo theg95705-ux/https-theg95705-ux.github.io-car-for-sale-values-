@@ -672,6 +672,47 @@ nav a.active{
 }
 
 /* ==========================================
+   VALUE CHANGE INDICATOR
+   Small pill next to the value showing the
+   last change. script.js toggles
+   .positive / .negative and fills the text;
+   it's hidden by default so cards with no
+   recorded change show nothing extra.
+========================================== */
+
+.value-row{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.value-change{
+    display:none;
+    align-items:center;
+    gap:3px;
+    font-size:12px;
+    font-weight:800;
+    padding:3px 9px;
+    border-radius:20px;
+    line-height:1;
+    white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+}
+
+.value-change.positive{
+    display:inline-flex;
+    color:var(--success);
+    background:rgba(52,211,153,.14);
+}
+
+.value-change.negative{
+    display:inline-flex;
+    color:var(--danger);
+    background:rgba(239,68,68,.14);
+}
+
+/* ==========================================
    ADMIN OVERLAY
 ========================================== */
 
