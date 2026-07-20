@@ -441,7 +441,7 @@ nav a.active{
     left:3px;
 }
 
-.switch-small input:checked + .slider:before{
+.switch.switch-small input:checked + .slider:before{
     transform:translate(19px, -50%);
 }
 
