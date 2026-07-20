@@ -320,6 +320,85 @@ function getVehicleNumber(id){
 
 
 // ==========================================
+// FORMAT NUMBER AS COMPACT
+// (100000 -> "100k", 1500000 -> "1.5M")
+// ==========================================
+
+
+function formatCompact(num){
+
+
+    const abs =
+
+    Math.abs(num);
+
+
+
+    if(abs >= 1000000){
+
+
+        const millions =
+
+        num / 1000000;
+
+
+        const isWhole =
+
+        millions % 1 === 0;
+
+
+        const rounded =
+
+        millions.toFixed(
+
+            isWhole ? 0 : 1
+
+        );
+
+
+        return rounded + "M";
+
+
+    }
+
+
+
+    if(abs >= 1000){
+
+
+        const thousands =
+
+        num / 1000;
+
+
+        const isWhole =
+
+        thousands % 1 === 0;
+
+
+        const rounded =
+
+        thousands.toFixed(
+
+            isWhole ? 0 : 1
+
+        );
+
+
+        return rounded + "k";
+
+
+    }
+
+
+
+    return num.toString();
+
+
+}
+
+
+// ==========================================
 // END PART 1
 // ==========================================
 // ==========================================
@@ -960,7 +1039,11 @@ function updateCard(
 
                 "$" +
 
-                Math.abs(diff).toLocaleString();
+                formatCompact(
+
+                    Math.abs(diff)
+
+                );
 
 
                 changeEl.classList.toggle(
