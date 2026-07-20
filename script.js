@@ -100,8 +100,11 @@ console.log("Firebase Connected");
 // ==========================================
 
 
-const ADMIN_EMAIL =
-"theg95705@gmail.com";
+const ADMIN_EMAILS =
+[
+    "theg95705@gmail.com",
+    "ellocosigma@gmail.com"
+];
 
 
 const CARDS_PER_PAGE =
@@ -521,6 +524,24 @@ async function loadVehicles(){
             ...vehicles
 
         ];
+
+
+
+
+        // DEBUG: list every loaded vehicle
+        // and the number extracted from its name
+
+        console.table(
+
+            vehicles.map(v=>({
+
+                name:v.name,
+
+                extractedNumber:getVehicleNumber(v.name)
+
+            }))
+
+        );
 
 
 
@@ -1926,11 +1947,15 @@ auth,
 
         user.email &&
 
-        user.email.toLowerCase()
+        ADMIN_EMAILS
 
-        ===
+        .map(e=>e.toLowerCase())
 
-        ADMIN_EMAIL.toLowerCase()
+        .includes(
+
+            user.email.toLowerCase()
+
+        )
 
     ){
 
