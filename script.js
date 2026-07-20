@@ -2868,16 +2868,6 @@ if(saveBtn){
 
 
 
-            alert(
-                "Vehicle saved"
-            );
-
-
-
-
-
-
-
             if(adminOverlay)
 
                 adminOverlay.style.display =
