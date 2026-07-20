@@ -866,6 +866,33 @@ select option{
 }
 
 /* ==========================================
+   CLEAR PRICE CHANGE BUTTON
+   Sits below Save/Cancel, full width. Neutral
+   styling (not "danger") since it's a small
+   cosmetic reset, not a destructive action.
+========================================== */
+
+.clear-change-btn{
+    width:100%;
+    margin-top:15px;
+    padding:14px;
+    border:2px solid var(--border);
+    border-radius:15px;
+    background:transparent;
+    color:var(--muted);
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.clear-change-btn:hover{
+    border-color:var(--primary);
+    color:white;
+    transform:translateY(-3px);
+}
+
+/* ==========================================
    LOGIN FORM - HIDE EMAIL FIELD
    Login is password-only now; the email
    input stays in the DOM (script.js still
