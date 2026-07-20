@@ -65,6 +65,9 @@ body{
     color:var(--text);
     overflow-x:hidden;
     font-family:var(--font-main);
+    font-size:16px;
+    line-height:1.5;
+    font-optical-sizing:auto;
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
     text-rendering:optimizeLegibility;
@@ -463,6 +466,10 @@ nav a.active{
     display:flex;
     flex-direction:column;
     justify-content:center;
+    background:var(--panel-light);
+    border-radius:15px;
+    padding:14px;
+    border:1px solid rgba(255,255,255,.05);
 }
 
 .name-title{
@@ -481,6 +488,26 @@ nav a.active{
     text-overflow:ellipsis;
     font-size:18px;
     font-weight:700;
+}
+
+/* ==========================================
+   LIMITED CARDS
+   Card gets a permanent gold border + glow
+   whenever its .limited-badge is visible
+   (i.e. not hidden with display:none by the JS)
+========================================== */
+
+.card:has(.limited-badge:not([style*="display: none"], [style*="display:none"])){
+    border-color:var(--gold);
+    box-shadow:
+        var(--shadow),
+        0 0 30px rgba(202,166,74,.35);
+}
+
+.card:has(.limited-badge:not([style*="display: none"], [style*="display:none"])):hover{
+    box-shadow:
+        var(--shadow),
+        0 0 45px rgba(202,166,74,.55);
 }
 
 /* ==========================================
@@ -523,12 +550,14 @@ nav a.active{
     color:var(--primary-light);
     font-size:23px;
     font-weight:900;
+    font-variant-numeric:tabular-nums;
 }
 
 .demand-value{
     color:var(--success);
     font-size:23px;
     font-weight:900;
+    font-variant-numeric:tabular-nums;
 }
 
 /* ==========================================
