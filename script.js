@@ -230,6 +230,13 @@ document.getElementById(
 
 
 
+const clearChangeBtn =
+document.getElementById(
+    "clearChangeBtn"
+);
+
+
+
 
 
 // Pagination
@@ -3329,6 +3336,237 @@ if(saveBtn){
 
 
 }
+
+
+
+
+
+
+
+
+
+// ==========================================
+// CLEAR PRICE CHANGE
+// (removes previousValue from Firestore so
+// the up/down change pill disappears -
+// does NOT delete the vehicle)
+// ==========================================
+
+
+if(clearChangeBtn){
+
+
+
+    clearChangeBtn.addEventListener(
+
+    "click",
+
+    async()=>{
+
+
+
+
+
+        if(!isAdmin){
+
+
+            alert(
+                "Admin only"
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+        if(!selectedVehicle)
+
+            return;
+
+
+
+
+
+
+
+
+        const id =
+
+        selectedVehicle.dataset.id;
+
+
+
+
+
+
+
+
+        if(!id){
+
+
+            alert(
+                "Vehicle ID missing"
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+
+        const currentVehicle =
+
+        vehicles.find(
+
+            v => v.id === id
+
+        );
+
+
+
+        if(!currentVehicle)
+
+            return;
+
+
+
+
+
+
+
+
+        try{
+
+
+
+            await setDoc(
+
+                doc(
+
+                    db,
+
+                    "vehicles",
+
+                    id
+
+                ),
+
+                {
+
+                    ...currentVehicle,
+
+                    previousValue:
+
+                    Number(
+
+                        currentVehicle.value || 0
+
+                    )
+
+                }
+
+            );
+
+
+
+
+
+
+
+            console.log(
+                "Price change cleared:",
+                id
+            );
+
+
+
+
+
+
+
+            if(adminOverlay)
+
+                adminOverlay.style.display =
+
+                "none";
+
+
+
+
+
+
+            selectedVehicle = null;
+
+
+
+
+
+
+            await loadVehicles();
+
+
+
+
+
+        }
+
+
+
+
+
+        catch(error){
+
+
+
+            console.error(
+
+                "Clear change error:",
+
+                error
+
+            );
+
+
+
+            alert(
+                "Failed to clear price change"
+            );
+
+
+
+        }
+
+
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+
 
 
 
