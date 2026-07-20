@@ -581,581 +581,138 @@ nav a.active{
    END PART 1
 ========================================== */
 /* ==========================================
-   VEHICLE VALUES
-   PART 2 - TOOLBAR + VEHICLE CARDS
-========================================== */
-
-
-
-/* ==========================================
-   PAGE HEADER / BACK BUTTON
-========================================== */
-
-
-.page-header{
-
-
-    width:95%;
-
-
-    max-width:1400px;
-
-
-    margin:25px auto;
-
-
-}
-
-
-
-
-.back-btn{
-
-
-    display:inline-flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
-
-
-
-    width:45px;
-
-
-    height:45px;
-
-
-
-    border-radius:14px;
-
-
-
-    background:
-
-    var(--panel);
-
-
-
-    border:
-
-    1px solid var(--border);
-
-
-
-    color:white;
-
-
-
-    text-decoration:none;
-
-
-
-    font-size:28px;
-
-
-
-    font-weight:900;
-
-
-
-    transition:.3s;
-
-
-
-}
-
-
-
-
-
-.back-btn:hover{
-
-
-    background:
-
-    var(--primary);
-
-
-
-    border-color:
-
-    var(--primary);
-
-
-
-    transform:
-
-    translateX(-5px);
-
-
-}
-
-
-
-
-
-
-/* ==========================================
-   TOOLBAR
-========================================== */
-
-
-.toolbar{
-
-
-    width:95%;
-
-
-    max-width:1400px;
-
-
-
-    margin:
-
-    30px auto;
-
-
-
-    display:flex;
-
-
-
-    align-items:center;
-
-
-
-    justify-content:space-between;
-
-
-
-    gap:20px;
-
-
-
-    padding:20px;
-
-
-
-    background:
-
-
-    rgba(18,27,43,.85);
-
-
-
-    border:
-
-
-    1px solid var(--border);
-
-
-
-    border-radius:22px;
-
-
-
-    backdrop-filter:
-
-    blur(18px);
-
-
-
-    box-shadow:
-
-    var(--shadow);
-
-
-
-}
-
-
-
-
-
-/* ==========================================
-   SEARCH
-========================================== */
-
-
-.search-box{
-
-
-    flex:1;
-
-
-}
-
-
-
-
-
-.search-box input{
-
-
-    width:100%;
-
-
-
-    padding:
-
-    15px 20px;
-
-
-
-    background:
-
-    var(--panel-light);
-
-
-
-    border:
-
-    2px solid var(--border);
-
-
-
-    border-radius:15px;
-
-
-
-    color:white;
-
-
-
-    font-size:16px;
-
-
-
-    font-weight:600;
-
-
-
-    outline:none;
-
-
-
-    transition:.3s;
-
-
-
-}
-
-
-
-
-
-.search-box input::placeholder{
-
-
-    color:
-
-    var(--muted);
-
-
-}
-
-
-
-
-
-.search-box input:focus{
-
-
-    border-color:
-
-    var(--primary);
-
-
-
-    box-shadow:
-
-    0 0 25px rgba(79,141,255,.35);
-
-
-}
-
-
-
-
-
-
-/* ==========================================
-   FILTER AREA
-========================================== */
-
-
-.filter-group{
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    gap:15px;
-
-
-    flex-wrap:wrap;
-
-
-}
-
-
-
-
-
-
-.filter-group select{
-
-
-    padding:
-
-    14px 18px;
-
-
-
-    min-width:150px;
-
-
-
-    background:
-
-    var(--panel-light);
-
-
-
-    border:
-
-    2px solid var(--border);
-
-
-
-    border-radius:15px;
-
-
-
-    color:white;
-
-
-
-    font-weight:800;
-
-
-
-    outline:none;
-
-
-
-    cursor:pointer;
-
-
-
-    transition:.3s;
-
-
-
-}
-
-
-
-
-
-.filter-group select:hover{
-
-
-    border-color:
-
-    var(--primary);
-
-
-}
-
-
-
-
-
-.filter-group select:focus{
-
-
-    border-color:
-
-    var(--primary);
-
-
-
-    box-shadow:
-
-    0 0 20px rgba(79,141,255,.3);
-
-
-}
-
-
-
-
-
-.filter-group option{
-
-
-    background:
-
-    #121b2b;
-
-
-    color:white;
-
-
-}
-
-
-
-
-
-
-/* ==========================================
-   LIMITED FILTER
-========================================== */
-
-
-.limited-filter{
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    gap:10px;
-
-
-
-    color:white;
-
-
-    font-weight:800;
-
-
-
-    cursor:pointer;
-
-
-}
-
-
-
-
-
-.limited-filter input{
-
-
-    width:18px;
-
-
-    height:18px;
-
-
-
-    cursor:pointer;
-
-
-}
-
-
-
-
-
-
-/* ==========================================
-   VEHICLE GRID (UPDATED SMALLER CARDS)
+   VEHICLE GRID FIX
 ========================================== */
 
 
 .cards{
 
     width:95%;
+
     max-width:1400px;
 
     margin:40px auto;
 
+
     display:grid;
 
+
     grid-template-columns:
-    repeat(
-        auto-fill,
-        minmax(240px,1fr)
-    );
+
+    repeat(4, 1fr);
+
 
     gap:25px;
 
+
     align-items:start;
+
 
 }
 
 
+
+
+
+/* TABLET */
+
+@media(max-width:1200px){
+
+    .cards{
+
+        grid-template-columns:
+
+        repeat(3,1fr);
+
+    }
+
+}
+
+
+
+
+
+/* SMALL TABLET */
+
+@media(max-width:900px){
+
+    .cards{
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+    }
+
+}
+
+
+
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .cards{
+
+        grid-template-columns:
+
+        repeat(1,1fr);
+
+    }
+
+}
 
 
 
 
 
 /* ==========================================
-   VEHICLE CARD
+   VEHICLE CARD FIX
 ========================================== */
 
 
 .card{
 
-
     position:relative;
 
+
+    width:100%;
+
+
+    min-height:430px;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    justify-content:flex-start;
 
 
     background:
 
-
-    rgba(18,27,43,.9);
-
+    rgba(18,27,43,.95);
 
 
     border:
 
-
     2px solid var(--border);
-
 
 
     border-radius:22px;
 
 
-
     padding:16px;
-
 
 
     overflow:hidden;
 
 
-
-    cursor:pointer;
-
-
-
-    box-shadow:
-
-    var(--shadow);
-
-
-
-    transition:.35s;
-
-
-
 }
-
 
 
 
@@ -1163,135 +720,18 @@ nav a.active{
 
 .card:hover{
 
-
     transform:
 
-    translateY(-10px);
-
-
-
-    border-color:
-
-    var(--primary);
-
-
-
-    box-shadow:
-
-
-    0 30px 70px rgba(79,141,255,.25);
-
+    translateY(-6px);
 
 }
-
 
 
 
 
 
 /* ==========================================
-   LIMITED VEHICLE CARD
-========================================== */
-
-
-.card.limited{
-
-
-    border-color:
-
-    var(--gold);
-
-
-
-    box-shadow:
-
-    0 0 35px rgba(202,166,74,.25);
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================
-   LIMITED BADGE
-========================================== */
-
-
-.limited-badge{
-
-
-    position:absolute;
-
-
-
-    top:14px;
-
-
-    left:14px;
-
-
-
-    display:none;
-
-
-
-    padding:
-
-    7px 14px;
-
-
-
-    border-radius:999px;
-
-
-
-    background:
-
-    var(--gold);
-
-
-
-    color:white;
-
-
-
-    font-size:12px;
-
-
-
-    font-weight:900;
-
-
-
-    z-index:5;
-
-
-}
-
-
-
-
-
-.card.limited .limited-badge{
-
-
-    display:flex;
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================
-   VEHICLE IMAGE FIXED
+   IMAGE FIX
 ========================================== */
 
 
@@ -1304,35 +744,30 @@ nav a.active{
     height:180px;
 
 
+    flex-shrink:0;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
 
     background:
 
     var(--panel-light);
 
 
-
     border-radius:18px;
-
 
 
     overflow:hidden;
 
 
-
-    display:flex;
-
-
-
-    justify-content:center;
-
-
-
-    align-items:center;
-
-
-
-    padding:10px;
-
+    padding:12px;
 
 
 }
@@ -1350,36 +785,10 @@ nav a.active{
     height:100%;
 
 
-
     object-fit:contain;
 
 
-
     object-position:center;
-
-
-
-    max-height:160px;
-
-
-
-    transition:.35s;
-
-
-
-}
-
-
-
-
-
-
-.card:hover .vehicle-image img{
-
-
-    transform:
-
-    scale(1.03);
 
 
 }
@@ -1390,67 +799,30 @@ nav a.active{
 
 
 /* ==========================================
-   VEHICLE NAME BOX
+   NAME FIX
 ========================================== */
 
 
 .vehicle-name-box{
 
 
-    background:
-
-    var(--panel-light);
+    margin-top:15px;
 
 
-
-    padding:14px;
-
+    min-height:75px;
 
 
-    border-radius:15px;
+    display:flex;
 
 
+    flex-direction:column;
 
-    margin-bottom:12px;
+
+    justify-content:center;
 
 
 }
 
-
-
-
-
-
-.name-title{
-
-
-    display:block;
-
-
-
-    color:
-
-    var(--muted);
-
-
-
-    font-size:12px;
-
-
-
-    font-weight:900;
-
-
-
-    text-transform:uppercase;
-
-
-
-    letter-spacing:1px;
-
-
-
-}
 
 
 
@@ -1459,30 +831,63 @@ nav a.active{
 .name-value{
 
 
-    display:block;
+    white-space:nowrap;
 
 
-
-    margin-top:7px;
-
+    overflow:hidden;
 
 
-    color:white;
+    text-overflow:ellipsis;
 
 
-
-    font-size:20px;
-
-
-
-    font-weight:900;
-
+    font-size:18px;
 
 
 }
 
 
 
+
+
+
+/* ==========================================
+   STATS FIX
+========================================== */
+
+
+.stat-box{
+
+
+    min-height:70px;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    justify-content:center;
+
+
+}
+
+
+
+
+
+/* ==========================================
+   HIDDEN EMPTY CARDS
+========================================== */
+
+
+.card[style*="display: none"]{
+
+
+    display:none !important;
+
+
+}
 /* ==========================================
    END PART 2
 ========================================== */
