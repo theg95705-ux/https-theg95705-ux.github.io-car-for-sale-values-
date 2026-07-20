@@ -201,7 +201,33 @@
 
 
 
-        <select id="demandFilter">
+        <!-- Custom-styled dropdown (drives the real,
+        hidden select below so script.js is untouched) -->
+
+        <div class="custom-select" id="demandFilterCustom">
+
+            <button type="button" class="custom-select-trigger">
+                All Demand
+            </button>
+
+            <ul class="custom-select-options">
+                <li data-value="all" class="selected">All Demand</li>
+                <li data-value="10">10/10</li>
+                <li data-value="9">9/10</li>
+                <li data-value="8">8/10</li>
+                <li data-value="7">7/10</li>
+                <li data-value="6">6/10</li>
+                <li data-value="5">5/10</li>
+                <li data-value="4">4/10</li>
+                <li data-value="3">3/10</li>
+                <li data-value="2">2/10</li>
+                <li data-value="1">1/10</li>
+                <li data-value="0">0/10</li>
+            </ul>
+
+        </div>
+
+        <select id="demandFilter" class="visually-hidden">
 
 
             <option value="all">
@@ -270,7 +296,25 @@
 
 
 
-        <select id="sortFilter">
+        <div class="custom-select" id="sortFilterCustom">
+
+            <button type="button" class="custom-select-trigger">
+                Default
+            </button>
+
+            <ul class="custom-select-options">
+                <li data-value="default" class="selected">Default</li>
+                <li data-value="valueHigh">Value: High → Low</li>
+                <li data-value="valueLow">Value: Low → High</li>
+                <li data-value="nameAZ">Name: A → Z</li>
+                <li data-value="nameZA">Name: Z → A</li>
+                <li data-value="demandHigh">Demand: High → Low</li>
+                <li data-value="demandLow">Demand: Low → High</li>
+            </ul>
+
+        </div>
+
+        <select id="sortFilter" class="visually-hidden">
 
 
             <option value="default">
@@ -337,9 +381,15 @@
         <label class="limited-filter">
 
 
-            <input
-                type="checkbox"
-                id="limitedOnly">
+            <span class="switch switch-small">
+
+                <input
+                    type="checkbox"
+                    id="limitedOnly">
+
+                <span class="slider"></span>
+
+            </span>
 
 
 
