@@ -6,7 +6,6 @@
 // ==========================================
 
 
-
 console.clear();
 
 
@@ -540,7 +539,7 @@ async function loadVehicles(){
 
 
 
-        displayVehicles();
+        filterVehicles();
 
 
 
@@ -2231,6 +2230,14 @@ if(loginBtn){
 
 
 
+        const email =
+
+        loginEmail.value.trim();
+
+
+
+
+
         const password =
 
         loginPassword.value;
@@ -2241,12 +2248,12 @@ if(loginBtn){
 
 
 
-        if(!password){
+        if(!email || !password){
 
 
 
             alert(
-                "Enter password"
+                "Enter email and password"
             );
 
 
@@ -2261,69 +2268,23 @@ if(loginBtn){
 
 
 
-        let loggedIn = false;
+        try{
+
+
+
+            await signInWithEmailAndPassword(
+
+                auth,
+
+                email,
+
+                password
+
+            );
 
 
 
 
-        for(
-
-            const email of ADMIN_EMAILS
-
-        ){
-
-
-
-            try{
-
-
-
-                await signInWithEmailAndPassword(
-
-                    auth,
-
-                    email,
-
-                    password
-
-                );
-
-
-
-                loggedIn = true;
-
-
-
-                break;
-
-
-
-            }
-
-
-
-            catch(error){
-
-
-
-                // wrong match for this
-
-                // admin email, try next
-
-
-            }
-
-
-
-        }
-
-
-
-
-
-
-
-        if(loggedIn){
 
 
 
@@ -2339,9 +2300,15 @@ if(loginBtn){
 
 
 
+
+
+
+
             loginEmail.value = "";
 
             loginPassword.value = "";
+
+
 
 
 
@@ -2355,20 +2322,22 @@ if(loginBtn){
 
 
 
-        else{
+        catch(error){
 
 
 
             console.error(
 
-                "Login failed: no admin matched this password"
+                "Login failed:",
+
+                error
 
             );
 
 
 
             alert(
-                "Incorrect password"
+                "Incorrect email or password"
             );
 
 
