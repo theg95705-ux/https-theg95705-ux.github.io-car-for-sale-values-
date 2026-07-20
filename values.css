@@ -831,10 +831,6 @@ select option{
    needs its id) but is visually hidden.
 ========================================== */
 
-#loginOverlay .admin-group:has(#loginEmail){
-    display:none;
-}
-
 /* ==========================================
    LOGIN ERROR
 ========================================== */
