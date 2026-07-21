@@ -31,7 +31,8 @@ import {
     getDocs,
     doc,
     setDoc,
-    getDoc
+    getDoc,
+    deleteDoc
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 
@@ -257,6 +258,13 @@ document.getElementById(
 const clearChangeBtn =
 document.getElementById(
     "clearChangeBtn"
+);
+
+
+
+const deleteVehicleBtn =
+document.getElementById(
+    "deleteVehicleBtn"
 );
 
 
@@ -758,6 +766,15 @@ function createVehicleCards(){
         if(clearChangeBtn)
 
             clearChangeBtn.style.display =
+
+            "none";
+
+
+
+
+        if(deleteVehicleBtn)
+
+            deleteVehicleBtn.style.display =
 
             "none";
 
@@ -3348,6 +3365,15 @@ function openEditor(card){
 
 
 
+    if(deleteVehicleBtn)
+
+        deleteVehicleBtn.style.display =
+
+        "";
+
+
+
+
     const titleEl =
 
     document.querySelector(
@@ -4143,6 +4169,201 @@ if(clearChangeBtn){
 
 
 
+// ==========================================
+// DELETE VEHICLE
+// (permanently removes this vehicle from
+// Firestore - separate from the price-change
+// clear button above, and from the cap
+// setting, which never deletes anything)
+// ==========================================
+
+
+if(deleteVehicleBtn){
+
+
+
+    deleteVehicleBtn.addEventListener(
+
+    "click",
+
+    async()=>{
+
+
+
+        if(!isAdmin){
+
+
+            alert(
+                "Admin only"
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+        if(!selectedVehicle)
+
+            return;
+
+
+
+
+        const id =
+
+        selectedVehicle.dataset.id;
+
+
+
+
+        if(!id){
+
+
+            alert(
+                "Vehicle ID missing"
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+        const currentVehicle =
+
+        vehicles.find(
+
+            v => v.id === id
+
+        );
+
+
+
+        const vehicleLabel =
+
+        currentVehicle
+
+        ? (currentVehicle.name || `Vehicle ${id}`)
+
+        : `Vehicle ${id}`;
+
+
+
+
+        const confirmed =
+
+        window.confirm(
+
+            `Permanently delete "${vehicleLabel}"? This cannot be undone.`
+
+        );
+
+
+
+        if(!confirmed)
+
+            return;
+
+
+
+
+        try{
+
+
+
+            await deleteDoc(
+
+                doc(
+
+                    db,
+
+                    "vehicles",
+
+                    id
+
+                )
+
+            );
+
+
+
+
+            console.log(
+                "Vehicle deleted:",
+                id
+            );
+
+
+
+
+            if(adminOverlay)
+
+                adminOverlay.style.display =
+
+                "none";
+
+
+
+
+            selectedVehicle = null;
+
+            isCreatingNew = false;
+
+            pendingNewId = null;
+
+
+
+
+            await loadVehicles();
+
+
+
+        }
+
+
+
+        catch(error){
+
+
+
+            console.error(
+
+                "Delete error:",
+
+                error
+
+            );
+
+
+
+            alert(
+                "Delete failed"
+            );
+
+
+
+        }
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
 
 
 
@@ -4407,26 +4628,14 @@ if(saveSettingsBtn){
 
 
 
-        if(newCap < vehicles.length){
-
-
-            showSettingsError(
-
-                `Cap can't be lower than the ${vehicles.length} vehicles you already have`
-
-            );
-
-
-            return;
-
-
-        }
-
-
-
-
-
-
+        // NOTE: lowering the cap is intentionally
+        // non-destructive. It just limits how many
+        // vehicles are shown (vehicles[] is sorted
+        // lowest ID first, so anything past the cap
+        // is hidden, not deleted). To remove a
+        // specific vehicle for good, use the
+        // "Delete Vehicle" button in that vehicle's
+        // own editor instead.
 
 
         try{
@@ -4460,11 +4669,9 @@ if(saveSettingsBtn){
 
 
 
-
             MAX_VEHICLES =
 
             newCap;
-
 
 
 
@@ -4484,7 +4691,6 @@ if(saveSettingsBtn){
 
 
 
-
             if(settingsOverlay)
 
                 settingsOverlay.style.display =
@@ -4496,12 +4702,12 @@ if(saveSettingsBtn){
 
 
 
-
             updateAddCardVisibility();
 
 
 
         }
+
 
 
 
