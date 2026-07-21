@@ -1020,6 +1020,65 @@ select option{
 }
 
 /* ==========================================
+   DELETE CONFIRMATION MODAL
+   Site-styled replacement for the native
+   browser confirm() popup.
+========================================== */
+
+.delete-confirm-panel{
+    width:420px;
+    text-align:center;
+}
+
+.delete-confirm-icon{
+    width:56px;
+    height:56px;
+    margin:0 auto 18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:rgba(239,68,68,.14);
+    border:2px solid rgba(239,68,68,.4);
+    color:var(--danger);
+    font-size:28px;
+    font-weight:900;
+}
+
+.admin-title.danger-title span{
+    color:var(--danger);
+}
+
+.delete-confirm-message{
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.6;
+    padding:0 10px;
+}
+
+.confirm-delete-btn{
+    flex:1;
+    padding:15px;
+    border:none;
+    border-radius:15px;
+    background:linear-gradient(180deg, #f87171, var(--danger));
+    color:white;
+    font-size:16px;
+    font-weight:900;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.confirm-delete-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 35px rgba(239,68,68,.45);
+}
+
+@media(max-width:700px){
+    .delete-confirm-panel{ width:95%; }
+}
+
+/* ==========================================
    LOGIN ERROR
 ========================================== */
 
