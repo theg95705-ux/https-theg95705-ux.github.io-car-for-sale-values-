@@ -687,11 +687,12 @@ nav a.active{
     z-index:2;
     display:none;
     align-items:center;
-    gap:4px;
-    font-size:13px;
+    gap:3px;
+    font-size:11px;
     font-weight:900;
-    padding:5px 11px;
-    border-radius:20px;
+    letter-spacing:.5px;
+    padding:5px 10px;
+    border-radius:8px;
     line-height:1;
     white-space:nowrap;
     font-variant-numeric:tabular-nums;
@@ -699,16 +700,14 @@ nav a.active{
 
 .value-change.positive{
     display:inline-flex;
-    color:var(--success);
-    background:rgba(52,211,153,.16);
-    border:1px solid rgba(52,211,153,.4);
+    color:#062e22;
+    background:var(--success);
 }
 
 .value-change.negative{
     display:inline-flex;
-    color:var(--danger);
-    background:rgba(239,68,68,.16);
-    border:1px solid rgba(239,68,68,.4);
+    color:white;
+    background:var(--danger);
 }
 
 /* ==========================================
