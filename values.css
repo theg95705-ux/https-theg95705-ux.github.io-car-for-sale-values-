@@ -673,27 +673,24 @@ nav a.active{
 
 /* ==========================================
    VALUE CHANGE INDICATOR
-   Small pill next to the value showing the
-   last change. script.js toggles
-   .positive / .negative and fills the text;
-   it's hidden by default so cards with no
-   recorded change show nothing extra.
+   Now a corner badge (top-right), matching
+   the Limited badge (top-left). script.js
+   toggles .positive / .negative and fills
+   the text; hidden by default so cards with
+   no recorded change show nothing extra.
 ========================================== */
 
-.value-row{
-    display:flex;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:8px;
-}
-
 .value-change{
+    position:absolute;
+    top:14px;
+    right:14px;
+    z-index:2;
     display:none;
     align-items:center;
     gap:4px;
-    font-size:15px;
+    font-size:13px;
     font-weight:900;
-    padding:5px 13px;
+    padding:5px 11px;
     border-radius:20px;
     line-height:1;
     white-space:nowrap;
@@ -703,13 +700,15 @@ nav a.active{
 .value-change.positive{
     display:inline-flex;
     color:var(--success);
-    background:rgba(52,211,153,.14);
+    background:rgba(52,211,153,.16);
+    border:1px solid rgba(52,211,153,.4);
 }
 
 .value-change.negative{
     display:inline-flex;
     color:var(--danger);
-    background:rgba(239,68,68,.14);
+    background:rgba(239,68,68,.16);
+    border:1px solid rgba(239,68,68,.4);
 }
 
 /* ==========================================
@@ -891,13 +890,6 @@ select option{
     color:white;
     transform:translateY(-3px);
 }
-
-/* ==========================================
-   LOGIN FORM - HIDE EMAIL FIELD
-   Login is password-only now; the email
-   input stays in the DOM (script.js still
-   needs its id) but is visually hidden.
-========================================== */
 
 /* ==========================================
    LOGIN ERROR
