@@ -269,6 +269,34 @@ document.getElementById(
 
 
 
+const deleteConfirmOverlay =
+document.getElementById(
+    "deleteConfirmOverlay"
+);
+
+
+
+const deleteConfirmMessage =
+document.getElementById(
+    "deleteConfirmMessage"
+);
+
+
+
+const deleteConfirmOkBtn =
+document.getElementById(
+    "deleteConfirmOkBtn"
+);
+
+
+
+const deleteConfirmCancelBtn =
+document.getElementById(
+    "deleteConfirmCancelBtn"
+);
+
+
+
 
 // Settings panel elements
 // (adjustable max vehicle cap)
@@ -4170,6 +4198,155 @@ if(clearChangeBtn){
 
 
 // ==========================================
+// SITE-STYLED CONFIRMATION MODAL
+// (replaces the native browser confirm()
+// popup with something that matches the
+// rest of the site. Returns a Promise that
+// resolves true on Delete, false on Cancel
+// or clicking outside the panel.)
+// ==========================================
+
+
+function showDeleteConfirm(message){
+
+
+    return new Promise((resolve)=>{
+
+
+        if(deleteConfirmMessage)
+
+            deleteConfirmMessage.textContent =
+
+            message;
+
+
+
+
+        if(deleteConfirmOverlay)
+
+            deleteConfirmOverlay.style.display =
+
+            "flex";
+
+
+
+
+        function finish(result){
+
+
+            if(deleteConfirmOverlay)
+
+                deleteConfirmOverlay.style.display =
+
+                "none";
+
+
+
+
+            if(deleteConfirmOkBtn)
+
+                deleteConfirmOkBtn.removeEventListener(
+                    "click",
+                    onOk
+                );
+
+
+
+
+            if(deleteConfirmCancelBtn)
+
+                deleteConfirmCancelBtn.removeEventListener(
+                    "click",
+                    onCancel
+                );
+
+
+
+
+            if(deleteConfirmOverlay)
+
+                deleteConfirmOverlay.removeEventListener(
+                    "click",
+                    onOverlayClick
+                );
+
+
+
+
+            resolve(result);
+
+
+        }
+
+
+
+
+        function onOk(){
+
+            finish(true);
+
+        }
+
+
+
+
+        function onCancel(){
+
+            finish(false);
+
+        }
+
+
+
+
+        function onOverlayClick(event){
+
+            if(event.target === deleteConfirmOverlay)
+
+                finish(false);
+
+        }
+
+
+
+
+        if(deleteConfirmOkBtn)
+
+            deleteConfirmOkBtn.addEventListener(
+                "click",
+                onOk
+            );
+
+
+
+
+        if(deleteConfirmCancelBtn)
+
+            deleteConfirmCancelBtn.addEventListener(
+                "click",
+                onCancel
+            );
+
+
+
+
+        if(deleteConfirmOverlay)
+
+            deleteConfirmOverlay.addEventListener(
+                "click",
+                onOverlayClick
+            );
+
+
+    });
+
+
+}
+
+
+
+
+// ==========================================
 // DELETE VEHICLE
 // (permanently removes this vehicle from
 // Firestore - separate from the price-change
@@ -4259,7 +4436,7 @@ if(deleteVehicleBtn){
 
         const confirmed =
 
-        window.confirm(
+        await showDeleteConfirm(
 
             `Permanently delete "${vehicleLabel}"? This cannot be undone.`
 
