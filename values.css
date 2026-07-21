@@ -682,7 +682,7 @@ nav a.active{
 
 .value-change{
     position:absolute;
-    top:16px;
+    top:22px;
     right:18px;
     z-index:2;
     display:none;
