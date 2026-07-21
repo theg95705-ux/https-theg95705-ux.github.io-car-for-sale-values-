@@ -142,6 +142,15 @@ let filteredVehicles = [];
 let currentPage = 1;
 
 
+let isCreatingNew = false;
+
+
+let pendingNewId = null;
+
+
+let addCardBtn = null;
+
+
 
 
 
@@ -406,6 +415,56 @@ function formatCompact(num){
 
 
 // ==========================================
+// NEXT AVAILABLE VEHICLE ID
+// (max existing ID number + 1, so new
+// vehicles continue the numbering)
+// ==========================================
+
+
+function getNextVehicleId(){
+
+
+    let maxNum = 0;
+
+
+
+
+    vehicles.forEach(v=>{
+
+
+        const num =
+
+        getVehicleNumber(v.id);
+
+
+
+        if(
+
+            num !== Number.MAX_SAFE_INTEGER &&
+
+            num > maxNum
+
+        ){
+
+
+            maxNum = num;
+
+
+        }
+
+
+    });
+
+
+
+
+    return String(maxNum + 1);
+
+
+}
+
+
+// ==========================================
 // END PART 1
 // ==========================================
 // ==========================================
@@ -500,6 +559,180 @@ function createVehicleCards(){
         `${CARDS_PER_PAGE} vehicle cards created`
     );
 
+
+
+
+    // ==========================================
+    // ADD VEHICLE TILE
+    // (only visible to admins, opens the editor
+    // in "create" mode instead of "edit" mode)
+    // ==========================================
+
+
+    addCardBtn =
+
+    document.createElement("div");
+
+
+    addCardBtn.className =
+
+    "add-card";
+
+
+    addCardBtn.id =
+
+    "addCardBtn";
+
+
+    addCardBtn.style.display =
+
+    "none";
+
+
+    addCardBtn.innerHTML =
+
+    `<span class="add-icon">+</span>
+
+     <span class="add-label">Add Vehicle</span>`;
+
+
+
+
+    addCardBtn.addEventListener(
+
+    "click",
+
+    ()=>{
+
+
+        if(!isAdmin)
+
+            return;
+
+
+
+
+        isCreatingNew = true;
+
+
+        pendingNewId =
+
+        getNextVehicleId();
+
+
+        selectedVehicle = null;
+
+
+
+
+        const vehicleName =
+
+        document.getElementById(
+            "vehicleName"
+        );
+
+
+        const vehicleValue =
+
+        document.getElementById(
+            "vehicleValue"
+        );
+
+
+        const vehicleDemand =
+
+        document.getElementById(
+            "vehicleDemand"
+        );
+
+
+        const vehicleImage =
+
+        document.getElementById(
+            "vehicleImage"
+        );
+
+
+        const vehicleLimited =
+
+        document.getElementById(
+            "vehicleLimited"
+        );
+
+
+
+
+        if(vehicleName)
+
+            vehicleName.value = "";
+
+
+
+        if(vehicleValue)
+
+            vehicleValue.value = "";
+
+
+
+        if(vehicleDemand)
+
+            vehicleDemand.value = "0";
+
+
+
+        if(vehicleImage)
+
+            vehicleImage.value = "";
+
+
+
+        if(vehicleLimited)
+
+            vehicleLimited.checked = false;
+
+
+
+
+        if(clearChangeBtn)
+
+            clearChangeBtn.style.display =
+
+            "none";
+
+
+
+
+        const titleEl =
+
+        document.querySelector(
+            "#adminOverlay .admin-title"
+        );
+
+
+        if(titleEl)
+
+            titleEl.innerHTML =
+
+            'Add <span>Vehicle</span>';
+
+
+
+
+        if(adminOverlay)
+
+            adminOverlay.style.display =
+
+            "flex";
+
+
+    });
+
+
+
+
+    cardsContainer.appendChild(
+        addCardBtn
+    );
 
 
 }
@@ -626,6 +859,12 @@ async function loadVehicles(){
 
 
         filterVehicles();
+
+
+
+        updateAddCardVisibility();
+
+
 
 
 
@@ -1220,6 +1459,41 @@ function updateCard(
 
 
 
+
+
+
+
+// ==========================================
+// UPDATE ADD-CARD VISIBILITY
+// ==========================================
+
+
+function updateAddCardVisibility(){
+
+
+    if(!addCardBtn)
+
+        return;
+
+
+
+
+    addCardBtn.style.display =
+
+    (
+
+        isAdmin &&
+
+        vehicles.length < MAX_VEHICLES
+
+    )
+
+    ? "flex"
+
+    : "none";
+
+
+}
 
 
 
@@ -2293,6 +2567,10 @@ auth,
         isAdmin = false;
 
 
+        updateAddCardVisibility();
+
+
+
 
         if(logoutBtn){
 
@@ -2344,6 +2622,10 @@ auth,
         isAdmin = true;
 
 
+        updateAddCardVisibility();
+
+
+
 
 
         if(logoutBtn){
@@ -2373,6 +2655,10 @@ auth,
 
 
         isAdmin = false;
+
+
+        updateAddCardVisibility();
+
 
 
 
@@ -2813,6 +3099,38 @@ function openEditor(card){
 
 
 
+    isCreatingNew = false;
+
+
+    pendingNewId = null;
+
+
+
+    if(clearChangeBtn)
+
+        clearChangeBtn.style.display =
+
+        "";
+
+
+
+
+    const titleEl =
+
+    document.querySelector(
+        "#adminOverlay .admin-title"
+    );
+
+
+    if(titleEl)
+
+        titleEl.innerHTML =
+
+        'Edit <span>Vehicle</span>';
+
+
+
+
     const name =
 
     card.querySelector(
@@ -3021,6 +3339,12 @@ if(cancelBtn){
         selectedVehicle = null;
 
 
+        isCreatingNew = false;
+
+        pendingNewId = null;
+
+
+
 
     });
 
@@ -3073,20 +3397,19 @@ if(saveBtn){
 
 
 
-        if(!selectedVehicle)
+        if(!isCreatingNew && !selectedVehicle)
 
             return;
 
 
 
-
-
-
-
-
         const id =
 
-        selectedVehicle.dataset.id;
+        isCreatingNew
+
+        ? pendingNewId
+
+        : selectedVehicle.dataset.id;
 
 
 
@@ -3118,13 +3441,21 @@ if(saveBtn){
         // ==========================
         // GRAB THE VEHICLE'S CURRENT
         // (PRE-EDIT) VALUE SO WE CAN
-        // STORE IT AS previousValue
+        // STORE IT AS previousValue.
+        // For a brand-new vehicle there is
+        // no "before", so oldValue stays
+        // null and gets set to match the
+        // new value below (no fake arrow).
         // ==========================
 
 
         const oldVehicle =
 
-        vehicles.find(
+        isCreatingNew
+
+        ? null
+
+        : vehicles.find(
 
             v => v.id === id
 
@@ -3138,12 +3469,26 @@ if(saveBtn){
 
         ? Number(oldVehicle.value || 0)
 
-        : 0;
+        : null;
 
 
 
 
 
+
+
+
+
+        const newValue =
+
+        Number(
+
+            document.getElementById(
+                "vehicleValue"
+            )
+            .value
+
+        );
 
 
 
@@ -3167,14 +3512,7 @@ if(saveBtn){
 
             value:
 
-            Number(
-
-                document.getElementById(
-                    "vehicleValue"
-                )
-                .value
-
-            ),
+            newValue,
 
 
 
@@ -3224,7 +3562,11 @@ if(saveBtn){
 
             previousValue:
 
-            oldValue
+            oldValue !== null
+
+            ? oldValue
+
+            : newValue
 
 
 
@@ -3287,6 +3629,12 @@ if(saveBtn){
 
 
             selectedVehicle = null;
+
+
+            isCreatingNew = false;
+
+            pendingNewId = null;
+
 
 
 
@@ -3635,6 +3983,12 @@ if(adminOverlay){
 
 
             selectedVehicle = null;
+
+
+            isCreatingNew = false;
+
+            pendingNewId = null;
+
 
 
         }
