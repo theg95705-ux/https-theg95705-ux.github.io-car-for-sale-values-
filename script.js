@@ -113,12 +113,165 @@ const CARDS_PER_PAGE =
 16;
 
 
-// Fixed cap - only this many vehicles ever
-// load or display. The Add Vehicle tile is
-// only shown while under this cap.
+// Cap starts at 32 but grows automatically
+// whenever a vehicle is added through the
+// Add Vehicle tile (see saveBtn handler) - so
+// existing pre-cap junk data stays hidden,
+// but the tile itself is never blocked by the
+// cap. The raised cap is quietly saved to
+// Firestore so it survives a page refresh -
+// there's no admin UI for this, it's just
+// internal bookkeeping.
 
-const MAX_VEHICLES =
+let MAX_VEHICLES =
 32;
+
+
+async function loadCap(){
+
+
+    try{
+
+
+
+        const capRef =
+
+        doc(
+
+            db,
+
+            "settings",
+
+            "config"
+
+        );
+
+
+
+
+        const snap =
+
+        await getDoc(
+
+            capRef
+
+        );
+
+
+
+
+        if(snap.exists()){
+
+
+            const saved =
+
+            Number(
+
+                snap.data().maxVehicles
+
+            );
+
+
+
+            if(saved && saved > MAX_VEHICLES){
+
+
+                MAX_VEHICLES =
+
+                saved;
+
+
+            }
+
+
+        }
+
+
+
+    }
+
+
+
+    catch(error){
+
+
+
+        console.error(
+
+            "Cap loading error:",
+
+            error
+
+        );
+
+
+
+    }
+
+
+}
+
+
+async function raiseCap(newCap){
+
+
+    MAX_VEHICLES =
+
+    newCap;
+
+
+
+
+    try{
+
+
+
+        await setDoc(
+
+            doc(
+
+                db,
+
+                "settings",
+
+                "config"
+
+            ),
+
+            {
+
+                maxVehicles:
+
+                newCap
+
+            }
+
+        );
+
+
+
+    }
+
+
+
+    catch(error){
+
+
+
+        console.error(
+
+            "Cap save error:",
+
+            error
+
+        );
+
+
+
+    }
+
+
+}
 
 
 
@@ -993,6 +1146,21 @@ function displayVehicles(){
 
 
 
+    const totalSlots =
+
+
+    filteredVehicles.length
+
+    +
+
+    (isAdmin ? 1 : 0);
+
+
+
+
+
+
+
     const totalPages =
 
 
@@ -1002,7 +1170,7 @@ function displayVehicles(){
 
         Math.ceil(
 
-            filteredVehicles.length
+            totalSlots
 
             /
 
@@ -1551,15 +1719,51 @@ function updateAddCardVisibility(){
 
 
 
-    addCardBtn.style.display =
+    if(!isAdmin){
 
-    (
 
-        isAdmin &&
+        addCardBtn.style.display =
 
-        vehicles.length < MAX_VEHICLES
+        "none";
+
+
+        return;
+
+
+    }
+
+
+
+
+    const addSlotIndex =
+
+    filteredVehicles.length;
+
+
+
+
+    const addSlotPage =
+
+    Math.floor(
+
+        addSlotIndex
+
+        /
+
+        CARDS_PER_PAGE
 
     )
+
+    +
+
+    1;
+
+
+
+
+    addCardBtn.style.display =
+
+    (currentPage === addSlotPage)
 
     ? "flex"
 
@@ -1647,15 +1851,31 @@ if(nextPage){
     ()=>{
 
 
+        const totalSlots =
+
+        filteredVehicles.length
+
+        +
+
+        (isAdmin ? 1 : 0);
+
+
+
         const totalPages =
 
-        Math.ceil(
+        Math.max(
 
-            filteredVehicles.length
+            1,
 
-            /
+            Math.ceil(
 
-            CARDS_PER_PAGE
+                totalSlots
+
+                /
+
+                CARDS_PER_PAGE
+
+            )
 
         );
 
@@ -3699,6 +3919,24 @@ if(saveBtn){
 
 
 
+            if(isCreatingNew){
+
+
+                await raiseCap(
+
+                    MAX_VEHICLES + 1
+
+                );
+
+
+            }
+
+
+
+
+
+
+
             if(adminOverlay)
 
                 adminOverlay.style.display =
@@ -4426,6 +4664,10 @@ async function startApp(){
 
 
     setupCardEditing();
+
+
+
+    await loadCap();
 
 
 
