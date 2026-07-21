@@ -110,16 +110,37 @@
 
 
 
-    <button
-        id="logoutBtn"
-        class="logout-btn"
-        style="display:none;">
+    <!-- ========================================= -->
+    <!-- HEADER ACTIONS (admin-only buttons) -->
+    <!-- ========================================= -->
+
+    <div class="header-actions">
 
 
-        Log Out
+        <button
+            id="settingsBtn"
+            class="settings-btn"
+            style="display:none;">
+
+            ⚙ Settings
+
+        </button>
 
 
-    </button>
+
+        <button
+            id="logoutBtn"
+            class="logout-btn"
+            style="display:none;">
+
+
+            Log Out
+
+
+        </button>
+
+
+    </div>
 
 
 </header>
@@ -1107,6 +1128,94 @@ ADMIN BUTTONS
 
 
 
+
+
+    </div>
+
+
+</div>
+
+
+
+
+<!-- =====================================
+SITE SETTINGS OVERLAY
+(admin-only — lets you change how many
+vehicle slots the site allows, instead of
+that number being hardcoded in script.js)
+===================================== -->
+
+
+<div
+class="admin-overlay"
+id="settingsOverlay">
+
+
+    <div class="admin-panel">
+
+
+        <h2 class="admin-title">
+
+            Site <span>Settings</span>
+
+        </h2>
+
+
+
+        <div class="admin-group">
+
+
+            <label>
+
+                Max Vehicles Allowed
+
+            </label>
+
+
+            <input
+            type="number"
+            id="maxVehiclesInput"
+            placeholder="32"
+            min="1"
+            autocomplete="off">
+
+
+        </div>
+
+
+
+        <p
+        id="settingsError"
+        class="login-error"
+        style="display:none;">
+
+        </p>
+
+
+
+        <div class="button-row">
+
+
+            <button
+            id="saveSettingsBtn"
+            class="save-btn">
+
+                Save
+
+            </button>
+
+
+
+            <button
+            id="cancelSettingsBtn"
+            class="cancel-btn">
+
+                Cancel
+
+            </button>
+
+
+        </div>
 
 
     </div>
