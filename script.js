@@ -232,6 +232,13 @@ document.getElementById(
 
 
 
+const cleanupBtn =
+document.getElementById(
+    "cleanupBtn"
+);
+
+
+
 const saveBtn =
 document.getElementById(
     "saveBtn"
@@ -2711,6 +2718,19 @@ auth,
 
 
 
+        if(cleanupBtn){
+
+
+            cleanupBtn.style.display =
+
+            "none";
+
+
+        }
+
+
+
+
         console.log(
             "No admin logged in"
         );
@@ -2759,6 +2779,18 @@ auth,
 
 
             logoutBtn.style.display =
+
+            "inline-flex";
+
+
+        }
+
+
+
+        if(cleanupBtn){
+
+
+            cleanupBtn.style.display =
 
             "inline-flex";
 
@@ -4369,6 +4401,178 @@ if(deleteVehicleBtn){
 
             alert(
                 "Delete failed"
+            );
+
+
+
+        }
+
+
+
+    });
+
+
+
+}
+
+
+
+
+// ==========================================
+// CLEAN UP EMPTY VEHICLES
+// (bulk-deletes any vehicle with $0 value
+// AND 0/10 demand - catches old test/junk
+// entries in one go instead of deleting
+// them one at a time)
+// ==========================================
+
+
+if(cleanupBtn){
+
+
+
+    cleanupBtn.addEventListener(
+
+    "click",
+
+    async()=>{
+
+
+
+        if(!isAdmin){
+
+
+            alert(
+                "Admin only"
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+        const emptyVehicles =
+
+        vehicles.filter(
+
+        v=>
+
+
+        Number(v.value || 0) === 0
+
+        &&
+
+        Number(v.demand || 0) === 0
+
+
+        );
+
+
+
+
+        if(emptyVehicles.length === 0){
+
+
+            alert(
+                "No empty vehicles found."
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+        const confirmed =
+
+        await showDeleteConfirm(
+
+            `Delete ${emptyVehicles.length} empty vehicle${emptyVehicles.length === 1 ? "" : "s"} `
+
+            +
+
+            `(no value, no demand)? This cannot be undone.`
+
+        );
+
+
+
+        if(!confirmed)
+
+            return;
+
+
+
+
+        try{
+
+
+
+            for(const v of emptyVehicles){
+
+
+                await deleteDoc(
+
+                    doc(
+
+                        db,
+
+                        "vehicles",
+
+                        v.id
+
+                    )
+
+                );
+
+
+            }
+
+
+
+
+            console.log(
+
+                "Empty vehicles cleaned up:",
+
+                emptyVehicles.length
+
+            );
+
+
+
+
+            await loadVehicles();
+
+
+
+        }
+
+
+
+        catch(error){
+
+
+
+            console.error(
+
+                "Cleanup error:",
+
+                error
+
+            );
+
+
+
+            alert(
+                "Cleanup failed"
             );
 
 
