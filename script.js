@@ -113,13 +113,12 @@ const CARDS_PER_PAGE =
 16;
 
 
-// NOTE: there is no vehicle cap anymore.
-// Every vehicle in Firestore loads and gets
-// a card. The "Add Vehicle" tile always sits
-// right after the last real vehicle in the
-// list - if that spot doesn't fit on the
-// current page, it just appears as the first
-// (and only) item on the next page instead.
+// Fixed cap - only this many vehicles ever
+// load or display. The Add Vehicle tile is
+// only shown while under this cap.
+
+const MAX_VEHICLES =
+32;
 
 
 
@@ -228,13 +227,6 @@ document.getElementById(
 const logoutBtn =
 document.getElementById(
     "logoutBtn"
-);
-
-
-
-const cleanupBtn =
-document.getElementById(
-    "cleanupBtn"
 );
 
 
@@ -887,6 +879,21 @@ async function loadVehicles(){
 
 
 
+        // CAP TOTAL VEHICLES
+
+        vehicles =
+
+        vehicles.slice(
+
+            0,
+
+            MAX_VEHICLES
+
+        );
+
+
+
+
         filteredVehicles =
 
         [
@@ -986,21 +993,6 @@ function displayVehicles(){
 
 
 
-    const totalSlots =
-
-
-    filteredVehicles.length
-
-    +
-
-    (isAdmin ? 1 : 0);
-
-
-
-
-
-
-
     const totalPages =
 
 
@@ -1010,7 +1002,7 @@ function displayVehicles(){
 
         Math.ceil(
 
-            totalSlots
+            filteredVehicles.length
 
             /
 
@@ -1559,51 +1551,15 @@ function updateAddCardVisibility(){
 
 
 
-    if(!isAdmin){
-
-
-        addCardBtn.style.display =
-
-        "none";
-
-
-        return;
-
-
-    }
-
-
-
-
-    const addSlotIndex =
-
-    filteredVehicles.length;
-
-
-
-
-    const addSlotPage =
-
-    Math.floor(
-
-        addSlotIndex
-
-        /
-
-        CARDS_PER_PAGE
-
-    )
-
-    +
-
-    1;
-
-
-
-
     addCardBtn.style.display =
 
-    (currentPage === addSlotPage)
+    (
+
+        isAdmin &&
+
+        vehicles.length < MAX_VEHICLES
+
+    )
 
     ? "flex"
 
@@ -1691,31 +1647,15 @@ if(nextPage){
     ()=>{
 
 
-        const totalSlots =
-
-        filteredVehicles.length
-
-        +
-
-        (isAdmin ? 1 : 0);
-
-
-
         const totalPages =
 
-        Math.max(
+        Math.ceil(
 
-            1,
+            filteredVehicles.length
 
-            Math.ceil(
+            /
 
-                totalSlots
-
-                /
-
-                CARDS_PER_PAGE
-
-            )
+            CARDS_PER_PAGE
 
         );
 
@@ -2718,19 +2658,6 @@ auth,
 
 
 
-        if(cleanupBtn){
-
-
-            cleanupBtn.style.display =
-
-            "none";
-
-
-        }
-
-
-
-
         console.log(
             "No admin logged in"
         );
@@ -2779,18 +2706,6 @@ auth,
 
 
             logoutBtn.style.display =
-
-            "inline-flex";
-
-
-        }
-
-
-
-        if(cleanupBtn){
-
-
-            cleanupBtn.style.display =
 
             "inline-flex";
 
@@ -4401,178 +4316,6 @@ if(deleteVehicleBtn){
 
             alert(
                 "Delete failed"
-            );
-
-
-
-        }
-
-
-
-    });
-
-
-
-}
-
-
-
-
-// ==========================================
-// CLEAN UP EMPTY VEHICLES
-// (bulk-deletes any vehicle with $0 value
-// AND 0/10 demand - catches old test/junk
-// entries in one go instead of deleting
-// them one at a time)
-// ==========================================
-
-
-if(cleanupBtn){
-
-
-
-    cleanupBtn.addEventListener(
-
-    "click",
-
-    async()=>{
-
-
-
-        if(!isAdmin){
-
-
-            alert(
-                "Admin only"
-            );
-
-
-            return;
-
-
-        }
-
-
-
-
-        const emptyVehicles =
-
-        vehicles.filter(
-
-        v=>
-
-
-        Number(v.value || 0) === 0
-
-        &&
-
-        Number(v.demand || 0) === 0
-
-
-        );
-
-
-
-
-        if(emptyVehicles.length === 0){
-
-
-            alert(
-                "No empty vehicles found."
-            );
-
-
-            return;
-
-
-        }
-
-
-
-
-        const confirmed =
-
-        await showDeleteConfirm(
-
-            `Delete ${emptyVehicles.length} empty vehicle${emptyVehicles.length === 1 ? "" : "s"} `
-
-            +
-
-            `(no value, no demand)? This cannot be undone.`
-
-        );
-
-
-
-        if(!confirmed)
-
-            return;
-
-
-
-
-        try{
-
-
-
-            for(const v of emptyVehicles){
-
-
-                await deleteDoc(
-
-                    doc(
-
-                        db,
-
-                        "vehicles",
-
-                        v.id
-
-                    )
-
-                );
-
-
-            }
-
-
-
-
-            console.log(
-
-                "Empty vehicles cleaned up:",
-
-                emptyVehicles.length
-
-            );
-
-
-
-
-            await loadVehicles();
-
-
-
-        }
-
-
-
-        catch(error){
-
-
-
-            console.error(
-
-                "Cleanup error:",
-
-                error
-
-            );
-
-
-
-            alert(
-                "Cleanup failed"
             );
 
 
