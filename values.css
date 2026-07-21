@@ -1,14 +1,7 @@
 /* ==========================================
    VEHICLE VALUES
    VALUES.CSS
-   UPDATED VERSION - FONTS FIXED + SETTINGS
-========================================== */
-
-/* ==========================================
-   FONT
-   Loaded in the HTML <head> via <link rel="stylesheet">
-   (with preconnect) — NOT here. Loading it again with
-   @import would fetch it twice and slow things down.
+   UPDATED VERSION - FONTS FIXED, NO SETTINGS
 ========================================== */
 
 /* ==========================================
@@ -41,9 +34,6 @@
 
 /* ==========================================
    GLOBAL RESET
-   (::before/::after added so generated
-   content, icons, and the "No Image"
-   placeholder text all inherit the font too)
 ========================================== */
 
 *,
@@ -132,19 +122,14 @@ img{
     z-index:999;
 }
 
-/* logo sits in column 1, pinned left */
 .header .logo{
     justify-self:start;
 }
 
-/* nav sits in column 2, the grid keeps it
-   perfectly centered no matter how wide the
-   logo or header-actions end up being */
 .header nav{
     justify-self:center;
 }
 
-/* settings/logout sit in column 3, pinned right */
 .header .header-actions{
     justify-self:end;
 }
@@ -206,9 +191,6 @@ nav a.active{
 
 /* ==========================================
    HEADER ACTIONS
-   (wraps Settings + Log Out so header's
-   space-between still only sees 3 columns:
-   logo, nav, header-actions)
 ========================================== */
 
 .header-actions{
@@ -236,30 +218,6 @@ nav a.active{
 .logout-btn:hover{
     transform:translateY(-3px);
     box-shadow:0 10px 25px rgba(239,68,68,.35);
-}
-
-/* ==========================================
-   SETTINGS BUTTON
-   (admin-only, sits next to Log Out — opens
-   the site settings panel, e.g. max vehicle cap)
-========================================== */
-
-.settings-btn{
-    background:var(--panel-light);
-    color:white;
-    border:2px solid var(--border);
-    padding:9px 22px;
-    border-radius:14px;
-    font-size:15px;
-    font-weight:900;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.settings-btn:hover{
-    border-color:var(--primary);
-    transform:translateY(-3px);
-    box-shadow:0 10px 25px rgba(79,141,255,.25);
 }
 
 /* ==========================================
@@ -388,8 +346,7 @@ nav a.active{
 }
 
 /* ==========================================
-   VISUALLY HIDDEN (real <select> stays
-   functional for script.js, just not shown)
+   VISUALLY HIDDEN
 ========================================== */
 
 .visually-hidden{
@@ -520,9 +477,10 @@ nav a.active{
 /* ==========================================
    ADD VEHICLE TILE
    Admin-only "+" card that opens the editor
-   in create mode. Hidden by default;
-   script.js toggles display:flex when the
-   user is an admin and under the vehicle cap.
+   in create mode. script.js shows this on
+   whichever page falls right after the last
+   real vehicle (spilling to a new page once
+   the current one is full).
 ========================================== */
 
 .add-card{
@@ -704,8 +662,6 @@ nav a.active{
 
 /* ==========================================
    LIMITED CARDS
-   script.js adds class="limited" to the
-   card itself when vehicle.limited is true
 ========================================== */
 
 .card.limited{
@@ -731,8 +687,6 @@ nav a.active{
 
 /* ==========================================
    STAT BOXES
-   (merged the two duplicate .stat-box
-   blocks from the original file into one)
 ========================================== */
 
 .stat-box{
@@ -773,11 +727,6 @@ nav a.active{
 
 /* ==========================================
    VALUE CHANGE INDICATOR
-   Now a corner badge (top-right), matching
-   the Limited badge (top-left). script.js
-   toggles .positive / .negative and fills
-   the text; hidden by default so cards with
-   no recorded change show nothing extra.
 ========================================== */
 
 .value-change{
@@ -966,10 +915,6 @@ select option{
 
 /* ==========================================
    CLEAR PRICE CHANGE BUTTON
-   Styled to match the other admin form
-   fields (same filled background, border,
-   and radius as inputs) instead of standing
-   out as a separate outline button.
 ========================================== */
 
 .clear-change-btn{
@@ -993,10 +938,6 @@ select option{
 
 /* ==========================================
    DELETE VEHICLE BUTTON
-   Deliberately styled as a "danger" action -
-   red outline/text at rest, filled red on
-   hover - so it reads as distinct and
-   permanent, unlike the other form controls.
 ========================================== */
 
 .delete-vehicle-btn{
@@ -1021,8 +962,6 @@ select option{
 
 /* ==========================================
    DELETE CONFIRMATION MODAL
-   Site-styled replacement for the native
-   browser confirm() popup.
 ========================================== */
 
 .delete-confirm-panel{
@@ -1224,7 +1163,6 @@ img{
     nav{ display:none; }
     .header-actions{ gap:8px; }
     .logout-btn{ padding:10px 16px; font-size:14px; }
-    .settings-btn{ padding:8px 14px; font-size:14px; }
     .page-title{ padding:50px 15px 30px; }
     .page-title h1{ font-size:34px; }
     .page-title p{ font-size:15px; }
@@ -1247,7 +1185,6 @@ img{
 @media(max-width:400px){
     .logo{ font-size:20px; }
     .logout-btn{ padding:8px 12px; }
-    .settings-btn{ padding:7px 10px; }
     .vehicle-image{ height:150px; }
     .admin-title{ font-size:24px; }
 }
