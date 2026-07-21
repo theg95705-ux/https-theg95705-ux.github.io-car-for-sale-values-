@@ -992,6 +992,34 @@ select option{
 }
 
 /* ==========================================
+   DELETE VEHICLE BUTTON
+   Deliberately styled as a "danger" action -
+   red outline/text at rest, filled red on
+   hover - so it reads as distinct and
+   permanent, unlike the other form controls.
+========================================== */
+
+.delete-vehicle-btn{
+    width:100%;
+    padding:14px;
+    border:2px solid var(--danger);
+    border-radius:14px;
+    background:rgba(239,68,68,.1);
+    color:var(--danger);
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.delete-vehicle-btn:hover{
+    background:var(--danger);
+    color:white;
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(239,68,68,.35);
+}
+
+/* ==========================================
    LOGIN ERROR
 ========================================== */
 
