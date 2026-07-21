@@ -1,7 +1,7 @@
 // ==========================================
 // VEHICLE VALUES
 // SCRIPT.JS
-// UPDATED FIXED VERSION
+// UPDATED - NO SETTINGS CAP, ADD-CARD DRIVES PAGINATION
 // PART 1 - FIREBASE + GLOBAL SYSTEM
 // ==========================================
 
@@ -113,22 +113,13 @@ const CARDS_PER_PAGE =
 16;
 
 
-// Default cap used until the saved value is
-// loaded from Firestore (settings/config).
-// This is now ADJUSTABLE from the Settings
-// panel in the header instead of being fixed
-// in code — see loadSettings() and the
-// Settings save handler in Part 5.
-
-let MAX_VEHICLES =
-32;
-
-
-// Safety ceiling so the admin can't type in
-// something absurd that breaks the grid.
-
-const HARD_CAP_VEHICLES =
-200;
+// NOTE: there is no vehicle cap anymore.
+// Every vehicle in Firestore loads and gets
+// a card. The "Add Vehicle" tile always sits
+// right after the last real vehicle in the
+// list - if that spot doesn't fit on the
+// current page, it just appears as the first
+// (and only) item on the next page instead.
 
 
 
@@ -293,53 +284,6 @@ document.getElementById(
 const deleteConfirmCancelBtn =
 document.getElementById(
     "deleteConfirmCancelBtn"
-);
-
-
-
-
-// Settings panel elements
-// (adjustable max vehicle cap)
-
-
-const settingsBtn =
-document.getElementById(
-    "settingsBtn"
-);
-
-
-
-const settingsOverlay =
-document.getElementById(
-    "settingsOverlay"
-);
-
-
-
-const maxVehiclesInput =
-document.getElementById(
-    "maxVehiclesInput"
-);
-
-
-
-const settingsError =
-document.getElementById(
-    "settingsError"
-);
-
-
-
-const saveSettingsBtn =
-document.getElementById(
-    "saveSettingsBtn"
-);
-
-
-
-const cancelSettingsBtn =
-document.getElementById(
-    "cancelSettingsBtn"
 );
 
 
@@ -662,8 +606,14 @@ function createVehicleCards(){
 
     // ==========================================
     // ADD VEHICLE TILE
-    // (only visible to admins, opens the editor
-    // in "create" mode instead of "edit" mode)
+    // (admin-only, opens the editor in "create"
+    // mode. This element is always the LAST
+    // child of cardsContainer - since the real
+    // vehicle cards past the current page's count
+    // are display:none, this tile naturally lands
+    // in the grid slot right after the last
+    // visible vehicle. displayVehicles() decides
+    // which page it should be visible on.)
     // ==========================================
 
 
@@ -854,6 +804,8 @@ function createVehicleCards(){
 
 // ==========================================
 // LOAD VEHICLES FROM FIREBASE
+// (no cap - every vehicle in the collection
+// loads and gets rendered)
 // ==========================================
 
 
@@ -928,25 +880,6 @@ async function loadVehicles(){
 
 
 
-        // CAP TOTAL VEHICLES
-        // (uses the adjustable MAX_VEHICLES,
-        // loaded from Firestore settings)
-
-        vehicles =
-
-        vehicles.slice(
-
-            0,
-
-            MAX_VEHICLES
-
-        );
-
-
-
-
-
-
         filteredVehicles =
 
         [
@@ -968,10 +901,6 @@ async function loadVehicles(){
 
 
         filterVehicles();
-
-
-
-        updateAddCardVisibility();
 
 
 
@@ -1020,131 +949,6 @@ async function loadVehicles(){
 
 
 
-// ==========================================
-// LOAD SITE SETTINGS FROM FIREBASE
-// (currently just the max vehicle cap,
-// stored at settings/config so it survives
-// refreshes and applies for every visitor)
-// ==========================================
-
-
-async function loadSettings(){
-
-
-    try{
-
-
-        console.log(
-            "Loading settings..."
-        );
-
-
-
-
-        const settingsRef =
-
-        doc(
-
-            db,
-
-            "settings",
-
-            "config"
-
-        );
-
-
-
-
-        const snap =
-
-        await getDoc(
-
-            settingsRef
-
-        );
-
-
-
-
-        if(snap.exists()){
-
-
-            const data =
-
-            snap.data();
-
-
-
-
-            const savedCap =
-
-            Number(
-
-                data.maxVehicles
-
-            );
-
-
-
-
-            if(
-
-                savedCap &&
-
-                savedCap > 0
-
-            ){
-
-
-                MAX_VEHICLES =
-
-                savedCap;
-
-
-            }
-
-
-        }
-
-
-
-
-        console.log(
-
-            "Settings loaded. MAX_VEHICLES =",
-
-            MAX_VEHICLES
-
-        );
-
-
-
-    }
-
-
-
-    catch(error){
-
-
-        console.error(
-
-            "Settings loading error:",
-
-            error
-
-        );
-
-
-    }
-
-
-
-}
-
-
-
-
 
 
 
@@ -1154,6 +958,10 @@ async function loadSettings(){
 
 // ==========================================
 // DISPLAY VEHICLES
+// (total page count includes the Add
+// Vehicle tile as a "virtual" extra item for
+// admins - that's what lets it spill onto a
+// fresh page once the current one is full)
 // ==========================================
 
 
@@ -1171,6 +979,21 @@ function displayVehicles(){
 
 
 
+    const totalSlots =
+
+
+    filteredVehicles.length
+
+    +
+
+    (isAdmin ? 1 : 0);
+
+
+
+
+
+
+
     const totalPages =
 
 
@@ -1180,7 +1003,7 @@ function displayVehicles(){
 
         Math.ceil(
 
-            filteredVehicles.length
+            totalSlots
 
             /
 
@@ -1341,6 +1164,15 @@ function displayVehicles(){
 
 
     });
+
+
+
+
+
+
+
+
+    updateAddCardVisibility();
 
 
 
@@ -1704,6 +1536,9 @@ function updateCard(
 
 // ==========================================
 // UPDATE ADD-CARD VISIBILITY
+// (the Add Vehicle tile only shows on the
+// page it actually belongs on - the page
+// right after the last real vehicle)
 // ==========================================
 
 
@@ -1717,15 +1552,51 @@ function updateAddCardVisibility(){
 
 
 
-    addCardBtn.style.display =
+    if(!isAdmin){
 
-    (
 
-        isAdmin &&
+        addCardBtn.style.display =
 
-        vehicles.length < MAX_VEHICLES
+        "none";
+
+
+        return;
+
+
+    }
+
+
+
+
+    const addSlotIndex =
+
+    filteredVehicles.length;
+
+
+
+
+    const addSlotPage =
+
+    Math.floor(
+
+        addSlotIndex
+
+        /
+
+        CARDS_PER_PAGE
 
     )
+
+    +
+
+    1;
+
+
+
+
+    addCardBtn.style.display =
+
+    (currentPage === addSlotPage)
 
     ? "flex"
 
@@ -1813,15 +1684,31 @@ if(nextPage){
     ()=>{
 
 
+        const totalSlots =
+
+        filteredVehicles.length
+
+        +
+
+        (isAdmin ? 1 : 0);
+
+
+
         const totalPages =
 
-        Math.ceil(
+        Math.max(
 
-            filteredVehicles.length
+            1,
 
-            /
+            Math.ceil(
 
-            CARDS_PER_PAGE
+                totalSlots
+
+                /
+
+                CARDS_PER_PAGE
+
+            )
 
         );
 
@@ -2824,18 +2711,6 @@ auth,
 
 
 
-        if(settingsBtn){
-
-
-            settingsBtn.style.display =
-
-            "none";
-
-
-        }
-
-
-
         console.log(
             "No admin logged in"
         );
@@ -2874,7 +2749,7 @@ auth,
         isAdmin = true;
 
 
-        updateAddCardVisibility();
+        displayVehicles();
 
 
 
@@ -2884,19 +2759,6 @@ auth,
 
 
             logoutBtn.style.display =
-
-            "inline-flex";
-
-
-        }
-
-
-
-
-        if(settingsBtn){
-
-
-            settingsBtn.style.display =
 
             "inline-flex";
 
@@ -2923,20 +2785,6 @@ auth,
 
 
         updateAddCardVisibility();
-
-
-
-
-        if(settingsBtn){
-
-
-            settingsBtn.style.display =
-
-            "none";
-
-
-        }
-
 
 
 
@@ -4350,8 +4198,7 @@ function showDeleteConfirm(message){
 // DELETE VEHICLE
 // (permanently removes this vehicle from
 // Firestore - separate from the price-change
-// clear button above, and from the cap
-// setting, which never deletes anything)
+// clear button above)
 // ==========================================
 
 
@@ -4539,408 +4386,6 @@ if(deleteVehicleBtn){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ==========================================
-// OPEN SETTINGS PANEL
-// (admin-only, next to Log Out — lets you
-// change how many vehicle slots the site
-// allows, saved to Firestore)
-// ==========================================
-
-
-if(settingsBtn){
-
-
-
-    settingsBtn.addEventListener(
-
-    "click",
-
-    ()=>{
-
-
-
-        if(!isAdmin)
-
-            return;
-
-
-
-
-        if(maxVehiclesInput)
-
-            maxVehiclesInput.value =
-
-            MAX_VEHICLES;
-
-
-
-
-        if(settingsError)
-
-            settingsError.style.display =
-
-            "none";
-
-
-
-
-        if(settingsOverlay)
-
-            settingsOverlay.style.display =
-
-            "flex";
-
-
-
-    });
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// ==========================================
-// CANCEL SETTINGS
-// ==========================================
-
-
-if(cancelSettingsBtn){
-
-
-
-    cancelSettingsBtn.addEventListener(
-
-    "click",
-
-    ()=>{
-
-
-
-        if(settingsOverlay)
-
-            settingsOverlay.style.display =
-
-            "none";
-
-
-
-    });
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// ==========================================
-// SAVE SETTINGS
-// (validates, writes to Firestore, then
-// updates MAX_VEHICLES live so the Add
-// Vehicle tile reacts immediately)
-// ==========================================
-
-
-if(saveSettingsBtn){
-
-
-
-    saveSettingsBtn.addEventListener(
-
-    "click",
-
-    async()=>{
-
-
-
-
-
-        if(!isAdmin){
-
-
-            alert(
-                "Admin only"
-            );
-
-
-            return;
-
-
-        }
-
-
-
-
-
-
-
-
-        const rawValue =
-
-        maxVehiclesInput
-
-        ? maxVehiclesInput.value
-
-        : "";
-
-
-
-
-        const newCap =
-
-        Number(rawValue);
-
-
-
-
-
-
-
-
-        function showSettingsError(msg){
-
-
-            if(settingsError){
-
-
-                settingsError.textContent =
-
-                msg;
-
-
-                settingsError.style.display =
-
-                "block";
-
-
-            }
-
-
-        }
-
-
-
-
-
-
-
-
-        if(
-
-            rawValue === "" ||
-
-            !Number.isFinite(newCap) ||
-
-            !Number.isInteger(newCap) ||
-
-            newCap < 1
-
-        ){
-
-
-            showSettingsError(
-
-                "Enter a whole number of 1 or more"
-
-            );
-
-
-            return;
-
-
-        }
-
-
-
-
-
-
-
-
-        if(newCap > HARD_CAP_VEHICLES){
-
-
-            showSettingsError(
-
-                `Cap can't be higher than ${HARD_CAP_VEHICLES}`
-
-            );
-
-
-            return;
-
-
-        }
-
-
-
-
-
-
-
-
-        // NOTE: lowering the cap is intentionally
-        // non-destructive. It just limits how many
-        // vehicles are shown (vehicles[] is sorted
-        // lowest ID first, so anything past the cap
-        // is hidden, not deleted). To remove a
-        // specific vehicle for good, use the
-        // "Delete Vehicle" button in that vehicle's
-        // own editor instead.
-
-
-        try{
-
-
-
-            await setDoc(
-
-                doc(
-
-                    db,
-
-                    "settings",
-
-                    "config"
-
-                ),
-
-                {
-
-                    maxVehicles:
-
-                    newCap
-
-                }
-
-            );
-
-
-
-
-
-
-            MAX_VEHICLES =
-
-            newCap;
-
-
-
-
-
-
-            console.log(
-
-                "Max vehicles updated:",
-
-                MAX_VEHICLES
-
-            );
-
-
-
-
-
-
-            if(settingsOverlay)
-
-                settingsOverlay.style.display =
-
-                "none";
-
-
-
-
-
-
-            updateAddCardVisibility();
-
-
-
-        }
-
-
-
-
-
-
-        catch(error){
-
-
-
-            console.error(
-
-                "Settings save error:",
-
-                error
-
-            );
-
-
-
-            showSettingsError(
-
-                "Save failed, try again"
-
-            );
-
-
-
-        }
-
-
-
-
-
-    });
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ==========================================
 // CLOSE OVERLAYS
 // ==========================================
@@ -5024,45 +4469,9 @@ if(adminOverlay){
 
 
 
-if(settingsOverlay){
-
-
-    settingsOverlay.addEventListener(
-
-    "click",
-
-    (event)=>{
-
-
-        if(event.target === settingsOverlay){
-
-
-            settingsOverlay.style.display =
-
-            "none";
-
-
-        }
-
-
-    });
-
-
-
-}
-
-
-
-
-
-
-
-
 
 // ==========================================
 // START WEBSITE
-// (settings load first so MAX_VEHICLES is
-// correct before vehicles are capped/loaded)
 // ==========================================
 
 
@@ -5070,10 +4479,6 @@ async function startApp(){
 
 
     setupCardEditing();
-
-
-
-    await loadSettings();
 
 
 
