@@ -30,7 +30,8 @@ import {
     collection,
     getDocs,
     doc,
-    setDoc
+    setDoc,
+    getDoc
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 
@@ -111,8 +112,22 @@ const CARDS_PER_PAGE =
 16;
 
 
-const MAX_VEHICLES =
+// Default cap used until the saved value is
+// loaded from Firestore (settings/config).
+// This is now ADJUSTABLE from the Settings
+// panel in the header instead of being fixed
+// in code — see loadSettings() and the
+// Settings save handler in Part 5.
+
+let MAX_VEHICLES =
 32;
+
+
+// Safety ceiling so the admin can't type in
+// something absurd that breaks the grid.
+
+const HARD_CAP_VEHICLES =
+200;
 
 
 
@@ -242,6 +257,53 @@ document.getElementById(
 const clearChangeBtn =
 document.getElementById(
     "clearChangeBtn"
+);
+
+
+
+
+// Settings panel elements
+// (adjustable max vehicle cap)
+
+
+const settingsBtn =
+document.getElementById(
+    "settingsBtn"
+);
+
+
+
+const settingsOverlay =
+document.getElementById(
+    "settingsOverlay"
+);
+
+
+
+const maxVehiclesInput =
+document.getElementById(
+    "maxVehiclesInput"
+);
+
+
+
+const settingsError =
+document.getElementById(
+    "settingsError"
+);
+
+
+
+const saveSettingsBtn =
+document.getElementById(
+    "saveSettingsBtn"
+);
+
+
+
+const cancelSettingsBtn =
+document.getElementById(
+    "cancelSettingsBtn"
 );
 
 
@@ -822,6 +884,8 @@ async function loadVehicles(){
 
 
         // CAP TOTAL VEHICLES
+        // (uses the adjustable MAX_VEHICLES,
+        // loaded from Firestore settings)
 
         vehicles =
 
@@ -891,6 +955,136 @@ async function loadVehicles(){
         console.error(
 
             "Firebase vehicle loading error:",
+
+            error
+
+        );
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// LOAD SITE SETTINGS FROM FIREBASE
+// (currently just the max vehicle cap,
+// stored at settings/config so it survives
+// refreshes and applies for every visitor)
+// ==========================================
+
+
+async function loadSettings(){
+
+
+    try{
+
+
+        console.log(
+            "Loading settings..."
+        );
+
+
+
+
+        const settingsRef =
+
+        doc(
+
+            db,
+
+            "settings",
+
+            "config"
+
+        );
+
+
+
+
+        const snap =
+
+        await getDoc(
+
+            settingsRef
+
+        );
+
+
+
+
+        if(snap.exists()){
+
+
+            const data =
+
+            snap.data();
+
+
+
+
+            const savedCap =
+
+            Number(
+
+                data.maxVehicles
+
+            );
+
+
+
+
+            if(
+
+                savedCap &&
+
+                savedCap > 0
+
+            ){
+
+
+                MAX_VEHICLES =
+
+                savedCap;
+
+
+            }
+
+
+        }
+
+
+
+
+        console.log(
+
+            "Settings loaded. MAX_VEHICLES =",
+
+            MAX_VEHICLES
+
+        );
+
+
+
+    }
+
+
+
+    catch(error){
+
+
+        console.error(
+
+            "Settings loading error:",
 
             error
 
@@ -2584,6 +2778,19 @@ auth,
 
 
 
+
+        if(settingsBtn){
+
+
+            settingsBtn.style.display =
+
+            "none";
+
+
+        }
+
+
+
         console.log(
             "No admin logged in"
         );
@@ -2640,6 +2847,19 @@ auth,
 
 
 
+
+        if(settingsBtn){
+
+
+            settingsBtn.style.display =
+
+            "inline-flex";
+
+
+        }
+
+
+
         console.log(
             "Admin logged in"
         );
@@ -2658,6 +2878,19 @@ auth,
 
 
         updateAddCardVisibility();
+
+
+
+
+        if(settingsBtn){
+
+
+            settingsBtn.style.display =
+
+            "none";
+
+
+        }
 
 
 
@@ -3922,6 +4155,407 @@ if(clearChangeBtn){
 
 
 
+// ==========================================
+// OPEN SETTINGS PANEL
+// (admin-only, next to Log Out — lets you
+// change how many vehicle slots the site
+// allows, saved to Firestore)
+// ==========================================
+
+
+if(settingsBtn){
+
+
+
+    settingsBtn.addEventListener(
+
+    "click",
+
+    ()=>{
+
+
+
+        if(!isAdmin)
+
+            return;
+
+
+
+
+        if(maxVehiclesInput)
+
+            maxVehiclesInput.value =
+
+            MAX_VEHICLES;
+
+
+
+
+        if(settingsError)
+
+            settingsError.style.display =
+
+            "none";
+
+
+
+
+        if(settingsOverlay)
+
+            settingsOverlay.style.display =
+
+            "flex";
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// CANCEL SETTINGS
+// ==========================================
+
+
+if(cancelSettingsBtn){
+
+
+
+    cancelSettingsBtn.addEventListener(
+
+    "click",
+
+    ()=>{
+
+
+
+        if(settingsOverlay)
+
+            settingsOverlay.style.display =
+
+            "none";
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// SAVE SETTINGS
+// (validates, writes to Firestore, then
+// updates MAX_VEHICLES live so the Add
+// Vehicle tile reacts immediately)
+// ==========================================
+
+
+if(saveSettingsBtn){
+
+
+
+    saveSettingsBtn.addEventListener(
+
+    "click",
+
+    async()=>{
+
+
+
+
+
+        if(!isAdmin){
+
+
+            alert(
+                "Admin only"
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+
+        const rawValue =
+
+        maxVehiclesInput
+
+        ? maxVehiclesInput.value
+
+        : "";
+
+
+
+
+        const newCap =
+
+        Number(rawValue);
+
+
+
+
+
+
+
+
+        function showSettingsError(msg){
+
+
+            if(settingsError){
+
+
+                settingsError.textContent =
+
+                msg;
+
+
+                settingsError.style.display =
+
+                "block";
+
+
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+        if(
+
+            rawValue === "" ||
+
+            !Number.isFinite(newCap) ||
+
+            !Number.isInteger(newCap) ||
+
+            newCap < 1
+
+        ){
+
+
+            showSettingsError(
+
+                "Enter a whole number of 1 or more"
+
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+
+        if(newCap > HARD_CAP_VEHICLES){
+
+
+            showSettingsError(
+
+                `Cap can't be higher than ${HARD_CAP_VEHICLES}`
+
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+
+        if(newCap < vehicles.length){
+
+
+            showSettingsError(
+
+                `Cap can't be lower than the ${vehicles.length} vehicles you already have`
+
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+
+        try{
+
+
+
+            await setDoc(
+
+                doc(
+
+                    db,
+
+                    "settings",
+
+                    "config"
+
+                ),
+
+                {
+
+                    maxVehicles:
+
+                    newCap
+
+                }
+
+            );
+
+
+
+
+
+
+
+            MAX_VEHICLES =
+
+            newCap;
+
+
+
+
+
+
+
+            console.log(
+
+                "Max vehicles updated:",
+
+                MAX_VEHICLES
+
+            );
+
+
+
+
+
+
+
+            if(settingsOverlay)
+
+                settingsOverlay.style.display =
+
+                "none";
+
+
+
+
+
+
+
+            updateAddCardVisibility();
+
+
+
+        }
+
+
+
+
+
+        catch(error){
+
+
+
+            console.error(
+
+                "Settings save error:",
+
+                error
+
+            );
+
+
+
+            showSettingsError(
+
+                "Save failed, try again"
+
+            );
+
+
+
+        }
+
+
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // ==========================================
@@ -4007,22 +4641,72 @@ if(adminOverlay){
 
 
 
+if(settingsOverlay){
+
+
+    settingsOverlay.addEventListener(
+
+    "click",
+
+    (event)=>{
+
+
+        if(event.target === settingsOverlay){
+
+
+            settingsOverlay.style.display =
+
+            "none";
+
+
+        }
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
 
 // ==========================================
 // START WEBSITE
+// (settings load first so MAX_VEHICLES is
+// correct before vehicles are capped/loaded)
 // ==========================================
 
 
-setupCardEditing();
+async function startApp(){
 
 
-loadVehicles();
+    setupCardEditing();
 
 
 
-console.log(
-    "Vehicle system ready"
-);
+    await loadSettings();
+
+
+
+    await loadVehicles();
+
+
+
+    console.log(
+        "Vehicle system ready"
+    );
+
+
+}
+
+
+startApp();
 
 
 
