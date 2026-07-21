@@ -1,7 +1,7 @@
 /* ==========================================
    VEHICLE VALUES
    VALUES.CSS
-   UPDATED VERSION - FONTS FIXED
+   UPDATED VERSION - FONTS FIXED + SETTINGS
 ========================================== */
 
 /* ==========================================
@@ -188,6 +188,19 @@ nav a.active{
 }
 
 /* ==========================================
+   HEADER ACTIONS
+   (wraps Settings + Log Out so header's
+   space-between still only sees 3 columns:
+   logo, nav, header-actions)
+========================================== */
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+/* ==========================================
    LOGOUT BUTTON
 ========================================== */
 
@@ -206,6 +219,30 @@ nav a.active{
 .logout-btn:hover{
     transform:translateY(-3px);
     box-shadow:0 10px 25px rgba(239,68,68,.35);
+}
+
+/* ==========================================
+   SETTINGS BUTTON
+   (admin-only, sits next to Log Out — opens
+   the site settings panel, e.g. max vehicle cap)
+========================================== */
+
+.settings-btn{
+    background:var(--panel-light);
+    color:white;
+    border:2px solid var(--border);
+    padding:9px 22px;
+    border-radius:14px;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.settings-btn:hover{
+    border-color:var(--primary);
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(79,141,255,.25);
 }
 
 /* ==========================================
@@ -1075,10 +1112,12 @@ img{
 ========================================== */
 
 @media(max-width:700px){
-    .header{ height:75px; padding:0 20px; }
+    .header{ height:auto; min-height:75px; padding:12px 20px; flex-wrap:wrap; row-gap:10px; }
     .logo{ font-size:24px; }
     nav{ display:none; }
+    .header-actions{ gap:8px; }
     .logout-btn{ padding:10px 16px; font-size:14px; }
+    .settings-btn{ padding:8px 14px; font-size:14px; }
     .page-title{ padding:50px 15px 30px; }
     .page-title h1{ font-size:34px; }
     .page-title p{ font-size:15px; }
@@ -1101,6 +1140,7 @@ img{
 @media(max-width:400px){
     .logo{ font-size:20px; }
     .logout-btn{ padding:8px 12px; }
+    .settings-btn{ padding:7px 10px; }
     .vehicle-image{ height:150px; }
     .admin-title{ font-size:24px; }
 }
