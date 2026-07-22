@@ -44,14 +44,6 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
 
-import {
-    getStorage,
-    ref as storageRef,
-    uploadBytesResumable,
-    getDownloadURL
-} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-storage.js";
-
-
 
 
 // ==========================================
@@ -98,11 +90,30 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 
-const storage = getStorage(app);
-
-
 
 console.log("Firebase Connected");
+
+
+
+// ==========================================
+// CLOUDINARY CONFIG
+// (used instead of Firebase Storage for image
+// uploads - unsigned upload preset, so no
+// backend secret is needed. Uploads go
+// straight from the browser to Cloudinary.)
+// ==========================================
+
+
+const CLOUDINARY_CLOUD_NAME =
+"odvna4u3";
+
+
+const CLOUDINARY_UPLOAD_PRESET =
+"carimages";
+
+
+const CLOUDINARY_UPLOAD_URL =
+`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
 
 
 
@@ -3643,6 +3654,7 @@ if(loginBtn){
 
 
 
+
             alert(
                 "Incorrect email or password"
             );
@@ -4199,10 +4211,11 @@ if(cancelBtn){
 
 // ==========================================
 // UPLOAD SELECTED IMAGE FILE
-// (uploads to Firebase Storage under
-// vehicles/{id}/ and returns a permanent
-// download URL - these do not expire like
-// Discord CDN links do)
+// (uploads to Cloudinary using the unsigned
+// "carimages" preset instead of Firebase
+// Storage. Uses XMLHttpRequest instead of
+// fetch so we can still report upload
+// progress %, same as before.)
 // ==========================================
 
 
@@ -4222,56 +4235,71 @@ function uploadVehicleImage(
     return new Promise((resolve, reject)=>{
 
 
-        const path =
+        const formData =
 
-        `vehicles/${id}/${Date.now()}_${fileName}`;
-
-
+        new FormData();
 
 
-        const fileRef =
 
-        storageRef(
 
-            storage,
-
-            path
-
+        formData.append(
+            "file",
+            blob,
+            fileName
         );
 
 
 
 
-        const task =
-
-        uploadBytesResumable(
-
-            fileRef,
-
-            blob
-
+        formData.append(
+            "upload_preset",
+            CLOUDINARY_UPLOAD_PRESET
         );
 
 
 
 
-        task.on(
+        // Group uploads by vehicle id so
 
-        "state_changed",
+        // they're easy to find/manage in the
 
-        (snapshot)=>{
+        // Cloudinary media library
 
 
-            if(onProgress){
+        formData.append(
+            "folder",
+            `vehicles/${id}`
+        );
+
+
+
+
+        const xhr =
+
+        new XMLHttpRequest();
+
+
+
+
+        xhr.open(
+            "POST",
+            CLOUDINARY_UPLOAD_URL
+        );
+
+
+
+
+        xhr.upload.onprogress = (event)=>{
+
+
+            if(onProgress && event.lengthComputable){
 
 
                 const pct =
 
                 Math.round(
 
-                    (snapshot.bytesTransferred /
-
-                    snapshot.totalBytes)
+                    (event.loaded / event.total)
 
                     * 100
 
@@ -4286,32 +4314,65 @@ function uploadVehicleImage(
             }
 
 
-        },
+        };
 
-        (error)=>{
 
-            reject(error);
 
-        },
 
-        async()=>{
+        xhr.onload = ()=>{
 
 
             try{
 
 
-                const url =
+                const response =
 
-                await getDownloadURL(
-
-                    task.snapshot.ref
-
-                );
+                JSON.parse(xhr.responseText);
 
 
 
 
-                resolve(url);
+                if(
+
+                    xhr.status >= 200 &&
+
+                    xhr.status < 300 &&
+
+                    response.secure_url
+
+                ){
+
+
+                    resolve(
+                        response.secure_url
+                    );
+
+
+                }
+
+
+
+                else{
+
+
+                    reject(
+
+                        new Error(
+
+                            (response.error &&
+
+                            response.error.message)
+
+                            ||
+
+                            "Cloudinary upload failed"
+
+                        )
+
+                    );
+
+
+                }
 
 
 
@@ -4328,9 +4389,29 @@ function uploadVehicleImage(
             }
 
 
-        }
+        };
 
-        );
+
+
+
+        xhr.onerror = ()=>{
+
+
+            reject(
+
+                new Error(
+                    "Network error during upload"
+                )
+
+            );
+
+
+        };
+
+
+
+
+        xhr.send(formData);
 
 
     });
@@ -4486,7 +4567,7 @@ if(saveBtn){
         // ==========================
         // RESOLVE IMAGE URL
         // If a new file was picked in the
-        // file input, upload it to Storage
+        // file input, upload it to Cloudinary
         // first and use the fresh permanent
         // URL. Otherwise keep whatever URL
         // was already on the vehicle.
