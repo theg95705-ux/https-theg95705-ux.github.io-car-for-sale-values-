@@ -47,7 +47,7 @@ import {
 import {
     getStorage,
     ref as storageRef,
-    uploadBytes,
+    uploadBytesResumable,
     getDownloadURL
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-storage.js";
 
@@ -319,6 +319,14 @@ let pendingNewId = null;
 
 
 let addCardBtn = null;
+
+
+// Holds the compressed/resized version of
+// whatever file the admin just picked in the
+// image field - this is what actually gets
+// uploaded (much faster than the raw file).
+
+let pendingImageBlob = null;
 
 
 
@@ -713,6 +721,11 @@ function getNextVehicleId(){
 function resetImageField(existingUrl){
 
 
+    pendingImageBlob = null;
+
+
+
+
     if(vehicleImageFile)
 
         vehicleImageFile.value = "";
@@ -789,9 +802,235 @@ function resetImageField(existingUrl){
 
 
 // ==========================================
-// PREVIEW SELECTED FILE
-// (shows a local preview instantly using
-// the browser, before anything is uploaded)
+// RESIZE / COMPRESS IMAGE
+// (this is the actual speed fix - phone and
+// screenshot files are often 3-8MB even
+// though the card only ever shows the image
+// at ~600x550px. Shrinking + re-encoding as
+// webp client-side before upload turns that
+// into a couple hundred KB, so the upload
+// itself finishes in a fraction of the time
+// regardless of connection speed.)
+// ==========================================
+
+
+function resizeImageFile(
+
+    file,
+
+    maxDimension = 1280,
+
+    quality = 0.82
+
+){
+
+
+    return new Promise((resolve, reject)=>{
+
+
+        const objectUrl =
+
+        URL.createObjectURL(file);
+
+
+
+        const img = new Image();
+
+
+
+
+        img.onload = ()=>{
+
+
+            let width = img.width;
+
+            let height = img.height;
+
+
+
+
+            if(
+
+                width > maxDimension ||
+
+                height > maxDimension
+
+            ){
+
+
+                if(width > height){
+
+
+                    height =
+
+                    Math.round(
+
+                        height *
+
+                        (maxDimension / width)
+
+                    );
+
+
+                    width = maxDimension;
+
+
+                }
+
+
+
+                else{
+
+
+                    width =
+
+                    Math.round(
+
+                        width *
+
+                        (maxDimension / height)
+
+                    );
+
+
+                    height = maxDimension;
+
+
+                }
+
+
+            }
+
+
+
+
+            const canvas =
+
+            document.createElement(
+                "canvas"
+            );
+
+
+            canvas.width = width;
+
+            canvas.height = height;
+
+
+
+
+            const ctx =
+
+            canvas.getContext("2d");
+
+
+            ctx.drawImage(
+
+                img,
+
+                0,
+
+                0,
+
+                width,
+
+                height
+
+            );
+
+
+
+
+            canvas.toBlob(
+
+            (blob)=>{
+
+
+                URL.revokeObjectURL(
+                    objectUrl
+                );
+
+
+
+
+                if(blob){
+
+                    resolve(blob);
+
+                }
+
+
+
+                else{
+
+                    reject(
+
+                        new Error(
+                            "Compression failed"
+                        )
+
+                    );
+
+                }
+
+
+            },
+
+            "image/webp",
+
+            quality
+
+            );
+
+
+        };
+
+
+
+
+        img.onerror = ()=>{
+
+
+            URL.revokeObjectURL(
+                objectUrl
+            );
+
+
+            reject(
+
+                new Error(
+                    "Could not read image"
+                )
+
+            );
+
+
+        };
+
+
+
+
+        img.src = objectUrl;
+
+
+    });
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// PREVIEW + COMPRESS SELECTED FILE
+// (compression happens the moment the file
+// is picked, not at Save time - so by the
+// time you hit Save the smaller version is
+// already sitting ready to go)
 // ==========================================
 
 
@@ -802,7 +1041,7 @@ if(vehicleImageFile){
 
     "change",
 
-    ()=>{
+    async()=>{
 
 
         const file =
@@ -821,20 +1060,7 @@ if(vehicleImageFile){
 
 
 
-        if(vehicleImagePreview){
-
-
-            vehicleImagePreview.src =
-
-            URL.createObjectURL(file);
-
-
-            vehicleImagePreview.style.display =
-
-            "block";
-
-
-        }
+        pendingImageBlob = null;
 
 
 
@@ -844,12 +1070,135 @@ if(vehicleImageFile){
 
             imageUploadStatus.textContent =
 
-            "New file selected - will upload on Save";
+            "Compressing image...";
 
 
             imageUploadStatus.style.display =
 
             "block";
+
+
+        }
+
+
+
+
+        try{
+
+
+
+            const compressed =
+
+            await resizeImageFile(file);
+
+
+
+
+            pendingImageBlob = compressed;
+
+
+
+
+            if(vehicleImagePreview){
+
+
+                vehicleImagePreview.src =
+
+                URL.createObjectURL(
+                    compressed
+                );
+
+
+                vehicleImagePreview.style.display =
+
+                "block";
+
+
+            }
+
+
+
+
+            if(imageUploadStatus){
+
+
+                const kb =
+
+                Math.round(
+                    compressed.size / 1024
+                );
+
+
+
+
+                imageUploadStatus.textContent =
+
+                `Ready (~${kb}KB) - will upload on Save`;
+
+
+            }
+
+
+
+        }
+
+
+
+        catch(error){
+
+
+
+            console.error(
+
+                "Image compression error:",
+
+                error
+
+            );
+
+
+
+
+            // FALLBACK - upload the original
+
+            // file untouched if compression
+
+            // fails for any reason
+
+
+            pendingImageBlob = file;
+
+
+
+
+            if(vehicleImagePreview){
+
+
+                vehicleImagePreview.src =
+
+                URL.createObjectURL(file);
+
+
+                vehicleImagePreview.style.display =
+
+                "block";
+
+
+            }
+
+
+
+
+            if(imageUploadStatus){
+
+
+                imageUploadStatus.textContent =
+
+                "New file selected - will upload on Save";
+
+
+            }
+
 
 
         }
@@ -3857,45 +4206,134 @@ if(cancelBtn){
 // ==========================================
 
 
-async function uploadVehicleImage(id, file){
+function uploadVehicleImage(
+
+    id,
+
+    blob,
+
+    fileName,
+
+    onProgress
+
+){
 
 
-    const path =
-
-    `vehicles/${id}/${Date.now()}_${file.name}`;
+    return new Promise((resolve, reject)=>{
 
 
+        const path =
 
-
-    const fileRef =
-
-    storageRef(
-
-        storage,
-
-        path
-
-    );
-
-
-
-
-    await uploadBytes(
-
-        fileRef,
-
-        file
-
-    );
+        `vehicles/${id}/${Date.now()}_${fileName}`;
 
 
 
 
-    return await getDownloadURL(
+        const fileRef =
 
-        fileRef
+        storageRef(
 
-    );
+            storage,
+
+            path
+
+        );
+
+
+
+
+        const task =
+
+        uploadBytesResumable(
+
+            fileRef,
+
+            blob
+
+        );
+
+
+
+
+        task.on(
+
+        "state_changed",
+
+        (snapshot)=>{
+
+
+            if(onProgress){
+
+
+                const pct =
+
+                Math.round(
+
+                    (snapshot.bytesTransferred /
+
+                    snapshot.totalBytes)
+
+                    * 100
+
+                );
+
+
+
+
+                onProgress(pct);
+
+
+            }
+
+
+        },
+
+        (error)=>{
+
+            reject(error);
+
+        },
+
+        async()=>{
+
+
+            try{
+
+
+                const url =
+
+                await getDownloadURL(
+
+                    task.snapshot.ref
+
+                );
+
+
+
+
+                resolve(url);
+
+
+
+            }
+
+
+
+            catch(error){
+
+
+                reject(error);
+
+
+            }
+
+
+        }
+
+        );
+
+
+    });
 
 
 }
@@ -4065,6 +4503,21 @@ if(saveBtn){
 
 
 
+        // Use the compressed blob if we have
+
+        // one - falls back to the raw file if
+
+        // compression somehow never ran
+
+
+        const uploadBlob =
+
+        pendingImageBlob ||
+
+        selectedFile;
+
+
+
         let imageUrl =
 
         vehicleImageHidden
@@ -4083,7 +4536,7 @@ if(saveBtn){
 
 
 
-        if(selectedFile){
+        if(uploadBlob){
 
 
 
@@ -4096,7 +4549,7 @@ if(saveBtn){
 
                 saveBtn.textContent =
 
-                "Uploading...";
+                "Uploading 0%";
 
 
 
@@ -4119,13 +4572,54 @@ if(saveBtn){
 
 
 
+                const uploadName =
+
+                (selectedFile
+
+                ? selectedFile.name.replace(
+                    /\.[^/.]+$/,
+                    ""
+                )
+
+                : "image")
+
+                + ".webp";
+
+
+
+
                 imageUrl =
 
                 await uploadVehicleImage(
 
                     id,
 
-                    selectedFile
+                    uploadBlob,
+
+                    uploadName,
+
+                    (pct)=>{
+
+
+                        saveBtn.textContent =
+
+                        `Uploading ${pct}%`;
+
+
+
+
+                        if(imageUploadStatus){
+
+
+                            imageUploadStatus.textContent =
+
+                            `Uploading... ${pct}%`;
+
+
+                        }
+
+
+                    }
 
                 );
 
@@ -4339,6 +4833,8 @@ if(saveBtn){
             isCreatingNew = false;
 
             pendingNewId = null;
+
+            pendingImageBlob = null;
 
 
 
