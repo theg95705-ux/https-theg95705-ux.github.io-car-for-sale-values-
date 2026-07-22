@@ -959,7 +959,7 @@ id="adminOverlay">
 
 
 
-        <!-- IMAGE URL -->
+        <!-- IMAGE UPLOAD -->
 
 
         <div class="admin-group">
@@ -968,7 +968,7 @@ id="adminOverlay">
 
             <label>
 
-                Vehicle Image URL
+                Vehicle Image
 
             </label>
 
@@ -976,10 +976,33 @@ id="adminOverlay">
 
 
             <input
-            type="text"
-            id="vehicleImage"
-            placeholder="https://example.com/car.png"
-            autocomplete="off">
+            type="file"
+            id="vehicleImageFile"
+            accept="image/*">
+
+
+
+            <input
+            type="hidden"
+            id="vehicleImage">
+
+
+
+            <img
+            id="vehicleImagePreview"
+            class="image-preview"
+            src=""
+            alt=""
+            style="display:none;">
+
+
+
+            <span
+            id="imageUploadStatus"
+            class="image-upload-status"
+            style="display:none;">
+
+            </span>
 
 
 
