@@ -788,6 +788,8 @@ nav a.active{
     padding:35px;
     box-shadow:0 40px 90px rgba(0,0,0,.7);
     animation:fadeIn .3s ease;
+    max-height:90vh;
+    overflow-y:auto;
 }
 
 .admin-title{
@@ -845,6 +847,53 @@ nav a.active{
 }
 
 /* ==========================================
+   FILE INPUT + IMAGE PREVIEW
+   (used by the vehicle image upload field)
+========================================== */
+
+.admin-group input[type="file"]{
+    padding:10px 14px;
+    cursor:pointer;
+}
+
+.admin-group input[type="file"]::file-selector-button{
+    padding:8px 14px;
+    margin-right:12px;
+    border:none;
+    border-radius:10px;
+    background:var(--primary);
+    color:white;
+    font-weight:800;
+    font-size:13px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.admin-group input[type="file"]::file-selector-button:hover{
+    background:var(--primary-light);
+}
+
+.image-preview{
+    display:block;
+    width:100%;
+    max-height:160px;
+    object-fit:contain;
+    margin-top:12px;
+    background:var(--panel-light);
+    border:2px solid var(--border);
+    border-radius:14px;
+    padding:8px;
+}
+
+.image-upload-status{
+    display:block;
+    margin-top:8px;
+    color:var(--muted);
+    font-size:13px;
+    font-weight:700;
+}
+
+/* ==========================================
    DROPDOWN
 ========================================== */
 
@@ -889,6 +938,13 @@ select option{
 .save-btn:hover{
     transform:translateY(-4px);
     box-shadow:0 15px 35px rgba(79,141,255,.45);
+}
+
+.save-btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+    transform:none;
+    box-shadow:none;
 }
 
 /* ==========================================
