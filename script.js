@@ -127,7 +127,8 @@ const CLOUDINARY_UPLOAD_URL =
 const ADMIN_EMAILS =
 [
     "theg95705@gmail.com",
-    "ellocosigma@gmail.com"
+    "ellocosigma@gmail.com",
+    "selling.tiktok1@outlook.com"
 ];
 
 
