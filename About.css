@@ -1,0 +1,687 @@
+/* ==========================================
+   VEHICLE VALUES
+   ABOUT.CSS
+   Matches the design system in values.css
+========================================== */
+
+/* ==========================================
+   VARIABLES
+   (same tokens as values.css, so this page
+   sits visually inside the same site)
+========================================== */
+
+:root{
+    --primary:#4f8dff;
+    --primary-light:#70a8ff;
+
+    --background:#0b1220;
+    --background-two:#0f1b30;
+
+    --panel:#121b2b;
+    --panel-light:#182438;
+
+    --border:#2b3d5d;
+
+    --text:#ffffff;
+    --muted:#b9c9e9;
+
+    --success:#34d399;
+    --gold:#caa64a;
+    --danger:#ef4444;
+
+    --font-main:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+    --shadow:0 20px 55px rgba(0,0,0,.45);
+}
+
+/* ==========================================
+   GLOBAL RESET
+========================================== */
+
+*,
+*::before,
+*::after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:var(--font-main);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(180deg,#0b1220,#08111f);
+    color:var(--text);
+    overflow-x:hidden;
+    font-family:var(--font-main);
+    font-size:16px;
+    line-height:1.5;
+    font-optical-sizing:auto;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    top:-400px;
+    left:50%;
+    transform:translateX(-50%);
+    width:900px;
+    height:900px;
+    background:radial-gradient(circle, rgba(79,141,255,.20), transparent 65%);
+    filter:blur(90px);
+    z-index:-1;
+    pointer-events:none;
+}
+
+a{
+    color:inherit;
+    font-family:var(--font-main);
+}
+
+button,
+input{
+    font-family:var(--font-main);
+}
+
+img{
+    display:block;
+    max-width:100%;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.header{
+    width:100%;
+    height:78px;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    padding:0 60px;
+    background:rgba(7,18,34,.85);
+    backdrop-filter:blur(18px);
+    border-top:3px solid var(--primary);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    position:sticky;
+    top:0;
+    z-index:999;
+}
+
+.header .logo{
+    justify-self:start;
+}
+
+.header nav{
+    justify-self:center;
+}
+
+.header .header-actions{
+    justify-self:end;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:900;
+    letter-spacing:.5px;
+    cursor:pointer;
+}
+
+.logo span{
+    color:var(--primary);
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:35px;
+}
+
+nav a{
+    position:relative;
+    text-decoration:none;
+    color:white;
+    font-size:16px;
+    font-weight:700;
+    transition:.3s;
+}
+
+nav a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-8px;
+    width:0;
+    height:2px;
+    background:var(--primary);
+    transition:.3s;
+}
+
+nav a:hover::after,
+nav a.active::after{
+    width:100%;
+}
+
+nav a:hover,
+nav a.active{
+    color:var(--primary);
+}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.header-cta{
+    background:linear-gradient(180deg, var(--primary-light), var(--primary));
+    color:white;
+    text-decoration:none;
+    padding:11px 24px;
+    border-radius:14px;
+    font-size:15px;
+    font-weight:900;
+    transition:.3s;
+    white-space:nowrap;
+}
+
+.header-cta:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 35px rgba(79,141,255,.4);
+}
+
+/* ==========================================
+   PAGE TITLE
+========================================== */
+
+.page-title{
+    text-align:center;
+    padding:65px 20px 35px;
+}
+
+.page-title h1{
+    font-size:50px;
+    font-weight:900;
+    letter-spacing:-1px;
+    text-shadow:0 0 45px rgba(79,141,255,.45);
+}
+
+.page-title h1 span{
+    color:var(--primary);
+}
+
+.page-title p{
+    margin-top:15px;
+    max-width:700px;
+    margin-left:auto;
+    margin-right:auto;
+    color:var(--muted);
+    font-size:18px;
+    line-height:1.6;
+}
+
+/* ==========================================
+   PAGE HEADER / BACK BUTTON
+========================================== */
+
+.page-header{
+    width:95%;
+    max-width:1100px;
+    margin:0 auto;
+    padding:10px 0 0;
+}
+
+.back-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:var(--panel-light);
+    border:1px solid var(--border);
+    color:white;
+    font-size:20px;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    background:var(--panel);
+    border-color:var(--primary);
+    transform:translateX(-3px);
+}
+
+/* ==========================================
+   SHARED SECTION WIDTH
+========================================== */
+
+.mission,
+.about-grid,
+.stats-strip,
+.how-it-works,
+.about-cta{
+    width:95%;
+    max-width:1100px;
+    margin:0 auto;
+}
+
+/* ==========================================
+   EYEBROW LABEL
+========================================== */
+
+.eyebrow{
+    display:inline-block;
+    color:var(--primary-light);
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:14px;
+}
+
+/* ==========================================
+   MISSION SECTION
+========================================== */
+
+.mission{
+    padding:50px 0 20px;
+    text-align:center;
+}
+
+.mission h2{
+    font-size:34px;
+    font-weight:800;
+    line-height:1.35;
+    max-width:820px;
+    margin:0 auto 22px;
+    letter-spacing:-.5px;
+}
+
+.mission p{
+    max-width:680px;
+    margin:0 auto;
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.7;
+}
+
+/* ==========================================
+   ABOUT GRID (what we track)
+========================================== */
+
+.about-grid{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:25px;
+}
+
+.about-card{
+    background:rgba(18,27,43,.95);
+    border:2px solid var(--border);
+    border-radius:22px;
+    padding:32px 26px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    transition:.3s;
+}
+
+.about-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--primary);
+    box-shadow:
+        var(--shadow),
+        0 0 40px rgba(79,141,255,.35);
+}
+
+.about-icon{
+    width:58px;
+    height:58px;
+    margin:0 auto 18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    background:var(--panel-light);
+    border:1px solid rgba(255,255,255,.06);
+    color:var(--primary-light);
+    font-size:24px;
+    font-weight:900;
+}
+
+.about-card h3{
+    font-size:19px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.about-card p{
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.6;
+}
+
+/* ==========================================
+   STATS STRIP
+========================================== */
+
+.stats-strip{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:25px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:38px 20px;
+}
+
+.stat{
+    text-align:center;
+}
+
+.stat-number{
+    display:block;
+    font-size:38px;
+    font-weight:900;
+    color:var(--primary-light);
+    letter-spacing:-1px;
+}
+
+.stat-label{
+    display:block;
+    margin-top:8px;
+    color:var(--muted);
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+}
+
+/* ==========================================
+   HOW IT WORKS
+========================================== */
+
+.how-it-works{
+    margin-top:75px;
+    text-align:center;
+}
+
+.how-it-works h2{
+    font-size:32px;
+    font-weight:800;
+    letter-spacing:-.5px;
+    margin-bottom:45px;
+}
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:25px;
+    text-align:left;
+}
+
+.step{
+    background:var(--panel-light);
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:18px;
+    padding:26px 24px;
+    position:relative;
+}
+
+.step-marker{
+    display:inline-block;
+    color:var(--primary);
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+.step p{
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.65;
+}
+
+/* ==========================================
+   ABOUT CTA
+========================================== */
+
+.about-cta{
+    margin-top:75px;
+    margin-bottom:90px;
+    text-align:center;
+    background:linear-gradient(180deg, var(--panel), var(--panel-light));
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:55px 30px;
+}
+
+.about-cta h2{
+    font-size:30px;
+    font-weight:900;
+    letter-spacing:-.5px;
+    margin-bottom:12px;
+}
+
+.about-cta p{
+    color:var(--muted);
+    font-size:16px;
+    margin-bottom:26px;
+}
+
+.about-cta .primary{
+    display:inline-block;
+    background:linear-gradient(180deg, var(--primary-light), var(--primary));
+    color:white;
+    text-decoration:none;
+    padding:16px 34px;
+    border-radius:15px;
+    font-size:16px;
+    font-weight:900;
+    transition:.3s;
+}
+
+.about-cta .primary:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 35px rgba(79,141,255,.45);
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer{
+    width:100%;
+    padding:60px 60px 30px;
+    background:rgba(7,18,34,.9);
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.footer-content{
+    max-width:1100px;
+    margin:0 auto;
+    text-align:center;
+}
+
+.footer-content .logo{
+    justify-content:center;
+    margin-bottom:14px;
+    display:inline-block;
+}
+
+.footer-content p{
+    color:var(--muted);
+    font-size:15px;
+    max-width:480px;
+    margin:0 auto;
+}
+
+.footer-links{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+    margin:30px 0 20px;
+}
+
+.footer-links a{
+    text-decoration:none;
+    color:var(--muted);
+    font-size:14px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.footer-links a:hover{
+    color:var(--primary);
+}
+
+.copyright{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    opacity:.7;
+}
+
+/* ==========================================
+   SCROLL REVEAL
+   (elements fade/rise into place once
+   visible - about.js toggles this class,
+   and it degrades gracefully to visible if
+   JS or IntersectionObserver isn't there)
+========================================== */
+
+.reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .6s ease, transform .6s ease;
+}
+
+.reveal.in-view{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce){
+
+    .reveal{
+        opacity:1;
+        transform:none;
+        transition:none;
+    }
+
+}
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#08111f;
+}
+
+::-webkit-scrollbar-thumb{
+    background:var(--border);
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:var(--primary);
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media(max-width:1000px){
+
+    .header{ padding:0 35px; }
+
+    nav{ gap:22px; }
+
+    .page-title h1{ font-size:44px; }
+
+    .about-grid,
+    .steps{ grid-template-columns:repeat(2, 1fr); }
+
+    .stats-strip{ grid-template-columns:repeat(3, 1fr); }
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:700px){
+
+    .header{ height:auto; min-height:75px; padding:12px 20px; }
+
+    .logo{ font-size:24px; }
+
+    nav{ display:none; }
+
+    .header-cta{ padding:10px 16px; font-size:14px; }
+
+    .page-title{ padding:50px 15px 30px; }
+
+    .page-title h1{ font-size:32px; }
+
+    .page-title p{ font-size:15px; }
+
+    .page-header{ width:92%; }
+
+    .mission{ width:92%; padding:40px 0 10px; }
+
+    .mission h2{ font-size:26px; }
+
+    .about-grid{ width:92%; grid-template-columns:1fr; margin-top:45px; }
+
+    .stats-strip{ width:92%; grid-template-columns:1fr; gap:30px; margin-top:45px; padding:32px 20px; }
+
+    .how-it-works{ width:92%; margin-top:55px; }
+
+    .how-it-works h2{ font-size:26px; }
+
+    .steps{ grid-template-columns:1fr; }
+
+    .about-cta{ width:92%; margin-top:55px; padding:42px 22px; }
+
+    .about-cta h2{ font-size:24px; }
+
+    footer{ padding:45px 25px 25px; }
+
+    .footer-links{ gap:18px 26px; }
+
+}
+
+/* ==========================================
+   SMALL PHONES
+========================================== */
+
+@media(max-width:400px){
+
+    .logo{ font-size:20px; }
+
+    .page-title h1{ font-size:27px; }
+
+    .mission h2{ font-size:22px; }
+
+}
+
+/* ==========================================
+   END ABOUT.CSS
+========================================== */
