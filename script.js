@@ -3769,7 +3769,7 @@ document.addEventListener(
 
         event.altKey &&
 
-        event.key === "ArrowRight"
+        event.key === "ArrowLeft"
 
     ){
 
