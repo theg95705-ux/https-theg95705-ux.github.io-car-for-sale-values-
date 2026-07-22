@@ -44,6 +44,14 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
 
+import {
+    getStorage,
+    ref as storageRef,
+    uploadBytes,
+    getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-storage.js";
+
+
 
 
 // ==========================================
@@ -88,6 +96,9 @@ const db = getFirestore(app);
 
 
 const auth = getAuth(app);
+
+
+const storage = getStorage(app);
 
 
 
@@ -441,6 +452,38 @@ document.getElementById(
 
 
 
+// Image upload elements
+
+
+const vehicleImageFile =
+document.getElementById(
+    "vehicleImageFile"
+);
+
+
+
+const vehicleImageHidden =
+document.getElementById(
+    "vehicleImage"
+);
+
+
+
+const vehicleImagePreview =
+document.getElementById(
+    "vehicleImagePreview"
+);
+
+
+
+const imageUploadStatus =
+document.getElementById(
+    "imageUploadStatus"
+);
+
+
+
+
 
 // Pagination
 
@@ -659,6 +702,166 @@ function getNextVehicleId(){
 
 
 // ==========================================
+// RESET IMAGE UPLOAD FIELD
+// (clears the file input, hidden URL field
+// and preview - used whenever the editor is
+// opened fresh, either for a new vehicle or
+// to load an existing one)
+// ==========================================
+
+
+function resetImageField(existingUrl){
+
+
+    if(vehicleImageFile)
+
+        vehicleImageFile.value = "";
+
+
+
+
+    if(vehicleImageHidden)
+
+        vehicleImageHidden.value =
+
+        existingUrl || "";
+
+
+
+
+    if(imageUploadStatus){
+
+        imageUploadStatus.style.display =
+
+        "none";
+
+        imageUploadStatus.textContent =
+
+        "";
+
+    }
+
+
+
+
+    if(vehicleImagePreview){
+
+
+        if(existingUrl){
+
+
+            vehicleImagePreview.src =
+
+            existingUrl;
+
+
+            vehicleImagePreview.style.display =
+
+            "block";
+
+
+        }
+
+
+
+        else{
+
+
+            vehicleImagePreview.removeAttribute(
+                "src"
+            );
+
+
+            vehicleImagePreview.style.display =
+
+            "none";
+
+
+        }
+
+
+    }
+
+
+}
+
+
+
+
+// ==========================================
+// PREVIEW SELECTED FILE
+// (shows a local preview instantly using
+// the browser, before anything is uploaded)
+// ==========================================
+
+
+if(vehicleImageFile){
+
+
+    vehicleImageFile.addEventListener(
+
+    "change",
+
+    ()=>{
+
+
+        const file =
+
+        vehicleImageFile.files &&
+
+        vehicleImageFile.files[0];
+
+
+
+
+        if(!file)
+
+            return;
+
+
+
+
+        if(vehicleImagePreview){
+
+
+            vehicleImagePreview.src =
+
+            URL.createObjectURL(file);
+
+
+            vehicleImagePreview.style.display =
+
+            "block";
+
+
+        }
+
+
+
+
+        if(imageUploadStatus){
+
+
+            imageUploadStatus.textContent =
+
+            "New file selected - will upload on Save";
+
+
+            imageUploadStatus.style.display =
+
+            "block";
+
+
+        }
+
+
+    });
+
+
+}
+
+
+// ==========================================
 // END PART 1
 // ==========================================
 // ==========================================
@@ -846,13 +1049,6 @@ function createVehicleCards(){
         );
 
 
-        const vehicleImage =
-
-        document.getElementById(
-            "vehicleImage"
-        );
-
-
         const vehicleLimited =
 
         document.getElementById(
@@ -880,9 +1076,7 @@ function createVehicleCards(){
 
 
 
-        if(vehicleImage)
-
-            vehicleImage.value = "";
+        resetImageField("");
 
 
 
@@ -3489,14 +3683,6 @@ function openEditor(card){
 
 
 
-    const vehicleImage =
-
-    document.getElementById(
-        "vehicleImage"
-    );
-
-
-
     const vehicleLimited =
 
     document.getElementById(
@@ -3565,15 +3751,15 @@ function openEditor(card){
 
 
 
-    if(vehicleImage)
+    resetImageField(
 
-        vehicleImage.value =
-
-        image
+        image && image.getAttribute("src")
 
         ? image.src
 
-        : "";
+        : ""
+
+    );
 
 
 
@@ -3650,6 +3836,66 @@ if(cancelBtn){
 
     });
 
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// UPLOAD SELECTED IMAGE FILE
+// (uploads to Firebase Storage under
+// vehicles/{id}/ and returns a permanent
+// download URL - these do not expire like
+// Discord CDN links do)
+// ==========================================
+
+
+async function uploadVehicleImage(id, file){
+
+
+    const path =
+
+    `vehicles/${id}/${Date.now()}_${file.name}`;
+
+
+
+
+    const fileRef =
+
+    storageRef(
+
+        storage,
+
+        path
+
+    );
+
+
+
+
+    await uploadBytes(
+
+        fileRef,
+
+        file
+
+    );
+
+
+
+
+    return await getDownloadURL(
+
+        fileRef
+
+    );
 
 
 }
@@ -3795,6 +4041,149 @@ if(saveBtn){
 
 
 
+
+
+
+
+        // ==========================
+        // RESOLVE IMAGE URL
+        // If a new file was picked in the
+        // file input, upload it to Storage
+        // first and use the fresh permanent
+        // URL. Otherwise keep whatever URL
+        // was already on the vehicle.
+        // ==========================
+
+
+        const selectedFile =
+
+        vehicleImageFile &&
+
+        vehicleImageFile.files &&
+
+        vehicleImageFile.files[0];
+
+
+
+        let imageUrl =
+
+        vehicleImageHidden
+
+        ? vehicleImageHidden.value.trim()
+
+        : "";
+
+
+
+
+        const originalSaveLabel =
+
+        saveBtn.textContent;
+
+
+
+
+        if(selectedFile){
+
+
+
+            try{
+
+
+
+                saveBtn.disabled = true;
+
+
+                saveBtn.textContent =
+
+                "Uploading...";
+
+
+
+
+                if(imageUploadStatus){
+
+
+                    imageUploadStatus.textContent =
+
+                    "Uploading image...";
+
+
+                    imageUploadStatus.style.display =
+
+                    "block";
+
+
+                }
+
+
+
+
+                imageUrl =
+
+                await uploadVehicleImage(
+
+                    id,
+
+                    selectedFile
+
+                );
+
+
+
+
+            }
+
+
+
+            catch(error){
+
+
+
+                console.error(
+
+                    "Image upload error:",
+
+                    error
+
+                );
+
+
+
+
+                alert(
+                    "Image upload failed"
+                );
+
+
+
+
+                saveBtn.disabled = false;
+
+
+                saveBtn.textContent =
+
+                originalSaveLabel;
+
+
+
+
+                return;
+
+
+
+            }
+
+
+        }
+
+
+
+
+
+
+
+
         const vehicleData = {
 
 
@@ -3839,11 +4228,7 @@ if(saveBtn){
 
             image:
 
-            document.getElementById(
-                "vehicleImage"
-            )
-            .value
-            .trim(),
+            imageUrl,
 
 
 
@@ -3990,6 +4375,25 @@ if(saveBtn){
             alert(
                 "Save failed"
             );
+
+
+
+        }
+
+
+
+
+
+        finally{
+
+
+
+            saveBtn.disabled = false;
+
+
+            saveBtn.textContent =
+
+            originalSaveLabel;
 
 
 
